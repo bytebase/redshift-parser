@@ -672,8 +672,7 @@ typedtableelement
    ;
 
 columnDef
-   : { $parser.Engine!=EngineRedshift }? colid typename create_generic_options? colquallist
-   | { $parser.Engine==EngineRedshift }? colid typename create_generic_options? rs_colattributes? colquallist
+   : colid typename create_generic_options? rs_colattributes? colquallist
    ;
 
 rs_colattributes

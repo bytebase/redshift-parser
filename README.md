@@ -1,16 +1,16 @@
 # Redshift Parser
 
-A comprehensive SQL parser for Amazon Redshift built with ANTLR 4, supporting both PostgreSQL and Redshift-specific syntax.
+A comprehensive SQL parser for Amazon Redshift built with ANTLR 4, optimized for Redshift-specific syntax.
 
 ## Overview
 
-This project is a Go-based SQL parser specifically designed for Amazon Redshift. It originated as a fork of the PostgreSQL parser but has been restructured to accommodate Redshift's unique syntax requirements and incompatibilities with standard PostgreSQL.
+This project is a Go-based SQL parser specifically designed for Amazon Redshift. It originated as a fork of the PostgreSQL parser but has been restructured to focus exclusively on Redshift's unique syntax requirements.
 
 ## Features
 
 - **Complete SQL Support**: Parses 200+ SQL statement types including DDL, DML, and advanced constructs
 - **Redshift-Specific Syntax**: Full support for Redshift extensions like `IDENTITY` columns, `DISTKEY`, `SORTKEY`, and more
-- **Engine-Aware Parsing**: Dual-mode parser that can handle both PostgreSQL and Redshift syntax
+- **Redshift-Optimized**: Parser optimized exclusively for Redshift syntax and features
 - **Comprehensive Testing**: 200+ test cases covering real-world SQL scenarios
 - **High Performance**: Optimized for production use with parser reuse and efficient error handling
 
@@ -45,9 +45,6 @@ func main() {
     stream := antlr.NewCommonTokenStream(lexer, 0)
     p := parser.NewRedshiftParser(stream)
     
-    // Set engine to Redshift for dialect-specific parsing
-    p.Engine = parser.EngineRedshift
-    
     // Parse the SQL
     tree := p.Root()
     
@@ -79,24 +76,15 @@ func main() {
 - Regular expressions
 - Full-text search
 
-## Engine Modes
+## Redshift-Specific Features
 
-The parser supports two engine modes:
+The parser is optimized for Redshift's unique SQL extensions:
 
-### Redshift Mode
-```go
-p.Engine = parser.EngineRedshift
-```
-- Supports Redshift-specific syntax extensions
-- Handles `IDENTITY` columns, distribution keys, sort keys
-- Supports Redshift built-in functions and data types
-
-### PostgreSQL Mode
-```go
-p.Engine = parser.EnginePostgreSQL
-```
-- Standard PostgreSQL syntax compliance
-- Useful for compatibility testing and migration scenarios
+- **IDENTITY columns**: `CREATE TABLE t (id INT IDENTITY(1,1))`
+- **Distribution keys**: `DISTKEY(column_name)`
+- **Sort keys**: `SORTKEY(column_name)`
+- **Redshift built-in functions**: Comprehensive support for Redshift-specific functions
+- **Data types**: All Redshift-supported data types including extensions
 
 ## Development
 
@@ -130,12 +118,11 @@ redshift-parser/
 ├── RedshiftParser.g4             # ANTLR parser grammar
 ├── build.sh                      # Code generation script
 ├── redshift_lexer_base.go        # Base lexer implementation
-├── redshift_parser_base.go       # Base parser with engine support
+├── redshift_parser_base.go       # Base parser implementation
 ├── keywords.go                   # 600+ SQL keywords
 ├── builtin_function.go           # Built-in function definitions
 ├── examples/                     # 200+ SQL test files
 ├── parser_test.go                # Main test suite
-├── engine_specific_test.go       # Engine-specific tests
 └── CLAUDE.md                     # Development guide
 ```
 
@@ -153,8 +140,6 @@ go test -run TestRedshiftParser -v
 # Run benchmarks
 go test -bench=. -v
 
-# Test specific engine
-go test -run TestRedshiftSyntax -v
 ```
 
 Test files are located in the `examples/` directory and cover:
