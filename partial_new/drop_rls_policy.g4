@@ -1,50 +1,15 @@
-/*
- * Grammar for DROP RLS POLICY command in Amazon Redshift
- * Based on AWS documentation: https://docs.aws.amazon.com/redshift/latest/dg/r_DROP_RLS_POLICY.html
- * 
- * Syntax: DROP RLS POLICY [ IF EXISTS ] policy_name [ CASCADE | RESTRICT ]
- */
+// DROP RLS POLICY statement - Redshift-specific command
 
-grammar drop_rls_policy;
-
-// Main rule for DROP RLS POLICY statement
-drop_rls_policy_statement
-    : DROP RLS POLICY if_exists_clause? policy_name drop_behavior_clause? SEMICOLON?
+droprlspolicystmt:
+    DROP RLS POLICY opt_if_exists colid opt_drop_behavior
     ;
 
-// Optional IF EXISTS clause
-if_exists_clause
-    : IF EXISTS
+opt_if_exists:
+    IF EXISTS | /* empty */
     ;
 
-// Policy name identifier
-policy_name
-    : identifier
+opt_drop_behavior:
+    CASCADE | RESTRICT | /* empty */
     ;
 
-// Optional CASCADE or RESTRICT clause
-drop_behavior_clause
-    : CASCADE
-    | RESTRICT
-    ;
-
-// Identifier rule (supports quoted and unquoted identifiers)
-identifier
-    : IDENTIFIER
-    | QUOTED_IDENTIFIER
-    ;
-
-// Lexer tokens
-DROP        : 'DROP' | 'drop' ;
-RLS         : 'RLS' | 'rls' ;
-POLICY      : 'POLICY' | 'policy' ;
-IF          : 'IF' | 'if' ;
-EXISTS      : 'EXISTS' | 'exists' ;
-CASCADE     : 'CASCADE' | 'cascade' ;
-RESTRICT    : 'RESTRICT' | 'restrict' ;
-
-IDENTIFIER          : [a-zA-Z_][a-zA-Z0-9_]* ;
-QUOTED_IDENTIFIER   : '"' (~["\r\n])* '"' ;
-
-SEMICOLON   : ';' ;
-WS          : [ \t\r\n]+ -> skip ;
+// Needed tokens: DROP, RLS, POLICY, IF, EXISTS, CASCADE, RESTRICT

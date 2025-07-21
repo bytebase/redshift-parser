@@ -1,23 +1,22 @@
-// CREATE DATASHARE grammar rules for Redshift
+// CREATE DATASHARE statement - Redshift-specific data sharing command
 // Reference: https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_DATASHARE.html
-
-createDatashareStmt
-    : CREATE DATASHARE identifier createDatashareOptions? SEMI
+createdatasharestmt
+    : CREATE DATASHARE colid createdatashareoptions?
     ;
 
-createDatashareOptions
-    : createDatashareOption (COMMA createDatashareOption)*
+createdatashareoptions
+    : createdatashareoption (COMMA createdatashareoption)*
     ;
 
-createDatashareOption
-    : setPublicAccessibleOption
-    | managedByOption
+createdatashareoption
+    : setpublicaccessibleoption
+    | managedbyoption
     ;
 
-setPublicAccessibleOption
+setpublicaccessibleoption
     : SET? PUBLICACCESSIBLE (EQUAL? (TRUE | FALSE))?
     ;
 
-managedByOption
+managedbyoption
     : MANAGEDBY ADX
     ;

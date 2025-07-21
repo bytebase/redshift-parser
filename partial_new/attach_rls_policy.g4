@@ -1,19 +1,21 @@
-attachRlsPolicyStatement
-    : ATTACH RLS POLICY policy_name=identifier
-      ON TABLE? table_name_list
-      TO rls_policy_target_list
+// ATTACH RLS POLICY statement - Redshift-specific command
+
+attachrlspolicystmt:
+    ATTACH RLS POLICY colid ON TABLE? tablelist TO attachtargetlist
     ;
 
-table_name_list
-    : qualified_name (COMMA qualified_name)*
+tablelist:
+    qualified_name (',' qualified_name)*
     ;
 
-rls_policy_target_list
-    : rls_policy_target (COMMA rls_policy_target)*
+attachtargetlist:
+    attachtarget (',' attachtarget)*
     ;
 
-rls_policy_target
-    : user_name=identifier
-    | ROLE role_name=identifier
+attachtarget:
+    colid
+    | ROLE colid
     | PUBLIC
     ;
+
+// Needed tokens: ATTACH, RLS, POLICY, ON, TABLE, TO, ROLE, PUBLIC

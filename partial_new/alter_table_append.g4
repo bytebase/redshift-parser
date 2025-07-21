@@ -1,18 +1,11 @@
-// ALTER TABLE APPEND command
-// Reference: https://docs.aws.amazon.com/redshift/latest/dg/r_ALTER_TABLE_APPEND.html
+// ALTER TABLE APPEND statement - Redshift-specific command
 
-alterTableAppendStatement
-    : ALTER TABLE targetTableName=alterTableName 
-      APPEND FROM sourceTable=alterTableAppendSource
-      alterTableAppendOption?
+altertableappendstmt:
+    ALTER TABLE qualified_name APPEND FROM qualified_name altertableappendoption?
     ;
 
-alterTableAppendSource
-    : schemaName=identifier DOT tableName=identifier
-    | tableName=identifier
+altertableappendoption:
+    IGNOREEXTRA | FILLTARGET
     ;
 
-alterTableAppendOption
-    : IGNOREEXTRA
-    | FILLTARGET
-    ;
+// Needed tokens: ALTER, TABLE, APPEND, FROM, IGNOREEXTRA, FILLTARGET

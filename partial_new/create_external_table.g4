@@ -1,83 +1,66 @@
-// CREATE EXTERNAL TABLE grammar rules for Redshift
-// Reference: https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_EXTERNAL_TABLE.html
+// CREATE EXTERNAL TABLE statement - Redshift-specific command
 
-// NOTE: The following tokens need to be added to RedshiftLexer.g4:
-// File formats: PARQUET, RCFILE, SEQUENCEFILE, TEXTFILE, ORC, AVRO
-// Clauses: PARTITIONED, DELIMITED, TERMINATED, ESCAPED, SERDE, SERDEPROPERTIES
-// Other: INPUTFORMAT, OUTPUTFORMAT, PROPERTIES, FIELDS, COLLECTION, ITEMS, DEFINED
-
-// For now, using identifiers or string constants where specific tokens don't exist
-
-createExternalTableStmt
-    : CREATE EXTERNAL TABLE (IF_P NOT EXISTS)? qualified_name 
-      OPEN_PAREN columnDefList? CLOSE_PAREN
-      partitionedByClause?
-      rowFormatClause?
-      storedAsClause
-      locationClause
-      tablePropertiesClause?
+createexternaltablestmt:
+    CREATE EXTERNAL TABLE opt_if_not_exists qualified_name 
+    '(' opttableelementlist ')'
+    partitionedbyClause?
+    rowformatClause?
+    storedasClause
+    locationClause
+    tablepropertiesClause?
     ;
 
-columnDefList
-    : columnDef (COMMA columnDef)*
+partitionedbyClause:
+    PARTITIONED BY '(' opttableelementlist ')'
     ;
 
-columnDef
-    : colid typename
+rowformatClause:
+    ROW FORMAT rowformattype
     ;
 
-partitionedByClause
-    : identifier /* PARTITIONED */ BY OPEN_PAREN columnDefList CLOSE_PAREN
+rowformattype:
+    DELIMITED rowformatdelimitedoptions?
+    | SERDE sconst (WITH SERDEPROPERTIES '(' rowpropertylist ')')?
     ;
 
-rowFormatClause
-    : ROW FORMAT identifier /* DELIMITED */ rowFormatDelimitedOptions?
-    | ROW FORMAT identifier /* SERDE */ sconst (WITH identifier /* SERDEPROPERTIES */ OPEN_PAREN serdePropertyList CLOSE_PAREN)?
+rowformatdelimitedoptions:
+    rowformatdelimitedoption+
     ;
 
-rowFormatDelimitedOptions
-    : rowFormatDelimitedOption+
+rowformatdelimitedoption:
+    FIELDS TERMINATED BY sconst (ESCAPED BY sconst)?
+    | COLLECTION ITEMS TERMINATED BY sconst
+    | MAP KEYS TERMINATED BY sconst  
+    | LINES TERMINATED BY sconst
+    | NULL DEFINED AS sconst
     ;
 
-rowFormatDelimitedOption
-    : identifier /* FIELDS */ identifier /* TERMINATED */ BY sconst (identifier /* ESCAPED */ BY sconst)?
-    | identifier /* COLLECTION */ identifier /* ITEMS */ identifier /* TERMINATED */ BY sconst
-    | MAP identifier /* KEYS */ identifier /* TERMINATED */ BY sconst
-    | identifier /* LINES */ identifier /* TERMINATED */ BY sconst
-    | NULL identifier /* DEFINED */ AS sconst
+storedasClause:
+    STORED AS fileformat
+    | STORED AS INPUTFORMAT sconst OUTPUTFORMAT sconst
     ;
 
-serdePropertyList
-    : serdeProperty (COMMA serdeProperty)*
+fileformat:
+    PARQUET | RCFILE | SEQUENCEFILE | TEXTFILE | ORC | AVRO
     ;
 
-serdeProperty
-    : sconst EQUAL sconst
+locationClause:
+    LOCATION sconst
     ;
 
-storedAsClause
-    : STORED AS fileFormat
-    | STORED AS identifier /* INPUTFORMAT */ sconst identifier /* OUTPUTFORMAT */ sconst
+tablepropertiesClause:
+    TABLE PROPERTIES '(' rowpropertylist ')'
     ;
 
-fileFormat
-    : identifier /* PARQUET, RCFILE, SEQUENCEFILE, TEXTFILE, ORC, or AVRO */
-    | identifier /* INPUTFORMAT */ sconst identifier /* OUTPUTFORMAT */ sconst
+rowpropertylist:
+    rowproperty (',' rowproperty)*
     ;
 
-locationClause
-    : LOCATION sconst
+rowproperty:
+    sconst '=' sconst
     ;
 
-tablePropertiesClause
-    : TABLE identifier /* PROPERTIES */ OPEN_PAREN tablePropertyList CLOSE_PAREN
-    ;
-
-tablePropertyList
-    : tableProperty (COMMA tableProperty)*
-    ;
-
-tableProperty
-    : sconst EQUAL sconst
-    ;
-
+// Needed tokens: CREATE, EXTERNAL, TABLE, PARTITIONED, BY, ROW, FORMAT, DELIMITED,
+// SERDE, WITH, SERDEPROPERTIES, FIELDS, TERMINATED, ESCAPED, COLLECTION, ITEMS,
+// MAP, KEYS, LINES, NULL, DEFINED, AS, STORED, INPUTFORMAT, OUTPUTFORMAT,
+// PARQUET, RCFILE, SEQUENCEFILE, TEXTFILE, ORC, AVRO, LOCATION, PROPERTIES

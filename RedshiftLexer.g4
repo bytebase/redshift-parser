@@ -1649,6 +1649,356 @@ YES_P
 ZONE
    : 'ZONE'
    ;
+
+// REDSHIFT-SPECIFIC KEYWORDS
+// These tokens are specific to Amazon Redshift and not part of standard PostgreSQL
+
+// Datashare Commands
+DATASHARE
+   : 'DATASHARE'
+   ;
+
+PUBLICACCESSIBLE
+   : 'PUBLICACCESSIBLE'
+   ;
+
+INCLUDENEW
+   : 'INCLUDENEW'
+   ;
+
+// External Data Sources
+EXTERNAL
+   : 'EXTERNAL'
+   ;
+
+IAM_ROLE
+   : 'IAM_ROLE'
+   ;
+
+CATALOG_ROLE
+   : 'CATALOG_ROLE'
+   ;
+
+CATALOG_ID
+   : 'CATALOG_ID'
+   ;
+
+HIVE
+   : 'HIVE'
+   ;
+
+METASTORE
+   : 'METASTORE'
+   ;
+
+URI
+   : 'URI'
+   ;
+
+POSTGRES
+   : 'POSTGRES'
+   ;
+
+MYSQL
+   : 'MYSQL'
+   ;
+
+SECRET_ARN
+   : 'SECRET_ARN'
+   ;
+
+KINESIS
+   : 'KINESIS'
+   ;
+
+KAFKA
+   : 'KAFKA'
+   ;
+
+MSK
+   : 'MSK'
+   ;
+
+AUTHENTICATION
+   : 'AUTHENTICATION'
+   ;
+
+AUTHENTICATION_ARN
+   : 'AUTHENTICATION_ARN'
+   ;
+
+SESSION_TOKEN
+   : 'SESSION'
+   ;
+
+MTLS
+   : 'MTLS'
+   ;
+
+// Security/Policy
+MASKING
+   : 'MASKING'
+   ;
+
+POLICY
+   : 'POLICY'
+   ;
+
+RLS
+   : 'RLS'
+   ;
+
+ATTACH
+   : 'ATTACH'
+   ;
+
+DETACH
+   : 'DETACH'
+   ;
+
+IDENTITY
+   : 'IDENTITY'
+   ;
+
+PROVIDER
+   : 'PROVIDER'
+   ;
+
+// ML/Model Commands
+MODEL
+   : 'MODEL'
+   ;
+
+TARGET
+   : 'TARGET'
+   ;
+
+SAGEMAKER
+   : 'SAGEMAKER'
+   ;
+
+AUTO
+   : 'AUTO'
+   ;
+
+MODEL_TYPE
+   : 'MODEL_TYPE'
+   ;
+
+PROBLEM_TYPE
+   : 'PROBLEM_TYPE'
+   ;
+
+OBJECTIVE
+   : 'OBJECTIVE'
+   ;
+
+PREPROCESSORS
+   : 'PREPROCESSORS'
+   ;
+
+HYPERPARAMETERS
+   : 'HYPERPARAMETERS'
+   ;
+
+XGBOOST
+   : 'XGBOOST'
+   ;
+
+MLP
+   : 'MLP'
+   ;
+
+LINEAR_LEARNER
+   : 'LINEAR_LEARNER'
+   ;
+
+KMEANS
+   : 'KMEANS'
+   ;
+
+FORECAST
+   : 'FORECAST'
+   ;
+
+REGRESSION
+   : 'REGRESSION'
+   ;
+
+BINARY_CLASSIFICATION
+   : 'BINARY_CLASSIFICATION'
+   ;
+
+MULTICLASS_CLASSIFICATION
+   : 'MULTICLASS_CLASSIFICATION'
+   ;
+
+S3_BUCKET
+   : 'S3_BUCKET'
+   ;
+
+TAGS
+   : 'TAGS'
+   ;
+
+KMS_KEY_ID
+   : 'KMS_KEY_ID'
+   ;
+
+S3_GARBAGE_COLLECT
+   : 'S3_GARBAGE_COLLECT'
+   ;
+
+MAX_CELLS
+   : 'MAX_CELLS'
+   ;
+
+MAX_RUNTIME
+   : 'MAX_RUNTIME'
+   ;
+
+HORIZON
+   : 'HORIZON'
+   ;
+
+FREQUENCY
+   : 'FREQUENCY'
+   ;
+
+PERCENTILES
+   : 'PERCENTILES'
+   ;
+
+MAX_BATCH_ROWS
+   : 'MAX_BATCH_ROWS'
+   ;
+
+// UNLOAD Command
+UNLOAD
+   : 'UNLOAD'
+   ;
+
+MANIFEST
+   : 'MANIFEST'
+   ;
+
+VERBOSE
+   : 'VERBOSE'
+   ;
+
+ADDQUOTES
+   : 'ADDQUOTES'
+   ;
+
+ALLOWOVERWRITE
+   : 'ALLOWOVERWRITE'
+   ;
+
+CLEANPATH
+   : 'CLEANPATH'
+   ;
+
+PARALLEL
+   : 'PARALLEL'
+   ;
+
+MAXFILESIZE
+   : 'MAXFILESIZE'
+   ;
+
+ROWGROUPSIZE
+   : 'ROWGROUPSIZE'
+   ;
+
+EXTENSION
+   : 'EXTENSION'
+   ;
+
+BZIP2
+   : 'BZIP2'
+   ;
+
+GZIP
+   : 'GZIP'
+   ;
+
+ZSTD
+   : 'ZSTD'
+   ;
+
+// Show Commands
+DATABASES
+   : 'DATABASES'
+   ;
+
+DATASHARES
+   : 'DATASHARES'
+   ;
+
+GRANTS
+   : 'GRANTS'
+   ;
+
+// Session/Connection
+USE
+   : 'USE'
+   ;
+
+CANCEL
+   : 'CANCEL'
+   ;
+
+SESSION_AUTHORIZATION
+   : 'SESSION_AUTHORIZATION'
+   ;
+
+SESSION_CHARACTERISTICS
+   : 'SESSION_CHARACTERISTICS'
+   ;
+
+// General
+COMPRESSION
+   : 'COMPRESSION'
+   ;
+
+LIBRARY
+   : 'LIBRARY'
+   ;
+
+PROCEDURE
+   : 'PROCEDURE'
+   ;
+
+APPEND
+   : 'APPEND'
+   ;
+
+// Size Units
+MB
+   : 'MB'
+   ;
+
+GB
+   : 'GB'
+   ;
+
+// Common Redshift Keywords
+ACCOUNT
+   : 'ACCOUNT'
+   ;
+
+NAMESPACE
+   : 'NAMESPACE'
+   ;
+
+DESCRIBE
+   : 'DESCRIBE'
+   ;
+
+DESC
+   : 'DESC'
+   ;
+
    //
 
    // non-reserved keywords (can not be function or type)

@@ -1,21 +1,19 @@
-// SHOW PROCEDURE command
-// Shows the source code of a stored procedure
-// Reference: https://docs.aws.amazon.com/redshift/latest/dg/r_SHOW_PROCEDURE.html
+// SHOW PROCEDURE statement - Redshift-specific command
 
-showProcedureStmt
-    : SHOW PROCEDURE procedureName=identifier (LPAREN procedureArguments? RPAREN)?
+showprocedurestmt:
+    SHOW PROCEDURE func_name ('(' func_args_list? ')')?
     ;
 
-procedureArguments
-    : procedureArgument (COMMA procedureArgument)*
+func_args_list:
+    func_arg (',' func_arg)*
     ;
 
-procedureArgument
-    : (argName=identifier)? (argMode)? argType=dataType
+func_arg:
+    (colid)? (param_mode)? typename
     ;
 
-argMode
-    : IN
-    | OUT
-    | INOUT
+param_mode:
+    IN | OUT | INOUT
     ;
+
+// Needed tokens: SHOW, PROCEDURE, IN, OUT, INOUT

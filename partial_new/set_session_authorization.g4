@@ -1,11 +1,7 @@
-// SET SESSION AUTHORIZATION statement
-// https://docs.aws.amazon.com/redshift/latest/dg/r_SET_SESSION_AUTHORIZATION.html
+// SET SESSION AUTHORIZATION statement - Redshift-specific command
 
-setSessionAuthorizationStmt
-    : SET (LOCAL)? SESSION AUTHORIZATION (userName | DEFAULT)
+setsessionauthorizationstmt:
+    SET (LOCAL)? SESSION AUTHORIZATION (rolespec | DEFAULT)
     ;
 
-userName
-    : Identifier
-    | StringConstant
-    ;
+// Needed tokens: SET, LOCAL, SESSION, AUTHORIZATION, DEFAULT

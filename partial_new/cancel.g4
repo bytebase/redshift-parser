@@ -1,10 +1,7 @@
-// CANCEL statement
-// https://docs.aws.amazon.com/redshift/latest/dg/r_CANCEL.html
+// CANCEL statement - Redshift-specific command
 
-// Rule to be included in RedshiftParser.g4
-cancelStmt
-    : CANCEL processId=INTEGER_LITERAL (message=STRING_LITERAL)?
+cancelstmt:
+    CANCEL iconst (sconst)?
     ;
 
-// Tokens to be included in RedshiftLexer.g4 (if not already present)
-// CANCEL: 'CANCEL';
+// Needed tokens: CANCEL

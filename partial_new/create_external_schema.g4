@@ -1,62 +1,57 @@
-// CREATE EXTERNAL SCHEMA command
+// CREATE EXTERNAL SCHEMA statement - Redshift-specific command
 // Reference: https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_EXTERNAL_SCHEMA.html
-
-createExternalSchemaStatement
-    : CREATE EXTERNAL SCHEMA (IF_P NOT EXISTS)? schemaName
-      ( fromDataCatalogClause
-      | fromHiveMetastoreClause
-      | fromPostgresClause
-      | fromMysqlClause
-      | fromKinesisClause
-      | fromKafkaClause
-      | fromMskClause
-      | fromRedshiftClause
+createexternalschemastmt
+    : CREATE EXTERNAL SCHEMA opt_if_not_exists? schema_name=colid
+      ( fromdatacatalogclause
+      | fromhivemetastoreclause
+      | frompostgresclause
+      | frommysqlclause
+      | fromkinesisclause
+      | fromkafkaclause
+      | frommskclause
+      | fromredshiftclause
       )
-    ;
-
-schemaName
-    : identifier
     ;
 
 // Data Catalog / AWS Glue syntax
 fromDataCatalogClause
     : FROM (DATA CATALOG)?
-      DATABASE STRING_LITERAL
-      REGION STRING_LITERAL
+      DATABASE sconst
+      REGION sconst
       IAM_ROLE iamRoleValue
       (CATALOG_ROLE catalogRoleValue)?
       (CREATE EXTERNAL DATABASE IF_P NOT EXISTS)?
-      (CATALOG_ID STRING_LITERAL)?
+      (CATALOG_ID sconst)?
     ;
 
 // Hive Metastore syntax
 fromHiveMetastoreClause
     : FROM HIVE METASTORE
-      DATABASE STRING_LITERAL
-      URI STRING_LITERAL
+      DATABASE sconst
+      URI sconst
       (PORT INTEGER_LITERAL)?
-      IAM_ROLE STRING_LITERAL
+      IAM_ROLE sconst
     ;
 
 // PostgreSQL federated query syntax
 fromPostgresClause
     : FROM POSTGRES
-      DATABASE STRING_LITERAL
-      (SCHEMA STRING_LITERAL)?
-      URI STRING_LITERAL
+      DATABASE sconst
+      (SCHEMA sconst)?
+      URI sconst
       (PORT INTEGER_LITERAL)?
       IAM_ROLE iamRoleValue
-      SECRET_ARN STRING_LITERAL
+      SECRET_ARN sconst
     ;
 
 // MySQL federated query syntax
 fromMysqlClause
     : FROM MYSQL
-      DATABASE STRING_LITERAL
-      URI STRING_LITERAL
+      DATABASE sconst
+      URI sconst
       (PORT INTEGER_LITERAL)?
       IAM_ROLE iamRoleValue
-      SECRET_ARN STRING_LITERAL
+      SECRET_ARN sconst
     ;
 
 // Kinesis streaming syntax
@@ -69,86 +64,48 @@ fromKinesisClause
 fromKafkaClause
     : FROM KAFKA
       IAM_ROLE iamRoleValue
-      (URI STRING_LITERAL)?
+      (URI sconst)?
       (AUTHENTICATION authenticationValue)?
-      (AUTHENTICATION_ARN STRING_LITERAL)?
+      (AUTHENTICATION_ARN sconst)?
     ;
 
 // MSK streaming syntax
 fromMskClause
     : FROM MSK
       IAM_ROLE iamRoleValue
-      (URI STRING_LITERAL)?
+      (URI sconst)?
       (AUTHENTICATION authenticationValue)?
-      (AUTHENTICATION_ARN STRING_LITERAL)?
+      (AUTHENTICATION_ARN sconst)?
     ;
 
 // Cross-database query syntax
 fromRedshiftClause
     : FROM REDSHIFT
-      DATABASE STRING_LITERAL
-      SCHEMA STRING_LITERAL?
+      DATABASE sconst
+      SCHEMA sconst?
     ;
 
 // IAM Role value can be DEFAULT, 'SESSION', or ARN string
-iamRoleValue
+iamrolevalue
     : DEFAULT
     | SESSION_TOKEN
-    | STRING_LITERAL  // ARN string
+    | sconst  // ARN string
     ;
 
 // Catalog Role value can be 'SESSION' or ARN string
-catalogRoleValue
+catalogrolevalue
     : SESSION_TOKEN
-    | STRING_LITERAL  // ARN string
+    | sconst  // ARN string
     ;
 
 // Authentication methods for streaming
-authenticationValue
+authenticationvalue
     : NONE
     | IAM
     | MTLS
     ;
 
-// Tokens (these would typically be in the lexer file)
-CREATE: 'CREATE';
-EXTERNAL: 'EXTERNAL';
-SCHEMA: 'SCHEMA';
-IF_P: 'IF';
-NOT: 'NOT';
-EXISTS: 'EXISTS';
-FROM: 'FROM';
-DATA: 'DATA';
-CATALOG: 'CATALOG';
-DATABASE: 'DATABASE';
-REGION: 'REGION';
-IAM_ROLE: 'IAM_ROLE';
-CATALOG_ROLE: 'CATALOG_ROLE';
-CATALOG_ID: 'CATALOG_ID';
-HIVE: 'HIVE';
-METASTORE: 'METASTORE';
-URI: 'URI';
-PORT: 'PORT';
-POSTGRES: 'POSTGRES';
-MYSQL: 'MYSQL';
-SECRET_ARN: 'SECRET_ARN';
-KINESIS: 'KINESIS';
-KAFKA: 'KAFKA';
-MSK: 'MSK';
-REDSHIFT: 'REDSHIFT';
-AUTHENTICATION: 'AUTHENTICATION';
-AUTHENTICATION_ARN: 'AUTHENTICATION_ARN';
-DEFAULT: 'DEFAULT';
-SESSION_TOKEN: 'SESSION';
-NONE: 'NONE';
-IAM: 'IAM';
-MTLS: 'MTLS';
-
-// Rules referenced from main parser (placeholders for this partial grammar)
-identifier: ID;
-
-// Basic tokens
-ID: [a-zA-Z_][a-zA-Z0-9_]*;
-INTEGER_LITERAL: [0-9]+;
-STRING_LITERAL: '\'' (~['\r\n] | '\'\'')* '\'';
-WS: [ \t\r\n]+ -> skip;
+// Tokens needed in RedshiftLexer.g4:
+// EXTERNAL, IAM_ROLE, CATALOG_ROLE, CATALOG_ID, HIVE, METASTORE, URI, PORT,
+// POSTGRES, MYSQL, SECRET_ARN, KINESIS, KAFKA, MSK, AUTHENTICATION,
+// AUTHENTICATION_ARN, SESSION_TOKEN, MTLS

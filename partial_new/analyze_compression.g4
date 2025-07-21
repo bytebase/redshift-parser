@@ -1,25 +1,15 @@
-// ANALYZE COMPRESSION statement
-// https://docs.aws.amazon.com/redshift/latest/dg/r_ANALYZE_COMPRESSION.html
+// ANALYZE COMPRESSION statement - Redshift-specific command
 
-// Rules to be included in RedshiftParser.g4
-
-// ANALYZE COMPRESSION specific rule
-analyze_compression_stmt
-    : analyze_keyword COMPRESSION opt_vacuum_relation_list? comprows_clause?
+analyzecompressionstmt:
+    analyze_keyword COMPRESSION opt_vacuum_relation_list? comprrowsclause?
     ;
 
-// COMPROWS clause for ANALYZE COMPRESSION
-comprows_clause
-    : COMPROWS numericonly
+comprrowsclause:
+    COMPROWS numericonly
     ;
 
-// Keyword alternatives (already exists, included for reference)
-analyze_keyword
-    : ANALYZE
-    | ANALYSE
+analyze_keyword:
+    ANALYZE | ANALYSE
     ;
 
-// Tokens to be included in RedshiftLexer.g4 (if not already present)
-// ANALYZE: 'ANALYZE';        // Already exists at line 246-247
-// COMPRESSION: 'COMPRESSION';
-// COMPROWS: 'COMPROWS';
+// Needed tokens: ANALYZE, ANALYSE, COMPRESSION, COMPROWS

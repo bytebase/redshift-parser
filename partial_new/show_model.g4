@@ -1,10 +1,7 @@
-// SHOW MODEL statement grammar for Redshift
-// Reference: https://docs.aws.amazon.com/redshift/latest/dg/r_SHOW_MODEL.html
+// SHOW MODEL statement - Redshift-specific command
 
-showModelStmt
-    : SHOW MODEL (ALL | modelName)
+showmodelstmt:
+    SHOW MODEL (ALL | colid)
     ;
 
-modelName
-    : identifier
-    ;
+// Needed tokens: SHOW, MODEL, ALL
