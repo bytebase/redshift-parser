@@ -43,6 +43,10 @@ func TestRedshiftParser(t *testing.T) {
 
 	for _, file := range examples {
 		filePath := path.Join("examples", file.Name())
+		// Skip directories
+		if file.IsDir() {
+			continue
+		}
 		t.Run(filePath, func(t *testing.T) {
 			t.Parallel()
 			// read all the bytes from the file
@@ -88,6 +92,73 @@ func TestRedshiftParser(t *testing.T) {
 			require.Equal(t, start, tree.GetStart().GetTokenIndex())
 			require.Equal(t, stop, tree.GetStop().GetTokenIndex())
 			// require.Equal(t, string(data), stream.GetTextFromTokens(stream.Get(0), stream.Get(stream.Size()-1)))
+		})
+	}
+}
+
+func TestRedshiftSpecificParser(t *testing.T) {
+	redshiftDir := path.Join("examples", "redshift")
+	// Check if redshift directory exists
+	if _, err := os.Stat(redshiftDir); os.IsNotExist(err) {
+		t.Skip("Redshift examples directory not found")
+		return
+	}
+
+	examples, err := os.ReadDir(redshiftDir)
+	if err != nil {
+		t.Skip("Cannot read Redshift examples directory")
+		return
+	}
+
+	for _, file := range examples {
+		if file.IsDir() {
+			continue
+		}
+		filePath := path.Join(redshiftDir, file.Name())
+		t.Run(filePath, func(t *testing.T) {
+			t.Parallel()
+			// read all the bytes from the file
+			data, err := os.ReadFile(filePath)
+			require.NoError(t, err)
+
+			input := antlr.NewInputStream(string(data))
+
+			lexer := pgparser.NewRedshiftLexer(input)
+
+			stream := antlr.NewCommonTokenStream(lexer, 0)
+			p := pgparser.NewRedshiftParser(stream)
+
+			lexerErrors := &CustomErrorListener{}
+			lexer.RemoveErrorListeners()
+			lexer.AddErrorListener(lexerErrors)
+
+			parserErrors := &CustomErrorListener{}
+			p.RemoveErrorListeners()
+			p.AddErrorListener(parserErrors)
+
+			p.BuildParseTrees = true
+
+			tree := p.Root()
+
+			require.Equal(t, 0, lexerErrors.errors)
+			require.Equal(t, 0, parserErrors.errors)
+
+			start := 0
+			stop := stream.Size() - 1
+			for i := 0; i < stream.Size(); i++ {
+				if stream.Get(i).GetChannel() == antlr.TokenDefaultChannel {
+					start = i
+					break
+				}
+			}
+			for i := stream.Size() - 1; i >= 0; i-- {
+				if stream.Get(i).GetChannel() == antlr.TokenDefaultChannel && stream.Get(i).GetTokenType() != antlr.TokenEOF {
+					stop = i
+					break
+				}
+			}
+			require.Equal(t, start, tree.GetStart().GetTokenIndex())
+			require.Equal(t, stop, tree.GetStop().GetTokenIndex())
 		})
 	}
 }
