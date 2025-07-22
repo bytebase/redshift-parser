@@ -1228,6 +1228,447 @@ type RedshiftParserListener interface {
 	// EnterLoadstmt is called when entering the loadstmt production.
 	EnterLoadstmt(c *LoadstmtContext)
 
+	// EnterAlterdatasharestmt is called when entering the alterdatasharestmt production.
+	EnterAlterdatasharestmt(c *AlterdatasharestmtContext)
+
+	// EnterAlterdatashare_action is called when entering the alterdatashare_action production.
+	EnterAlterdatashare_action(c *Alterdatashare_actionContext)
+
+	// EnterAlterdatashare_add_drop is called when entering the alterdatashare_add_drop production.
+	EnterAlterdatashare_add_drop(c *Alterdatashare_add_dropContext)
+
+	// EnterAlterdatashare_objects is called when entering the alterdatashare_objects production.
+	EnterAlterdatashare_objects(c *Alterdatashare_objectsContext)
+
+	// EnterDatashare_table_list is called when entering the datashare_table_list production.
+	EnterDatashare_table_list(c *Datashare_table_listContext)
+
+	// EnterDatashare_table_name is called when entering the datashare_table_name production.
+	EnterDatashare_table_name(c *Datashare_table_nameContext)
+
+	// EnterDatashare_function_list is called when entering the datashare_function_list production.
+	EnterDatashare_function_list(c *Datashare_function_listContext)
+
+	// EnterDatashare_function is called when entering the datashare_function production.
+	EnterDatashare_function(c *Datashare_functionContext)
+
+	// EnterDatashare_function_name is called when entering the datashare_function_name production.
+	EnterDatashare_function_name(c *Datashare_function_nameContext)
+
+	// EnterCreatedatasharestmt is called when entering the createdatasharestmt production.
+	EnterCreatedatasharestmt(c *CreatedatasharestmtContext)
+
+	// EnterCreatedatashareoptions is called when entering the createdatashareoptions production.
+	EnterCreatedatashareoptions(c *CreatedatashareoptionsContext)
+
+	// EnterCreatedatashareoption is called when entering the createdatashareoption production.
+	EnterCreatedatashareoption(c *CreatedatashareoptionContext)
+
+	// EnterSetpublicaccessibleoption is called when entering the setpublicaccessibleoption production.
+	EnterSetpublicaccessibleoption(c *SetpublicaccessibleoptionContext)
+
+	// EnterManagedbyoption is called when entering the managedbyoption production.
+	EnterManagedbyoption(c *ManagedbyoptionContext)
+
+	// EnterDescdatasharestmt is called when entering the descdatasharestmt production.
+	EnterDescdatasharestmt(c *DescdatasharestmtContext)
+
+	// EnterDropdatasharestmt is called when entering the dropdatasharestmt production.
+	EnterDropdatasharestmt(c *DropdatasharestmtContext)
+
+	// EnterAlterexternalschemastmt is called when entering the alterexternalschemastmt production.
+	EnterAlterexternalschemastmt(c *AlterexternalschemastmtContext)
+
+	// EnterAltexternalschemaopts is called when entering the altexternalschemaopts production.
+	EnterAltexternalschemaopts(c *AltexternalschemaoptsContext)
+
+	// EnterAlterexternalviewstmt is called when entering the alterexternalviewstmt production.
+	EnterAlterexternalviewstmt(c *AlterexternalviewstmtContext)
+
+	// EnterAltexternalviewopts is called when entering the altexternalviewopts production.
+	EnterAltexternalviewopts(c *AltexternalviewoptsContext)
+
+	// EnterCreateexternalschemastmt is called when entering the createexternalschemastmt production.
+	EnterCreateexternalschemastmt(c *CreateexternalschemastmtContext)
+
+	// EnterFromdatacatalogclause is called when entering the fromdatacatalogclause production.
+	EnterFromdatacatalogclause(c *FromdatacatalogclauseContext)
+
+	// EnterImplicitdatacatalogclause is called when entering the implicitdatacatalogclause production.
+	EnterImplicitdatacatalogclause(c *ImplicitdatacatalogclauseContext)
+
+	// EnterFromhivemetastoreclause is called when entering the fromhivemetastoreclause production.
+	EnterFromhivemetastoreclause(c *FromhivemetastoreclauseContext)
+
+	// EnterFrompostgresclause is called when entering the frompostgresclause production.
+	EnterFrompostgresclause(c *FrompostgresclauseContext)
+
+	// EnterFrommysqlclause is called when entering the frommysqlclause production.
+	EnterFrommysqlclause(c *FrommysqlclauseContext)
+
+	// EnterFromkinesisclause is called when entering the fromkinesisclause production.
+	EnterFromkinesisclause(c *FromkinesisclauseContext)
+
+	// EnterFromkafkaclause is called when entering the fromkafkaclause production.
+	EnterFromkafkaclause(c *FromkafkaclauseContext)
+
+	// EnterFrommskclause is called when entering the frommskclause production.
+	EnterFrommskclause(c *FrommskclauseContext)
+
+	// EnterFromredshiftclause is called when entering the fromredshiftclause production.
+	EnterFromredshiftclause(c *FromredshiftclauseContext)
+
+	// EnterIamrolevalue is called when entering the iamrolevalue production.
+	EnterIamrolevalue(c *IamrolevalueContext)
+
+	// EnterCatalogrolevalue is called when entering the catalogrolevalue production.
+	EnterCatalogrolevalue(c *CatalogrolevalueContext)
+
+	// EnterAuthenticationvalue is called when entering the authenticationvalue production.
+	EnterAuthenticationvalue(c *AuthenticationvalueContext)
+
+	// EnterCreateexternalfunctionstmt is called when entering the createexternalfunctionstmt production.
+	EnterCreateexternalfunctionstmt(c *CreateexternalfunctionstmtContext)
+
+	// EnterParamlist is called when entering the paramlist production.
+	EnterParamlist(c *ParamlistContext)
+
+	// EnterParam_spec is called when entering the param_spec production.
+	EnterParam_spec(c *Param_specContext)
+
+	// EnterCreateexternalmodelstmt is called when entering the createexternalmodelstmt production.
+	EnterCreateexternalmodelstmt(c *CreateexternalmodelstmtContext)
+
+	// EnterCreateexternaltablestmt is called when entering the createexternaltablestmt production.
+	EnterCreateexternaltablestmt(c *CreateexternaltablestmtContext)
+
+	// EnterExtern_column_list is called when entering the extern_column_list production.
+	EnterExtern_column_list(c *Extern_column_listContext)
+
+	// EnterExtern_column_def is called when entering the extern_column_def production.
+	EnterExtern_column_def(c *Extern_column_defContext)
+
+	// EnterExtern_typename is called when entering the extern_typename production.
+	EnterExtern_typename(c *Extern_typenameContext)
+
+	// EnterExtern_table_format is called when entering the extern_table_format production.
+	EnterExtern_table_format(c *Extern_table_formatContext)
+
+	// EnterRow_format_spec is called when entering the row_format_spec production.
+	EnterRow_format_spec(c *Row_format_specContext)
+
+	// EnterSerde_properties_list is called when entering the serde_properties_list production.
+	EnterSerde_properties_list(c *Serde_properties_listContext)
+
+	// EnterSerde_property is called when entering the serde_property production.
+	EnterSerde_property(c *Serde_propertyContext)
+
+	// EnterExternal_format_spec is called when entering the external_format_spec production.
+	EnterExternal_format_spec(c *External_format_specContext)
+
+	// EnterTable_properties_list is called when entering the table_properties_list production.
+	EnterTable_properties_list(c *Table_properties_listContext)
+
+	// EnterTable_property is called when entering the table_property production.
+	EnterTable_property(c *Table_propertyContext)
+
+	// EnterCreateexternalviewstmt is called when entering the createexternalviewstmt production.
+	EnterCreateexternalviewstmt(c *CreateexternalviewstmtContext)
+
+	// EnterDropexternalviewstmt is called when entering the dropexternalviewstmt production.
+	EnterDropexternalviewstmt(c *DropexternalviewstmtContext)
+
+	// EnterAlteridentityproviderstmt is called when entering the alteridentityproviderstmt production.
+	EnterAlteridentityproviderstmt(c *AlteridentityproviderstmtContext)
+
+	// EnterAlteridprovideropts is called when entering the alteridprovideropts production.
+	EnterAlteridprovideropts(c *AlteridprovideroptsContext)
+
+	// EnterAltermaskingpolicystmt is called when entering the altermaskingpolicystmt production.
+	EnterAltermaskingpolicystmt(c *AltermaskingpolicystmtContext)
+
+	// EnterAltmaskingpolicyopts is called when entering the altmaskingpolicyopts production.
+	EnterAltmaskingpolicyopts(c *AltmaskingpolicyoptsContext)
+
+	// EnterAltmaskingpolicyargs is called when entering the altmaskingpolicyargs production.
+	EnterAltmaskingpolicyargs(c *AltmaskingpolicyargsContext)
+
+	// EnterAltmaskingpolicyarg is called when entering the altmaskingpolicyarg production.
+	EnterAltmaskingpolicyarg(c *AltmaskingpolicyargContext)
+
+	// EnterAlterrlspolicystmt is called when entering the alterrlspolicystmt production.
+	EnterAlterrlspolicystmt(c *AlterrlspolicystmtContext)
+
+	// EnterAltrlspolicyopts is called when entering the altrlspolicyopts production.
+	EnterAltrlspolicyopts(c *AltrlspolicyoptsContext)
+
+	// EnterAttachmaskingpolicystmt is called when entering the attachmaskingpolicystmt production.
+	EnterAttachmaskingpolicystmt(c *AttachmaskingpolicystmtContext)
+
+	// EnterAttachpolicycollist is called when entering the attachpolicycollist production.
+	EnterAttachpolicycollist(c *AttachpolicycollistContext)
+
+	// EnterAttachpolicycolumn is called when entering the attachpolicycolumn production.
+	EnterAttachpolicycolumn(c *AttachpolicycolumnContext)
+
+	// EnterAttachpolicytargets is called when entering the attachpolicytargets production.
+	EnterAttachpolicytargets(c *AttachpolicytargetsContext)
+
+	// EnterAttachpolicytarget is called when entering the attachpolicytarget production.
+	EnterAttachpolicytarget(c *AttachpolicytargetContext)
+
+	// EnterAttachrlspolicystmt is called when entering the attachrlspolicystmt production.
+	EnterAttachrlspolicystmt(c *AttachrlspolicystmtContext)
+
+	// EnterCreateidentityproviderstmt is called when entering the createidentityproviderstmt production.
+	EnterCreateidentityproviderstmt(c *CreateidentityproviderstmtContext)
+
+	// EnterCreateidprovideropts is called when entering the createidprovideropts production.
+	EnterCreateidprovideropts(c *CreateidprovideroptsContext)
+
+	// EnterGroupfilter is called when entering the groupfilter production.
+	EnterGroupfilter(c *GroupfilterContext)
+
+	// EnterCreatelibrarystmt is called when entering the createlibrarystmt production.
+	EnterCreatelibrarystmt(c *CreatelibrarystmtContext)
+
+	// EnterCreatelibraryopts is called when entering the createlibraryopts production.
+	EnterCreatelibraryopts(c *CreatelibraryoptsContext)
+
+	// EnterCreatemaskingpolicystmt is called when entering the createmaskingpolicystmt production.
+	EnterCreatemaskingpolicystmt(c *CreatemaskingpolicystmtContext)
+
+	// EnterInputcolumnlist is called when entering the inputcolumnlist production.
+	EnterInputcolumnlist(c *InputcolumnlistContext)
+
+	// EnterInputcolumn is called when entering the inputcolumn production.
+	EnterInputcolumn(c *InputcolumnContext)
+
+	// EnterMaskingexpression is called when entering the maskingexpression production.
+	EnterMaskingexpression(c *MaskingexpressionContext)
+
+	// EnterCreatemodelstmt is called when entering the createmodelstmt production.
+	EnterCreatemodelstmt(c *CreatemodelstmtContext)
+
+	// EnterCreatemodelfromclause is called when entering the createmodelfromclause production.
+	EnterCreatemodelfromclause(c *CreatemodelfromclauseContext)
+
+	// EnterIamrolespec is called when entering the iamrolespec production.
+	EnterIamrolespec(c *IamrolespecContext)
+
+	// EnterSagemakerspec is called when entering the sagemakerspec production.
+	EnterSagemakerspec(c *SagemakerspecContext)
+
+	// EnterModeltypespec is called when entering the modeltypespec production.
+	EnterModeltypespec(c *ModeltypespecContext)
+
+	// EnterProblemtypespec is called when entering the problemtypespec production.
+	EnterProblemtypespec(c *ProblemtypespecContext)
+
+	// EnterProblemtype is called when entering the problemtype production.
+	EnterProblemtype(c *ProblemtypeContext)
+
+	// EnterObjectivespec is called when entering the objectivespec production.
+	EnterObjectivespec(c *ObjectivespecContext)
+
+	// EnterHyperparametersspec is called when entering the hyperparametersspec production.
+	EnterHyperparametersspec(c *HyperparametersspecContext)
+
+	// EnterHyperparameterslist is called when entering the hyperparameterslist production.
+	EnterHyperparameterslist(c *HyperparameterslistContext)
+
+	// EnterHyperparameteritem is called when entering the hyperparameteritem production.
+	EnterHyperparameteritem(c *HyperparameteritemContext)
+
+	// EnterSettingsclause is called when entering the settingsclause production.
+	EnterSettingsclause(c *SettingsclauseContext)
+
+	// EnterSettingsitem is called when entering the settingsitem production.
+	EnterSettingsitem(c *SettingsitemContext)
+
+	// EnterDatatypelist is called when entering the datatypelist production.
+	EnterDatatypelist(c *DatatypelistContext)
+
+	// EnterDatatype is called when entering the datatype production.
+	EnterDatatype(c *DatatypeContext)
+
+	// EnterCreaterlspolicystmt is called when entering the createrlspolicystmt production.
+	EnterCreaterlspolicystmt(c *CreaterlspolicystmtContext)
+
+	// EnterDescidentityproviderstmt is called when entering the descidentityproviderstmt production.
+	EnterDescidentityproviderstmt(c *DescidentityproviderstmtContext)
+
+	// EnterDetachmaskingpolicystmt is called when entering the detachmaskingpolicystmt production.
+	EnterDetachmaskingpolicystmt(c *DetachmaskingpolicystmtContext)
+
+	// EnterDetachrlspolicystmt is called when entering the detachrlspolicystmt production.
+	EnterDetachrlspolicystmt(c *DetachrlspolicystmtContext)
+
+	// EnterDropidentityproviderstmt is called when entering the dropidentityproviderstmt production.
+	EnterDropidentityproviderstmt(c *DropidentityproviderstmtContext)
+
+	// EnterDroplibrarystmt is called when entering the droplibrarystmt production.
+	EnterDroplibrarystmt(c *DroplibrarystmtContext)
+
+	// EnterDropmaskingpolicystmt is called when entering the dropmaskingpolicystmt production.
+	EnterDropmaskingpolicystmt(c *DropmaskingpolicystmtContext)
+
+	// EnterDropmodelstmt is called when entering the dropmodelstmt production.
+	EnterDropmodelstmt(c *DropmodelstmtContext)
+
+	// EnterDroprlspolicystmt is called when entering the droprlspolicystmt production.
+	EnterDroprlspolicystmt(c *DroprlspolicystmtContext)
+
+	// EnterAltertableappendstmt is called when entering the altertableappendstmt production.
+	EnterAltertableappendstmt(c *AltertableappendstmtContext)
+
+	// EnterAppendoptions is called when entering the appendoptions production.
+	EnterAppendoptions(c *AppendoptionsContext)
+
+	// EnterAlteruserstmt is called when entering the alteruserstmt production.
+	EnterAlteruserstmt(c *AlteruserstmtContext)
+
+	// EnterAlteruseropts is called when entering the alteruseropts production.
+	EnterAlteruseropts(c *AlteruseroptsContext)
+
+	// EnterAnalyzecompressionstmt is called when entering the analyzecompressionstmt production.
+	EnterAnalyzecompressionstmt(c *AnalyzecompressionstmtContext)
+
+	// EnterCancelstmt is called when entering the cancelstmt production.
+	EnterCancelstmt(c *CancelstmtContext)
+
+	// EnterClosestmt is called when entering the closestmt production.
+	EnterClosestmt(c *ClosestmtContext)
+
+	// EnterInsertexternaltablestmt is called when entering the insertexternaltablestmt production.
+	EnterInsertexternaltablestmt(c *InsertexternaltablestmtContext)
+
+	// EnterSelect_or_values is called when entering the select_or_values production.
+	EnterSelect_or_values(c *Select_or_valuesContext)
+
+	// EnterSelectintostmt is called when entering the selectintostmt production.
+	EnterSelectintostmt(c *SelectintostmtContext)
+
+	// EnterSetsessionauthorizationstmt is called when entering the setsessionauthorizationstmt production.
+	EnterSetsessionauthorizationstmt(c *SetsessionauthorizationstmtContext)
+
+	// EnterSetsessioncharacteristicsstmt is called when entering the setsessioncharacteristicsstmt production.
+	EnterSetsessioncharacteristicsstmt(c *SetsessioncharacteristicsstmtContext)
+
+	// EnterShowcolumnsstmt is called when entering the showcolumnsstmt production.
+	EnterShowcolumnsstmt(c *ShowcolumnsstmtContext)
+
+	// EnterShowdatabasesstmt is called when entering the showdatabasesstmt production.
+	EnterShowdatabasesstmt(c *ShowdatabasesstmtContext)
+
+	// EnterShowdbsopts is called when entering the showdbsopts production.
+	EnterShowdbsopts(c *ShowdbsoptsContext)
+
+	// EnterShowdatasharesstmt is called when entering the showdatasharesstmt production.
+	EnterShowdatasharesstmt(c *ShowdatasharesstmtContext)
+
+	// EnterShowexternaltablestmt is called when entering the showexternaltablestmt production.
+	EnterShowexternaltablestmt(c *ShowexternaltablestmtContext)
+
+	// EnterShowgrantsstmt is called when entering the showgrantsstmt production.
+	EnterShowgrantsstmt(c *ShowgrantsstmtContext)
+
+	// EnterGrantobject is called when entering the grantobject production.
+	EnterGrantobject(c *GrantobjectContext)
+
+	// EnterGrantprincipal is called when entering the grantprincipal production.
+	EnterGrantprincipal(c *GrantprincipalContext)
+
+	// EnterShowmodelstmt is called when entering the showmodelstmt production.
+	EnterShowmodelstmt(c *ShowmodelstmtContext)
+
+	// EnterShowprocedurestmt is called when entering the showprocedurestmt production.
+	EnterShowprocedurestmt(c *ShowprocedurestmtContext)
+
+	// EnterShowschemasstmt is called when entering the showschemasstmt production.
+	EnterShowschemasstmt(c *ShowschemasstmtContext)
+
+	// EnterShowtablestmt is called when entering the showtablestmt production.
+	EnterShowtablestmt(c *ShowtablestmtContext)
+
+	// EnterShowtablesstmt is called when entering the showtablesstmt production.
+	EnterShowtablesstmt(c *ShowtablesstmtContext)
+
+	// EnterShowviewstmt is called when entering the showviewstmt production.
+	EnterShowviewstmt(c *ShowviewstmtContext)
+
+	// EnterUnloadstmt is called when entering the unloadstmt production.
+	EnterUnloadstmt(c *UnloadstmtContext)
+
+	// EnterIamroleclause is called when entering the iamroleclause production.
+	EnterIamroleclause(c *IamroleclauseContext)
+
+	// EnterUnloadoptions is called when entering the unloadoptions production.
+	EnterUnloadoptions(c *UnloadoptionsContext)
+
+	// EnterFormatoption is called when entering the formatoption production.
+	EnterFormatoption(c *FormatoptionContext)
+
+	// EnterPartitionbyoption is called when entering the partitionbyoption production.
+	EnterPartitionbyoption(c *PartitionbyoptionContext)
+
+	// EnterManifestoption is called when entering the manifestoption production.
+	EnterManifestoption(c *ManifestoptionContext)
+
+	// EnterHeaderoption is called when entering the headeroption production.
+	EnterHeaderoption(c *HeaderoptionContext)
+
+	// EnterDelimiteroption is called when entering the delimiteroption production.
+	EnterDelimiteroption(c *DelimiteroptionContext)
+
+	// EnterFixedwidthoption is called when entering the fixedwidthoption production.
+	EnterFixedwidthoption(c *FixedwidthoptionContext)
+
+	// EnterEncryptedoption is called when entering the encryptedoption production.
+	EnterEncryptedoption(c *EncryptedoptionContext)
+
+	// EnterKmskeyoption is called when entering the kmskeyoption production.
+	EnterKmskeyoption(c *KmskeyoptionContext)
+
+	// EnterCompressionoption is called when entering the compressionoption production.
+	EnterCompressionoption(c *CompressionoptionContext)
+
+	// EnterAddquotesoption is called when entering the addquotesoption production.
+	EnterAddquotesoption(c *AddquotesoptionContext)
+
+	// EnterNullasoption is called when entering the nullasoption production.
+	EnterNullasoption(c *NullasoptionContext)
+
+	// EnterEscapeoption is called when entering the escapeoption production.
+	EnterEscapeoption(c *EscapeoptionContext)
+
+	// EnterAllowoverwriteoption is called when entering the allowoverwriteoption production.
+	EnterAllowoverwriteoption(c *AllowoverwriteoptionContext)
+
+	// EnterCleanpathoption is called when entering the cleanpathoption production.
+	EnterCleanpathoption(c *CleanpathoptionContext)
+
+	// EnterParalleloption is called when entering the paralleloption production.
+	EnterParalleloption(c *ParalleloptionContext)
+
+	// EnterMaxfilesizeoption is called when entering the maxfilesizeoption production.
+	EnterMaxfilesizeoption(c *MaxfilesizeoptionContext)
+
+	// EnterRowgroupsizeoption is called when entering the rowgroupsizeoption production.
+	EnterRowgroupsizeoption(c *RowgroupsizeoptionContext)
+
+	// EnterSizeunit is called when entering the sizeunit production.
+	EnterSizeunit(c *SizeunitContext)
+
+	// EnterRegionoption is called when entering the regionoption production.
+	EnterRegionoption(c *RegionoptionContext)
+
+	// EnterExtensionoption is called when entering the extensionoption production.
+	EnterExtensionoption(c *ExtensionoptionContext)
+
+	// EnterUsestmt is called when entering the usestmt production.
+	EnterUsestmt(c *UsestmtContext)
+
 	// EnterCreatedbstmt is called when entering the createdbstmt production.
 	EnterCreatedbstmt(c *CreatedbstmtContext)
 
@@ -3693,6 +4134,447 @@ type RedshiftParserListener interface {
 
 	// ExitLoadstmt is called when exiting the loadstmt production.
 	ExitLoadstmt(c *LoadstmtContext)
+
+	// ExitAlterdatasharestmt is called when exiting the alterdatasharestmt production.
+	ExitAlterdatasharestmt(c *AlterdatasharestmtContext)
+
+	// ExitAlterdatashare_action is called when exiting the alterdatashare_action production.
+	ExitAlterdatashare_action(c *Alterdatashare_actionContext)
+
+	// ExitAlterdatashare_add_drop is called when exiting the alterdatashare_add_drop production.
+	ExitAlterdatashare_add_drop(c *Alterdatashare_add_dropContext)
+
+	// ExitAlterdatashare_objects is called when exiting the alterdatashare_objects production.
+	ExitAlterdatashare_objects(c *Alterdatashare_objectsContext)
+
+	// ExitDatashare_table_list is called when exiting the datashare_table_list production.
+	ExitDatashare_table_list(c *Datashare_table_listContext)
+
+	// ExitDatashare_table_name is called when exiting the datashare_table_name production.
+	ExitDatashare_table_name(c *Datashare_table_nameContext)
+
+	// ExitDatashare_function_list is called when exiting the datashare_function_list production.
+	ExitDatashare_function_list(c *Datashare_function_listContext)
+
+	// ExitDatashare_function is called when exiting the datashare_function production.
+	ExitDatashare_function(c *Datashare_functionContext)
+
+	// ExitDatashare_function_name is called when exiting the datashare_function_name production.
+	ExitDatashare_function_name(c *Datashare_function_nameContext)
+
+	// ExitCreatedatasharestmt is called when exiting the createdatasharestmt production.
+	ExitCreatedatasharestmt(c *CreatedatasharestmtContext)
+
+	// ExitCreatedatashareoptions is called when exiting the createdatashareoptions production.
+	ExitCreatedatashareoptions(c *CreatedatashareoptionsContext)
+
+	// ExitCreatedatashareoption is called when exiting the createdatashareoption production.
+	ExitCreatedatashareoption(c *CreatedatashareoptionContext)
+
+	// ExitSetpublicaccessibleoption is called when exiting the setpublicaccessibleoption production.
+	ExitSetpublicaccessibleoption(c *SetpublicaccessibleoptionContext)
+
+	// ExitManagedbyoption is called when exiting the managedbyoption production.
+	ExitManagedbyoption(c *ManagedbyoptionContext)
+
+	// ExitDescdatasharestmt is called when exiting the descdatasharestmt production.
+	ExitDescdatasharestmt(c *DescdatasharestmtContext)
+
+	// ExitDropdatasharestmt is called when exiting the dropdatasharestmt production.
+	ExitDropdatasharestmt(c *DropdatasharestmtContext)
+
+	// ExitAlterexternalschemastmt is called when exiting the alterexternalschemastmt production.
+	ExitAlterexternalschemastmt(c *AlterexternalschemastmtContext)
+
+	// ExitAltexternalschemaopts is called when exiting the altexternalschemaopts production.
+	ExitAltexternalschemaopts(c *AltexternalschemaoptsContext)
+
+	// ExitAlterexternalviewstmt is called when exiting the alterexternalviewstmt production.
+	ExitAlterexternalviewstmt(c *AlterexternalviewstmtContext)
+
+	// ExitAltexternalviewopts is called when exiting the altexternalviewopts production.
+	ExitAltexternalviewopts(c *AltexternalviewoptsContext)
+
+	// ExitCreateexternalschemastmt is called when exiting the createexternalschemastmt production.
+	ExitCreateexternalschemastmt(c *CreateexternalschemastmtContext)
+
+	// ExitFromdatacatalogclause is called when exiting the fromdatacatalogclause production.
+	ExitFromdatacatalogclause(c *FromdatacatalogclauseContext)
+
+	// ExitImplicitdatacatalogclause is called when exiting the implicitdatacatalogclause production.
+	ExitImplicitdatacatalogclause(c *ImplicitdatacatalogclauseContext)
+
+	// ExitFromhivemetastoreclause is called when exiting the fromhivemetastoreclause production.
+	ExitFromhivemetastoreclause(c *FromhivemetastoreclauseContext)
+
+	// ExitFrompostgresclause is called when exiting the frompostgresclause production.
+	ExitFrompostgresclause(c *FrompostgresclauseContext)
+
+	// ExitFrommysqlclause is called when exiting the frommysqlclause production.
+	ExitFrommysqlclause(c *FrommysqlclauseContext)
+
+	// ExitFromkinesisclause is called when exiting the fromkinesisclause production.
+	ExitFromkinesisclause(c *FromkinesisclauseContext)
+
+	// ExitFromkafkaclause is called when exiting the fromkafkaclause production.
+	ExitFromkafkaclause(c *FromkafkaclauseContext)
+
+	// ExitFrommskclause is called when exiting the frommskclause production.
+	ExitFrommskclause(c *FrommskclauseContext)
+
+	// ExitFromredshiftclause is called when exiting the fromredshiftclause production.
+	ExitFromredshiftclause(c *FromredshiftclauseContext)
+
+	// ExitIamrolevalue is called when exiting the iamrolevalue production.
+	ExitIamrolevalue(c *IamrolevalueContext)
+
+	// ExitCatalogrolevalue is called when exiting the catalogrolevalue production.
+	ExitCatalogrolevalue(c *CatalogrolevalueContext)
+
+	// ExitAuthenticationvalue is called when exiting the authenticationvalue production.
+	ExitAuthenticationvalue(c *AuthenticationvalueContext)
+
+	// ExitCreateexternalfunctionstmt is called when exiting the createexternalfunctionstmt production.
+	ExitCreateexternalfunctionstmt(c *CreateexternalfunctionstmtContext)
+
+	// ExitParamlist is called when exiting the paramlist production.
+	ExitParamlist(c *ParamlistContext)
+
+	// ExitParam_spec is called when exiting the param_spec production.
+	ExitParam_spec(c *Param_specContext)
+
+	// ExitCreateexternalmodelstmt is called when exiting the createexternalmodelstmt production.
+	ExitCreateexternalmodelstmt(c *CreateexternalmodelstmtContext)
+
+	// ExitCreateexternaltablestmt is called when exiting the createexternaltablestmt production.
+	ExitCreateexternaltablestmt(c *CreateexternaltablestmtContext)
+
+	// ExitExtern_column_list is called when exiting the extern_column_list production.
+	ExitExtern_column_list(c *Extern_column_listContext)
+
+	// ExitExtern_column_def is called when exiting the extern_column_def production.
+	ExitExtern_column_def(c *Extern_column_defContext)
+
+	// ExitExtern_typename is called when exiting the extern_typename production.
+	ExitExtern_typename(c *Extern_typenameContext)
+
+	// ExitExtern_table_format is called when exiting the extern_table_format production.
+	ExitExtern_table_format(c *Extern_table_formatContext)
+
+	// ExitRow_format_spec is called when exiting the row_format_spec production.
+	ExitRow_format_spec(c *Row_format_specContext)
+
+	// ExitSerde_properties_list is called when exiting the serde_properties_list production.
+	ExitSerde_properties_list(c *Serde_properties_listContext)
+
+	// ExitSerde_property is called when exiting the serde_property production.
+	ExitSerde_property(c *Serde_propertyContext)
+
+	// ExitExternal_format_spec is called when exiting the external_format_spec production.
+	ExitExternal_format_spec(c *External_format_specContext)
+
+	// ExitTable_properties_list is called when exiting the table_properties_list production.
+	ExitTable_properties_list(c *Table_properties_listContext)
+
+	// ExitTable_property is called when exiting the table_property production.
+	ExitTable_property(c *Table_propertyContext)
+
+	// ExitCreateexternalviewstmt is called when exiting the createexternalviewstmt production.
+	ExitCreateexternalviewstmt(c *CreateexternalviewstmtContext)
+
+	// ExitDropexternalviewstmt is called when exiting the dropexternalviewstmt production.
+	ExitDropexternalviewstmt(c *DropexternalviewstmtContext)
+
+	// ExitAlteridentityproviderstmt is called when exiting the alteridentityproviderstmt production.
+	ExitAlteridentityproviderstmt(c *AlteridentityproviderstmtContext)
+
+	// ExitAlteridprovideropts is called when exiting the alteridprovideropts production.
+	ExitAlteridprovideropts(c *AlteridprovideroptsContext)
+
+	// ExitAltermaskingpolicystmt is called when exiting the altermaskingpolicystmt production.
+	ExitAltermaskingpolicystmt(c *AltermaskingpolicystmtContext)
+
+	// ExitAltmaskingpolicyopts is called when exiting the altmaskingpolicyopts production.
+	ExitAltmaskingpolicyopts(c *AltmaskingpolicyoptsContext)
+
+	// ExitAltmaskingpolicyargs is called when exiting the altmaskingpolicyargs production.
+	ExitAltmaskingpolicyargs(c *AltmaskingpolicyargsContext)
+
+	// ExitAltmaskingpolicyarg is called when exiting the altmaskingpolicyarg production.
+	ExitAltmaskingpolicyarg(c *AltmaskingpolicyargContext)
+
+	// ExitAlterrlspolicystmt is called when exiting the alterrlspolicystmt production.
+	ExitAlterrlspolicystmt(c *AlterrlspolicystmtContext)
+
+	// ExitAltrlspolicyopts is called when exiting the altrlspolicyopts production.
+	ExitAltrlspolicyopts(c *AltrlspolicyoptsContext)
+
+	// ExitAttachmaskingpolicystmt is called when exiting the attachmaskingpolicystmt production.
+	ExitAttachmaskingpolicystmt(c *AttachmaskingpolicystmtContext)
+
+	// ExitAttachpolicycollist is called when exiting the attachpolicycollist production.
+	ExitAttachpolicycollist(c *AttachpolicycollistContext)
+
+	// ExitAttachpolicycolumn is called when exiting the attachpolicycolumn production.
+	ExitAttachpolicycolumn(c *AttachpolicycolumnContext)
+
+	// ExitAttachpolicytargets is called when exiting the attachpolicytargets production.
+	ExitAttachpolicytargets(c *AttachpolicytargetsContext)
+
+	// ExitAttachpolicytarget is called when exiting the attachpolicytarget production.
+	ExitAttachpolicytarget(c *AttachpolicytargetContext)
+
+	// ExitAttachrlspolicystmt is called when exiting the attachrlspolicystmt production.
+	ExitAttachrlspolicystmt(c *AttachrlspolicystmtContext)
+
+	// ExitCreateidentityproviderstmt is called when exiting the createidentityproviderstmt production.
+	ExitCreateidentityproviderstmt(c *CreateidentityproviderstmtContext)
+
+	// ExitCreateidprovideropts is called when exiting the createidprovideropts production.
+	ExitCreateidprovideropts(c *CreateidprovideroptsContext)
+
+	// ExitGroupfilter is called when exiting the groupfilter production.
+	ExitGroupfilter(c *GroupfilterContext)
+
+	// ExitCreatelibrarystmt is called when exiting the createlibrarystmt production.
+	ExitCreatelibrarystmt(c *CreatelibrarystmtContext)
+
+	// ExitCreatelibraryopts is called when exiting the createlibraryopts production.
+	ExitCreatelibraryopts(c *CreatelibraryoptsContext)
+
+	// ExitCreatemaskingpolicystmt is called when exiting the createmaskingpolicystmt production.
+	ExitCreatemaskingpolicystmt(c *CreatemaskingpolicystmtContext)
+
+	// ExitInputcolumnlist is called when exiting the inputcolumnlist production.
+	ExitInputcolumnlist(c *InputcolumnlistContext)
+
+	// ExitInputcolumn is called when exiting the inputcolumn production.
+	ExitInputcolumn(c *InputcolumnContext)
+
+	// ExitMaskingexpression is called when exiting the maskingexpression production.
+	ExitMaskingexpression(c *MaskingexpressionContext)
+
+	// ExitCreatemodelstmt is called when exiting the createmodelstmt production.
+	ExitCreatemodelstmt(c *CreatemodelstmtContext)
+
+	// ExitCreatemodelfromclause is called when exiting the createmodelfromclause production.
+	ExitCreatemodelfromclause(c *CreatemodelfromclauseContext)
+
+	// ExitIamrolespec is called when exiting the iamrolespec production.
+	ExitIamrolespec(c *IamrolespecContext)
+
+	// ExitSagemakerspec is called when exiting the sagemakerspec production.
+	ExitSagemakerspec(c *SagemakerspecContext)
+
+	// ExitModeltypespec is called when exiting the modeltypespec production.
+	ExitModeltypespec(c *ModeltypespecContext)
+
+	// ExitProblemtypespec is called when exiting the problemtypespec production.
+	ExitProblemtypespec(c *ProblemtypespecContext)
+
+	// ExitProblemtype is called when exiting the problemtype production.
+	ExitProblemtype(c *ProblemtypeContext)
+
+	// ExitObjectivespec is called when exiting the objectivespec production.
+	ExitObjectivespec(c *ObjectivespecContext)
+
+	// ExitHyperparametersspec is called when exiting the hyperparametersspec production.
+	ExitHyperparametersspec(c *HyperparametersspecContext)
+
+	// ExitHyperparameterslist is called when exiting the hyperparameterslist production.
+	ExitHyperparameterslist(c *HyperparameterslistContext)
+
+	// ExitHyperparameteritem is called when exiting the hyperparameteritem production.
+	ExitHyperparameteritem(c *HyperparameteritemContext)
+
+	// ExitSettingsclause is called when exiting the settingsclause production.
+	ExitSettingsclause(c *SettingsclauseContext)
+
+	// ExitSettingsitem is called when exiting the settingsitem production.
+	ExitSettingsitem(c *SettingsitemContext)
+
+	// ExitDatatypelist is called when exiting the datatypelist production.
+	ExitDatatypelist(c *DatatypelistContext)
+
+	// ExitDatatype is called when exiting the datatype production.
+	ExitDatatype(c *DatatypeContext)
+
+	// ExitCreaterlspolicystmt is called when exiting the createrlspolicystmt production.
+	ExitCreaterlspolicystmt(c *CreaterlspolicystmtContext)
+
+	// ExitDescidentityproviderstmt is called when exiting the descidentityproviderstmt production.
+	ExitDescidentityproviderstmt(c *DescidentityproviderstmtContext)
+
+	// ExitDetachmaskingpolicystmt is called when exiting the detachmaskingpolicystmt production.
+	ExitDetachmaskingpolicystmt(c *DetachmaskingpolicystmtContext)
+
+	// ExitDetachrlspolicystmt is called when exiting the detachrlspolicystmt production.
+	ExitDetachrlspolicystmt(c *DetachrlspolicystmtContext)
+
+	// ExitDropidentityproviderstmt is called when exiting the dropidentityproviderstmt production.
+	ExitDropidentityproviderstmt(c *DropidentityproviderstmtContext)
+
+	// ExitDroplibrarystmt is called when exiting the droplibrarystmt production.
+	ExitDroplibrarystmt(c *DroplibrarystmtContext)
+
+	// ExitDropmaskingpolicystmt is called when exiting the dropmaskingpolicystmt production.
+	ExitDropmaskingpolicystmt(c *DropmaskingpolicystmtContext)
+
+	// ExitDropmodelstmt is called when exiting the dropmodelstmt production.
+	ExitDropmodelstmt(c *DropmodelstmtContext)
+
+	// ExitDroprlspolicystmt is called when exiting the droprlspolicystmt production.
+	ExitDroprlspolicystmt(c *DroprlspolicystmtContext)
+
+	// ExitAltertableappendstmt is called when exiting the altertableappendstmt production.
+	ExitAltertableappendstmt(c *AltertableappendstmtContext)
+
+	// ExitAppendoptions is called when exiting the appendoptions production.
+	ExitAppendoptions(c *AppendoptionsContext)
+
+	// ExitAlteruserstmt is called when exiting the alteruserstmt production.
+	ExitAlteruserstmt(c *AlteruserstmtContext)
+
+	// ExitAlteruseropts is called when exiting the alteruseropts production.
+	ExitAlteruseropts(c *AlteruseroptsContext)
+
+	// ExitAnalyzecompressionstmt is called when exiting the analyzecompressionstmt production.
+	ExitAnalyzecompressionstmt(c *AnalyzecompressionstmtContext)
+
+	// ExitCancelstmt is called when exiting the cancelstmt production.
+	ExitCancelstmt(c *CancelstmtContext)
+
+	// ExitClosestmt is called when exiting the closestmt production.
+	ExitClosestmt(c *ClosestmtContext)
+
+	// ExitInsertexternaltablestmt is called when exiting the insertexternaltablestmt production.
+	ExitInsertexternaltablestmt(c *InsertexternaltablestmtContext)
+
+	// ExitSelect_or_values is called when exiting the select_or_values production.
+	ExitSelect_or_values(c *Select_or_valuesContext)
+
+	// ExitSelectintostmt is called when exiting the selectintostmt production.
+	ExitSelectintostmt(c *SelectintostmtContext)
+
+	// ExitSetsessionauthorizationstmt is called when exiting the setsessionauthorizationstmt production.
+	ExitSetsessionauthorizationstmt(c *SetsessionauthorizationstmtContext)
+
+	// ExitSetsessioncharacteristicsstmt is called when exiting the setsessioncharacteristicsstmt production.
+	ExitSetsessioncharacteristicsstmt(c *SetsessioncharacteristicsstmtContext)
+
+	// ExitShowcolumnsstmt is called when exiting the showcolumnsstmt production.
+	ExitShowcolumnsstmt(c *ShowcolumnsstmtContext)
+
+	// ExitShowdatabasesstmt is called when exiting the showdatabasesstmt production.
+	ExitShowdatabasesstmt(c *ShowdatabasesstmtContext)
+
+	// ExitShowdbsopts is called when exiting the showdbsopts production.
+	ExitShowdbsopts(c *ShowdbsoptsContext)
+
+	// ExitShowdatasharesstmt is called when exiting the showdatasharesstmt production.
+	ExitShowdatasharesstmt(c *ShowdatasharesstmtContext)
+
+	// ExitShowexternaltablestmt is called when exiting the showexternaltablestmt production.
+	ExitShowexternaltablestmt(c *ShowexternaltablestmtContext)
+
+	// ExitShowgrantsstmt is called when exiting the showgrantsstmt production.
+	ExitShowgrantsstmt(c *ShowgrantsstmtContext)
+
+	// ExitGrantobject is called when exiting the grantobject production.
+	ExitGrantobject(c *GrantobjectContext)
+
+	// ExitGrantprincipal is called when exiting the grantprincipal production.
+	ExitGrantprincipal(c *GrantprincipalContext)
+
+	// ExitShowmodelstmt is called when exiting the showmodelstmt production.
+	ExitShowmodelstmt(c *ShowmodelstmtContext)
+
+	// ExitShowprocedurestmt is called when exiting the showprocedurestmt production.
+	ExitShowprocedurestmt(c *ShowprocedurestmtContext)
+
+	// ExitShowschemasstmt is called when exiting the showschemasstmt production.
+	ExitShowschemasstmt(c *ShowschemasstmtContext)
+
+	// ExitShowtablestmt is called when exiting the showtablestmt production.
+	ExitShowtablestmt(c *ShowtablestmtContext)
+
+	// ExitShowtablesstmt is called when exiting the showtablesstmt production.
+	ExitShowtablesstmt(c *ShowtablesstmtContext)
+
+	// ExitShowviewstmt is called when exiting the showviewstmt production.
+	ExitShowviewstmt(c *ShowviewstmtContext)
+
+	// ExitUnloadstmt is called when exiting the unloadstmt production.
+	ExitUnloadstmt(c *UnloadstmtContext)
+
+	// ExitIamroleclause is called when exiting the iamroleclause production.
+	ExitIamroleclause(c *IamroleclauseContext)
+
+	// ExitUnloadoptions is called when exiting the unloadoptions production.
+	ExitUnloadoptions(c *UnloadoptionsContext)
+
+	// ExitFormatoption is called when exiting the formatoption production.
+	ExitFormatoption(c *FormatoptionContext)
+
+	// ExitPartitionbyoption is called when exiting the partitionbyoption production.
+	ExitPartitionbyoption(c *PartitionbyoptionContext)
+
+	// ExitManifestoption is called when exiting the manifestoption production.
+	ExitManifestoption(c *ManifestoptionContext)
+
+	// ExitHeaderoption is called when exiting the headeroption production.
+	ExitHeaderoption(c *HeaderoptionContext)
+
+	// ExitDelimiteroption is called when exiting the delimiteroption production.
+	ExitDelimiteroption(c *DelimiteroptionContext)
+
+	// ExitFixedwidthoption is called when exiting the fixedwidthoption production.
+	ExitFixedwidthoption(c *FixedwidthoptionContext)
+
+	// ExitEncryptedoption is called when exiting the encryptedoption production.
+	ExitEncryptedoption(c *EncryptedoptionContext)
+
+	// ExitKmskeyoption is called when exiting the kmskeyoption production.
+	ExitKmskeyoption(c *KmskeyoptionContext)
+
+	// ExitCompressionoption is called when exiting the compressionoption production.
+	ExitCompressionoption(c *CompressionoptionContext)
+
+	// ExitAddquotesoption is called when exiting the addquotesoption production.
+	ExitAddquotesoption(c *AddquotesoptionContext)
+
+	// ExitNullasoption is called when exiting the nullasoption production.
+	ExitNullasoption(c *NullasoptionContext)
+
+	// ExitEscapeoption is called when exiting the escapeoption production.
+	ExitEscapeoption(c *EscapeoptionContext)
+
+	// ExitAllowoverwriteoption is called when exiting the allowoverwriteoption production.
+	ExitAllowoverwriteoption(c *AllowoverwriteoptionContext)
+
+	// ExitCleanpathoption is called when exiting the cleanpathoption production.
+	ExitCleanpathoption(c *CleanpathoptionContext)
+
+	// ExitParalleloption is called when exiting the paralleloption production.
+	ExitParalleloption(c *ParalleloptionContext)
+
+	// ExitMaxfilesizeoption is called when exiting the maxfilesizeoption production.
+	ExitMaxfilesizeoption(c *MaxfilesizeoptionContext)
+
+	// ExitRowgroupsizeoption is called when exiting the rowgroupsizeoption production.
+	ExitRowgroupsizeoption(c *RowgroupsizeoptionContext)
+
+	// ExitSizeunit is called when exiting the sizeunit production.
+	ExitSizeunit(c *SizeunitContext)
+
+	// ExitRegionoption is called when exiting the regionoption production.
+	ExitRegionoption(c *RegionoptionContext)
+
+	// ExitExtensionoption is called when exiting the extensionoption production.
+	ExitExtensionoption(c *ExtensionoptionContext)
+
+	// ExitUsestmt is called when exiting the usestmt production.
+	ExitUsestmt(c *UsestmtContext)
 
 	// ExitCreatedbstmt is called when exiting the createdbstmt production.
 	ExitCreatedbstmt(c *CreatedbstmtContext)

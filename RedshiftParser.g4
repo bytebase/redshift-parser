@@ -153,6 +153,59 @@ stmt
    | variablesetstmt
    | variableshowstmt
    | viewstmt
+   // REDSHIFT-SPECIFIC STATEMENTS
+   | alterdatasharestmt
+   | alterexternalschemastmt
+   | alterexternalviewstmt
+   | alteridentityproviderstmt
+   | altermaskingpolicystmt
+   | alterrlspolicystmt
+   | altertableappendstmt
+   | alteruserstmt
+   | analyzecompressionstmt
+   | attachmaskingpolicystmt
+   | attachrlspolicystmt
+   | cancelstmt
+   | closestmt
+   | createdatasharestmt
+   | createexternalfunctionstmt
+   | createexternalmodelstmt
+   | createexternalschemastmt
+   | createexternaltablestmt
+   | createexternalviewstmt
+   | createidentityproviderstmt
+   | createlibrarystmt
+   | createmaskingpolicystmt
+   | createmodelstmt
+   | createrlspolicystmt
+   | descdatasharestmt
+   | descidentityproviderstmt
+   | detachmaskingpolicystmt
+   | detachrlspolicystmt
+   | dropdatasharestmt
+   | dropexternalviewstmt
+   | dropidentityproviderstmt
+   | droplibrarystmt
+   | dropmaskingpolicystmt
+   | dropmodelstmt
+   | droprlspolicystmt
+   | insertexternaltablestmt
+   | selectintostmt
+   | setsessionauthorizationstmt
+   | setsessioncharacteristicsstmt
+   | showcolumnsstmt
+   | showdatabasesstmt
+   | showdatasharesstmt
+   | showexternaltablestmt
+   | showgrantsstmt
+   | showmodelstmt
+   | showprocedurestmt
+   | showschemasstmt
+   | showtablestmt
+   | showtablesstmt
+   | showviewstmt
+   | unloadstmt
+   | usestmt
    | plsqlconsolecommand
    ;
 
@@ -178,16 +231,28 @@ optrolelist
    ;
 
 alteroptrolelist
-   : alteroptroleelem*
+   : alteroptroleelem (',' alteroptroleelem)*
+   | alteroptroleelem*
    ;
 
 alteroptroleelem
-   : PASSWORD (sconst | NULL_P)
+   : PASSWORD (sconst | NULL_P | DISABLE_P)
    | (ENCRYPTED | UNENCRYPTED) PASSWORD sconst
    | INHERIT
-   | CONNECTION LIMIT signediconst
+   | CONNECTION LIMIT (signediconst | UNLIMITED)
    | VALID UNTIL sconst
    | USER role_list
+   | EXTERNALID (sconst | identifier)
+   | CREATEDB
+   | NOCREATEDB
+   | CREATEUSER
+   | NOCREATEUSER
+   | SYSLOG ACCESS (RESTRICTED | UNRESTRICTED)
+   | SESSION TIMEOUT iconst
+   | RESET SESSION TIMEOUT
+   | RESET ALL
+   | SET var_name (TO | EQUAL)? var_list
+   | RESET var_name
    | identifier
    ;
 
@@ -2442,6 +2507,824 @@ loadstmt
    : LOAD file_name
    ;
 
+// ==============================================================================
+// REDSHIFT-SPECIFIC STATEMENTS  
+// These statements are specific to Amazon Redshift and not part of PostgreSQL
+// ==============================================================================
+
+// DATASHARE statements
+alterdatasharestmt
+   : ALTER DATASHARE colid alterdatashare_action
+   ;
+
+alterdatashare_action
+   : alterdatashare_add_drop alterdatashare_objects
+   | SET PUBLICACCESSIBLE opt_equal? opt_boolean_or_string
+   | SET INCLUDENEW opt_equal? opt_boolean_or_string FOR SCHEMA colid
+   ;
+
+alterdatashare_add_drop
+   : ADD_P
+   | REMOVE
+   ;
+
+alterdatashare_objects
+   : TABLE datashare_table_list
+   | SCHEMA name_list
+   | FUNCTION datashare_function_list
+   | ALL TABLES IN_P SCHEMA name_list
+   | ALL FUNCTIONS IN_P SCHEMA name_list
+   ;
+
+datashare_table_list
+   : datashare_table_name (COMMA datashare_table_name)*
+   ;
+
+datashare_table_name
+   : colid (DOT colid)?
+   ;
+
+datashare_function_list
+   : datashare_function (COMMA datashare_function)*
+   ;
+
+datashare_function
+   : datashare_function_name func_args
+   ;
+
+datashare_function_name
+   : colid (DOT colid)?
+   ;
+
+createdatasharestmt
+    : CREATE DATASHARE qualified_name createdatashareoptions?
+    ;
+
+createdatashareoptions
+    : createdatashareoption (COMMA createdatashareoption)*
+    ;
+
+createdatashareoption
+    : setpublicaccessibleoption
+    | managedbyoption
+    ;
+
+setpublicaccessibleoption
+    : SET? PUBLICACCESSIBLE (EQUAL? (TRUE_P | FALSE_P))?
+    ;
+
+managedbyoption
+    : MANAGEDBY ADX
+    ;
+
+descdatasharestmt
+    : (DESC | DESCRIBE) DATASHARE datashare_name=colid (OF (ACCOUNT account_id=sconst)? NAMESPACE namespace_guid=sconst)?
+    ;
+
+dropdatasharestmt
+    : DROP DATASHARE opt_if_exists? colid
+    ;
+
+// EXTERNAL statements
+alterexternalschemastmt
+    : ALTER EXTERNAL SCHEMA colid altexternalschemaopts
+    ;
+
+altexternalschemaopts
+    : RENAME TO colid
+    | OWNER TO colid
+    ;
+
+alterexternalviewstmt
+    : ALTER EXTERNAL VIEW qualified_name altexternalviewopts
+    ;
+
+altexternalviewopts
+    : RENAME TO qualified_name
+    | OWNER TO colid
+    | SET SCHEMA colid
+    ;
+
+createexternalschemastmt
+    : CREATE EXTERNAL SCHEMA opt_if_not_exists? schema_name=colid
+      ( fromdatacatalogclause
+      | fromhivemetastoreclause
+      | frompostgresclause
+      | frommysqlclause
+      | fromkinesisclause
+      | fromkafkaclause
+      | frommskclause
+      | fromredshiftclause
+      | implicitdatacatalogclause  // Support implicit data catalog
+      )
+    ;
+
+// External schema FROM clauses
+fromdatacatalogclause
+    : FROM (DATA_P CATALOG | DATA_CATALOG)
+      DATABASE sconst
+      colid sconst  // REGION AS literal
+      IAM_ROLE iamrolevalue
+      (CATALOG_ROLE catalogrolevalue)?
+      (CREATE EXTERNAL DATABASE opt_if_not_exists)?
+      (CATALOG_ID sconst)?
+    ;
+
+// Implicit data catalog clause (without explicit DATA CATALOG keywords)
+implicitdatacatalogclause
+    : FROM DATABASE sconst
+      colid sconst  // REGION AS literal
+      IAM_ROLE iamrolevalue
+      (CATALOG_ROLE catalogrolevalue)?
+      (CREATE EXTERNAL DATABASE opt_if_not_exists)?
+      (CATALOG_ID sconst)?
+    ;
+
+fromhivemetastoreclause
+    : FROM HIVE METASTORE
+      DATABASE sconst
+      URI sconst
+      (PORT iconst)?
+      IAM_ROLE sconst
+    ;
+
+frompostgresclause
+    : FROM POSTGRES
+      DATABASE sconst
+      (SCHEMA sconst)?
+      URI sconst
+      (PORT iconst)?
+      IAM_ROLE iamrolevalue
+      SECRET_ARN sconst
+    ;
+
+frommysqlclause
+    : FROM MYSQL
+      DATABASE sconst
+      URI sconst
+      (PORT iconst)?
+      IAM_ROLE iamrolevalue
+      SECRET_ARN sconst
+    ;
+
+fromkinesisclause
+    : FROM KINESIS
+      IAM_ROLE iamrolevalue
+    ;
+
+fromkafkaclause
+    : FROM KAFKA
+      IAM_ROLE iamrolevalue
+      (URI sconst)?
+      (AUTHENTICATION authenticationvalue)?
+      (AUTHENTICATION_ARN sconst)?
+    ;
+
+frommskclause
+    : FROM MSK
+      IAM_ROLE iamrolevalue
+      (URI sconst)?
+      (AUTHENTICATION authenticationvalue)?
+      (AUTHENTICATION_ARN sconst)?
+    ;
+
+fromredshiftclause
+    : FROM REDSHIFT
+      DATABASE sconst
+      (SCHEMA sconst)?
+      (colid sconst)?  // REGION 'region-name'
+      (IAM_ROLE iamrolevalue)?
+    ;
+
+iamrolevalue
+    : DEFAULT
+    | SESSION_TOKEN
+    | sconst
+    ;
+
+catalogrolevalue
+    : SESSION_TOKEN
+    | sconst
+    ;
+
+authenticationvalue
+    : NONE
+    | IAM
+    | MTLS
+    ;
+
+createexternalfunctionstmt
+    : CREATE (OR REPLACE)? EXTERNAL FUNCTION function_name=qualified_name '(' paramlist ')' 
+      RETURNS typename
+      (STABLE | IMMUTABLE | VOLATILE)?
+      LAMBDA sconst
+      IAM_ROLE iamrolevalue
+    ;
+
+paramlist
+    : param_spec (',' param_spec)*
+    |
+    ;
+
+param_spec
+    : paramname=colid typename
+    ;
+
+createexternalmodelstmt
+    : CREATE EXTERNAL MODEL qualified_name
+      FROM sconst  // S3 path
+      (FUNCTION_NAME qualified_name)?
+      IAM_ROLE iamrolevalue
+      (SETTINGS '(' settingsclause ')')?
+    ;
+
+createexternaltablestmt
+    : CREATE EXTERNAL TABLE opt_if_not_exists? qualified_name '(' extern_column_list ')'
+      (PARTITIONED BY '(' extern_column_list ')')?
+      extern_table_format
+      LOCATION sconst
+      (TABLE PROPERTIES '(' table_properties_list ')')?
+    ;
+
+extern_column_list
+    : extern_column_def (',' extern_column_def)*
+    ;
+
+extern_column_def
+    : colid extern_typename
+    ;
+
+extern_typename
+    : typename
+    | STRING  // Support STRING type
+    ;
+
+extern_table_format
+    : STORED AS external_format_spec
+    | row_format_spec STORED AS external_format_spec
+    | STORED AS INPUTFORMAT sconst OUTPUTFORMAT sconst
+    ;
+
+row_format_spec
+    : ROW FORMAT DELIMITED 
+      (FIELDS TERMINATED BY sconst (ESCAPED BY sconst)?)?
+      (COLLECTION ITEMS TERMINATED BY sconst)?
+      (MAP KEYS TERMINATED BY sconst)?
+      (LINES TERMINATED BY sconst)?
+      (NULL_P DEFINED AS sconst)?
+    | ROW FORMAT SERDE sconst (WITH SERDEPROPERTIES '(' serde_properties_list ')')?
+    ;
+
+serde_properties_list
+    : serde_property (',' serde_property)*
+    ;
+
+serde_property
+    : sconst '=' sconst
+    ;
+
+external_format_spec
+    : PARQUET
+    | AVRO
+    | RCFILE
+    | SEQUENCEFILE
+    | TEXTFILE
+    | ORC
+    | ION
+    | JSON
+    ;
+
+table_properties_list
+    : table_property (',' table_property)*
+    ;
+
+table_property
+    : sconst EQUAL sconst
+    ;
+
+createexternalviewstmt
+    : CREATE (OR REPLACE)? EXTERNAL VIEW qualified_name
+      AS sconst
+    ;
+
+dropexternalviewstmt
+    : DROP EXTERNAL VIEW opt_if_exists? qualified_name opt_drop_behavior?
+    ;
+
+// SECURITY/POLICY statements
+alteridentityproviderstmt
+    : ALTER IDENTITY PROVIDER colid alteridprovideropts
+    ;
+
+alteridprovideropts
+    : TYPE_P sconst
+    | PROVIDER_URL sconst  
+    | PROVIDER_URL_PORT iconst
+    | ATTRIBUTE_MAP sconst
+    | PROVIDER_ARN sconst
+    | ASSUME_ROLE_ARN sconst
+    ;
+
+altermaskingpolicystmt
+    : ALTER MASKING POLICY colid altmaskingpolicyopts
+    ;
+
+altmaskingpolicyopts
+    : RENAME TO colid
+    | OWNER TO colid
+    | SET '(' altmaskingpolicyargs ')'
+    | USING '(' maskingexpression ')'
+    ;
+
+altmaskingpolicyargs
+    : altmaskingpolicyarg (',' altmaskingpolicyarg)*
+    ;
+
+altmaskingpolicyarg
+    : colid typename
+    ;
+
+alterrlspolicystmt
+    : ALTER RLS POLICY colid ON qualified_name altrlspolicyopts
+    ;
+
+altrlspolicyopts
+    : RENAME TO colid
+    | OWNER TO colid
+    ;
+
+attachmaskingpolicystmt
+    : ATTACH MASKING POLICY colid
+      ON qualified_name
+      '(' attachpolicycollist ')'
+      (USING '(' attachpolicycollist ')')?
+      TO attachpolicytargets
+      (PRIORITY iconst)?
+    ;
+
+attachpolicycollist
+    : attachpolicycolumn (',' attachpolicycolumn)*
+    ;
+
+attachpolicycolumn
+    : qualified_name  // supports dotted paths like person.name.first_name
+    ;
+
+attachpolicytargets
+    : attachpolicytarget (',' attachpolicytarget)*
+    ;
+
+attachpolicytarget
+    : ROLE qualified_name
+    | colid // PUBLIC or user name - PUBLIC is treated as an identifier here
+    ;
+
+attachrlspolicystmt
+    : ATTACH RLS POLICY colid ON qualified_name TO attachpolicytargets
+    ;
+
+createidentityproviderstmt
+    : CREATE IDENTITY_P PROVIDER colid
+      TYPE_P (sconst | colid)
+      createidprovideropts*
+    ;
+
+createidprovideropts
+    : PROVIDER_URL sconst
+    | PROVIDER_URL_PORT iconst
+    | ATTRIBUTE_MAP sconst
+    | PROVIDER_ARN sconst
+    | ASSUME_ROLE_ARN sconst
+    | NAMESPACE sconst
+    | PARAMETERS sconst
+    | APPLICATION_ARN sconst
+    | IAM_ROLE (DEFAULT | sconst)
+    | AUTO_CREATE_ROLES (TRUE_P | FALSE_P) (groupfilter)?
+    ;
+
+groupfilter
+    : INCLUDE GROUPS LIKE sconst
+    | EXCLUDE GROUPS LIKE sconst
+    ;
+
+createlibrarystmt
+    : CREATE (OR REPLACE)? LIBRARY colid LANGUAGE PLPYTHONU
+      FROM sconst createlibraryopts*
+    ;
+
+createlibraryopts
+    : CREDENTIALS sconst
+    | colid (AS)? sconst  // REGION AS literal  
+    | IAM_ROLE (DEFAULT | sconst)
+    ;
+
+createmaskingpolicystmt
+    : CREATE MASKING POLICY opt_if_not_exists? policy_name=colid
+      WITH '(' inputcolumnlist ')'
+      USING '(' maskingexpression ')'
+    ;
+
+inputcolumnlist
+    : inputcolumn (',' inputcolumn)*
+    ;
+
+inputcolumn
+    : column_name=colid typename
+    ;
+
+maskingexpression
+    : a_expr
+    ;
+
+createmodelstmt
+    : CREATE MODEL model_name=qualified_name
+      FROM createmodelfromclause
+      (TARGET target_column=qualified_name)?
+      FUNCTION function_name=qualified_name ('(' datatypelist ')')?
+      (RETURNS typename)?
+      (SAGEMAKER sagemakerspec)?
+      IAM_ROLE iamrolespec
+      (AUTO (ON | OFF))?
+      (MODEL_TYPE modeltypespec)?
+      (PROBLEM_TYPE problemtypespec)?
+      (OBJECTIVE objectivespec)?
+      (PREPROCESSORS sconst)?
+      (HYPERPARAMETERS hyperparametersspec)?
+      (SETTINGS '(' settingsclause ')')?
+    ;
+
+createmodelfromclause
+    : qualified_name
+    | '(' selectstmt ')'
+    | sconst
+    ;
+
+iamrolespec
+    : DEFAULT
+    | sconst
+    ;
+
+sagemakerspec
+    : sconst (':' sconst)?
+    ;
+
+modeltypespec
+    : XGBOOST
+    | MLP
+    | LINEAR_LEARNER
+    | KMEANS
+    | FORECAST
+    ;
+
+problemtypespec
+    : '(' problemtype ')'
+    ;
+
+problemtype
+    : REGRESSION
+    | BINARY_CLASSIFICATION
+    | MULTICLASS_CLASSIFICATION
+    ;
+
+objectivespec
+    : '(' sconst ')'
+    ;
+
+hyperparametersspec
+    : DEFAULT
+    | DEFAULT EXCEPT '(' hyperparameterslist ')'
+    ;
+
+hyperparameterslist
+    : hyperparameteritem (',' hyperparameteritem)*
+    ;
+
+hyperparameteritem
+    : colid sconst
+    ;
+
+settingsclause
+    : settingsitem (',' settingsitem)*
+    ;
+
+settingsitem
+    : S3_BUCKET sconst
+    | TAGS sconst
+    | KMS_KEY_ID sconst
+    | S3_GARBAGE_COLLECT (ON | OFF)
+    | MAX_CELLS iconst
+    | MAX_RUNTIME iconst
+    | HORIZON iconst
+    | FREQUENCY iconst
+    | PERCENTILES sconst
+    | MAX_BATCH_ROWS iconst
+    ;
+
+datatypelist
+    : datatype (',' datatype)*
+    ;
+
+datatype
+    : typename
+    | colid typename  // named parameter: name type
+    | colid colid     // named parameter with non-standard type like: data json
+    ;
+
+
+createrlspolicystmt
+    : CREATE RLS POLICY colid 
+      (WITH '(' inputcolumnlist ')' (AS colid)?)?
+      USING '(' a_expr ')'
+    ;
+
+descidentityproviderstmt
+    : (DESC | DESCRIBE) IDENTITY PROVIDER colid
+    ;
+
+detachmaskingpolicystmt
+    : DETACH MASKING POLICY colid
+      ON qualified_name
+      '(' attachpolicycollist ')'
+      FROM attachpolicytargets
+    ;
+
+detachrlspolicystmt
+    : DETACH RLS POLICY colid FROM qualified_name
+    ;
+
+dropidentityproviderstmt
+    : DROP IDENTITY PROVIDER opt_if_exists? colid
+    ;
+
+droplibrarystmt
+    : DROP LIBRARY opt_if_exists? colid
+    ;
+
+dropmaskingpolicystmt  
+    : DROP MASKING POLICY opt_if_exists? colid
+    ;
+
+dropmodelstmt
+    : DROP MODEL opt_if_exists? qualified_name
+    ;
+
+
+droprlspolicystmt
+    : DROP RLS POLICY opt_if_exists? colid ON qualified_name
+    ;
+
+// REDSHIFT-SPECIFIC UTILITY statements
+altertableappendstmt
+    : ALTER TABLE qualified_name APPEND FROM qualified_name appendoptions*
+    ;
+
+appendoptions
+    : FILLTARGET
+    | IGNOREEXTRA
+    ;
+
+alteruserstmt
+    : ALTER USER colid (WITH)? alteruseropts+
+    ;
+
+alteruseropts
+    : PASSWORD (sconst | colid)
+    | CREATEDB
+    | NOCREATEDB
+    | CREATEUSER  
+    | NOCREATEUSER
+    | SYSLOG ACCESS (RESTRICTED | UNRESTRICTED)
+    | CONNECTION LIMIT (iconst | UNLIMITED)
+    | VALID UNTIL sconst
+    | RENAME TO colid
+    | SESSION TIMEOUT iconst
+    | RESET SESSION TIMEOUT
+    | RESET colid
+    | SET colid TO a_expr
+    | EXTERNALID sconst
+    ;
+
+analyzecompressionstmt
+    : (ANALYZE | ANALYSE) COMPRESSION (qualified_name ('(' name_list ')')?)? (COMPROWS iconst)?
+    ;
+
+cancelstmt
+    : CANCEL (sconst | iconst) (sconst)?  // session PID/query ID, optional message
+    ;
+
+closestmt
+    : CLOSE cursorname=colid
+    ;
+
+insertexternaltablestmt
+    : INSERT INTO qualified_name select_or_values
+    ;
+
+select_or_values  
+    : selectstmt
+    | values_clause  
+    ;
+
+selectintostmt
+    : SELECT opt_all_clause? opt_target_list INTO qualified_name from_clause?
+    ;
+
+setsessionauthorizationstmt
+    : SET SESSION AUTHORIZATION colid
+    | SET SESSION AUTHORIZATION DEFAULT
+    | RESET SESSION AUTHORIZATION
+    ;
+
+setsessioncharacteristicsstmt
+    : SET SESSION CHARACTERISTICS AS TRANSACTION transaction_mode_list
+    ;
+
+// SHOW statements  
+showcolumnsstmt
+    : SHOW COLUMNS FROM TABLE? qualified_name (LIKE sconst)?
+    ;
+
+showdatabasesstmt
+    : SHOW DATABASES (FROM DATA_P CATALOG)? showdbsopts*
+    ;
+
+showdbsopts
+    : LIKE sconst
+    | WITH DATASHARE sconst
+    | LIMIT iconst
+    | ACCOUNT sconst (',' sconst)*
+    | IAM_ROLE (DEFAULT | SESSION | sconst)
+    ;
+
+showdatasharesstmt
+    : SHOW DATASHARES (LIKE sconst)?
+    ;
+
+showexternaltablestmt
+    : SHOW EXTERNAL TABLE qualified_name
+    ;
+
+showgrantsstmt
+    : SHOW GRANTS (ON grantobject)? (FOR grantprincipal)? (LIMIT iconst)?
+    | SHOW GRANTS (FOR grantprincipal) (LIMIT iconst)?
+    ;
+
+grantobject
+    : DATABASE colid
+    | SCHEMA qualified_name  
+    | TABLE? qualified_name
+    | FUNCTION qualified_name ('(' datatypelist? ')')?
+    ;
+
+grantprincipal
+    : colid
+    | ROLE colid
+    ;
+
+showmodelstmt
+    : SHOW MODEL qualified_name
+    ;
+
+showprocedurestmt
+    : SHOW PROCEDURE qualified_name ('(' datatypelist ')')?
+    ;
+
+showschemasstmt  
+    : SHOW SCHEMAS (FROM DATABASE colid)? (LIKE sconst)?
+    ;
+
+showtablestmt
+    : SHOW TABLE qualified_name
+    ;
+
+showtablesstmt
+    : SHOW TABLES FROM SCHEMA database_name=colid '.' schema_name=colid
+      (LIKE pattern=sconst)?
+      (LIMIT limit_value=iconst)?
+    ;
+
+showviewstmt
+    : SHOW VIEW qualified_name
+    ;
+
+// OTHER REDSHIFT statements
+unloadstmt
+    : UNLOAD '(' sconst ')' TO sconst iamroleclause unloadoptions*
+    ;
+
+iamroleclause
+    : IAM_ROLE (DEFAULT | sconst)
+    ;
+
+unloadoptions
+    : formatoption
+    | partitionbyoption
+    | manifestoption
+    | headeroption
+    | delimiteroption
+    | fixedwidthoption
+    | encryptedoption
+    | kmskeyoption
+    | compressionoption
+    | addquotesoption
+    | nullasoption
+    | escapeoption
+    | allowoverwriteoption
+    | cleanpathoption
+    | paralleloption
+    | maxfilesizeoption
+    | rowgroupsizeoption
+    | regionoption
+    | extensionoption
+    ;
+
+formatoption
+    : FORMAT (CSV | PARQUET | JSON)
+    ;
+
+partitionbyoption
+    : PARTITION BY '(' columnlist ')' INCLUDE?
+    ;
+
+manifestoption
+    : MANIFEST VERBOSE?
+    ;
+
+headeroption
+    : HEADER_P
+    ;
+
+delimiteroption
+    : DELIMITER AS? sconst
+    ;
+
+fixedwidthoption
+    : FIXEDWIDTH sconst
+    ;
+
+encryptedoption
+    : ENCRYPTED AUTO?
+    ;
+
+kmskeyoption
+    : KMS_KEY_ID sconst
+    ;
+
+compressionoption
+    : BZIP2
+    | GZIP
+    | ZSTD
+    ;
+
+addquotesoption
+    : ADDQUOTES
+    ;
+
+nullasoption
+    : NULL_P AS sconst
+    ;
+
+escapeoption
+    : ESCAPE
+    ;
+
+allowoverwriteoption
+    : ALLOWOVERWRITE
+    ;
+
+cleanpathoption
+    : CLEANPATH
+    ;
+
+paralleloption
+    : PARALLEL (ON | OFF)
+    ;
+
+maxfilesizeoption
+    : MAXFILESIZE AS? iconst sizeunit?
+    ;
+
+rowgroupsizeoption
+    : ROWGROUPSIZE AS? iconst sizeunit?
+    ;
+
+sizeunit
+    : MB
+    | GB
+    ;
+
+regionoption
+    : colid AS? sconst  // REGION AS literal
+    ;
+
+extensionoption
+    : EXTENSION sconst
+    ;
+
+usestmt
+    : USE database_name=colid
+    ;
+
 createdbstmt
    : CREATE DATABASE name opt_with? createdb_opt_list?
    ;
@@ -4386,6 +5269,7 @@ col_name_keyword
    | INT_P
    | INTEGER
    | INTERVAL
+   | JSON
    | LEAST
    | NATIONAL
    | NCHAR
@@ -4393,6 +5277,7 @@ col_name_keyword
    | NORMALIZE
    | NULLIF
    | numeric
+   | OFFSET
    | OUT_P
    | OVERLAY
    | POSITION
@@ -4662,6 +5547,7 @@ builtin_function_name
    | TO_CHAR
    | TO_DATE
    | TO_NUMBER
+   | CURRENT_USER
    ;
 
 /************************************************************************************************************************************************************/

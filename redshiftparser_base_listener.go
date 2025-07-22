@@ -2565,6 +2565,935 @@ func (s *BaseRedshiftParserListener) EnterLoadstmt(ctx *LoadstmtContext) {}
 // ExitLoadstmt is called when production loadstmt is exited.
 func (s *BaseRedshiftParserListener) ExitLoadstmt(ctx *LoadstmtContext) {}
 
+// EnterAlterdatasharestmt is called when production alterdatasharestmt is entered.
+func (s *BaseRedshiftParserListener) EnterAlterdatasharestmt(ctx *AlterdatasharestmtContext) {}
+
+// ExitAlterdatasharestmt is called when production alterdatasharestmt is exited.
+func (s *BaseRedshiftParserListener) ExitAlterdatasharestmt(ctx *AlterdatasharestmtContext) {}
+
+// EnterAlterdatashare_action is called when production alterdatashare_action is entered.
+func (s *BaseRedshiftParserListener) EnterAlterdatashare_action(ctx *Alterdatashare_actionContext) {}
+
+// ExitAlterdatashare_action is called when production alterdatashare_action is exited.
+func (s *BaseRedshiftParserListener) ExitAlterdatashare_action(ctx *Alterdatashare_actionContext) {}
+
+// EnterAlterdatashare_add_drop is called when production alterdatashare_add_drop is entered.
+func (s *BaseRedshiftParserListener) EnterAlterdatashare_add_drop(ctx *Alterdatashare_add_dropContext) {
+}
+
+// ExitAlterdatashare_add_drop is called when production alterdatashare_add_drop is exited.
+func (s *BaseRedshiftParserListener) ExitAlterdatashare_add_drop(ctx *Alterdatashare_add_dropContext) {
+}
+
+// EnterAlterdatashare_objects is called when production alterdatashare_objects is entered.
+func (s *BaseRedshiftParserListener) EnterAlterdatashare_objects(ctx *Alterdatashare_objectsContext) {
+}
+
+// ExitAlterdatashare_objects is called when production alterdatashare_objects is exited.
+func (s *BaseRedshiftParserListener) ExitAlterdatashare_objects(ctx *Alterdatashare_objectsContext) {}
+
+// EnterDatashare_table_list is called when production datashare_table_list is entered.
+func (s *BaseRedshiftParserListener) EnterDatashare_table_list(ctx *Datashare_table_listContext) {}
+
+// ExitDatashare_table_list is called when production datashare_table_list is exited.
+func (s *BaseRedshiftParserListener) ExitDatashare_table_list(ctx *Datashare_table_listContext) {}
+
+// EnterDatashare_table_name is called when production datashare_table_name is entered.
+func (s *BaseRedshiftParserListener) EnterDatashare_table_name(ctx *Datashare_table_nameContext) {}
+
+// ExitDatashare_table_name is called when production datashare_table_name is exited.
+func (s *BaseRedshiftParserListener) ExitDatashare_table_name(ctx *Datashare_table_nameContext) {}
+
+// EnterDatashare_function_list is called when production datashare_function_list is entered.
+func (s *BaseRedshiftParserListener) EnterDatashare_function_list(ctx *Datashare_function_listContext) {
+}
+
+// ExitDatashare_function_list is called when production datashare_function_list is exited.
+func (s *BaseRedshiftParserListener) ExitDatashare_function_list(ctx *Datashare_function_listContext) {
+}
+
+// EnterDatashare_function is called when production datashare_function is entered.
+func (s *BaseRedshiftParserListener) EnterDatashare_function(ctx *Datashare_functionContext) {}
+
+// ExitDatashare_function is called when production datashare_function is exited.
+func (s *BaseRedshiftParserListener) ExitDatashare_function(ctx *Datashare_functionContext) {}
+
+// EnterDatashare_function_name is called when production datashare_function_name is entered.
+func (s *BaseRedshiftParserListener) EnterDatashare_function_name(ctx *Datashare_function_nameContext) {
+}
+
+// ExitDatashare_function_name is called when production datashare_function_name is exited.
+func (s *BaseRedshiftParserListener) ExitDatashare_function_name(ctx *Datashare_function_nameContext) {
+}
+
+// EnterCreatedatasharestmt is called when production createdatasharestmt is entered.
+func (s *BaseRedshiftParserListener) EnterCreatedatasharestmt(ctx *CreatedatasharestmtContext) {}
+
+// ExitCreatedatasharestmt is called when production createdatasharestmt is exited.
+func (s *BaseRedshiftParserListener) ExitCreatedatasharestmt(ctx *CreatedatasharestmtContext) {}
+
+// EnterCreatedatashareoptions is called when production createdatashareoptions is entered.
+func (s *BaseRedshiftParserListener) EnterCreatedatashareoptions(ctx *CreatedatashareoptionsContext) {
+}
+
+// ExitCreatedatashareoptions is called when production createdatashareoptions is exited.
+func (s *BaseRedshiftParserListener) ExitCreatedatashareoptions(ctx *CreatedatashareoptionsContext) {}
+
+// EnterCreatedatashareoption is called when production createdatashareoption is entered.
+func (s *BaseRedshiftParserListener) EnterCreatedatashareoption(ctx *CreatedatashareoptionContext) {}
+
+// ExitCreatedatashareoption is called when production createdatashareoption is exited.
+func (s *BaseRedshiftParserListener) ExitCreatedatashareoption(ctx *CreatedatashareoptionContext) {}
+
+// EnterSetpublicaccessibleoption is called when production setpublicaccessibleoption is entered.
+func (s *BaseRedshiftParserListener) EnterSetpublicaccessibleoption(ctx *SetpublicaccessibleoptionContext) {
+}
+
+// ExitSetpublicaccessibleoption is called when production setpublicaccessibleoption is exited.
+func (s *BaseRedshiftParserListener) ExitSetpublicaccessibleoption(ctx *SetpublicaccessibleoptionContext) {
+}
+
+// EnterManagedbyoption is called when production managedbyoption is entered.
+func (s *BaseRedshiftParserListener) EnterManagedbyoption(ctx *ManagedbyoptionContext) {}
+
+// ExitManagedbyoption is called when production managedbyoption is exited.
+func (s *BaseRedshiftParserListener) ExitManagedbyoption(ctx *ManagedbyoptionContext) {}
+
+// EnterDescdatasharestmt is called when production descdatasharestmt is entered.
+func (s *BaseRedshiftParserListener) EnterDescdatasharestmt(ctx *DescdatasharestmtContext) {}
+
+// ExitDescdatasharestmt is called when production descdatasharestmt is exited.
+func (s *BaseRedshiftParserListener) ExitDescdatasharestmt(ctx *DescdatasharestmtContext) {}
+
+// EnterDropdatasharestmt is called when production dropdatasharestmt is entered.
+func (s *BaseRedshiftParserListener) EnterDropdatasharestmt(ctx *DropdatasharestmtContext) {}
+
+// ExitDropdatasharestmt is called when production dropdatasharestmt is exited.
+func (s *BaseRedshiftParserListener) ExitDropdatasharestmt(ctx *DropdatasharestmtContext) {}
+
+// EnterAlterexternalschemastmt is called when production alterexternalschemastmt is entered.
+func (s *BaseRedshiftParserListener) EnterAlterexternalschemastmt(ctx *AlterexternalschemastmtContext) {
+}
+
+// ExitAlterexternalschemastmt is called when production alterexternalschemastmt is exited.
+func (s *BaseRedshiftParserListener) ExitAlterexternalschemastmt(ctx *AlterexternalschemastmtContext) {
+}
+
+// EnterAltexternalschemaopts is called when production altexternalschemaopts is entered.
+func (s *BaseRedshiftParserListener) EnterAltexternalschemaopts(ctx *AltexternalschemaoptsContext) {}
+
+// ExitAltexternalschemaopts is called when production altexternalschemaopts is exited.
+func (s *BaseRedshiftParserListener) ExitAltexternalschemaopts(ctx *AltexternalschemaoptsContext) {}
+
+// EnterAlterexternalviewstmt is called when production alterexternalviewstmt is entered.
+func (s *BaseRedshiftParserListener) EnterAlterexternalviewstmt(ctx *AlterexternalviewstmtContext) {}
+
+// ExitAlterexternalviewstmt is called when production alterexternalviewstmt is exited.
+func (s *BaseRedshiftParserListener) ExitAlterexternalviewstmt(ctx *AlterexternalviewstmtContext) {}
+
+// EnterAltexternalviewopts is called when production altexternalviewopts is entered.
+func (s *BaseRedshiftParserListener) EnterAltexternalviewopts(ctx *AltexternalviewoptsContext) {}
+
+// ExitAltexternalviewopts is called when production altexternalviewopts is exited.
+func (s *BaseRedshiftParserListener) ExitAltexternalviewopts(ctx *AltexternalviewoptsContext) {}
+
+// EnterCreateexternalschemastmt is called when production createexternalschemastmt is entered.
+func (s *BaseRedshiftParserListener) EnterCreateexternalschemastmt(ctx *CreateexternalschemastmtContext) {
+}
+
+// ExitCreateexternalschemastmt is called when production createexternalschemastmt is exited.
+func (s *BaseRedshiftParserListener) ExitCreateexternalschemastmt(ctx *CreateexternalschemastmtContext) {
+}
+
+// EnterFromdatacatalogclause is called when production fromdatacatalogclause is entered.
+func (s *BaseRedshiftParserListener) EnterFromdatacatalogclause(ctx *FromdatacatalogclauseContext) {}
+
+// ExitFromdatacatalogclause is called when production fromdatacatalogclause is exited.
+func (s *BaseRedshiftParserListener) ExitFromdatacatalogclause(ctx *FromdatacatalogclauseContext) {}
+
+// EnterImplicitdatacatalogclause is called when production implicitdatacatalogclause is entered.
+func (s *BaseRedshiftParserListener) EnterImplicitdatacatalogclause(ctx *ImplicitdatacatalogclauseContext) {
+}
+
+// ExitImplicitdatacatalogclause is called when production implicitdatacatalogclause is exited.
+func (s *BaseRedshiftParserListener) ExitImplicitdatacatalogclause(ctx *ImplicitdatacatalogclauseContext) {
+}
+
+// EnterFromhivemetastoreclause is called when production fromhivemetastoreclause is entered.
+func (s *BaseRedshiftParserListener) EnterFromhivemetastoreclause(ctx *FromhivemetastoreclauseContext) {
+}
+
+// ExitFromhivemetastoreclause is called when production fromhivemetastoreclause is exited.
+func (s *BaseRedshiftParserListener) ExitFromhivemetastoreclause(ctx *FromhivemetastoreclauseContext) {
+}
+
+// EnterFrompostgresclause is called when production frompostgresclause is entered.
+func (s *BaseRedshiftParserListener) EnterFrompostgresclause(ctx *FrompostgresclauseContext) {}
+
+// ExitFrompostgresclause is called when production frompostgresclause is exited.
+func (s *BaseRedshiftParserListener) ExitFrompostgresclause(ctx *FrompostgresclauseContext) {}
+
+// EnterFrommysqlclause is called when production frommysqlclause is entered.
+func (s *BaseRedshiftParserListener) EnterFrommysqlclause(ctx *FrommysqlclauseContext) {}
+
+// ExitFrommysqlclause is called when production frommysqlclause is exited.
+func (s *BaseRedshiftParserListener) ExitFrommysqlclause(ctx *FrommysqlclauseContext) {}
+
+// EnterFromkinesisclause is called when production fromkinesisclause is entered.
+func (s *BaseRedshiftParserListener) EnterFromkinesisclause(ctx *FromkinesisclauseContext) {}
+
+// ExitFromkinesisclause is called when production fromkinesisclause is exited.
+func (s *BaseRedshiftParserListener) ExitFromkinesisclause(ctx *FromkinesisclauseContext) {}
+
+// EnterFromkafkaclause is called when production fromkafkaclause is entered.
+func (s *BaseRedshiftParserListener) EnterFromkafkaclause(ctx *FromkafkaclauseContext) {}
+
+// ExitFromkafkaclause is called when production fromkafkaclause is exited.
+func (s *BaseRedshiftParserListener) ExitFromkafkaclause(ctx *FromkafkaclauseContext) {}
+
+// EnterFrommskclause is called when production frommskclause is entered.
+func (s *BaseRedshiftParserListener) EnterFrommskclause(ctx *FrommskclauseContext) {}
+
+// ExitFrommskclause is called when production frommskclause is exited.
+func (s *BaseRedshiftParserListener) ExitFrommskclause(ctx *FrommskclauseContext) {}
+
+// EnterFromredshiftclause is called when production fromredshiftclause is entered.
+func (s *BaseRedshiftParserListener) EnterFromredshiftclause(ctx *FromredshiftclauseContext) {}
+
+// ExitFromredshiftclause is called when production fromredshiftclause is exited.
+func (s *BaseRedshiftParserListener) ExitFromredshiftclause(ctx *FromredshiftclauseContext) {}
+
+// EnterIamrolevalue is called when production iamrolevalue is entered.
+func (s *BaseRedshiftParserListener) EnterIamrolevalue(ctx *IamrolevalueContext) {}
+
+// ExitIamrolevalue is called when production iamrolevalue is exited.
+func (s *BaseRedshiftParserListener) ExitIamrolevalue(ctx *IamrolevalueContext) {}
+
+// EnterCatalogrolevalue is called when production catalogrolevalue is entered.
+func (s *BaseRedshiftParserListener) EnterCatalogrolevalue(ctx *CatalogrolevalueContext) {}
+
+// ExitCatalogrolevalue is called when production catalogrolevalue is exited.
+func (s *BaseRedshiftParserListener) ExitCatalogrolevalue(ctx *CatalogrolevalueContext) {}
+
+// EnterAuthenticationvalue is called when production authenticationvalue is entered.
+func (s *BaseRedshiftParserListener) EnterAuthenticationvalue(ctx *AuthenticationvalueContext) {}
+
+// ExitAuthenticationvalue is called when production authenticationvalue is exited.
+func (s *BaseRedshiftParserListener) ExitAuthenticationvalue(ctx *AuthenticationvalueContext) {}
+
+// EnterCreateexternalfunctionstmt is called when production createexternalfunctionstmt is entered.
+func (s *BaseRedshiftParserListener) EnterCreateexternalfunctionstmt(ctx *CreateexternalfunctionstmtContext) {
+}
+
+// ExitCreateexternalfunctionstmt is called when production createexternalfunctionstmt is exited.
+func (s *BaseRedshiftParserListener) ExitCreateexternalfunctionstmt(ctx *CreateexternalfunctionstmtContext) {
+}
+
+// EnterParamlist is called when production paramlist is entered.
+func (s *BaseRedshiftParserListener) EnterParamlist(ctx *ParamlistContext) {}
+
+// ExitParamlist is called when production paramlist is exited.
+func (s *BaseRedshiftParserListener) ExitParamlist(ctx *ParamlistContext) {}
+
+// EnterParam_spec is called when production param_spec is entered.
+func (s *BaseRedshiftParserListener) EnterParam_spec(ctx *Param_specContext) {}
+
+// ExitParam_spec is called when production param_spec is exited.
+func (s *BaseRedshiftParserListener) ExitParam_spec(ctx *Param_specContext) {}
+
+// EnterCreateexternalmodelstmt is called when production createexternalmodelstmt is entered.
+func (s *BaseRedshiftParserListener) EnterCreateexternalmodelstmt(ctx *CreateexternalmodelstmtContext) {
+}
+
+// ExitCreateexternalmodelstmt is called when production createexternalmodelstmt is exited.
+func (s *BaseRedshiftParserListener) ExitCreateexternalmodelstmt(ctx *CreateexternalmodelstmtContext) {
+}
+
+// EnterCreateexternaltablestmt is called when production createexternaltablestmt is entered.
+func (s *BaseRedshiftParserListener) EnterCreateexternaltablestmt(ctx *CreateexternaltablestmtContext) {
+}
+
+// ExitCreateexternaltablestmt is called when production createexternaltablestmt is exited.
+func (s *BaseRedshiftParserListener) ExitCreateexternaltablestmt(ctx *CreateexternaltablestmtContext) {
+}
+
+// EnterExtern_column_list is called when production extern_column_list is entered.
+func (s *BaseRedshiftParserListener) EnterExtern_column_list(ctx *Extern_column_listContext) {}
+
+// ExitExtern_column_list is called when production extern_column_list is exited.
+func (s *BaseRedshiftParserListener) ExitExtern_column_list(ctx *Extern_column_listContext) {}
+
+// EnterExtern_column_def is called when production extern_column_def is entered.
+func (s *BaseRedshiftParserListener) EnterExtern_column_def(ctx *Extern_column_defContext) {}
+
+// ExitExtern_column_def is called when production extern_column_def is exited.
+func (s *BaseRedshiftParserListener) ExitExtern_column_def(ctx *Extern_column_defContext) {}
+
+// EnterExtern_typename is called when production extern_typename is entered.
+func (s *BaseRedshiftParserListener) EnterExtern_typename(ctx *Extern_typenameContext) {}
+
+// ExitExtern_typename is called when production extern_typename is exited.
+func (s *BaseRedshiftParserListener) ExitExtern_typename(ctx *Extern_typenameContext) {}
+
+// EnterExtern_table_format is called when production extern_table_format is entered.
+func (s *BaseRedshiftParserListener) EnterExtern_table_format(ctx *Extern_table_formatContext) {}
+
+// ExitExtern_table_format is called when production extern_table_format is exited.
+func (s *BaseRedshiftParserListener) ExitExtern_table_format(ctx *Extern_table_formatContext) {}
+
+// EnterRow_format_spec is called when production row_format_spec is entered.
+func (s *BaseRedshiftParserListener) EnterRow_format_spec(ctx *Row_format_specContext) {}
+
+// ExitRow_format_spec is called when production row_format_spec is exited.
+func (s *BaseRedshiftParserListener) ExitRow_format_spec(ctx *Row_format_specContext) {}
+
+// EnterSerde_properties_list is called when production serde_properties_list is entered.
+func (s *BaseRedshiftParserListener) EnterSerde_properties_list(ctx *Serde_properties_listContext) {}
+
+// ExitSerde_properties_list is called when production serde_properties_list is exited.
+func (s *BaseRedshiftParserListener) ExitSerde_properties_list(ctx *Serde_properties_listContext) {}
+
+// EnterSerde_property is called when production serde_property is entered.
+func (s *BaseRedshiftParserListener) EnterSerde_property(ctx *Serde_propertyContext) {}
+
+// ExitSerde_property is called when production serde_property is exited.
+func (s *BaseRedshiftParserListener) ExitSerde_property(ctx *Serde_propertyContext) {}
+
+// EnterExternal_format_spec is called when production external_format_spec is entered.
+func (s *BaseRedshiftParserListener) EnterExternal_format_spec(ctx *External_format_specContext) {}
+
+// ExitExternal_format_spec is called when production external_format_spec is exited.
+func (s *BaseRedshiftParserListener) ExitExternal_format_spec(ctx *External_format_specContext) {}
+
+// EnterTable_properties_list is called when production table_properties_list is entered.
+func (s *BaseRedshiftParserListener) EnterTable_properties_list(ctx *Table_properties_listContext) {}
+
+// ExitTable_properties_list is called when production table_properties_list is exited.
+func (s *BaseRedshiftParserListener) ExitTable_properties_list(ctx *Table_properties_listContext) {}
+
+// EnterTable_property is called when production table_property is entered.
+func (s *BaseRedshiftParserListener) EnterTable_property(ctx *Table_propertyContext) {}
+
+// ExitTable_property is called when production table_property is exited.
+func (s *BaseRedshiftParserListener) ExitTable_property(ctx *Table_propertyContext) {}
+
+// EnterCreateexternalviewstmt is called when production createexternalviewstmt is entered.
+func (s *BaseRedshiftParserListener) EnterCreateexternalviewstmt(ctx *CreateexternalviewstmtContext) {
+}
+
+// ExitCreateexternalviewstmt is called when production createexternalviewstmt is exited.
+func (s *BaseRedshiftParserListener) ExitCreateexternalviewstmt(ctx *CreateexternalviewstmtContext) {}
+
+// EnterDropexternalviewstmt is called when production dropexternalviewstmt is entered.
+func (s *BaseRedshiftParserListener) EnterDropexternalviewstmt(ctx *DropexternalviewstmtContext) {}
+
+// ExitDropexternalviewstmt is called when production dropexternalviewstmt is exited.
+func (s *BaseRedshiftParserListener) ExitDropexternalviewstmt(ctx *DropexternalviewstmtContext) {}
+
+// EnterAlteridentityproviderstmt is called when production alteridentityproviderstmt is entered.
+func (s *BaseRedshiftParserListener) EnterAlteridentityproviderstmt(ctx *AlteridentityproviderstmtContext) {
+}
+
+// ExitAlteridentityproviderstmt is called when production alteridentityproviderstmt is exited.
+func (s *BaseRedshiftParserListener) ExitAlteridentityproviderstmt(ctx *AlteridentityproviderstmtContext) {
+}
+
+// EnterAlteridprovideropts is called when production alteridprovideropts is entered.
+func (s *BaseRedshiftParserListener) EnterAlteridprovideropts(ctx *AlteridprovideroptsContext) {}
+
+// ExitAlteridprovideropts is called when production alteridprovideropts is exited.
+func (s *BaseRedshiftParserListener) ExitAlteridprovideropts(ctx *AlteridprovideroptsContext) {}
+
+// EnterAltermaskingpolicystmt is called when production altermaskingpolicystmt is entered.
+func (s *BaseRedshiftParserListener) EnterAltermaskingpolicystmt(ctx *AltermaskingpolicystmtContext) {
+}
+
+// ExitAltermaskingpolicystmt is called when production altermaskingpolicystmt is exited.
+func (s *BaseRedshiftParserListener) ExitAltermaskingpolicystmt(ctx *AltermaskingpolicystmtContext) {}
+
+// EnterAltmaskingpolicyopts is called when production altmaskingpolicyopts is entered.
+func (s *BaseRedshiftParserListener) EnterAltmaskingpolicyopts(ctx *AltmaskingpolicyoptsContext) {}
+
+// ExitAltmaskingpolicyopts is called when production altmaskingpolicyopts is exited.
+func (s *BaseRedshiftParserListener) ExitAltmaskingpolicyopts(ctx *AltmaskingpolicyoptsContext) {}
+
+// EnterAltmaskingpolicyargs is called when production altmaskingpolicyargs is entered.
+func (s *BaseRedshiftParserListener) EnterAltmaskingpolicyargs(ctx *AltmaskingpolicyargsContext) {}
+
+// ExitAltmaskingpolicyargs is called when production altmaskingpolicyargs is exited.
+func (s *BaseRedshiftParserListener) ExitAltmaskingpolicyargs(ctx *AltmaskingpolicyargsContext) {}
+
+// EnterAltmaskingpolicyarg is called when production altmaskingpolicyarg is entered.
+func (s *BaseRedshiftParserListener) EnterAltmaskingpolicyarg(ctx *AltmaskingpolicyargContext) {}
+
+// ExitAltmaskingpolicyarg is called when production altmaskingpolicyarg is exited.
+func (s *BaseRedshiftParserListener) ExitAltmaskingpolicyarg(ctx *AltmaskingpolicyargContext) {}
+
+// EnterAlterrlspolicystmt is called when production alterrlspolicystmt is entered.
+func (s *BaseRedshiftParserListener) EnterAlterrlspolicystmt(ctx *AlterrlspolicystmtContext) {}
+
+// ExitAlterrlspolicystmt is called when production alterrlspolicystmt is exited.
+func (s *BaseRedshiftParserListener) ExitAlterrlspolicystmt(ctx *AlterrlspolicystmtContext) {}
+
+// EnterAltrlspolicyopts is called when production altrlspolicyopts is entered.
+func (s *BaseRedshiftParserListener) EnterAltrlspolicyopts(ctx *AltrlspolicyoptsContext) {}
+
+// ExitAltrlspolicyopts is called when production altrlspolicyopts is exited.
+func (s *BaseRedshiftParserListener) ExitAltrlspolicyopts(ctx *AltrlspolicyoptsContext) {}
+
+// EnterAttachmaskingpolicystmt is called when production attachmaskingpolicystmt is entered.
+func (s *BaseRedshiftParserListener) EnterAttachmaskingpolicystmt(ctx *AttachmaskingpolicystmtContext) {
+}
+
+// ExitAttachmaskingpolicystmt is called when production attachmaskingpolicystmt is exited.
+func (s *BaseRedshiftParserListener) ExitAttachmaskingpolicystmt(ctx *AttachmaskingpolicystmtContext) {
+}
+
+// EnterAttachpolicycollist is called when production attachpolicycollist is entered.
+func (s *BaseRedshiftParserListener) EnterAttachpolicycollist(ctx *AttachpolicycollistContext) {}
+
+// ExitAttachpolicycollist is called when production attachpolicycollist is exited.
+func (s *BaseRedshiftParserListener) ExitAttachpolicycollist(ctx *AttachpolicycollistContext) {}
+
+// EnterAttachpolicycolumn is called when production attachpolicycolumn is entered.
+func (s *BaseRedshiftParserListener) EnterAttachpolicycolumn(ctx *AttachpolicycolumnContext) {}
+
+// ExitAttachpolicycolumn is called when production attachpolicycolumn is exited.
+func (s *BaseRedshiftParserListener) ExitAttachpolicycolumn(ctx *AttachpolicycolumnContext) {}
+
+// EnterAttachpolicytargets is called when production attachpolicytargets is entered.
+func (s *BaseRedshiftParserListener) EnterAttachpolicytargets(ctx *AttachpolicytargetsContext) {}
+
+// ExitAttachpolicytargets is called when production attachpolicytargets is exited.
+func (s *BaseRedshiftParserListener) ExitAttachpolicytargets(ctx *AttachpolicytargetsContext) {}
+
+// EnterAttachpolicytarget is called when production attachpolicytarget is entered.
+func (s *BaseRedshiftParserListener) EnterAttachpolicytarget(ctx *AttachpolicytargetContext) {}
+
+// ExitAttachpolicytarget is called when production attachpolicytarget is exited.
+func (s *BaseRedshiftParserListener) ExitAttachpolicytarget(ctx *AttachpolicytargetContext) {}
+
+// EnterAttachrlspolicystmt is called when production attachrlspolicystmt is entered.
+func (s *BaseRedshiftParserListener) EnterAttachrlspolicystmt(ctx *AttachrlspolicystmtContext) {}
+
+// ExitAttachrlspolicystmt is called when production attachrlspolicystmt is exited.
+func (s *BaseRedshiftParserListener) ExitAttachrlspolicystmt(ctx *AttachrlspolicystmtContext) {}
+
+// EnterCreateidentityproviderstmt is called when production createidentityproviderstmt is entered.
+func (s *BaseRedshiftParserListener) EnterCreateidentityproviderstmt(ctx *CreateidentityproviderstmtContext) {
+}
+
+// ExitCreateidentityproviderstmt is called when production createidentityproviderstmt is exited.
+func (s *BaseRedshiftParserListener) ExitCreateidentityproviderstmt(ctx *CreateidentityproviderstmtContext) {
+}
+
+// EnterCreateidprovideropts is called when production createidprovideropts is entered.
+func (s *BaseRedshiftParserListener) EnterCreateidprovideropts(ctx *CreateidprovideroptsContext) {}
+
+// ExitCreateidprovideropts is called when production createidprovideropts is exited.
+func (s *BaseRedshiftParserListener) ExitCreateidprovideropts(ctx *CreateidprovideroptsContext) {}
+
+// EnterGroupfilter is called when production groupfilter is entered.
+func (s *BaseRedshiftParserListener) EnterGroupfilter(ctx *GroupfilterContext) {}
+
+// ExitGroupfilter is called when production groupfilter is exited.
+func (s *BaseRedshiftParserListener) ExitGroupfilter(ctx *GroupfilterContext) {}
+
+// EnterCreatelibrarystmt is called when production createlibrarystmt is entered.
+func (s *BaseRedshiftParserListener) EnterCreatelibrarystmt(ctx *CreatelibrarystmtContext) {}
+
+// ExitCreatelibrarystmt is called when production createlibrarystmt is exited.
+func (s *BaseRedshiftParserListener) ExitCreatelibrarystmt(ctx *CreatelibrarystmtContext) {}
+
+// EnterCreatelibraryopts is called when production createlibraryopts is entered.
+func (s *BaseRedshiftParserListener) EnterCreatelibraryopts(ctx *CreatelibraryoptsContext) {}
+
+// ExitCreatelibraryopts is called when production createlibraryopts is exited.
+func (s *BaseRedshiftParserListener) ExitCreatelibraryopts(ctx *CreatelibraryoptsContext) {}
+
+// EnterCreatemaskingpolicystmt is called when production createmaskingpolicystmt is entered.
+func (s *BaseRedshiftParserListener) EnterCreatemaskingpolicystmt(ctx *CreatemaskingpolicystmtContext) {
+}
+
+// ExitCreatemaskingpolicystmt is called when production createmaskingpolicystmt is exited.
+func (s *BaseRedshiftParserListener) ExitCreatemaskingpolicystmt(ctx *CreatemaskingpolicystmtContext) {
+}
+
+// EnterInputcolumnlist is called when production inputcolumnlist is entered.
+func (s *BaseRedshiftParserListener) EnterInputcolumnlist(ctx *InputcolumnlistContext) {}
+
+// ExitInputcolumnlist is called when production inputcolumnlist is exited.
+func (s *BaseRedshiftParserListener) ExitInputcolumnlist(ctx *InputcolumnlistContext) {}
+
+// EnterInputcolumn is called when production inputcolumn is entered.
+func (s *BaseRedshiftParserListener) EnterInputcolumn(ctx *InputcolumnContext) {}
+
+// ExitInputcolumn is called when production inputcolumn is exited.
+func (s *BaseRedshiftParserListener) ExitInputcolumn(ctx *InputcolumnContext) {}
+
+// EnterMaskingexpression is called when production maskingexpression is entered.
+func (s *BaseRedshiftParserListener) EnterMaskingexpression(ctx *MaskingexpressionContext) {}
+
+// ExitMaskingexpression is called when production maskingexpression is exited.
+func (s *BaseRedshiftParserListener) ExitMaskingexpression(ctx *MaskingexpressionContext) {}
+
+// EnterCreatemodelstmt is called when production createmodelstmt is entered.
+func (s *BaseRedshiftParserListener) EnterCreatemodelstmt(ctx *CreatemodelstmtContext) {}
+
+// ExitCreatemodelstmt is called when production createmodelstmt is exited.
+func (s *BaseRedshiftParserListener) ExitCreatemodelstmt(ctx *CreatemodelstmtContext) {}
+
+// EnterCreatemodelfromclause is called when production createmodelfromclause is entered.
+func (s *BaseRedshiftParserListener) EnterCreatemodelfromclause(ctx *CreatemodelfromclauseContext) {}
+
+// ExitCreatemodelfromclause is called when production createmodelfromclause is exited.
+func (s *BaseRedshiftParserListener) ExitCreatemodelfromclause(ctx *CreatemodelfromclauseContext) {}
+
+// EnterIamrolespec is called when production iamrolespec is entered.
+func (s *BaseRedshiftParserListener) EnterIamrolespec(ctx *IamrolespecContext) {}
+
+// ExitIamrolespec is called when production iamrolespec is exited.
+func (s *BaseRedshiftParserListener) ExitIamrolespec(ctx *IamrolespecContext) {}
+
+// EnterSagemakerspec is called when production sagemakerspec is entered.
+func (s *BaseRedshiftParserListener) EnterSagemakerspec(ctx *SagemakerspecContext) {}
+
+// ExitSagemakerspec is called when production sagemakerspec is exited.
+func (s *BaseRedshiftParserListener) ExitSagemakerspec(ctx *SagemakerspecContext) {}
+
+// EnterModeltypespec is called when production modeltypespec is entered.
+func (s *BaseRedshiftParserListener) EnterModeltypespec(ctx *ModeltypespecContext) {}
+
+// ExitModeltypespec is called when production modeltypespec is exited.
+func (s *BaseRedshiftParserListener) ExitModeltypespec(ctx *ModeltypespecContext) {}
+
+// EnterProblemtypespec is called when production problemtypespec is entered.
+func (s *BaseRedshiftParserListener) EnterProblemtypespec(ctx *ProblemtypespecContext) {}
+
+// ExitProblemtypespec is called when production problemtypespec is exited.
+func (s *BaseRedshiftParserListener) ExitProblemtypespec(ctx *ProblemtypespecContext) {}
+
+// EnterProblemtype is called when production problemtype is entered.
+func (s *BaseRedshiftParserListener) EnterProblemtype(ctx *ProblemtypeContext) {}
+
+// ExitProblemtype is called when production problemtype is exited.
+func (s *BaseRedshiftParserListener) ExitProblemtype(ctx *ProblemtypeContext) {}
+
+// EnterObjectivespec is called when production objectivespec is entered.
+func (s *BaseRedshiftParserListener) EnterObjectivespec(ctx *ObjectivespecContext) {}
+
+// ExitObjectivespec is called when production objectivespec is exited.
+func (s *BaseRedshiftParserListener) ExitObjectivespec(ctx *ObjectivespecContext) {}
+
+// EnterHyperparametersspec is called when production hyperparametersspec is entered.
+func (s *BaseRedshiftParserListener) EnterHyperparametersspec(ctx *HyperparametersspecContext) {}
+
+// ExitHyperparametersspec is called when production hyperparametersspec is exited.
+func (s *BaseRedshiftParserListener) ExitHyperparametersspec(ctx *HyperparametersspecContext) {}
+
+// EnterHyperparameterslist is called when production hyperparameterslist is entered.
+func (s *BaseRedshiftParserListener) EnterHyperparameterslist(ctx *HyperparameterslistContext) {}
+
+// ExitHyperparameterslist is called when production hyperparameterslist is exited.
+func (s *BaseRedshiftParserListener) ExitHyperparameterslist(ctx *HyperparameterslistContext) {}
+
+// EnterHyperparameteritem is called when production hyperparameteritem is entered.
+func (s *BaseRedshiftParserListener) EnterHyperparameteritem(ctx *HyperparameteritemContext) {}
+
+// ExitHyperparameteritem is called when production hyperparameteritem is exited.
+func (s *BaseRedshiftParserListener) ExitHyperparameteritem(ctx *HyperparameteritemContext) {}
+
+// EnterSettingsclause is called when production settingsclause is entered.
+func (s *BaseRedshiftParserListener) EnterSettingsclause(ctx *SettingsclauseContext) {}
+
+// ExitSettingsclause is called when production settingsclause is exited.
+func (s *BaseRedshiftParserListener) ExitSettingsclause(ctx *SettingsclauseContext) {}
+
+// EnterSettingsitem is called when production settingsitem is entered.
+func (s *BaseRedshiftParserListener) EnterSettingsitem(ctx *SettingsitemContext) {}
+
+// ExitSettingsitem is called when production settingsitem is exited.
+func (s *BaseRedshiftParserListener) ExitSettingsitem(ctx *SettingsitemContext) {}
+
+// EnterDatatypelist is called when production datatypelist is entered.
+func (s *BaseRedshiftParserListener) EnterDatatypelist(ctx *DatatypelistContext) {}
+
+// ExitDatatypelist is called when production datatypelist is exited.
+func (s *BaseRedshiftParserListener) ExitDatatypelist(ctx *DatatypelistContext) {}
+
+// EnterDatatype is called when production datatype is entered.
+func (s *BaseRedshiftParserListener) EnterDatatype(ctx *DatatypeContext) {}
+
+// ExitDatatype is called when production datatype is exited.
+func (s *BaseRedshiftParserListener) ExitDatatype(ctx *DatatypeContext) {}
+
+// EnterCreaterlspolicystmt is called when production createrlspolicystmt is entered.
+func (s *BaseRedshiftParserListener) EnterCreaterlspolicystmt(ctx *CreaterlspolicystmtContext) {}
+
+// ExitCreaterlspolicystmt is called when production createrlspolicystmt is exited.
+func (s *BaseRedshiftParserListener) ExitCreaterlspolicystmt(ctx *CreaterlspolicystmtContext) {}
+
+// EnterDescidentityproviderstmt is called when production descidentityproviderstmt is entered.
+func (s *BaseRedshiftParserListener) EnterDescidentityproviderstmt(ctx *DescidentityproviderstmtContext) {
+}
+
+// ExitDescidentityproviderstmt is called when production descidentityproviderstmt is exited.
+func (s *BaseRedshiftParserListener) ExitDescidentityproviderstmt(ctx *DescidentityproviderstmtContext) {
+}
+
+// EnterDetachmaskingpolicystmt is called when production detachmaskingpolicystmt is entered.
+func (s *BaseRedshiftParserListener) EnterDetachmaskingpolicystmt(ctx *DetachmaskingpolicystmtContext) {
+}
+
+// ExitDetachmaskingpolicystmt is called when production detachmaskingpolicystmt is exited.
+func (s *BaseRedshiftParserListener) ExitDetachmaskingpolicystmt(ctx *DetachmaskingpolicystmtContext) {
+}
+
+// EnterDetachrlspolicystmt is called when production detachrlspolicystmt is entered.
+func (s *BaseRedshiftParserListener) EnterDetachrlspolicystmt(ctx *DetachrlspolicystmtContext) {}
+
+// ExitDetachrlspolicystmt is called when production detachrlspolicystmt is exited.
+func (s *BaseRedshiftParserListener) ExitDetachrlspolicystmt(ctx *DetachrlspolicystmtContext) {}
+
+// EnterDropidentityproviderstmt is called when production dropidentityproviderstmt is entered.
+func (s *BaseRedshiftParserListener) EnterDropidentityproviderstmt(ctx *DropidentityproviderstmtContext) {
+}
+
+// ExitDropidentityproviderstmt is called when production dropidentityproviderstmt is exited.
+func (s *BaseRedshiftParserListener) ExitDropidentityproviderstmt(ctx *DropidentityproviderstmtContext) {
+}
+
+// EnterDroplibrarystmt is called when production droplibrarystmt is entered.
+func (s *BaseRedshiftParserListener) EnterDroplibrarystmt(ctx *DroplibrarystmtContext) {}
+
+// ExitDroplibrarystmt is called when production droplibrarystmt is exited.
+func (s *BaseRedshiftParserListener) ExitDroplibrarystmt(ctx *DroplibrarystmtContext) {}
+
+// EnterDropmaskingpolicystmt is called when production dropmaskingpolicystmt is entered.
+func (s *BaseRedshiftParserListener) EnterDropmaskingpolicystmt(ctx *DropmaskingpolicystmtContext) {}
+
+// ExitDropmaskingpolicystmt is called when production dropmaskingpolicystmt is exited.
+func (s *BaseRedshiftParserListener) ExitDropmaskingpolicystmt(ctx *DropmaskingpolicystmtContext) {}
+
+// EnterDropmodelstmt is called when production dropmodelstmt is entered.
+func (s *BaseRedshiftParserListener) EnterDropmodelstmt(ctx *DropmodelstmtContext) {}
+
+// ExitDropmodelstmt is called when production dropmodelstmt is exited.
+func (s *BaseRedshiftParserListener) ExitDropmodelstmt(ctx *DropmodelstmtContext) {}
+
+// EnterDroprlspolicystmt is called when production droprlspolicystmt is entered.
+func (s *BaseRedshiftParserListener) EnterDroprlspolicystmt(ctx *DroprlspolicystmtContext) {}
+
+// ExitDroprlspolicystmt is called when production droprlspolicystmt is exited.
+func (s *BaseRedshiftParserListener) ExitDroprlspolicystmt(ctx *DroprlspolicystmtContext) {}
+
+// EnterAltertableappendstmt is called when production altertableappendstmt is entered.
+func (s *BaseRedshiftParserListener) EnterAltertableappendstmt(ctx *AltertableappendstmtContext) {}
+
+// ExitAltertableappendstmt is called when production altertableappendstmt is exited.
+func (s *BaseRedshiftParserListener) ExitAltertableappendstmt(ctx *AltertableappendstmtContext) {}
+
+// EnterAppendoptions is called when production appendoptions is entered.
+func (s *BaseRedshiftParserListener) EnterAppendoptions(ctx *AppendoptionsContext) {}
+
+// ExitAppendoptions is called when production appendoptions is exited.
+func (s *BaseRedshiftParserListener) ExitAppendoptions(ctx *AppendoptionsContext) {}
+
+// EnterAlteruserstmt is called when production alteruserstmt is entered.
+func (s *BaseRedshiftParserListener) EnterAlteruserstmt(ctx *AlteruserstmtContext) {}
+
+// ExitAlteruserstmt is called when production alteruserstmt is exited.
+func (s *BaseRedshiftParserListener) ExitAlteruserstmt(ctx *AlteruserstmtContext) {}
+
+// EnterAlteruseropts is called when production alteruseropts is entered.
+func (s *BaseRedshiftParserListener) EnterAlteruseropts(ctx *AlteruseroptsContext) {}
+
+// ExitAlteruseropts is called when production alteruseropts is exited.
+func (s *BaseRedshiftParserListener) ExitAlteruseropts(ctx *AlteruseroptsContext) {}
+
+// EnterAnalyzecompressionstmt is called when production analyzecompressionstmt is entered.
+func (s *BaseRedshiftParserListener) EnterAnalyzecompressionstmt(ctx *AnalyzecompressionstmtContext) {
+}
+
+// ExitAnalyzecompressionstmt is called when production analyzecompressionstmt is exited.
+func (s *BaseRedshiftParserListener) ExitAnalyzecompressionstmt(ctx *AnalyzecompressionstmtContext) {}
+
+// EnterCancelstmt is called when production cancelstmt is entered.
+func (s *BaseRedshiftParserListener) EnterCancelstmt(ctx *CancelstmtContext) {}
+
+// ExitCancelstmt is called when production cancelstmt is exited.
+func (s *BaseRedshiftParserListener) ExitCancelstmt(ctx *CancelstmtContext) {}
+
+// EnterClosestmt is called when production closestmt is entered.
+func (s *BaseRedshiftParserListener) EnterClosestmt(ctx *ClosestmtContext) {}
+
+// ExitClosestmt is called when production closestmt is exited.
+func (s *BaseRedshiftParserListener) ExitClosestmt(ctx *ClosestmtContext) {}
+
+// EnterInsertexternaltablestmt is called when production insertexternaltablestmt is entered.
+func (s *BaseRedshiftParserListener) EnterInsertexternaltablestmt(ctx *InsertexternaltablestmtContext) {
+}
+
+// ExitInsertexternaltablestmt is called when production insertexternaltablestmt is exited.
+func (s *BaseRedshiftParserListener) ExitInsertexternaltablestmt(ctx *InsertexternaltablestmtContext) {
+}
+
+// EnterSelect_or_values is called when production select_or_values is entered.
+func (s *BaseRedshiftParserListener) EnterSelect_or_values(ctx *Select_or_valuesContext) {}
+
+// ExitSelect_or_values is called when production select_or_values is exited.
+func (s *BaseRedshiftParserListener) ExitSelect_or_values(ctx *Select_or_valuesContext) {}
+
+// EnterSelectintostmt is called when production selectintostmt is entered.
+func (s *BaseRedshiftParserListener) EnterSelectintostmt(ctx *SelectintostmtContext) {}
+
+// ExitSelectintostmt is called when production selectintostmt is exited.
+func (s *BaseRedshiftParserListener) ExitSelectintostmt(ctx *SelectintostmtContext) {}
+
+// EnterSetsessionauthorizationstmt is called when production setsessionauthorizationstmt is entered.
+func (s *BaseRedshiftParserListener) EnterSetsessionauthorizationstmt(ctx *SetsessionauthorizationstmtContext) {
+}
+
+// ExitSetsessionauthorizationstmt is called when production setsessionauthorizationstmt is exited.
+func (s *BaseRedshiftParserListener) ExitSetsessionauthorizationstmt(ctx *SetsessionauthorizationstmtContext) {
+}
+
+// EnterSetsessioncharacteristicsstmt is called when production setsessioncharacteristicsstmt is entered.
+func (s *BaseRedshiftParserListener) EnterSetsessioncharacteristicsstmt(ctx *SetsessioncharacteristicsstmtContext) {
+}
+
+// ExitSetsessioncharacteristicsstmt is called when production setsessioncharacteristicsstmt is exited.
+func (s *BaseRedshiftParserListener) ExitSetsessioncharacteristicsstmt(ctx *SetsessioncharacteristicsstmtContext) {
+}
+
+// EnterShowcolumnsstmt is called when production showcolumnsstmt is entered.
+func (s *BaseRedshiftParserListener) EnterShowcolumnsstmt(ctx *ShowcolumnsstmtContext) {}
+
+// ExitShowcolumnsstmt is called when production showcolumnsstmt is exited.
+func (s *BaseRedshiftParserListener) ExitShowcolumnsstmt(ctx *ShowcolumnsstmtContext) {}
+
+// EnterShowdatabasesstmt is called when production showdatabasesstmt is entered.
+func (s *BaseRedshiftParserListener) EnterShowdatabasesstmt(ctx *ShowdatabasesstmtContext) {}
+
+// ExitShowdatabasesstmt is called when production showdatabasesstmt is exited.
+func (s *BaseRedshiftParserListener) ExitShowdatabasesstmt(ctx *ShowdatabasesstmtContext) {}
+
+// EnterShowdbsopts is called when production showdbsopts is entered.
+func (s *BaseRedshiftParserListener) EnterShowdbsopts(ctx *ShowdbsoptsContext) {}
+
+// ExitShowdbsopts is called when production showdbsopts is exited.
+func (s *BaseRedshiftParserListener) ExitShowdbsopts(ctx *ShowdbsoptsContext) {}
+
+// EnterShowdatasharesstmt is called when production showdatasharesstmt is entered.
+func (s *BaseRedshiftParserListener) EnterShowdatasharesstmt(ctx *ShowdatasharesstmtContext) {}
+
+// ExitShowdatasharesstmt is called when production showdatasharesstmt is exited.
+func (s *BaseRedshiftParserListener) ExitShowdatasharesstmt(ctx *ShowdatasharesstmtContext) {}
+
+// EnterShowexternaltablestmt is called when production showexternaltablestmt is entered.
+func (s *BaseRedshiftParserListener) EnterShowexternaltablestmt(ctx *ShowexternaltablestmtContext) {}
+
+// ExitShowexternaltablestmt is called when production showexternaltablestmt is exited.
+func (s *BaseRedshiftParserListener) ExitShowexternaltablestmt(ctx *ShowexternaltablestmtContext) {}
+
+// EnterShowgrantsstmt is called when production showgrantsstmt is entered.
+func (s *BaseRedshiftParserListener) EnterShowgrantsstmt(ctx *ShowgrantsstmtContext) {}
+
+// ExitShowgrantsstmt is called when production showgrantsstmt is exited.
+func (s *BaseRedshiftParserListener) ExitShowgrantsstmt(ctx *ShowgrantsstmtContext) {}
+
+// EnterGrantobject is called when production grantobject is entered.
+func (s *BaseRedshiftParserListener) EnterGrantobject(ctx *GrantobjectContext) {}
+
+// ExitGrantobject is called when production grantobject is exited.
+func (s *BaseRedshiftParserListener) ExitGrantobject(ctx *GrantobjectContext) {}
+
+// EnterGrantprincipal is called when production grantprincipal is entered.
+func (s *BaseRedshiftParserListener) EnterGrantprincipal(ctx *GrantprincipalContext) {}
+
+// ExitGrantprincipal is called when production grantprincipal is exited.
+func (s *BaseRedshiftParserListener) ExitGrantprincipal(ctx *GrantprincipalContext) {}
+
+// EnterShowmodelstmt is called when production showmodelstmt is entered.
+func (s *BaseRedshiftParserListener) EnterShowmodelstmt(ctx *ShowmodelstmtContext) {}
+
+// ExitShowmodelstmt is called when production showmodelstmt is exited.
+func (s *BaseRedshiftParserListener) ExitShowmodelstmt(ctx *ShowmodelstmtContext) {}
+
+// EnterShowprocedurestmt is called when production showprocedurestmt is entered.
+func (s *BaseRedshiftParserListener) EnterShowprocedurestmt(ctx *ShowprocedurestmtContext) {}
+
+// ExitShowprocedurestmt is called when production showprocedurestmt is exited.
+func (s *BaseRedshiftParserListener) ExitShowprocedurestmt(ctx *ShowprocedurestmtContext) {}
+
+// EnterShowschemasstmt is called when production showschemasstmt is entered.
+func (s *BaseRedshiftParserListener) EnterShowschemasstmt(ctx *ShowschemasstmtContext) {}
+
+// ExitShowschemasstmt is called when production showschemasstmt is exited.
+func (s *BaseRedshiftParserListener) ExitShowschemasstmt(ctx *ShowschemasstmtContext) {}
+
+// EnterShowtablestmt is called when production showtablestmt is entered.
+func (s *BaseRedshiftParserListener) EnterShowtablestmt(ctx *ShowtablestmtContext) {}
+
+// ExitShowtablestmt is called when production showtablestmt is exited.
+func (s *BaseRedshiftParserListener) ExitShowtablestmt(ctx *ShowtablestmtContext) {}
+
+// EnterShowtablesstmt is called when production showtablesstmt is entered.
+func (s *BaseRedshiftParserListener) EnterShowtablesstmt(ctx *ShowtablesstmtContext) {}
+
+// ExitShowtablesstmt is called when production showtablesstmt is exited.
+func (s *BaseRedshiftParserListener) ExitShowtablesstmt(ctx *ShowtablesstmtContext) {}
+
+// EnterShowviewstmt is called when production showviewstmt is entered.
+func (s *BaseRedshiftParserListener) EnterShowviewstmt(ctx *ShowviewstmtContext) {}
+
+// ExitShowviewstmt is called when production showviewstmt is exited.
+func (s *BaseRedshiftParserListener) ExitShowviewstmt(ctx *ShowviewstmtContext) {}
+
+// EnterUnloadstmt is called when production unloadstmt is entered.
+func (s *BaseRedshiftParserListener) EnterUnloadstmt(ctx *UnloadstmtContext) {}
+
+// ExitUnloadstmt is called when production unloadstmt is exited.
+func (s *BaseRedshiftParserListener) ExitUnloadstmt(ctx *UnloadstmtContext) {}
+
+// EnterIamroleclause is called when production iamroleclause is entered.
+func (s *BaseRedshiftParserListener) EnterIamroleclause(ctx *IamroleclauseContext) {}
+
+// ExitIamroleclause is called when production iamroleclause is exited.
+func (s *BaseRedshiftParserListener) ExitIamroleclause(ctx *IamroleclauseContext) {}
+
+// EnterUnloadoptions is called when production unloadoptions is entered.
+func (s *BaseRedshiftParserListener) EnterUnloadoptions(ctx *UnloadoptionsContext) {}
+
+// ExitUnloadoptions is called when production unloadoptions is exited.
+func (s *BaseRedshiftParserListener) ExitUnloadoptions(ctx *UnloadoptionsContext) {}
+
+// EnterFormatoption is called when production formatoption is entered.
+func (s *BaseRedshiftParserListener) EnterFormatoption(ctx *FormatoptionContext) {}
+
+// ExitFormatoption is called when production formatoption is exited.
+func (s *BaseRedshiftParserListener) ExitFormatoption(ctx *FormatoptionContext) {}
+
+// EnterPartitionbyoption is called when production partitionbyoption is entered.
+func (s *BaseRedshiftParserListener) EnterPartitionbyoption(ctx *PartitionbyoptionContext) {}
+
+// ExitPartitionbyoption is called when production partitionbyoption is exited.
+func (s *BaseRedshiftParserListener) ExitPartitionbyoption(ctx *PartitionbyoptionContext) {}
+
+// EnterManifestoption is called when production manifestoption is entered.
+func (s *BaseRedshiftParserListener) EnterManifestoption(ctx *ManifestoptionContext) {}
+
+// ExitManifestoption is called when production manifestoption is exited.
+func (s *BaseRedshiftParserListener) ExitManifestoption(ctx *ManifestoptionContext) {}
+
+// EnterHeaderoption is called when production headeroption is entered.
+func (s *BaseRedshiftParserListener) EnterHeaderoption(ctx *HeaderoptionContext) {}
+
+// ExitHeaderoption is called when production headeroption is exited.
+func (s *BaseRedshiftParserListener) ExitHeaderoption(ctx *HeaderoptionContext) {}
+
+// EnterDelimiteroption is called when production delimiteroption is entered.
+func (s *BaseRedshiftParserListener) EnterDelimiteroption(ctx *DelimiteroptionContext) {}
+
+// ExitDelimiteroption is called when production delimiteroption is exited.
+func (s *BaseRedshiftParserListener) ExitDelimiteroption(ctx *DelimiteroptionContext) {}
+
+// EnterFixedwidthoption is called when production fixedwidthoption is entered.
+func (s *BaseRedshiftParserListener) EnterFixedwidthoption(ctx *FixedwidthoptionContext) {}
+
+// ExitFixedwidthoption is called when production fixedwidthoption is exited.
+func (s *BaseRedshiftParserListener) ExitFixedwidthoption(ctx *FixedwidthoptionContext) {}
+
+// EnterEncryptedoption is called when production encryptedoption is entered.
+func (s *BaseRedshiftParserListener) EnterEncryptedoption(ctx *EncryptedoptionContext) {}
+
+// ExitEncryptedoption is called when production encryptedoption is exited.
+func (s *BaseRedshiftParserListener) ExitEncryptedoption(ctx *EncryptedoptionContext) {}
+
+// EnterKmskeyoption is called when production kmskeyoption is entered.
+func (s *BaseRedshiftParserListener) EnterKmskeyoption(ctx *KmskeyoptionContext) {}
+
+// ExitKmskeyoption is called when production kmskeyoption is exited.
+func (s *BaseRedshiftParserListener) ExitKmskeyoption(ctx *KmskeyoptionContext) {}
+
+// EnterCompressionoption is called when production compressionoption is entered.
+func (s *BaseRedshiftParserListener) EnterCompressionoption(ctx *CompressionoptionContext) {}
+
+// ExitCompressionoption is called when production compressionoption is exited.
+func (s *BaseRedshiftParserListener) ExitCompressionoption(ctx *CompressionoptionContext) {}
+
+// EnterAddquotesoption is called when production addquotesoption is entered.
+func (s *BaseRedshiftParserListener) EnterAddquotesoption(ctx *AddquotesoptionContext) {}
+
+// ExitAddquotesoption is called when production addquotesoption is exited.
+func (s *BaseRedshiftParserListener) ExitAddquotesoption(ctx *AddquotesoptionContext) {}
+
+// EnterNullasoption is called when production nullasoption is entered.
+func (s *BaseRedshiftParserListener) EnterNullasoption(ctx *NullasoptionContext) {}
+
+// ExitNullasoption is called when production nullasoption is exited.
+func (s *BaseRedshiftParserListener) ExitNullasoption(ctx *NullasoptionContext) {}
+
+// EnterEscapeoption is called when production escapeoption is entered.
+func (s *BaseRedshiftParserListener) EnterEscapeoption(ctx *EscapeoptionContext) {}
+
+// ExitEscapeoption is called when production escapeoption is exited.
+func (s *BaseRedshiftParserListener) ExitEscapeoption(ctx *EscapeoptionContext) {}
+
+// EnterAllowoverwriteoption is called when production allowoverwriteoption is entered.
+func (s *BaseRedshiftParserListener) EnterAllowoverwriteoption(ctx *AllowoverwriteoptionContext) {}
+
+// ExitAllowoverwriteoption is called when production allowoverwriteoption is exited.
+func (s *BaseRedshiftParserListener) ExitAllowoverwriteoption(ctx *AllowoverwriteoptionContext) {}
+
+// EnterCleanpathoption is called when production cleanpathoption is entered.
+func (s *BaseRedshiftParserListener) EnterCleanpathoption(ctx *CleanpathoptionContext) {}
+
+// ExitCleanpathoption is called when production cleanpathoption is exited.
+func (s *BaseRedshiftParserListener) ExitCleanpathoption(ctx *CleanpathoptionContext) {}
+
+// EnterParalleloption is called when production paralleloption is entered.
+func (s *BaseRedshiftParserListener) EnterParalleloption(ctx *ParalleloptionContext) {}
+
+// ExitParalleloption is called when production paralleloption is exited.
+func (s *BaseRedshiftParserListener) ExitParalleloption(ctx *ParalleloptionContext) {}
+
+// EnterMaxfilesizeoption is called when production maxfilesizeoption is entered.
+func (s *BaseRedshiftParserListener) EnterMaxfilesizeoption(ctx *MaxfilesizeoptionContext) {}
+
+// ExitMaxfilesizeoption is called when production maxfilesizeoption is exited.
+func (s *BaseRedshiftParserListener) ExitMaxfilesizeoption(ctx *MaxfilesizeoptionContext) {}
+
+// EnterRowgroupsizeoption is called when production rowgroupsizeoption is entered.
+func (s *BaseRedshiftParserListener) EnterRowgroupsizeoption(ctx *RowgroupsizeoptionContext) {}
+
+// ExitRowgroupsizeoption is called when production rowgroupsizeoption is exited.
+func (s *BaseRedshiftParserListener) ExitRowgroupsizeoption(ctx *RowgroupsizeoptionContext) {}
+
+// EnterSizeunit is called when production sizeunit is entered.
+func (s *BaseRedshiftParserListener) EnterSizeunit(ctx *SizeunitContext) {}
+
+// ExitSizeunit is called when production sizeunit is exited.
+func (s *BaseRedshiftParserListener) ExitSizeunit(ctx *SizeunitContext) {}
+
+// EnterRegionoption is called when production regionoption is entered.
+func (s *BaseRedshiftParserListener) EnterRegionoption(ctx *RegionoptionContext) {}
+
+// ExitRegionoption is called when production regionoption is exited.
+func (s *BaseRedshiftParserListener) ExitRegionoption(ctx *RegionoptionContext) {}
+
+// EnterExtensionoption is called when production extensionoption is entered.
+func (s *BaseRedshiftParserListener) EnterExtensionoption(ctx *ExtensionoptionContext) {}
+
+// ExitExtensionoption is called when production extensionoption is exited.
+func (s *BaseRedshiftParserListener) ExitExtensionoption(ctx *ExtensionoptionContext) {}
+
+// EnterUsestmt is called when production usestmt is entered.
+func (s *BaseRedshiftParserListener) EnterUsestmt(ctx *UsestmtContext) {}
+
+// ExitUsestmt is called when production usestmt is exited.
+func (s *BaseRedshiftParserListener) ExitUsestmt(ctx *UsestmtContext) {}
+
 // EnterCreatedbstmt is called when production createdbstmt is entered.
 func (s *BaseRedshiftParserListener) EnterCreatedbstmt(ctx *CreatedbstmtContext) {}
 

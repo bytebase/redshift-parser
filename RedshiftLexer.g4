@@ -814,6 +814,10 @@ CSV
    : 'CSV'
    ;
 
+JSON
+   : 'JSON'
+   ;
+
 CURSOR
    : 'CURSOR'
    ;
@@ -824,6 +828,10 @@ CYCLE
 
 DATA_P
    : 'DATA'
+   ;
+
+DATA_CATALOG
+   : 'DATA_CATALOG'
    ;
 
 DATABASE
@@ -1667,10 +1675,6 @@ INCLUDENEW
    ;
 
 // External Data Sources
-EXTERNAL
-   : 'EXTERNAL'
-   ;
-
 IAM_ROLE
    : 'IAM_ROLE'
    ;
@@ -1740,20 +1744,8 @@ MASKING
    : 'MASKING'
    ;
 
-POLICY
-   : 'POLICY'
-   ;
-
 RLS
    : 'RLS'
-   ;
-
-ATTACH
-   : 'ATTACH'
-   ;
-
-DETACH
-   : 'DETACH'
    ;
 
 IDENTITY
@@ -1882,10 +1874,6 @@ MANIFEST
    : 'MANIFEST'
    ;
 
-VERBOSE
-   : 'VERBOSE'
-   ;
-
 ADDQUOTES
    : 'ADDQUOTES'
    ;
@@ -1898,20 +1886,12 @@ CLEANPATH
    : 'CLEANPATH'
    ;
 
-PARALLEL
-   : 'PARALLEL'
-   ;
-
 MAXFILESIZE
    : 'MAXFILESIZE'
    ;
 
 ROWGROUPSIZE
    : 'ROWGROUPSIZE'
-   ;
-
-EXTENSION
-   : 'EXTENSION'
    ;
 
 BZIP2
@@ -1965,10 +1945,6 @@ LIBRARY
    : 'LIBRARY'
    ;
 
-PROCEDURE
-   : 'PROCEDURE'
-   ;
-
 APPEND
    : 'APPEND'
    ;
@@ -1995,8 +1971,178 @@ DESCRIBE
    : 'DESCRIBE'
    ;
 
-DESC
-   : 'DESC'
+// Additional Redshift-specific tokens
+MANAGEDBY
+   : 'MANAGEDBY'
+   ;
+
+ADX
+   : 'ADX'
+   ;
+
+REMOVE
+   : 'REMOVE'
+   ;
+
+PLPYTHONU
+   : 'PLPYTHONU'
+   ;
+
+FILLTARGET
+   : 'FILLTARGET'
+   ;
+
+IGNOREEXTRA
+   : 'IGNOREEXTRA'
+   ;
+
+CREATEUSER
+   : 'CREATEUSER'
+   ;
+
+NOCREATEUSER
+   : 'NOCREATEUSER'
+   ;
+
+// Additional commonly used tokens (avoiding conflicts with existing _P tokens and identifiers)
+// REGION removed due to conflict with column names
+
+PORT
+   : 'PORT'
+   ;
+
+REDSHIFT
+   : 'REDSHIFT'
+   ;
+
+IAM
+   : 'IAM'
+   ;
+
+CREATEDB
+   : 'CREATEDB'
+   ;
+
+NOCREATEDB
+   : 'NOCREATEDB'
+   ;
+
+RESTRICTED
+   : 'RESTRICTED'
+   ;
+
+UNLIMITED
+   : 'UNLIMITED'
+   ;
+
+EXTERNALID
+   : 'EXTERNALID'
+   ;
+
+TIMEOUT
+   : 'TIMEOUT'
+   ;
+
+SYSLOG
+   : 'SYSLOG'
+   ;
+
+CREDENTIALS
+   : 'CREDENTIALS'
+   ;
+
+UNRESTRICTED
+   : 'UNRESTRICTED'
+   ;
+
+PARAMETERS
+   : 'PARAMETERS'
+   ;
+
+APPLICATION_ARN
+   : 'APPLICATION_ARN'
+   ;
+
+AUTO_CREATE_ROLES
+   : 'AUTO_CREATE_ROLES'
+   ;
+
+COMPROWS
+   : 'COMPROWS'
+   ;
+
+PROVIDER_URL
+   : 'PROVIDER_URL'
+   ;
+
+PROVIDER_URL_PORT
+   : 'PROVIDER_URL_PORT'
+   ;
+
+ATTRIBUTE_MAP
+   : 'ATTRIBUTE_MAP'
+   ;
+
+PROVIDER_ARN
+   : 'PROVIDER_ARN'
+   ;
+
+ASSUME_ROLE_ARN
+   : 'ASSUME_ROLE_ARN'
+   ;
+
+
+PROPERTIES
+   : 'PROPERTIES'
+   ;
+
+AVRO
+   : 'AVRO'
+   ;
+
+RCFILE
+   : 'RCFILE'
+   ;
+
+SEQUENCEFILE
+   : 'SEQUENCEFILE'
+   ;
+
+TEXTFILE
+   : 'TEXTFILE'
+   ;
+
+ORC
+   : 'ORC'
+   ;
+
+ION
+   : 'ION'
+   ;
+
+LAMBDA
+   : 'LAMBDA'
+   ;
+
+FIXEDWIDTH
+   : 'FIXEDWIDTH'
+   ;
+
+// Missing tokens causing implicit definition warnings (avoiding conflicts with _P versions)
+PARQUET
+   : 'PARQUET'
+   ;
+
+HEADER
+   : 'HEADER'
+   ;
+
+SETTINGS
+   : 'SETTINGS'
+   ;
+
+FUNCTION_NAME
+   : 'FUNCTION_NAME'
    ;
 
    //
@@ -2258,6 +2404,76 @@ STORED
    : 'STORED'
    ;
 
+// External table format tokens
+SERDE
+   : 'SERDE'
+   ;
+
+SERDEPROPERTIES
+   : 'SERDEPROPERTIES'
+   ;
+
+INPUTFORMAT
+   : 'INPUTFORMAT'
+   ;
+
+OUTPUTFORMAT
+   : 'OUTPUTFORMAT'
+   ;
+
+FIELDS
+   : 'FIELDS'
+   ;
+
+COLLECTION
+   : 'COLLECTION'
+   ;
+
+ITEMS
+   : 'ITEMS'
+   ;
+
+TERMINATED
+   : 'TERMINATED'
+   ;
+
+ESCAPED
+   : 'ESCAPED'
+   ;
+
+DEFINED
+   : 'DEFINED'
+   ;
+
+LINES
+   : 'LINES'
+   ;
+
+KEYS
+   : 'KEYS'
+   ;
+
+PARTITIONED
+   : 'PARTITIONED'
+   ;
+
+// Complex type tokens
+STRUCT
+   : 'STRUCT'
+   ;
+
+MAP
+   : 'MAP'
+   ;
+
+STRING
+   : 'STRING'
+   ;
+
+DELIMITED
+   : 'DELIMITED'
+   ;
+
 INCLUDE
    : 'INCLUDE'
    ;
@@ -2276,6 +2492,10 @@ IMPORT_P
 
 POLICY
    : 'POLICY'
+   ;
+
+PRIORITY
+   : 'PRIORITY'
    ;
 
 METHOD
