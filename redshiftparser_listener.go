@@ -946,8 +946,20 @@ type RedshiftParserListener interface {
 	// EnterCreatefunctionstmt is called when entering the createfunctionstmt production.
 	EnterCreatefunctionstmt(c *CreatefunctionstmtContext)
 
+	// EnterCreateprocedurestmt is called when entering the createprocedurestmt production.
+	EnterCreateprocedurestmt(c *CreateprocedurestmtContext)
+
+	// EnterOpt_nonatomic is called when entering the opt_nonatomic production.
+	EnterOpt_nonatomic(c *Opt_nonatomicContext)
+
 	// EnterOpt_or_replace is called when entering the opt_or_replace production.
 	EnterOpt_or_replace(c *Opt_or_replaceContext)
+
+	// EnterFunc_py_args_or_sql_args is called when entering the func_py_args_or_sql_args production.
+	EnterFunc_py_args_or_sql_args(c *Func_py_args_or_sql_argsContext)
+
+	// EnterFunc_py_args_or_sql_args_list is called when entering the func_py_args_or_sql_args_list production.
+	EnterFunc_py_args_or_sql_args_list(c *Func_py_args_or_sql_args_listContext)
 
 	// EnterFunc_args is called when entering the func_args production.
 	EnterFunc_args(c *Func_argsContext)
@@ -3853,8 +3865,20 @@ type RedshiftParserListener interface {
 	// ExitCreatefunctionstmt is called when exiting the createfunctionstmt production.
 	ExitCreatefunctionstmt(c *CreatefunctionstmtContext)
 
+	// ExitCreateprocedurestmt is called when exiting the createprocedurestmt production.
+	ExitCreateprocedurestmt(c *CreateprocedurestmtContext)
+
+	// ExitOpt_nonatomic is called when exiting the opt_nonatomic production.
+	ExitOpt_nonatomic(c *Opt_nonatomicContext)
+
 	// ExitOpt_or_replace is called when exiting the opt_or_replace production.
 	ExitOpt_or_replace(c *Opt_or_replaceContext)
+
+	// ExitFunc_py_args_or_sql_args is called when exiting the func_py_args_or_sql_args production.
+	ExitFunc_py_args_or_sql_args(c *Func_py_args_or_sql_argsContext)
+
+	// ExitFunc_py_args_or_sql_args_list is called when exiting the func_py_args_or_sql_args_list production.
+	ExitFunc_py_args_or_sql_args_list(c *Func_py_args_or_sql_args_listContext)
 
 	// ExitFunc_args is called when exiting the func_args production.
 	ExitFunc_args(c *Func_argsContext)

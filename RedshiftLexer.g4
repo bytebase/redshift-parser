@@ -1972,6 +1972,10 @@ DESCRIBE
    ;
 
 // Additional Redshift-specific tokens
+NONATOMIC
+    : 'NONATOMIC'
+    ;
+
 MANAGEDBY
    : 'MANAGEDBY'
    ;

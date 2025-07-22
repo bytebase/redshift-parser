@@ -946,8 +946,20 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#createfunctionstmt.
 	VisitCreatefunctionstmt(ctx *CreatefunctionstmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#createprocedurestmt.
+	VisitCreateprocedurestmt(ctx *CreateprocedurestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#opt_nonatomic.
+	VisitOpt_nonatomic(ctx *Opt_nonatomicContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#opt_or_replace.
 	VisitOpt_or_replace(ctx *Opt_or_replaceContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#func_py_args_or_sql_args.
+	VisitFunc_py_args_or_sql_args(ctx *Func_py_args_or_sql_argsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#func_py_args_or_sql_args_list.
+	VisitFunc_py_args_or_sql_args_list(ctx *Func_py_args_or_sql_args_listContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#func_args.
 	VisitFunc_args(ctx *Func_argsContext) interface{}

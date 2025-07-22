@@ -1259,7 +1259,23 @@ func (v *BaseRedshiftParserVisitor) VisitCreatefunctionstmt(ctx *Createfunctions
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitCreateprocedurestmt(ctx *CreateprocedurestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitOpt_nonatomic(ctx *Opt_nonatomicContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitOpt_or_replace(ctx *Opt_or_replaceContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFunc_py_args_or_sql_args(ctx *Func_py_args_or_sql_argsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFunc_py_args_or_sql_args_list(ctx *Func_py_args_or_sql_args_listContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

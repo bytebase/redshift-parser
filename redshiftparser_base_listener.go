@@ -1979,11 +1979,39 @@ func (s *BaseRedshiftParserListener) EnterCreatefunctionstmt(ctx *Createfunction
 // ExitCreatefunctionstmt is called when production createfunctionstmt is exited.
 func (s *BaseRedshiftParserListener) ExitCreatefunctionstmt(ctx *CreatefunctionstmtContext) {}
 
+// EnterCreateprocedurestmt is called when production createprocedurestmt is entered.
+func (s *BaseRedshiftParserListener) EnterCreateprocedurestmt(ctx *CreateprocedurestmtContext) {}
+
+// ExitCreateprocedurestmt is called when production createprocedurestmt is exited.
+func (s *BaseRedshiftParserListener) ExitCreateprocedurestmt(ctx *CreateprocedurestmtContext) {}
+
+// EnterOpt_nonatomic is called when production opt_nonatomic is entered.
+func (s *BaseRedshiftParserListener) EnterOpt_nonatomic(ctx *Opt_nonatomicContext) {}
+
+// ExitOpt_nonatomic is called when production opt_nonatomic is exited.
+func (s *BaseRedshiftParserListener) ExitOpt_nonatomic(ctx *Opt_nonatomicContext) {}
+
 // EnterOpt_or_replace is called when production opt_or_replace is entered.
 func (s *BaseRedshiftParserListener) EnterOpt_or_replace(ctx *Opt_or_replaceContext) {}
 
 // ExitOpt_or_replace is called when production opt_or_replace is exited.
 func (s *BaseRedshiftParserListener) ExitOpt_or_replace(ctx *Opt_or_replaceContext) {}
+
+// EnterFunc_py_args_or_sql_args is called when production func_py_args_or_sql_args is entered.
+func (s *BaseRedshiftParserListener) EnterFunc_py_args_or_sql_args(ctx *Func_py_args_or_sql_argsContext) {
+}
+
+// ExitFunc_py_args_or_sql_args is called when production func_py_args_or_sql_args is exited.
+func (s *BaseRedshiftParserListener) ExitFunc_py_args_or_sql_args(ctx *Func_py_args_or_sql_argsContext) {
+}
+
+// EnterFunc_py_args_or_sql_args_list is called when production func_py_args_or_sql_args_list is entered.
+func (s *BaseRedshiftParserListener) EnterFunc_py_args_or_sql_args_list(ctx *Func_py_args_or_sql_args_listContext) {
+}
+
+// ExitFunc_py_args_or_sql_args_list is called when production func_py_args_or_sql_args_list is exited.
+func (s *BaseRedshiftParserListener) ExitFunc_py_args_or_sql_args_list(ctx *Func_py_args_or_sql_args_listContext) {
+}
 
 // EnterFunc_args is called when production func_args is entered.
 func (s *BaseRedshiftParserListener) EnterFunc_args(ctx *Func_argsContext) {}

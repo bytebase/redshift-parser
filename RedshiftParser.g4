@@ -80,6 +80,7 @@ stmt
    | createforeignserverstmt
    | createforeigntablestmt
    | createfunctionstmt
+   | createprocedurestmt
    | creategroupstmt
    | creatematviewstmt
    | createopclassstmt
@@ -1885,15 +1886,37 @@ opt_nulls_order
    ;
 
 createfunctionstmt
-   : CREATE opt_or_replace? (FUNCTION | PROCEDURE) func_name func_args_with_defaults
+   : CREATE opt_or_replace? FUNCTION func_name func_py_args_or_sql_args
      (
         RETURNS (func_return | TABLE OPEN_PAREN table_func_column_list CLOSE_PAREN)
      )?
+     (VOLATILE | STABLE | IMMUTABLE)
      createfunc_opt_list
+   ;
+
+createprocedurestmt
+   : CREATE opt_or_replace? PROCEDURE func_name func_args
+    (
+            RETURNS (func_return | TABLE OPEN_PAREN table_func_column_list CLOSE_PAREN)
+    )?
+    opt_nonatomic?
+    createfunc_opt_list;
+
+opt_nonatomic
+   : NONATOMIC
    ;
 
 opt_or_replace
    : OR REPLACE
+   ;
+
+func_py_args_or_sql_args
+   : OPEN_PAREN func_py_args_or_sql_args_list CLOSE_PAREN
+   ;
+
+func_py_args_or_sql_args_list
+   : param_name func_type (COMMA param_name func_type)*
+   | func_type (COMMA func_type)*
    ;
 
 func_args
@@ -1932,7 +1955,6 @@ arg_class
    : IN_P OUT_P?
    | OUT_P
    | INOUT
-   | VARIADIC
    ;
 
 param_name
