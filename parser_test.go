@@ -48,7 +48,6 @@ func TestRedshiftParser(t *testing.T) {
 			continue
 		}
 		t.Run(filePath, func(t *testing.T) {
-			t.Parallel()
 			// read all the bytes from the file
 			data, err := os.ReadFile(filePath)
 			require.NoError(t, err)
@@ -116,7 +115,6 @@ func TestRedshiftSpecificParser(t *testing.T) {
 		}
 		filePath := path.Join(redshiftDir, file.Name())
 		t.Run(filePath, func(t *testing.T) {
-			t.Parallel()
 			// read all the bytes from the file
 			data, err := os.ReadFile(filePath)
 			require.NoError(t, err)

@@ -64,6 +64,12 @@ type RedshiftParserListener interface {
 	// EnterDroprolestmt is called when entering the droprolestmt production.
 	EnterDroprolestmt(c *DroprolestmtContext)
 
+	// EnterDropuserstmt is called when entering the dropuserstmt production.
+	EnterDropuserstmt(c *DropuserstmtContext)
+
+	// EnterDropgroupstmt is called when entering the dropgroupstmt production.
+	EnterDropgroupstmt(c *DropgroupstmtContext)
+
 	// EnterCreategroupstmt is called when entering the creategroupstmt production.
 	EnterCreategroupstmt(c *CreategroupstmtContext)
 
@@ -447,6 +453,12 @@ type RedshiftParserListener interface {
 
 	// EnterCreate_as_target is called when entering the create_as_target production.
 	EnterCreate_as_target(c *Create_as_targetContext)
+
+	// EnterTable_attributes is called when entering the table_attributes production.
+	EnterTable_attributes(c *Table_attributesContext)
+
+	// EnterOpt_backup_clase is called when entering the opt_backup_clase production.
+	EnterOpt_backup_clase(c *Opt_backup_claseContext)
 
 	// EnterOpt_with_data is called when entering the opt_with_data production.
 	EnterOpt_with_data(c *Opt_with_dataContext)
@@ -1072,6 +1084,9 @@ type RedshiftParserListener interface {
 	// EnterAlterfunctionstmt is called when entering the alterfunctionstmt production.
 	EnterAlterfunctionstmt(c *AlterfunctionstmtContext)
 
+	// EnterAlterprocedurestmt is called when entering the alterprocedurestmt production.
+	EnterAlterprocedurestmt(c *AlterprocedurestmtContext)
+
 	// EnterAlterfunc_opt_list is called when entering the alterfunc_opt_list production.
 	EnterAlterfunc_opt_list(c *Alterfunc_opt_listContext)
 
@@ -1333,9 +1348,6 @@ type RedshiftParserListener interface {
 	// EnterAlterexternalviewstmt is called when entering the alterexternalviewstmt production.
 	EnterAlterexternalviewstmt(c *AlterexternalviewstmtContext)
 
-	// EnterAltexternalviewopts is called when entering the altexternalviewopts production.
-	EnterAltexternalviewopts(c *AltexternalviewoptsContext)
-
 	// EnterCreateexternalschemastmt is called when entering the createexternalschemastmt production.
 	EnterCreateexternalschemastmt(c *CreateexternalschemastmtContext)
 
@@ -1467,6 +1479,9 @@ type RedshiftParserListener interface {
 
 	// EnterAttachrlspolicystmt is called when entering the attachrlspolicystmt production.
 	EnterAttachrlspolicystmt(c *AttachrlspolicystmtContext)
+
+	// EnterTable_name_list is called when entering the table_name_list production.
+	EnterTable_name_list(c *Table_name_listContext)
 
 	// EnterCreateidentityproviderstmt is called when entering the createidentityproviderstmt production.
 	EnterCreateidentityproviderstmt(c *CreateidentityproviderstmtContext)
@@ -2202,6 +2217,9 @@ type RedshiftParserListener interface {
 
 	// EnterSimpletypename is called when entering the simpletypename production.
 	EnterSimpletypename(c *SimpletypenameContext)
+
+	// EnterJson_type is called when entering the json_type production.
+	EnterJson_type(c *Json_typeContext)
 
 	// EnterConsttypename is called when entering the consttypename production.
 	EnterConsttypename(c *ConsttypenameContext)
@@ -3025,6 +3043,12 @@ type RedshiftParserListener interface {
 	// ExitDroprolestmt is called when exiting the droprolestmt production.
 	ExitDroprolestmt(c *DroprolestmtContext)
 
+	// ExitDropuserstmt is called when exiting the dropuserstmt production.
+	ExitDropuserstmt(c *DropuserstmtContext)
+
+	// ExitDropgroupstmt is called when exiting the dropgroupstmt production.
+	ExitDropgroupstmt(c *DropgroupstmtContext)
+
 	// ExitCreategroupstmt is called when exiting the creategroupstmt production.
 	ExitCreategroupstmt(c *CreategroupstmtContext)
 
@@ -3408,6 +3432,12 @@ type RedshiftParserListener interface {
 
 	// ExitCreate_as_target is called when exiting the create_as_target production.
 	ExitCreate_as_target(c *Create_as_targetContext)
+
+	// ExitTable_attributes is called when exiting the table_attributes production.
+	ExitTable_attributes(c *Table_attributesContext)
+
+	// ExitOpt_backup_clase is called when exiting the opt_backup_clase production.
+	ExitOpt_backup_clase(c *Opt_backup_claseContext)
 
 	// ExitOpt_with_data is called when exiting the opt_with_data production.
 	ExitOpt_with_data(c *Opt_with_dataContext)
@@ -4033,6 +4063,9 @@ type RedshiftParserListener interface {
 	// ExitAlterfunctionstmt is called when exiting the alterfunctionstmt production.
 	ExitAlterfunctionstmt(c *AlterfunctionstmtContext)
 
+	// ExitAlterprocedurestmt is called when exiting the alterprocedurestmt production.
+	ExitAlterprocedurestmt(c *AlterprocedurestmtContext)
+
 	// ExitAlterfunc_opt_list is called when exiting the alterfunc_opt_list production.
 	ExitAlterfunc_opt_list(c *Alterfunc_opt_listContext)
 
@@ -4294,9 +4327,6 @@ type RedshiftParserListener interface {
 	// ExitAlterexternalviewstmt is called when exiting the alterexternalviewstmt production.
 	ExitAlterexternalviewstmt(c *AlterexternalviewstmtContext)
 
-	// ExitAltexternalviewopts is called when exiting the altexternalviewopts production.
-	ExitAltexternalviewopts(c *AltexternalviewoptsContext)
-
 	// ExitCreateexternalschemastmt is called when exiting the createexternalschemastmt production.
 	ExitCreateexternalschemastmt(c *CreateexternalschemastmtContext)
 
@@ -4428,6 +4458,9 @@ type RedshiftParserListener interface {
 
 	// ExitAttachrlspolicystmt is called when exiting the attachrlspolicystmt production.
 	ExitAttachrlspolicystmt(c *AttachrlspolicystmtContext)
+
+	// ExitTable_name_list is called when exiting the table_name_list production.
+	ExitTable_name_list(c *Table_name_listContext)
 
 	// ExitCreateidentityproviderstmt is called when exiting the createidentityproviderstmt production.
 	ExitCreateidentityproviderstmt(c *CreateidentityproviderstmtContext)
@@ -5163,6 +5196,9 @@ type RedshiftParserListener interface {
 
 	// ExitSimpletypename is called when exiting the simpletypename production.
 	ExitSimpletypename(c *SimpletypenameContext)
+
+	// ExitJson_type is called when exiting the json_type production.
+	ExitJson_type(c *Json_typeContext)
 
 	// ExitConsttypename is called when exiting the consttypename production.
 	ExitConsttypename(c *ConsttypenameContext)

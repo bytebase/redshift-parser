@@ -83,6 +83,14 @@ func (v *BaseRedshiftParserVisitor) VisitDroprolestmt(ctx *DroprolestmtContext) 
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitDropuserstmt(ctx *DropuserstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDropgroupstmt(ctx *DropgroupstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitCreategroupstmt(ctx *CreategroupstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -592,6 +600,14 @@ func (v *BaseRedshiftParserVisitor) VisitCreateasstmt(ctx *CreateasstmtContext) 
 }
 
 func (v *BaseRedshiftParserVisitor) VisitCreate_as_target(ctx *Create_as_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitTable_attributes(ctx *Table_attributesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitOpt_backup_clase(ctx *Opt_backup_claseContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -1427,6 +1443,10 @@ func (v *BaseRedshiftParserVisitor) VisitAlterfunctionstmt(ctx *Alterfunctionstm
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitAlterprocedurestmt(ctx *AlterprocedurestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitAlterfunc_opt_list(ctx *Alterfunc_opt_listContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -1775,10 +1795,6 @@ func (v *BaseRedshiftParserVisitor) VisitAlterexternalviewstmt(ctx *Alterexterna
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseRedshiftParserVisitor) VisitAltexternalviewopts(ctx *AltexternalviewoptsContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
 func (v *BaseRedshiftParserVisitor) VisitCreateexternalschemastmt(ctx *CreateexternalschemastmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -1952,6 +1968,10 @@ func (v *BaseRedshiftParserVisitor) VisitAttachpolicytarget(ctx *Attachpolicytar
 }
 
 func (v *BaseRedshiftParserVisitor) VisitAttachrlspolicystmt(ctx *AttachrlspolicystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitTable_name_list(ctx *Table_name_listContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -2932,6 +2952,10 @@ func (v *BaseRedshiftParserVisitor) VisitOpt_array_bounds(ctx *Opt_array_boundsC
 }
 
 func (v *BaseRedshiftParserVisitor) VisitSimpletypename(ctx *SimpletypenameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitJson_type(ctx *Json_typeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

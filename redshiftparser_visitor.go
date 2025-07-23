@@ -64,6 +64,12 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#droprolestmt.
 	VisitDroprolestmt(ctx *DroprolestmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#dropuserstmt.
+	VisitDropuserstmt(ctx *DropuserstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#dropgroupstmt.
+	VisitDropgroupstmt(ctx *DropgroupstmtContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#creategroupstmt.
 	VisitCreategroupstmt(ctx *CreategroupstmtContext) interface{}
 
@@ -447,6 +453,12 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#create_as_target.
 	VisitCreate_as_target(ctx *Create_as_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#table_attributes.
+	VisitTable_attributes(ctx *Table_attributesContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#opt_backup_clase.
+	VisitOpt_backup_clase(ctx *Opt_backup_claseContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#opt_with_data.
 	VisitOpt_with_data(ctx *Opt_with_dataContext) interface{}
@@ -1072,6 +1084,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#alterfunctionstmt.
 	VisitAlterfunctionstmt(ctx *AlterfunctionstmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#alterprocedurestmt.
+	VisitAlterprocedurestmt(ctx *AlterprocedurestmtContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#alterfunc_opt_list.
 	VisitAlterfunc_opt_list(ctx *Alterfunc_opt_listContext) interface{}
 
@@ -1333,9 +1348,6 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#alterexternalviewstmt.
 	VisitAlterexternalviewstmt(ctx *AlterexternalviewstmtContext) interface{}
 
-	// Visit a parse tree produced by RedshiftParser#altexternalviewopts.
-	VisitAltexternalviewopts(ctx *AltexternalviewoptsContext) interface{}
-
 	// Visit a parse tree produced by RedshiftParser#createexternalschemastmt.
 	VisitCreateexternalschemastmt(ctx *CreateexternalschemastmtContext) interface{}
 
@@ -1467,6 +1479,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#attachrlspolicystmt.
 	VisitAttachrlspolicystmt(ctx *AttachrlspolicystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#table_name_list.
+	VisitTable_name_list(ctx *Table_name_listContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#createidentityproviderstmt.
 	VisitCreateidentityproviderstmt(ctx *CreateidentityproviderstmtContext) interface{}
@@ -2202,6 +2217,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#simpletypename.
 	VisitSimpletypename(ctx *SimpletypenameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#json_type.
+	VisitJson_type(ctx *Json_typeContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#consttypename.
 	VisitConsttypename(ctx *ConsttypenameContext) interface{}

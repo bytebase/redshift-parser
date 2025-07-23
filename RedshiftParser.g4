@@ -41,6 +41,7 @@ stmt
    | alterfdwstmt
    | alterforeignserverstmt
    | alterfunctionstmt
+   | alterprocedurestmt
    | altergroupstmt
    | alterobjectdependsstmt
    | alterobjectschemastmt
@@ -118,6 +119,8 @@ stmt
    | droptablespacestmt
    | droptransformstmt
    | droprolestmt
+   | dropuserstmt
+   | dropgroupstmt
    | dropusermappingstmt
    | dropdbstmt
    | executestmt
@@ -287,8 +290,17 @@ alterschemastmt
    ;
 
 droprolestmt
-   : DROP (ROLE | USER | GROUP_P) (IF_P EXISTS)? role_list
+   : DROP ROLE rolespec (FORCE | RESTRICT)?
    ;
+
+dropuserstmt
+   : DROP USER opt_if_exists? role_list
+   ;
+
+dropgroupstmt
+   : DROP GROUP rolespec
+   ;
+
 
 creategroupstmt
    : CREATE GROUP_P roleid opt_with? optrolelist
@@ -734,11 +746,7 @@ createstmt
    ;
 
 opttemp
-   : TEMPORARY
-   | TEMP
-   | LOCAL (TEMPORARY | TEMP)
-   | GLOBAL (TEMPORARY | TEMP)
-   | UNLOGGED
+   : LOCAL? (TEMPORARY | TEMP)
    ;
 
 opttableelementlist
@@ -995,11 +1003,21 @@ alterstatsstmt
    ;
 
 createasstmt
-   : CREATE opttemp? TABLE (IF_P NOT EXISTS)? create_as_target AS selectstmt opt_with_data?
+   : CREATE opttemp? TABLE create_as_target AS selectstmt
    ;
 
 create_as_target
-   : qualified_name opt_column_list? table_access_method_clause? optwith? oncommitoption? opttablespace?
+   : qualified_name opt_column_list? opt_backup_clase? table_attributes?
+   ;
+
+table_attributes
+   : DISTSTYLE (AUTO | EVEN | ALL | KEY)
+   | DISTKEY OPEN_PAREN distkey_identifier=colid CLOSE_PAREN
+   | (COMPOUND | INTERLEAVED)? SORTKEY OPEN_PAREN sortkey_columnlist=columnlist CLOSE_PAREN
+   ;
+
+opt_backup_clase
+   : BACKUP (YES_P | NO)
    ;
 
 opt_with_data
@@ -2010,7 +2028,7 @@ func_arg
    ;
 
 arg_class
-   : IN_P OUT_P?
+   : IN_P
    | OUT_P
    | INOUT
    ;
@@ -2123,7 +2141,11 @@ table_func_column_list
    ;
 
 alterfunctionstmt
-   : ALTER (FUNCTION | PROCEDURE | ROUTINE) function_with_argtypes alterfunc_opt_list opt_restrict?
+   : ALTER FUNCTION func_name func_py_args_or_sql_args ((RENAME TO func_name) | (OWNER TO rolespec))
+   ;
+
+alterprocedurestmt
+   : ALTER PROCEDURE func_name func_args ((RENAME TO func_name) | (OWNER TO rolespec))
    ;
 
 alterfunc_opt_list
@@ -2685,13 +2707,7 @@ altexternalschemaopts
     ;
 
 alterexternalviewstmt
-    : ALTER EXTERNAL VIEW qualified_name altexternalviewopts
-    ;
-
-altexternalviewopts
-    : RENAME TO qualified_name
-    | OWNER TO colid
-    | SET SCHEMA colid
+    : ALTER EXTERNAL VIEW qualified_name FORCE? ((AS selectstmt) | (REMOVE DEFINITION))?
     ;
 
 createexternalschemastmt
@@ -2916,16 +2932,15 @@ dropexternalviewstmt
 
 // SECURITY/POLICY statements
 alteridentityproviderstmt
-    : ALTER IDENTITY PROVIDER colid alteridprovideropts
+    : ALTER IDENTITY_P PROVIDER identity_provider_name=colid alteridprovideropts+
     ;
 
 alteridprovideropts
-    : TYPE_P sconst
-    | PROVIDER_URL sconst  
-    | PROVIDER_URL_PORT iconst
-    | ATTRIBUTE_MAP sconst
-    | PROVIDER_ARN sconst
-    | ASSUME_ROLE_ARN sconst
+    : PARAMETERS parameter_string=sconst
+    | NAMESPACE namespace=sconst
+    | IAM_ROLE iam_role=sconst
+    | AUTO_CREATE_ROLES ((TRUE_P ((INCLUDE | EXCLUDE) GROUPS LIKE filter_pattern=sconst)?) | FALSE_P)?
+    | DISABLE_P | ENABLE_P
     ;
 
 altermaskingpolicystmt
@@ -2978,7 +2993,11 @@ attachpolicytarget
     ;
 
 attachrlspolicystmt
-    : ATTACH RLS POLICY colid ON qualified_name TO attachpolicytargets
+    : ATTACH RLS POLICY policy_name=colid ON TABLE? table_name_list TO attachpolicytargets
+    ;
+
+table_name_list
+    : qualified_name (COMMA qualified_name)*
     ;
 
 createidentityproviderstmt
@@ -4199,12 +4218,12 @@ xml_namespace_el
    ;
 
 typename
-   : SETOF? simpletypename (opt_array_bounds | ARRAY (OPEN_BRACKET iconst CLOSE_BRACKET)?)
+   : SETOF? simpletypename (opt_array_bounds? | ARRAY (OPEN_BRACKET iconst CLOSE_BRACKET)?)
    | qualified_name PERCENT (ROWTYPE | TYPE_P)
    ;
 
 opt_array_bounds
-   : (OPEN_BRACKET iconst? CLOSE_BRACKET)*
+   : (OPEN_BRACKET iconst? CLOSE_BRACKET)+
    ;
 
 simpletypename
@@ -4214,6 +4233,11 @@ simpletypename
    | character
    | constdatetime
    | constinterval (opt_interval? | OPEN_PAREN iconst CLOSE_PAREN)
+   | json_type
+   ;
+
+json_type
+   : JSON
    ;
 
 consttypename
@@ -5259,6 +5283,7 @@ unreserved_keyword
    | PREPARED
    | PRESERVE
    | PRIOR
+   | PRIORITY
    | PRIVILEGES
    | PROCEDURAL
    | PROCEDURE
@@ -5370,6 +5395,37 @@ unreserved_keyword
    | YEAR_P
    | YES_P
    | ZONE
+   // REDSHIFT-SPECIFIC KEYWORDS (added to support their use as column names/identifiers)
+   | DEFINITION | DATASHARE | PUBLICACCESSIBLE | INCLUDENEW
+   | IAM_ROLE | CATALOG_ROLE | CATALOG_ID | HIVE | METASTORE | URI
+   | POSTGRES | MYSQL | SECRET_ARN | KINESIS | KAFKA | MSK
+   | AUTHENTICATION | AUTHENTICATION_ARN | SESSION_TOKEN | MTLS
+   | MASKING | RLS | IDENTITY | PROVIDER | PROTECTED
+   | MODEL | TARGET | SAGEMAKER | AUTO | MODEL_TYPE | PROBLEM_TYPE
+   | OBJECTIVE | PREPROCESSORS | HYPERPARAMETERS | XGBOOST | MLP
+   | LINEAR_LEARNER | KMEANS | FORECAST | REGRESSION | BINARY_CLASSIFICATION
+   | MULTICLASS_CLASSIFICATION | S3_BUCKET | TAGS | KMS_KEY_ID | S3_GARBAGE_COLLECT
+   | MAX_CELLS | MAX_RUNTIME | HORIZON | FREQUENCY | PERCENTILES | MAX_BATCH_ROWS
+   | UNLOAD | MANIFEST | ADDQUOTES | ALLOWOVERWRITE | CLEANPATH
+   | MAXFILESIZE | ROWGROUPSIZE | BZIP2 | GZIP | ZSTD
+   | DATABASES | DATASHARES | GRANTS | USE | CANCEL
+   | SESSION_AUTHORIZATION | SESSION_CHARACTERISTICS | COMPRESSION | LIBRARY | APPEND
+   | MB | GB | ACCOUNT | NAMESPACE | DESCRIBE
+   | NONATOMIC | MANAGEDBY | ADX | REMOVE | DUPLICATES
+   | BEDROCK | MODEL_ID | PROMPT | SUFFIX | REQUEST_TYPE | RESPONSE_TYPE
+   | RAW | UNIFIED | SUPER | CI | CS | PLPYTHONU
+   | FILLTARGET | IGNOREEXTRA | CREATEUSER | NOCREATEUSER | REGION | PORT
+   | REDSHIFT | IAM | CREATEDB | NOCREATEDB | RESTRICTED | UNLIMITED
+   | EXTERNALID | TIMEOUT | SYSLOG | CREDENTIALS | UNRESTRICTED | PARAMETERS
+   | APPLICATION_ARN | AUTO_CREATE_ROLES | COMPROWS | PROVIDER_URL | PROVIDER_URL_PORT
+   | ATTRIBUTE_MAP | PROVIDER_ARN | ASSUME_ROLE_ARN | PROPERTIES
+   | AVRO | RCFILE | SEQUENCEFILE | TEXTFILE | ORC | ION | LAMBDA | FIXEDWIDTH
+   | PARQUET | LZOP | REMOVEQUOTES | TRUNCATECOLUMNS | FILLRECORD
+   | BLANKSASNULL | EMPTYASNULL | MAXERROR | DATEFORMAT | TIMEFORMAT
+   | ACCEPTINVCHARS | ACCEPTANYDATE | IGNOREHEADER | IGNOREBLANKLINES
+   | COMPUPDATE | STATUPDATE | EXPLICIT_IDS | READRATIO | ROUNDEC
+   | TRIMBLANKS | PRESET | ACCESS_KEY_ID | SECRET_ACCESS_KEY
+   | SESSION_TOKEN_KW | HEADER | SETTINGS | FUNCTION_NAME
    ;
 
 col_name_keyword
