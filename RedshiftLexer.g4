@@ -2478,6 +2478,24 @@ DELIMITED
    : 'DELIMITED'
    ;
 
+// External function tokens
+RETRY_TIMEOUT
+   : 'RETRY_TIMEOUT'
+   ;
+
+MAX_BATCH_SIZE
+   : 'MAX_BATCH_SIZE'
+   ;
+
+MAX_PAYLOAD_IN_MB
+   : 'MAX_PAYLOAD_IN_MB'
+   ;
+
+KB
+   : 'KB'
+   ;
+
+
 INCLUDE
    : 'INCLUDE'
    ;

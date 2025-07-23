@@ -1787,6 +1787,10 @@ func (v *BaseRedshiftParserVisitor) VisitCreateexternalfunctionstmt(ctx *Createe
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitExternal_func_params(ctx *External_func_paramsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitParamlist(ctx *ParamlistContext) interface{} {
 	return v.VisitChildren(ctx)
 }

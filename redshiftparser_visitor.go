@@ -1342,6 +1342,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#createexternalfunctionstmt.
 	VisitCreateexternalfunctionstmt(ctx *CreateexternalfunctionstmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#external_func_params.
+	VisitExternal_func_params(ctx *External_func_paramsContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#paramlist.
 	VisitParamlist(ctx *ParamlistContext) interface{}
 

@@ -1342,6 +1342,9 @@ type RedshiftParserListener interface {
 	// EnterCreateexternalfunctionstmt is called when entering the createexternalfunctionstmt production.
 	EnterCreateexternalfunctionstmt(c *CreateexternalfunctionstmtContext)
 
+	// EnterExternal_func_params is called when entering the external_func_params production.
+	EnterExternal_func_params(c *External_func_paramsContext)
+
 	// EnterParamlist is called when entering the paramlist production.
 	EnterParamlist(c *ParamlistContext)
 
@@ -4260,6 +4263,9 @@ type RedshiftParserListener interface {
 
 	// ExitCreateexternalfunctionstmt is called when exiting the createexternalfunctionstmt production.
 	ExitCreateexternalfunctionstmt(c *CreateexternalfunctionstmtContext)
+
+	// ExitExternal_func_params is called when exiting the external_func_params production.
+	ExitExternal_func_params(c *External_func_paramsContext)
 
 	// ExitParamlist is called when exiting the paramlist production.
 	ExitParamlist(c *ParamlistContext)

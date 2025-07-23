@@ -2736,11 +2736,18 @@ authenticationvalue
     ;
 
 createexternalfunctionstmt
-    : CREATE (OR REPLACE)? EXTERNAL FUNCTION function_name=qualified_name '(' paramlist ')' 
+    : CREATE (OR REPLACE)? EXTERNAL FUNCTION function_name=qualified_name '(' external_func_params? ')' 
       RETURNS typename
-      (STABLE | IMMUTABLE | VOLATILE)?
+      (STABLE | IMMUTABLE | VOLATILE)
       LAMBDA sconst
       IAM_ROLE iamrolevalue
+      (RETRY_TIMEOUT iconst)?
+      (MAX_BATCH_ROWS iconst)?
+      (MAX_BATCH_SIZE iconst (KB | MB)?)?
+    ;
+
+external_func_params
+    : typename (',' typename)*
     ;
 
 paramlist
@@ -2825,8 +2832,9 @@ table_property
     ;
 
 createexternalviewstmt
-    : CREATE (OR REPLACE)? EXTERNAL VIEW qualified_name
-      AS sconst
+    : CREATE (OR REPLACE)? EXTERNAL VIEW qualified_name 
+      ('(' name_list ')')?
+      AS selectstmt
     ;
 
 dropexternalviewstmt
@@ -3036,6 +3044,8 @@ settingsitem
     | S3_GARBAGE_COLLECT (ON | OFF)
     | MAX_CELLS iconst
     | MAX_RUNTIME iconst
+    | MAX_BATCH_SIZE sconst
+    | MAX_PAYLOAD_IN_MB sconst
     | HORIZON iconst
     | FREQUENCY iconst
     | PERCENTILES sconst
@@ -4169,11 +4179,11 @@ bitwithoutlength
    ;
 
 character
-   : character_c (OPEN_PAREN iconst CLOSE_PAREN)?
+   : character_c (OPEN_PAREN (iconst | colid) CLOSE_PAREN)?
    ;
 
 constcharacter
-   : character_c (OPEN_PAREN iconst CLOSE_PAREN)?
+   : character_c (OPEN_PAREN (iconst | colid) CLOSE_PAREN)?
    ;
 
 character_c

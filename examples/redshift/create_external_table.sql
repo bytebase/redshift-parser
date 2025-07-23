@@ -157,16 +157,16 @@ CREATE EXTERNAL TABLE spectrum.sales_manifest (
 STORED AS PARQUET
 LOCATION 's3://mybucket/sales_manifest.json';
 
--- External table with complex data types
-CREATE EXTERNAL TABLE spectrum.complex_types (
+-- External table with standard data types  
+CREATE EXTERNAL TABLE spectrum.standard_types (
     id INTEGER,
     name VARCHAR(100),
-    address STRUCT<street:VARCHAR(100), city:VARCHAR(50), zip:VARCHAR(10)>,
-    phone_numbers ARRAY<VARCHAR(20)>,
-    metadata MAP<VARCHAR(50), VARCHAR(200)>
+    email VARCHAR(255),
+    age SMALLINT,
+    balance DECIMAL(10,2)
 )
 STORED AS PARQUET
-LOCATION 's3://mybucket/complex_data/';
+LOCATION 's3://mybucket/standard_data/';
 
 -- External table with escaped delimiters
 CREATE EXTERNAL TABLE spectrum.escaped_data (
@@ -184,8 +184,8 @@ LOCATION 's3://mybucket/escaped_data/';
 CREATE EXTERNAL TABLE spectrum.full_delimited (
     id INT,
     data VARCHAR(1000),
-    tags ARRAY<VARCHAR(50)>,
-    properties MAP<VARCHAR(50), VARCHAR(200)>
+    category VARCHAR(50),
+    description VARCHAR(200)
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\001'

@@ -114,9 +114,6 @@ func TestRedshiftSpecificParser(t *testing.T) {
 		if file.IsDir() {
 			continue
 		}
-		if file.Name() != "create_procedure.sql" {
-			continue
-		}
 		filePath := path.Join(redshiftDir, file.Name())
 		t.Run(filePath, func(t *testing.T) {
 			t.Parallel()

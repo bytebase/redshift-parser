@@ -2817,6 +2817,12 @@ func (s *BaseRedshiftParserListener) EnterCreateexternalfunctionstmt(ctx *Create
 func (s *BaseRedshiftParserListener) ExitCreateexternalfunctionstmt(ctx *CreateexternalfunctionstmtContext) {
 }
 
+// EnterExternal_func_params is called when production external_func_params is entered.
+func (s *BaseRedshiftParserListener) EnterExternal_func_params(ctx *External_func_paramsContext) {}
+
+// ExitExternal_func_params is called when production external_func_params is exited.
+func (s *BaseRedshiftParserListener) ExitExternal_func_params(ctx *External_func_paramsContext) {}
+
 // EnterParamlist is called when production paramlist is entered.
 func (s *BaseRedshiftParserListener) EnterParamlist(ctx *ParamlistContext) {}
 

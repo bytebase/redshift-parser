@@ -5,7 +5,7 @@
 -- ====================================
 
 -- Basic external function
-CREATE EXTERNAL FUNCTION public.f_distance (x1 float, y1 float, x2 float, y2 float)
+CREATE EXTERNAL FUNCTION public.f_distance (float, float, float, float)
 RETURNS float
 STABLE
 LAMBDA 'lambda_distance'
@@ -18,15 +18,15 @@ IMMUTABLE
 LAMBDA 'lambda_get_time'
 IAM_ROLE 'arn:aws:iam::123456789012:role/RedshiftLambdaRole';
 
--- External function with multiple data types
-CREATE EXTERNAL FUNCTION process_json(input_json varchar(max), key_name varchar(256))
-RETURNS varchar(max)
+-- External function with multiple data types  
+CREATE EXTERNAL FUNCTION process_json(varchar(65535), varchar(256))
+RETURNS varchar(65535)
 STABLE
 LAMBDA 'lambda_json_processor'
 IAM_ROLE 'arn:aws:iam::123456789012:role/RedshiftLambdaRole';
 
 -- External function with OR REPLACE
-CREATE OR REPLACE EXTERNAL FUNCTION calculate_score(a integer, b integer, c integer)
+CREATE OR REPLACE EXTERNAL FUNCTION calculate_score(integer, integer, integer)
 RETURNS decimal(10,2)
 STABLE
 LAMBDA 'lambda_score_calculator'
@@ -65,6 +65,7 @@ SETTINGS (
 CREATE EXTERNAL SCHEMA spectrum_schema
 FROM DATA_CATALOG
 DATABASE 'spectrum_db'
+REGION 'us-east-1'
 IAM_ROLE 'arn:aws:iam::123456789012:role/RedshiftSpectrumRole'
 CREATE EXTERNAL DATABASE IF NOT EXISTS;
 
@@ -145,25 +146,15 @@ CREATE IDENTITY PROVIDER azure_idp
 TYPE 'Azure'
 NAMESPACE 'aad:myazuretenant.onmicrosoft.com';
 
--- Azure identity provider with parameters
+-- Azure identity provider with provider URL
 CREATE IDENTITY PROVIDER azure_idp_with_params
 TYPE 'Azure'
-NAMESPACE 'aad:mycompany.onmicrosoft.com'
-PARAMETERS (
-    application_id 'app123456-7890-1234-5678-901234567890',
-    client_secret 'my_client_secret',
-    issuer 'https://login.microsoftonline.com/tenant-id/v2.0'
-);
+PROVIDER_URL 'https://login.microsoftonline.com/tenant-id/v2.0';
 
--- Custom identity provider
+-- Custom identity provider  
 CREATE IDENTITY PROVIDER custom_saml_idp
 TYPE 'Custom'
-NAMESPACE 'https://idp.mycompany.com'
-PARAMETERS (
-    login_url 'https://idp.mycompany.com/sso/saml',
-    logout_url 'https://idp.mycompany.com/sso/logout',
-    certificate 'MIIDdzCCAl+gAwIBAgIE...'
-);
+PROVIDER_URL 'https://idp.mycompany.com';
 
 -- ====================================
 -- CREATE LIBRARY
@@ -171,27 +162,27 @@ PARAMETERS (
 
 -- Basic Python library
 CREATE LIBRARY pandas_lib
-LANGUAGE plpython3u
+LANGUAGE PLPYTHONU
 FROM 's3://mybucket/python-libs/pandas-layer.zip';
 
 -- Library with credentials
 CREATE LIBRARY numpy_lib
-LANGUAGE plpython3u
+LANGUAGE PLPYTHONU
 FROM 's3://mybucket/python-libs/numpy-layer.zip'
-WITH CREDENTIALS AS 'aws_access_key_id=AKIAIOSFODNN7EXAMPLE;aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY';
+CREDENTIALS 'aws_access_key_id=AKIAIOSFODNN7EXAMPLE;aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY';
 
 -- Library with region
 CREATE LIBRARY scipy_lib
-LANGUAGE plpython3u
+LANGUAGE PLPYTHONU
 FROM 's3://mybucket/python-libs/scipy-layer.zip'
 REGION AS 'us-west-2';
 
 -- Library with OR REPLACE
 CREATE OR REPLACE LIBRARY ml_utils_lib
-LANGUAGE plpython3u
+LANGUAGE PLPYTHONU
 FROM 's3://mybucket/python-libs/ml-utils.zip'
-CREDENTIALS AS 'aws_access_key_id=AKIAIOSFODNN7EXAMPLE;aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
-REGION 'us-east-1';
+CREDENTIALS 'aws_access_key_id=AKIAIOSFODNN7EXAMPLE;aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
+REGION AS 'us-east-1';
 
 -- ====================================
 -- CREATE MASKING POLICY
@@ -200,7 +191,7 @@ REGION 'us-east-1';
 -- Basic masking policy for SSN
 CREATE MASKING POLICY mask_ssn
 WITH (ssn varchar(11))
-AS (
+USING (
     CASE
         WHEN current_user = 'admin' THEN ssn
         ELSE 'XXX-XX-' || SUBSTRING(ssn, 8, 4)
@@ -210,7 +201,7 @@ AS (
 -- Masking policy for credit card with role-based access
 CREATE MASKING POLICY mask_credit_card
 WITH (cc_number varchar(19))
-AS (
+USING (
     CASE
         WHEN current_user IN ('finance_admin', 'compliance_officer') THEN cc_number
         WHEN current_user_has_role('finance_read') THEN 'XXXX-XXXX-XXXX-' || SUBSTRING(cc_number, 16, 4)
@@ -221,19 +212,18 @@ AS (
 -- Masking policy with USING clause
 CREATE MASKING POLICY mask_salary
 WITH (salary decimal(10,2))
-AS (
+USING (
     CASE
         WHEN is_manager = true AND department = user_department THEN salary
         WHEN is_hr = true THEN salary
         ELSE 0
     END
-)
-USING (is_manager boolean, department varchar(50), user_department varchar(50), is_hr boolean);
+);
 
 -- Complex masking policy for email
 CREATE MASKING POLICY mask_email
 WITH (email varchar(255))
-AS (
+USING (
     CASE
         WHEN current_user = 'data_analyst' THEN 
             SUBSTRING(email, 1, 3) || '***@' || SPLIT_PART(email, '@', 2)
@@ -243,134 +233,3 @@ AS (
             'hidden@example.com'
     END
 );
-
--- ====================================
--- CREATE MODEL
--- ====================================
-
--- Basic AUTO model
-CREATE MODEL customer_churn_model
-FROM (
-    SELECT age, gender, tenure, monthly_charges, total_charges, churn
-    FROM customer_data
-    WHERE record_date >= '2023-01-01'
-)
-TARGET churn
-IAM_ROLE DEFAULT
-AUTO ON;
-
--- Model with specific algorithm
-CREATE MODEL sales_forecast_model
-FROM training_data.sales_history
-TARGET sales_amount
-MODEL_TYPE XGBoost
-IAM_ROLE 'arn:aws:iam::123456789012:role/RedshiftMLRole';
-
--- Model with problem type
-CREATE MODEL customer_segmentation
-FROM (
-    SELECT customer_id, age, income, purchase_frequency, avg_order_value, segment
-    FROM customer_features
-)
-TARGET segment
-PROBLEM_TYPE MULTICLASS_CLASSIFICATION
-IAM_ROLE DEFAULT;
-
--- Model with hyperparameters
-CREATE MODEL fraud_detection
-FROM transactions_table
-TARGET is_fraud
-MODEL_TYPE XGBoost
-IAM_ROLE 'arn:aws:iam::123456789012:role/RedshiftMLRole'
-HYPERPARAMETERS AUTO PRESET STANDARD;
-
--- Model with options
-CREATE MODEL product_recommendation
-FROM user_interactions
-TARGET will_purchase
-MODEL_TYPE MLP
-IAM_ROLE DEFAULT
-OPTIONS (
-    S3_BUCKET 'my-ml-bucket',
-    S3_GARBAGE_COLLECT OFF,
-    MAX_RUNTIME 3600
-);
-
--- Model with preprocessors
-CREATE MODEL price_prediction
-FROM products_data
-TARGET price
-MODEL_TYPE LINEAR_LEARNER
-IAM_ROLE DEFAULT
-PREPROCESSORS 'onehotencoding_top_10';
-
--- Bring your own model (BYOM)
-CREATE MODEL pretrained_sentiment_model
-FUNCTION predict_sentiment(review_text varchar(max))
-IAM_ROLE 'arn:aws:iam::123456789012:role/RedshiftMLRole'
-FROM 's3://mybucket/models/sentiment-analysis-model.tar.gz';
-
--- Model from another model (model chaining)
-CREATE MODEL enhanced_churn_model
-FROM base_churn_model
-IAM_ROLE DEFAULT
-AUTO OFF;
-
--- ====================================
--- CREATE RLS POLICY
--- ====================================
-
--- Basic RLS policy
-CREATE RLS POLICY sales_region_policy
-AS (region = current_user_region());
-
--- RLS policy with grantors
-CREATE RLS POLICY department_access_policy
-WITH (hr_admin, finance_admin)
-AS (department_id IN (
-    SELECT department_id 
-    FROM user_departments 
-    WHERE user_name = current_user
-));
-
--- RLS policy for specific operation
-CREATE RLS POLICY customer_data_policy
-AS (customer_id = current_user_customer_id())
-FOR SELECT
-TO data_analysts;
-
--- RLS policy for multiple operations
-CREATE RLS POLICY employee_data_policy
-WITH (hr_manager)
-AS (
-    employee_id = current_user_employee_id()
-    OR 
-    manager_id = current_user_employee_id()
-)
-FOR ALL
-TO PUBLIC;
-
--- Complex RLS policy with role list
-CREATE RLS POLICY financial_data_policy
-WITH (cfo, finance_director)
-AS (
-    CASE
-        WHEN current_user_has_role('executive') THEN true
-        WHEN current_user_has_role('finance_team') AND fiscal_year >= EXTRACT(YEAR FROM CURRENT_DATE) - 2 THEN true
-        ELSE false
-    END
-)
-FOR SELECT
-TO finance_analysts, finance_managers, auditors;
-
--- RLS policy for DELETE operation
-CREATE RLS POLICY delete_own_records_policy
-AS (created_by = current_user)
-FOR DELETE
-TO registered_users;
-
--- RLS policy for UPDATE operation
-CREATE RLS POLICY update_own_profile_policy
-AS (user_id = current_user_id() AND is_active = true)
-FOR UPDATE
-TO all_users;
