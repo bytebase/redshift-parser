@@ -122,6 +122,12 @@ func (s *BaseRedshiftParserListener) EnterAlterrolesetstmt(ctx *Alterrolesetstmt
 // ExitAlterrolesetstmt is called when production alterrolesetstmt is exited.
 func (s *BaseRedshiftParserListener) ExitAlterrolesetstmt(ctx *AlterrolesetstmtContext) {}
 
+// EnterAlterschemastmt is called when production alterschemastmt is entered.
+func (s *BaseRedshiftParserListener) EnterAlterschemastmt(ctx *AlterschemastmtContext) {}
+
+// ExitAlterschemastmt is called when production alterschemastmt is exited.
+func (s *BaseRedshiftParserListener) ExitAlterschemastmt(ctx *AlterschemastmtContext) {}
+
 // EnterDroprolestmt is called when production droprolestmt is entered.
 func (s *BaseRedshiftParserListener) EnterDroprolestmt(ctx *DroprolestmtContext) {}
 
@@ -460,6 +466,40 @@ func (s *BaseRedshiftParserListener) EnterCopystmt(ctx *CopystmtContext) {}
 // ExitCopystmt is called when production copystmt is exited.
 func (s *BaseRedshiftParserListener) ExitCopystmt(ctx *CopystmtContext) {}
 
+// EnterRedshift_copy_authorization is called when production redshift_copy_authorization is entered.
+func (s *BaseRedshiftParserListener) EnterRedshift_copy_authorization(ctx *Redshift_copy_authorizationContext) {
+}
+
+// ExitRedshift_copy_authorization is called when production redshift_copy_authorization is exited.
+func (s *BaseRedshiftParserListener) ExitRedshift_copy_authorization(ctx *Redshift_copy_authorizationContext) {
+}
+
+// EnterRedshift_copy_format is called when production redshift_copy_format is entered.
+func (s *BaseRedshiftParserListener) EnterRedshift_copy_format(ctx *Redshift_copy_formatContext) {}
+
+// ExitRedshift_copy_format is called when production redshift_copy_format is exited.
+func (s *BaseRedshiftParserListener) ExitRedshift_copy_format(ctx *Redshift_copy_formatContext) {}
+
+// EnterRedshift_copy_parameter is called when production redshift_copy_parameter is entered.
+func (s *BaseRedshiftParserListener) EnterRedshift_copy_parameter(ctx *Redshift_copy_parameterContext) {
+}
+
+// ExitRedshift_copy_parameter is called when production redshift_copy_parameter is exited.
+func (s *BaseRedshiftParserListener) ExitRedshift_copy_parameter(ctx *Redshift_copy_parameterContext) {
+}
+
+// EnterCopy_param_name is called when production copy_param_name is entered.
+func (s *BaseRedshiftParserListener) EnterCopy_param_name(ctx *Copy_param_nameContext) {}
+
+// ExitCopy_param_name is called when production copy_param_name is exited.
+func (s *BaseRedshiftParserListener) ExitCopy_param_name(ctx *Copy_param_nameContext) {}
+
+// EnterCopy_param_value is called when production copy_param_value is entered.
+func (s *BaseRedshiftParserListener) EnterCopy_param_value(ctx *Copy_param_valueContext) {}
+
+// ExitCopy_param_value is called when production copy_param_value is exited.
+func (s *BaseRedshiftParserListener) ExitCopy_param_value(ctx *Copy_param_valueContext) {}
+
 // EnterCopy_from is called when production copy_from is entered.
 func (s *BaseRedshiftParserListener) EnterCopy_from(ctx *Copy_fromContext) {}
 
@@ -609,6 +649,12 @@ func (s *BaseRedshiftParserListener) EnterRs_colattributes(ctx *Rs_colattributes
 
 // ExitRs_colattributes is called when production rs_colattributes is exited.
 func (s *BaseRedshiftParserListener) ExitRs_colattributes(ctx *Rs_colattributesContext) {}
+
+// EnterRs_colattribute is called when production rs_colattribute is entered.
+func (s *BaseRedshiftParserListener) EnterRs_colattribute(ctx *Rs_colattributeContext) {}
+
+// ExitRs_colattribute is called when production rs_colattribute is exited.
+func (s *BaseRedshiftParserListener) ExitRs_colattribute(ctx *Rs_colattributeContext) {}
 
 // EnterColumnOptions is called when production columnOptions is entered.
 func (s *BaseRedshiftParserListener) EnterColumnOptions(ctx *ColumnOptionsContext) {}
@@ -821,6 +867,32 @@ func (s *BaseRedshiftParserListener) EnterOpttablespace(ctx *OpttablespaceContex
 
 // ExitOpttablespace is called when production opttablespace is exited.
 func (s *BaseRedshiftParserListener) ExitOpttablespace(ctx *OpttablespaceContext) {}
+
+// EnterOptredshifttableoptions is called when production optredshifttableoptions is entered.
+func (s *BaseRedshiftParserListener) EnterOptredshifttableoptions(ctx *OptredshifttableoptionsContext) {
+}
+
+// ExitOptredshifttableoptions is called when production optredshifttableoptions is exited.
+func (s *BaseRedshiftParserListener) ExitOptredshifttableoptions(ctx *OptredshifttableoptionsContext) {
+}
+
+// EnterRedshifttableoption is called when production redshifttableoption is entered.
+func (s *BaseRedshiftParserListener) EnterRedshifttableoption(ctx *RedshifttableoptionContext) {}
+
+// ExitRedshifttableoption is called when production redshifttableoption is exited.
+func (s *BaseRedshiftParserListener) ExitRedshifttableoption(ctx *RedshifttableoptionContext) {}
+
+// EnterSortkeyclause is called when production sortkeyclause is entered.
+func (s *BaseRedshiftParserListener) EnterSortkeyclause(ctx *SortkeyclauseContext) {}
+
+// ExitSortkeyclause is called when production sortkeyclause is exited.
+func (s *BaseRedshiftParserListener) ExitSortkeyclause(ctx *SortkeyclauseContext) {}
+
+// EnterSortkeyclausetype is called when production sortkeyclausetype is entered.
+func (s *BaseRedshiftParserListener) EnterSortkeyclausetype(ctx *SortkeyclausetypeContext) {}
+
+// ExitSortkeyclausetype is called when production sortkeyclausetype is exited.
+func (s *BaseRedshiftParserListener) ExitSortkeyclausetype(ctx *SortkeyclausetypeContext) {}
 
 // EnterOptconstablespace is called when production optconstablespace is entered.
 func (s *BaseRedshiftParserListener) EnterOptconstablespace(ctx *OptconstablespaceContext) {}
@@ -2581,6 +2653,13 @@ func (s *BaseRedshiftParserListener) EnterViewstmt(ctx *ViewstmtContext) {}
 // ExitViewstmt is called when production viewstmt is exited.
 func (s *BaseRedshiftParserListener) ExitViewstmt(ctx *ViewstmtContext) {}
 
+// EnterWith_no_schema_binding is called when production with_no_schema_binding is entered.
+func (s *BaseRedshiftParserListener) EnterWith_no_schema_binding(ctx *With_no_schema_bindingContext) {
+}
+
+// ExitWith_no_schema_binding is called when production with_no_schema_binding is exited.
+func (s *BaseRedshiftParserListener) ExitWith_no_schema_binding(ctx *With_no_schema_bindingContext) {}
+
 // EnterOpt_check_option is called when production opt_check_option is entered.
 func (s *BaseRedshiftParserListener) EnterOpt_check_option(ctx *Opt_check_optionContext) {}
 
@@ -3669,6 +3748,12 @@ func (s *BaseRedshiftParserListener) EnterVacuumstmt(ctx *VacuumstmtContext) {}
 
 // ExitVacuumstmt is called when production vacuumstmt is exited.
 func (s *BaseRedshiftParserListener) ExitVacuumstmt(ctx *VacuumstmtContext) {}
+
+// EnterVacuum_option is called when production vacuum_option is entered.
+func (s *BaseRedshiftParserListener) EnterVacuum_option(ctx *Vacuum_optionContext) {}
+
+// ExitVacuum_option is called when production vacuum_option is exited.
+func (s *BaseRedshiftParserListener) ExitVacuum_option(ctx *Vacuum_optionContext) {}
 
 // EnterAnalyzestmt is called when production analyzestmt is entered.
 func (s *BaseRedshiftParserListener) EnterAnalyzestmt(ctx *AnalyzestmtContext) {}

@@ -1,0 +1,3 @@
+-- Test VACUUM TO PERCENT syntax
+VACUUM FULL sales TO 75 PERCENT;
+VACUUM FULL sales TO 75%;

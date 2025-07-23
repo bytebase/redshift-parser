@@ -553,6 +553,10 @@ BINARY
    : 'BINARY'
    ;
 
+BINDING
+   : 'BINDING'
+   ;
+
 COLLATION
    : 'COLLATION'
    ;
@@ -1756,6 +1760,10 @@ PROVIDER
    : 'PROVIDER'
    ;
 
+PROTECTED
+   : 'PROTECTED'
+   ;
+
 // ML/Model Commands
 MODEL
    : 'MODEL'
@@ -1988,6 +1996,54 @@ REMOVE
    : 'REMOVE'
    ;
 
+DUPLICATES
+   : 'DUPLICATES'
+   ;
+
+BEDROCK
+   : 'BEDROCK'
+   ;
+
+MODEL_ID
+   : 'MODEL_ID'
+   ;
+
+PROMPT
+   : 'PROMPT'
+   ;
+
+SUFFIX
+   : 'SUFFIX'
+   ;
+
+REQUEST_TYPE
+   : 'REQUEST_TYPE'
+   ;
+
+RESPONSE_TYPE
+   : 'RESPONSE_TYPE'
+   ;
+
+RAW
+   : 'RAW'
+   ;
+
+UNIFIED
+   : 'UNIFIED'
+   ;
+
+SUPER
+   : 'SUPER'
+   ;
+
+CI
+   : 'CI'
+   ;
+
+CS
+   : 'CS'
+   ;
+
 PLPYTHONU
    : 'PLPYTHONU'
    ;
@@ -2135,6 +2191,98 @@ FIXEDWIDTH
 // Missing tokens causing implicit definition warnings (avoiding conflicts with _P versions)
 PARQUET
    : 'PARQUET'
+   ;
+
+LZOP
+   : 'LZOP'
+   ;
+
+REMOVEQUOTES
+   : 'REMOVEQUOTES'
+   ;
+
+TRUNCATECOLUMNS
+   : 'TRUNCATECOLUMNS'
+   ;
+
+FILLRECORD
+   : 'FILLRECORD'
+   ;
+
+BLANKSASNULL
+   : 'BLANKSASNULL'
+   ;
+
+EMPTYASNULL
+   : 'EMPTYASNULL'
+   ;
+
+MAXERROR
+   : 'MAXERROR'
+   ;
+
+DATEFORMAT
+   : 'DATEFORMAT'
+   ;
+
+TIMEFORMAT
+   : 'TIMEFORMAT'
+   ;
+
+ACCEPTINVCHARS
+   : 'ACCEPTINVCHARS'
+   ;
+
+ACCEPTANYDATE
+   : 'ACCEPTANYDATE'
+   ;
+
+IGNOREHEADER
+   : 'IGNOREHEADER'
+   ;
+
+IGNOREBLANKLINES
+   : 'IGNOREBLANKLINES'
+   ;
+
+COMPUPDATE
+   : 'COMPUPDATE'
+   ;
+
+STATUPDATE
+   : 'STATUPDATE'
+   ;
+
+EXPLICIT_IDS
+   : 'EXPLICIT_IDS'
+   ;
+
+READRATIO
+   : 'READRATIO'
+   ;
+
+ROUNDEC
+   : 'ROUNDEC'
+   ;
+
+TRIMBLANKS
+   : 'TRIMBLANKS'
+   ;
+
+PRESET
+   : 'PRESET'
+   ;
+
+ACCESS_KEY_ID
+   : 'ACCESS_KEY_ID'
+   ;
+
+SECRET_ACCESS_KEY
+   : 'SECRET_ACCESS_KEY'
+   ;
+
+SESSION_TOKEN_KW
+   : 'SESSION_TOKEN'
    ;
 
 HEADER

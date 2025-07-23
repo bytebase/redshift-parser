@@ -56,6 +56,7 @@ stmt
    | alterpublicationstmt
    | alterrolesetstmt
    | alterrolestmt
+   | alterschemastmt
    | altersubscriptionstmt
    | alterstatsstmt
    | altertsconfigurationstmt
@@ -279,6 +280,10 @@ opt_in_database
 
 alterrolesetstmt
    : ALTER (ROLE | USER) ALL? rolespec opt_in_database? setresetclause
+   ;
+
+alterschemastmt
+   : ALTER SCHEMA name QUOTA (iconst (MB | GB | TB)? | UNLIMITED)
    ;
 
 droprolestmt
@@ -617,6 +622,32 @@ closeportalstmt
 copystmt
    : COPY opt_binary? qualified_name opt_column_list? copy_from opt_program? copy_file_name copy_delimiter? opt_with? copy_options where_clause?
    | COPY OPEN_PAREN preparablestmt CLOSE_PAREN TO opt_program? copy_file_name opt_with? copy_options
+   | COPY qualified_name opt_column_list? FROM sconst redshift_copy_authorization redshift_copy_format? redshift_copy_parameter*
+   ;
+
+redshift_copy_authorization
+   : IAM_ROLE (DEFAULT | sconst)
+   | CREDENTIALS sconst
+   | ACCESS_KEY_ID sconst SECRET_ACCESS_KEY sconst (SESSION_TOKEN_KW sconst)?
+   ;
+
+redshift_copy_format
+   : FORMAT? AS? (CSV | PARQUET | ORC | JSON | AVRO) sconst?
+   ;
+
+redshift_copy_parameter
+   : copy_param_name (AS? copy_param_value)?
+   ;
+
+copy_param_name
+   : colid
+   | NULL_P
+   ;
+
+copy_param_value
+   : sconst | iconst | colid
+   | ON | OFF | TRUE_P | FALSE_P | PRESET
+   | AUTO | DEFAULT | NONE
    ;
 
 copy_from
@@ -920,6 +951,27 @@ oncommitoption
 
 opttablespace
    : TABLESPACE name
+   ;
+
+optredshifttableoptions
+   : redshifttableoption+
+   ;
+
+redshifttableoption
+   : BACKUP (YES_P | NO)
+   | DISTSTYLE (ALL | EVEN | KEY | AUTO)
+   | DISTKEY OPEN_PAREN colid CLOSE_PAREN
+   | sortkeyclause
+   | ENCODE AUTO
+   ;
+
+sortkeyclause
+   : sortkeyclausetype? SORTKEY OPEN_PAREN columnlist CLOSE_PAREN
+   ;
+
+sortkeyclausetype
+   : COMPOUND
+   | INTERLEAVED
    ;
 
 optconstablespace
@@ -2518,7 +2570,11 @@ viewstmt
           VIEW qualified_name opt_column_list? opt_reloptions?
         | RECURSIVE VIEW qualified_name OPEN_PAREN columnlist CLOSE_PAREN opt_reloptions?
     )
-     AS selectstmt opt_check_option?
+     AS selectstmt opt_check_option? with_no_schema_binding?
+   ;
+
+with_no_schema_binding
+   : WITH NO SCHEMA BINDING
    ;
 
 opt_check_option
@@ -2609,12 +2665,17 @@ dropdatasharestmt
 
 // EXTERNAL statements
 alterexternalschemastmt
-    : ALTER EXTERNAL SCHEMA colid altexternalschemaopts
+    : ALTER EXTERNAL SCHEMA colid altexternalschemaopts+
     ;
 
 altexternalschemaopts
     : RENAME TO colid
     | OWNER TO colid
+    | IAM_ROLE (DEFAULT | SESSION | sconst)
+    | AUTHENTICATION (NONE | IAM | MTLS)
+    | AUTHENTICATION_ARN sconst
+    | SECRET_ARN sconst
+    | URI sconst
     ;
 
 alterexternalviewstmt

@@ -58,6 +58,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#alterrolesetstmt.
 	VisitAlterrolesetstmt(ctx *AlterrolesetstmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#alterschemastmt.
+	VisitAlterschemastmt(ctx *AlterschemastmtContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#droprolestmt.
 	VisitDroprolestmt(ctx *DroprolestmtContext) interface{}
 
@@ -223,6 +226,21 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#copystmt.
 	VisitCopystmt(ctx *CopystmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#redshift_copy_authorization.
+	VisitRedshift_copy_authorization(ctx *Redshift_copy_authorizationContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#redshift_copy_format.
+	VisitRedshift_copy_format(ctx *Redshift_copy_formatContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#redshift_copy_parameter.
+	VisitRedshift_copy_parameter(ctx *Redshift_copy_parameterContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#copy_param_name.
+	VisitCopy_param_name(ctx *Copy_param_nameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#copy_param_value.
+	VisitCopy_param_value(ctx *Copy_param_valueContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#copy_from.
 	VisitCopy_from(ctx *Copy_fromContext) interface{}
 
@@ -294,6 +312,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#rs_colattributes.
 	VisitRs_colattributes(ctx *Rs_colattributesContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#rs_colattribute.
+	VisitRs_colattribute(ctx *Rs_colattributeContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#columnOptions.
 	VisitColumnOptions(ctx *ColumnOptionsContext) interface{}
@@ -396,6 +417,18 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#opttablespace.
 	VisitOpttablespace(ctx *OpttablespaceContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#optredshifttableoptions.
+	VisitOptredshifttableoptions(ctx *OptredshifttableoptionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#redshifttableoption.
+	VisitRedshifttableoption(ctx *RedshifttableoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#sortkeyclause.
+	VisitSortkeyclause(ctx *SortkeyclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#sortkeyclausetype.
+	VisitSortkeyclausetype(ctx *SortkeyclausetypeContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#optconstablespace.
 	VisitOptconstablespace(ctx *OptconstablespaceContext) interface{}
@@ -1234,6 +1267,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#viewstmt.
 	VisitViewstmt(ctx *ViewstmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#with_no_schema_binding.
+	VisitWith_no_schema_binding(ctx *With_no_schema_bindingContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#opt_check_option.
 	VisitOpt_check_option(ctx *Opt_check_optionContext) interface{}
 
@@ -1753,6 +1789,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#vacuumstmt.
 	VisitVacuumstmt(ctx *VacuumstmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#vacuum_option.
+	VisitVacuum_option(ctx *Vacuum_optionContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#analyzestmt.
 	VisitAnalyzestmt(ctx *AnalyzestmtContext) interface{}
 
@@ -1860,6 +1899,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#mergestmt.
 	VisitMergestmt(ctx *MergestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#merge_when_clause.
+	VisitMerge_when_clause(ctx *Merge_when_clauseContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#merge_insert_clause.
 	VisitMerge_insert_clause(ctx *Merge_insert_clauseContext) interface{}

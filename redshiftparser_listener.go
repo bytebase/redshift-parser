@@ -58,6 +58,9 @@ type RedshiftParserListener interface {
 	// EnterAlterrolesetstmt is called when entering the alterrolesetstmt production.
 	EnterAlterrolesetstmt(c *AlterrolesetstmtContext)
 
+	// EnterAlterschemastmt is called when entering the alterschemastmt production.
+	EnterAlterschemastmt(c *AlterschemastmtContext)
+
 	// EnterDroprolestmt is called when entering the droprolestmt production.
 	EnterDroprolestmt(c *DroprolestmtContext)
 
@@ -223,6 +226,21 @@ type RedshiftParserListener interface {
 	// EnterCopystmt is called when entering the copystmt production.
 	EnterCopystmt(c *CopystmtContext)
 
+	// EnterRedshift_copy_authorization is called when entering the redshift_copy_authorization production.
+	EnterRedshift_copy_authorization(c *Redshift_copy_authorizationContext)
+
+	// EnterRedshift_copy_format is called when entering the redshift_copy_format production.
+	EnterRedshift_copy_format(c *Redshift_copy_formatContext)
+
+	// EnterRedshift_copy_parameter is called when entering the redshift_copy_parameter production.
+	EnterRedshift_copy_parameter(c *Redshift_copy_parameterContext)
+
+	// EnterCopy_param_name is called when entering the copy_param_name production.
+	EnterCopy_param_name(c *Copy_param_nameContext)
+
+	// EnterCopy_param_value is called when entering the copy_param_value production.
+	EnterCopy_param_value(c *Copy_param_valueContext)
+
 	// EnterCopy_from is called when entering the copy_from production.
 	EnterCopy_from(c *Copy_fromContext)
 
@@ -294,6 +312,9 @@ type RedshiftParserListener interface {
 
 	// EnterRs_colattributes is called when entering the rs_colattributes production.
 	EnterRs_colattributes(c *Rs_colattributesContext)
+
+	// EnterRs_colattribute is called when entering the rs_colattribute production.
+	EnterRs_colattribute(c *Rs_colattributeContext)
 
 	// EnterColumnOptions is called when entering the columnOptions production.
 	EnterColumnOptions(c *ColumnOptionsContext)
@@ -396,6 +417,18 @@ type RedshiftParserListener interface {
 
 	// EnterOpttablespace is called when entering the opttablespace production.
 	EnterOpttablespace(c *OpttablespaceContext)
+
+	// EnterOptredshifttableoptions is called when entering the optredshifttableoptions production.
+	EnterOptredshifttableoptions(c *OptredshifttableoptionsContext)
+
+	// EnterRedshifttableoption is called when entering the redshifttableoption production.
+	EnterRedshifttableoption(c *RedshifttableoptionContext)
+
+	// EnterSortkeyclause is called when entering the sortkeyclause production.
+	EnterSortkeyclause(c *SortkeyclauseContext)
+
+	// EnterSortkeyclausetype is called when entering the sortkeyclausetype production.
+	EnterSortkeyclausetype(c *SortkeyclausetypeContext)
 
 	// EnterOptconstablespace is called when entering the optconstablespace production.
 	EnterOptconstablespace(c *OptconstablespaceContext)
@@ -1234,6 +1267,9 @@ type RedshiftParserListener interface {
 	// EnterViewstmt is called when entering the viewstmt production.
 	EnterViewstmt(c *ViewstmtContext)
 
+	// EnterWith_no_schema_binding is called when entering the with_no_schema_binding production.
+	EnterWith_no_schema_binding(c *With_no_schema_bindingContext)
+
 	// EnterOpt_check_option is called when entering the opt_check_option production.
 	EnterOpt_check_option(c *Opt_check_optionContext)
 
@@ -1753,6 +1789,9 @@ type RedshiftParserListener interface {
 	// EnterVacuumstmt is called when entering the vacuumstmt production.
 	EnterVacuumstmt(c *VacuumstmtContext)
 
+	// EnterVacuum_option is called when entering the vacuum_option production.
+	EnterVacuum_option(c *Vacuum_optionContext)
+
 	// EnterAnalyzestmt is called when entering the analyzestmt production.
 	EnterAnalyzestmt(c *AnalyzestmtContext)
 
@@ -1860,6 +1899,9 @@ type RedshiftParserListener interface {
 
 	// EnterMergestmt is called when entering the mergestmt production.
 	EnterMergestmt(c *MergestmtContext)
+
+	// EnterMerge_when_clause is called when entering the merge_when_clause production.
+	EnterMerge_when_clause(c *Merge_when_clauseContext)
 
 	// EnterMerge_insert_clause is called when entering the merge_insert_clause production.
 	EnterMerge_insert_clause(c *Merge_insert_clauseContext)
@@ -2980,6 +3022,9 @@ type RedshiftParserListener interface {
 	// ExitAlterrolesetstmt is called when exiting the alterrolesetstmt production.
 	ExitAlterrolesetstmt(c *AlterrolesetstmtContext)
 
+	// ExitAlterschemastmt is called when exiting the alterschemastmt production.
+	ExitAlterschemastmt(c *AlterschemastmtContext)
+
 	// ExitDroprolestmt is called when exiting the droprolestmt production.
 	ExitDroprolestmt(c *DroprolestmtContext)
 
@@ -3144,6 +3189,21 @@ type RedshiftParserListener interface {
 
 	// ExitCopystmt is called when exiting the copystmt production.
 	ExitCopystmt(c *CopystmtContext)
+
+	// ExitRedshift_copy_authorization is called when exiting the redshift_copy_authorization production.
+	ExitRedshift_copy_authorization(c *Redshift_copy_authorizationContext)
+
+	// ExitRedshift_copy_format is called when exiting the redshift_copy_format production.
+	ExitRedshift_copy_format(c *Redshift_copy_formatContext)
+
+	// ExitRedshift_copy_parameter is called when exiting the redshift_copy_parameter production.
+	ExitRedshift_copy_parameter(c *Redshift_copy_parameterContext)
+
+	// ExitCopy_param_name is called when exiting the copy_param_name production.
+	ExitCopy_param_name(c *Copy_param_nameContext)
+
+	// ExitCopy_param_value is called when exiting the copy_param_value production.
+	ExitCopy_param_value(c *Copy_param_valueContext)
 
 	// ExitCopy_from is called when exiting the copy_from production.
 	ExitCopy_from(c *Copy_fromContext)
@@ -3318,6 +3378,18 @@ type RedshiftParserListener interface {
 
 	// ExitOpttablespace is called when exiting the opttablespace production.
 	ExitOpttablespace(c *OpttablespaceContext)
+
+	// ExitOptredshifttableoptions is called when exiting the optredshifttableoptions production.
+	ExitOptredshifttableoptions(c *OptredshifttableoptionsContext)
+
+	// ExitRedshifttableoption is called when exiting the redshifttableoption production.
+	ExitRedshifttableoption(c *RedshifttableoptionContext)
+
+	// ExitSortkeyclause is called when exiting the sortkeyclause production.
+	ExitSortkeyclause(c *SortkeyclauseContext)
+
+	// ExitSortkeyclausetype is called when exiting the sortkeyclausetype production.
+	ExitSortkeyclausetype(c *SortkeyclausetypeContext)
 
 	// ExitOptconstablespace is called when exiting the optconstablespace production.
 	ExitOptconstablespace(c *OptconstablespaceContext)

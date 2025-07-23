@@ -75,6 +75,10 @@ func (v *BaseRedshiftParserVisitor) VisitAlterrolesetstmt(ctx *AlterrolesetstmtC
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitAlterschemastmt(ctx *AlterschemastmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitDroprolestmt(ctx *DroprolestmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -295,6 +299,26 @@ func (v *BaseRedshiftParserVisitor) VisitCopystmt(ctx *CopystmtContext) interfac
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitRedshift_copy_authorization(ctx *Redshift_copy_authorizationContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRedshift_copy_format(ctx *Redshift_copy_formatContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRedshift_copy_parameter(ctx *Redshift_copy_parameterContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCopy_param_name(ctx *Copy_param_nameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCopy_param_value(ctx *Copy_param_valueContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitCopy_from(ctx *Copy_fromContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -388,6 +412,10 @@ func (v *BaseRedshiftParserVisitor) VisitColumnDef(ctx *ColumnDefContext) interf
 }
 
 func (v *BaseRedshiftParserVisitor) VisitRs_colattributes(ctx *Rs_colattributesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRs_colattribute(ctx *Rs_colattributeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -524,6 +552,22 @@ func (v *BaseRedshiftParserVisitor) VisitOncommitoption(ctx *OncommitoptionConte
 }
 
 func (v *BaseRedshiftParserVisitor) VisitOpttablespace(ctx *OpttablespaceContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitOptredshifttableoptions(ctx *OptredshifttableoptionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRedshifttableoption(ctx *RedshifttableoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSortkeyclause(ctx *SortkeyclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSortkeyclausetype(ctx *SortkeyclausetypeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -2476,6 +2520,10 @@ func (v *BaseRedshiftParserVisitor) VisitReturning_clause(ctx *Returning_clauseC
 }
 
 func (v *BaseRedshiftParserVisitor) VisitMergestmt(ctx *MergestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitMerge_when_clause(ctx *Merge_when_clauseContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
