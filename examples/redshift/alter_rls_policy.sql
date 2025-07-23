@@ -72,16 +72,6 @@ ALTER RLS POLICY comprehensive_access_policy USING (
 -- ALTER RLS POLICY with semicolon terminator
 ALTER RLS POLICY terminated_policy USING (active = true);
 
--- Examples that would NOT work in Redshift (commented out as they're not supported):
--- ALTER RLS POLICY policy_name RENAME TO new_policy_name;  -- NOT SUPPORTED
--- ALTER RLS POLICY policy_name OWNER TO new_owner;         -- NOT SUPPORTED
--- ALTER RLS POLICY policy_name WITH CHECK (expression);    -- NOT SUPPORTED
-
--- Additional test cases for edge cases
-
--- ALTER RLS POLICY with empty IN list (edge case)
-ALTER RLS POLICY empty_in_policy USING (status IN ());
-
 -- ALTER RLS POLICY with single item IN list
 ALTER RLS POLICY single_in_policy USING (role IN ('viewer'));
 

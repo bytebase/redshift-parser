@@ -2976,7 +2976,7 @@ altmaskingpolicyarg
     ;
 
 alterrlspolicystmt
-    : ALTER RLS POLICY colid USING '(' a_expr ')'
+    : ALTER RLS POLICY colid USING OPEN_PAREN a_expr CLOSE_PAREN
     ;
 
 attachmaskingpolicystmt
