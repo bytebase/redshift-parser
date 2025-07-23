@@ -1450,6 +1450,9 @@ type RedshiftParserListener interface {
 	// EnterAltermaskingpolicystmt is called when entering the altermaskingpolicystmt production.
 	EnterAltermaskingpolicystmt(c *AltermaskingpolicystmtContext)
 
+	// EnterAltermaterializedviewstmt is called when entering the altermaterializedviewstmt production.
+	EnterAltermaterializedviewstmt(c *AltermaterializedviewstmtContext)
+
 	// EnterAltmaskingpolicyopts is called when entering the altmaskingpolicyopts production.
 	EnterAltmaskingpolicyopts(c *AltmaskingpolicyoptsContext)
 
@@ -4428,6 +4431,9 @@ type RedshiftParserListener interface {
 
 	// ExitAltermaskingpolicystmt is called when exiting the altermaskingpolicystmt production.
 	ExitAltermaskingpolicystmt(c *AltermaskingpolicystmtContext)
+
+	// ExitAltermaterializedviewstmt is called when exiting the altermaterializedviewstmt production.
+	ExitAltermaterializedviewstmt(c *AltermaterializedviewstmtContext)
 
 	// ExitAltmaskingpolicyopts is called when exiting the altmaskingpolicyopts production.
 	ExitAltmaskingpolicyopts(c *AltmaskingpolicyoptsContext)

@@ -1931,6 +1931,10 @@ func (v *BaseRedshiftParserVisitor) VisitAltermaskingpolicystmt(ctx *Altermaskin
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitAltermaterializedviewstmt(ctx *AltermaterializedviewstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitAltmaskingpolicyopts(ctx *AltmaskingpolicyoptsContext) interface{} {
 	return v.VisitChildren(ctx)
 }

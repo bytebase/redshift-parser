@@ -3048,6 +3048,14 @@ func (s *BaseRedshiftParserListener) EnterAltermaskingpolicystmt(ctx *Altermaski
 // ExitAltermaskingpolicystmt is called when production altermaskingpolicystmt is exited.
 func (s *BaseRedshiftParserListener) ExitAltermaskingpolicystmt(ctx *AltermaskingpolicystmtContext) {}
 
+// EnterAltermaterializedviewstmt is called when production altermaterializedviewstmt is entered.
+func (s *BaseRedshiftParserListener) EnterAltermaterializedviewstmt(ctx *AltermaterializedviewstmtContext) {
+}
+
+// ExitAltermaterializedviewstmt is called when production altermaterializedviewstmt is exited.
+func (s *BaseRedshiftParserListener) ExitAltermaterializedviewstmt(ctx *AltermaterializedviewstmtContext) {
+}
+
 // EnterAltmaskingpolicyopts is called when production altmaskingpolicyopts is entered.
 func (s *BaseRedshiftParserListener) EnterAltmaskingpolicyopts(ctx *AltmaskingpolicyoptsContext) {}
 

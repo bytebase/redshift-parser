@@ -164,6 +164,7 @@ stmt
    | alterexternalviewstmt
    | alteridentityproviderstmt
    | altermaskingpolicystmt
+   | altermaterializedviewstmt
    | alterrlspolicystmt
    | altertableappendstmt
    | alteruserstmt
@@ -2945,6 +2946,18 @@ alteridprovideropts
 
 altermaskingpolicystmt
     : ALTER MASKING POLICY colid altmaskingpolicyopts
+    ;
+
+altermaterializedviewstmt
+    : ALTER MATERIALIZED VIEW qualified_name
+     (
+       AUTO REFRESH (YES_P | NO)
+       | ALTER DISTKEY colid
+       | ALTER DISTSTYLE (ALL | EVEN | (KEY DISTKEY colid) | AUTO)
+       | ALTER COMPOUND? SORTKEY OPEN_PAREN (colid (COMMA colid)*) CLOSE_PAREN
+       | ALTER SORTKEY (AUTO | NONE)
+       | ROW LEVEL SECURITY (ON | OFF) (CONJUNCTION TYPE_P (AND | OR))? (FOR DATASHARES)?
+     )
     ;
 
 altmaskingpolicyopts
