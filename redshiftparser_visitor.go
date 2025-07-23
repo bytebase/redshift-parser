@@ -1450,9 +1450,6 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#alterrlspolicystmt.
 	VisitAlterrlspolicystmt(ctx *AlterrlspolicystmtContext) interface{}
 
-	// Visit a parse tree produced by RedshiftParser#altrlspolicyopts.
-	VisitAltrlspolicyopts(ctx *AltrlspolicyoptsContext) interface{}
-
 	// Visit a parse tree produced by RedshiftParser#attachmaskingpolicystmt.
 	VisitAttachmaskingpolicystmt(ctx *AttachmaskingpolicystmtContext) interface{}
 

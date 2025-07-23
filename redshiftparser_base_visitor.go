@@ -1687,6 +1687,10 @@ func (v *BaseRedshiftParserVisitor) VisitViewstmt(ctx *ViewstmtContext) interfac
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitWith_no_schema_binding(ctx *With_no_schema_bindingContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitOpt_check_option(ctx *Opt_check_optionContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -1924,10 +1928,6 @@ func (v *BaseRedshiftParserVisitor) VisitAltmaskingpolicyarg(ctx *Altmaskingpoli
 }
 
 func (v *BaseRedshiftParserVisitor) VisitAlterrlspolicystmt(ctx *AlterrlspolicystmtContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseRedshiftParserVisitor) VisitAltrlspolicyopts(ctx *AltrlspolicyoptsContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -2376,6 +2376,10 @@ func (v *BaseRedshiftParserVisitor) VisitCluster_index_specification(ctx *Cluste
 }
 
 func (v *BaseRedshiftParserVisitor) VisitVacuumstmt(ctx *VacuumstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitVacuum_option(ctx *Vacuum_optionContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

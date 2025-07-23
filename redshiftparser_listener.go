@@ -1450,9 +1450,6 @@ type RedshiftParserListener interface {
 	// EnterAlterrlspolicystmt is called when entering the alterrlspolicystmt production.
 	EnterAlterrlspolicystmt(c *AlterrlspolicystmtContext)
 
-	// EnterAltrlspolicyopts is called when entering the altrlspolicyopts production.
-	EnterAltrlspolicyopts(c *AltrlspolicyoptsContext)
-
 	// EnterAttachmaskingpolicystmt is called when entering the attachmaskingpolicystmt production.
 	EnterAttachmaskingpolicystmt(c *AttachmaskingpolicystmtContext)
 
@@ -3277,6 +3274,9 @@ type RedshiftParserListener interface {
 	// ExitRs_colattributes is called when exiting the rs_colattributes production.
 	ExitRs_colattributes(c *Rs_colattributesContext)
 
+	// ExitRs_colattribute is called when exiting the rs_colattribute production.
+	ExitRs_colattribute(c *Rs_colattributeContext)
+
 	// ExitColumnOptions is called when exiting the columnOptions production.
 	ExitColumnOptions(c *ColumnOptionsContext)
 
@@ -4228,6 +4228,9 @@ type RedshiftParserListener interface {
 	// ExitViewstmt is called when exiting the viewstmt production.
 	ExitViewstmt(c *ViewstmtContext)
 
+	// ExitWith_no_schema_binding is called when exiting the with_no_schema_binding production.
+	ExitWith_no_schema_binding(c *With_no_schema_bindingContext)
+
 	// ExitOpt_check_option is called when exiting the opt_check_option production.
 	ExitOpt_check_option(c *Opt_check_optionContext)
 
@@ -4407,9 +4410,6 @@ type RedshiftParserListener interface {
 
 	// ExitAlterrlspolicystmt is called when exiting the alterrlspolicystmt production.
 	ExitAlterrlspolicystmt(c *AlterrlspolicystmtContext)
-
-	// ExitAltrlspolicyopts is called when exiting the altrlspolicyopts production.
-	ExitAltrlspolicyopts(c *AltrlspolicyoptsContext)
 
 	// ExitAttachmaskingpolicystmt is called when exiting the attachmaskingpolicystmt production.
 	ExitAttachmaskingpolicystmt(c *AttachmaskingpolicystmtContext)
@@ -4747,6 +4747,9 @@ type RedshiftParserListener interface {
 	// ExitVacuumstmt is called when exiting the vacuumstmt production.
 	ExitVacuumstmt(c *VacuumstmtContext)
 
+	// ExitVacuum_option is called when exiting the vacuum_option production.
+	ExitVacuum_option(c *Vacuum_optionContext)
+
 	// ExitAnalyzestmt is called when exiting the analyzestmt production.
 	ExitAnalyzestmt(c *AnalyzestmtContext)
 
@@ -4854,6 +4857,9 @@ type RedshiftParserListener interface {
 
 	// ExitMergestmt is called when exiting the mergestmt production.
 	ExitMergestmt(c *MergestmtContext)
+
+	// ExitMerge_when_clause is called when exiting the merge_when_clause production.
+	ExitMerge_when_clause(c *Merge_when_clauseContext)
 
 	// ExitMerge_insert_clause is called when exiting the merge_insert_clause production.
 	ExitMerge_insert_clause(c *Merge_insert_clauseContext)

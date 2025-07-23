@@ -122,29 +122,37 @@ func redshiftlexerLexerInit() {
 		"'DATASHARES'", "'GRANTS'", "'USE'", "'CANCEL'", "'SESSION_AUTHORIZATION'",
 		"'SESSION_CHARACTERISTICS'", "'COMPRESSION'", "'LIBRARY'", "'APPEND'",
 		"'MB'", "'GB'", "'ACCOUNT'", "'NAMESPACE'", "'DESCRIBE'", "'NONATOMIC'",
-		"'MANAGEDBY'", "'ADX'", "'REMOVE'", "'PLPYTHONU'", "'FILLTARGET'", "'IGNOREEXTRA'",
-		"'CREATEUSER'", "'NOCREATEUSER'", "'PORT'", "'REDSHIFT'", "'IAM'", "'CREATEDB'",
-		"'NOCREATEDB'", "'RESTRICTED'", "'UNLIMITED'", "'EXTERNALID'", "'TIMEOUT'",
-		"'SYSLOG'", "'CREDENTIALS'", "'UNRESTRICTED'", "'PARAMETERS'", "'APPLICATION_ARN'",
-		"'AUTO_CREATE_ROLES'", "'COMPROWS'", "'PROVIDER_URL'", "'PROVIDER_URL_PORT'",
-		"'ATTRIBUTE_MAP'", "'PROVIDER_ARN'", "'ASSUME_ROLE_ARN'", "'PROPERTIES'",
-		"'AVRO'", "'RCFILE'", "'SEQUENCEFILE'", "'TEXTFILE'", "'ORC'", "'ION'",
-		"'LAMBDA'", "'FIXEDWIDTH'", "'PARQUET'", "", "'SETTINGS'", "'FUNCTION_NAME'",
-		"'ATOMIC'", "'BETWEEN'", "'BIGINT'", "'BIT'", "'BOOLEAN'", "'CHAR'",
-		"'CHARACTER'", "'COALESCE'", "'DEC'", "'DECIMAL'", "'EXISTS'", "'EXTRACT'",
-		"'FLOAT'", "'GREATEST'", "'INOUT'", "'INT'", "'INTEGER'", "'INTERVAL'",
-		"'LEAST'", "'NATIONAL'", "'NCHAR'", "'NONE'", "'NULLIF'", "'NUMERIC'",
-		"'OVERLAY'", "'PARAMETER'", "'POSITION'", "'PRECISION'", "'REAL'", "'ROW'",
-		"'SETOF'", "'SMALLINT'", "'SUBSTRING'", "'TIME'", "'TIMESTAMP'", "'TREAT'",
-		"'TRIM'", "'VALUES'", "'VARCHAR'", "'XMLATTRIBUTES'", "'XMLCOMMENT'",
-		"'XMLAGG'", "'XML_IS_WELL_FORMED'", "'XML_IS_WELL_FORMED_DOCUMENT'",
-		"'XML_IS_WELL_FORMED_CONTENT'", "'XPATH'", "'XPATH_EXISTS'", "'XMLCONCAT'",
-		"'XMLELEMENT'", "'XMLEXISTS'", "'XMLFOREST'", "'XMLPARSE'", "'XMLPI'",
-		"'XMLROOT'", "'XMLSERIALIZE'", "'CALL'", "'CURRENT'", "'ATTACH'", "'DETACH'",
-		"'EXPRESSION'", "'GENERATED'", "'LOGGED'", "'STORED'", "'SERDE'", "'SERDEPROPERTIES'",
-		"'INPUTFORMAT'", "'OUTPUTFORMAT'", "'FIELDS'", "'COLLECTION'", "'ITEMS'",
-		"'TERMINATED'", "'ESCAPED'", "'DEFINED'", "'LINES'", "'KEYS'", "'PARTITIONED'",
-		"'STRUCT'", "'MAP'", "'STRING'", "'DELIMITED'", "'RETRY_TIMEOUT'", "'MAX_BATCH_SIZE'",
+		"'MANAGEDBY'", "'ADX'", "'REMOVE'", "'DUPLICATES'", "'BEDROCK'", "'MODEL_ID'",
+		"'PROMPT'", "'SUFFIX'", "'REQUEST_TYPE'", "'RESPONSE_TYPE'", "'RAW'",
+		"'UNIFIED'", "'SUPER'", "'CI'", "'CS'", "'PLPYTHONU'", "'FILLTARGET'",
+		"'IGNOREEXTRA'", "'CREATEUSER'", "'NOCREATEUSER'", "'REGION'", "'PORT'",
+		"'REDSHIFT'", "'IAM'", "'CREATEDB'", "'NOCREATEDB'", "'RESTRICTED'",
+		"'UNLIMITED'", "'EXTERNALID'", "'TIMEOUT'", "'SYSLOG'", "'CREDENTIALS'",
+		"'UNRESTRICTED'", "'PARAMETERS'", "'APPLICATION_ARN'", "'AUTO_CREATE_ROLES'",
+		"'COMPROWS'", "'PROVIDER_URL'", "'PROVIDER_URL_PORT'", "'ATTRIBUTE_MAP'",
+		"'PROVIDER_ARN'", "'ASSUME_ROLE_ARN'", "'PROPERTIES'", "'AVRO'", "'RCFILE'",
+		"'SEQUENCEFILE'", "'TEXTFILE'", "'ORC'", "'ION'", "'LAMBDA'", "'FIXEDWIDTH'",
+		"'PARQUET'", "'LZOP'", "'REMOVEQUOTES'", "'TRUNCATECOLUMNS'", "'FILLRECORD'",
+		"'BLANKSASNULL'", "'EMPTYASNULL'", "'MAXERROR'", "'DATEFORMAT'", "'TIMEFORMAT'",
+		"'ACCEPTINVCHARS'", "'ACCEPTANYDATE'", "'IGNOREHEADER'", "'IGNOREBLANKLINES'",
+		"'COMPUPDATE'", "'STATUPDATE'", "'EXPLICIT_IDS'", "'READRATIO'", "'ROUNDEC'",
+		"'TRIMBLANKS'", "'PRESET'", "'ACCESS_KEY_ID'", "'SECRET_ACCESS_KEY'",
+		"'SESSION_TOKEN'", "", "'SETTINGS'", "'FUNCTION_NAME'", "'ATOMIC'",
+		"'BETWEEN'", "'BIGINT'", "'BIT'", "'BOOLEAN'", "'CHAR'", "'CHARACTER'",
+		"'COALESCE'", "'DEC'", "'DECIMAL'", "'EXISTS'", "'EXTRACT'", "'FLOAT'",
+		"'GREATEST'", "'INOUT'", "'INT'", "'INTEGER'", "'INTERVAL'", "'LEAST'",
+		"'NATIONAL'", "'NCHAR'", "'NONE'", "'NULLIF'", "'NUMERIC'", "'OVERLAY'",
+		"'PARAMETER'", "'POSITION'", "'PRECISION'", "'REAL'", "'ROW'", "'SETOF'",
+		"'SMALLINT'", "'SUBSTRING'", "'TIME'", "'TIMESTAMP'", "'TREAT'", "'TRIM'",
+		"'VALUES'", "'VARCHAR'", "'XMLATTRIBUTES'", "'XMLCOMMENT'", "'XMLAGG'",
+		"'XML_IS_WELL_FORMED'", "'XML_IS_WELL_FORMED_DOCUMENT'", "'XML_IS_WELL_FORMED_CONTENT'",
+		"'XPATH'", "'XPATH_EXISTS'", "'XMLCONCAT'", "'XMLELEMENT'", "'XMLEXISTS'",
+		"'XMLFOREST'", "'XMLPARSE'", "'XMLPI'", "'XMLROOT'", "'XMLSERIALIZE'",
+		"'CALL'", "'CURRENT'", "'ATTACH'", "'DETACH'", "'EXPRESSION'", "'GENERATED'",
+		"'LOGGED'", "'STORED'", "'SERDE'", "'SERDEPROPERTIES'", "'INPUTFORMAT'",
+		"'OUTPUTFORMAT'", "'FIELDS'", "'COLLECTION'", "'ITEMS'", "'TERMINATED'",
+		"'ESCAPED'", "'DEFINED'", "'LINES'", "'KEYS'", "'PARTITIONED'", "'STRUCT'",
+		"'MAP'", "'STRING'", "'DELIMITED'", "'RETRY_TIMEOUT'", "'MAX_BATCH_SIZE'",
 		"'MAX_PAYLOAD_IN_MB'", "'KB'", "'INCLUDE'", "'ROUTINE'", "'TRANSFORM'",
 		"'IMPORT'", "'POLICY'", "'PRIORITY'", "'METHOD'", "'REFERENCING'", "'NEW'",
 		"'OLD'", "'VALUE'", "'SUBSCRIPTION'", "'PUBLICATION'", "'OUT'", "'END'",
@@ -491,7 +499,7 @@ func redshiftlexerLexerInit() {
 	}
 	staticData.PredictionContextCache = antlr.NewPredictionContextCache()
 	staticData.serializedATN = []int32{
-		4, 0, 828, 8573, 6, -1, 6, -1, 6, -1, 6, -1, 6, -1, 2, 0, 7, 0, 2, 1, 7,
+		4, 0, 877, 9147, 6, -1, 6, -1, 6, -1, 6, -1, 6, -1, 2, 0, 7, 0, 2, 1, 7,
 		1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7, 4, 2, 5, 7, 5, 2, 6, 7, 6, 2, 7, 7,
 		7, 2, 8, 7, 8, 2, 9, 7, 9, 2, 10, 7, 10, 2, 11, 7, 11, 2, 12, 7, 12, 2,
 		13, 7, 13, 2, 14, 7, 14, 2, 15, 7, 15, 2, 16, 7, 16, 2, 17, 7, 17, 2, 18,
@@ -5612,22 +5620,22 @@ func (l *RedshiftLexer) Action(localctx antlr.RuleContext, ruleIndex, actionInde
 	case 28:
 		l.Operator_Action(localctx, actionIndex)
 
-	case 805:
+	case 854:
 		l.BeginDollarStringConstant_Action(localctx, actionIndex)
 
-	case 816:
+	case 865:
 		l.NumericFail_Action(localctx, actionIndex)
 
-	case 825:
+	case 874:
 		l.UnterminatedBlockComment_Action(localctx, actionIndex)
 
-	case 837:
+	case 886:
 		l.AfterEscapeStringConstantMode_NotContinued_Action(localctx, actionIndex)
 
-	case 841:
+	case 890:
 		l.AfterEscapeStringConstantWithNewlineMode_NotContinued_Action(localctx, actionIndex)
 
-	case 843:
+	case 892:
 		l.EndDollarStringConstant_Action(localctx, actionIndex)
 
 	default:
@@ -5707,10 +5715,10 @@ func (l *RedshiftLexer) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex
 	case 29:
 		return l.OperatorEndingWithPlusMinus_Sempred(localctx, predIndex)
 
-	case 789:
+	case 838:
 		return l.IdentifierStartChar_Sempred(localctx, predIndex)
 
-	case 843:
+	case 892:
 		return l.EndDollarStringConstant_Sempred(localctx, predIndex)
 
 	default:

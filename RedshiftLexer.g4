@@ -2065,7 +2065,9 @@ NOCREATEUSER
    ;
 
 // Additional commonly used tokens (avoiding conflicts with existing _P tokens and identifiers)
-// REGION removed due to conflict with column names
+REGION
+   : 'REGION'
+   ;
 
 PORT
    : 'PORT'
@@ -3445,8 +3447,52 @@ SORTKEY
    : 'SORTKEY'
    ;
 
+DISTSTYLE
+   : 'DISTSTYLE'
+   ;
+
+BACKUP
+   : 'BACKUP'
+   ;
+
+COMPOUND
+   : 'COMPOUND'
+   ;
+
+INTERLEAVED
+   : 'INTERLEAVED'
+   ;
+
+EVEN
+   : 'EVEN'
+   ;
+
 CASE_SENSITIVE
    : 'CASE_SENSITIVE'
+   ;
+
+QUOTA
+   : 'QUOTA'
+   ;
+
+TB
+   : 'TB'
+   ;
+
+BOOST
+   : 'BOOST'
+   ;
+
+RECLUSTER
+   : 'RECLUSTER'
+   ;
+
+SORT
+   : 'SORT'
+   ;
+
+PERCENT_WORD
+   : 'PERCENT'
    ;
 
 CASE_INSENSITIVE

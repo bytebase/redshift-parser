@@ -3048,12 +3048,6 @@ func (s *BaseRedshiftParserListener) EnterAlterrlspolicystmt(ctx *Alterrlspolicy
 // ExitAlterrlspolicystmt is called when production alterrlspolicystmt is exited.
 func (s *BaseRedshiftParserListener) ExitAlterrlspolicystmt(ctx *AlterrlspolicystmtContext) {}
 
-// EnterAltrlspolicyopts is called when production altrlspolicyopts is entered.
-func (s *BaseRedshiftParserListener) EnterAltrlspolicyopts(ctx *AltrlspolicyoptsContext) {}
-
-// ExitAltrlspolicyopts is called when production altrlspolicyopts is exited.
-func (s *BaseRedshiftParserListener) ExitAltrlspolicyopts(ctx *AltrlspolicyoptsContext) {}
-
 // EnterAttachmaskingpolicystmt is called when production attachmaskingpolicystmt is entered.
 func (s *BaseRedshiftParserListener) EnterAttachmaskingpolicystmt(ctx *AttachmaskingpolicystmtContext) {
 }
@@ -3979,6 +3973,12 @@ func (s *BaseRedshiftParserListener) EnterMergestmt(ctx *MergestmtContext) {}
 
 // ExitMergestmt is called when production mergestmt is exited.
 func (s *BaseRedshiftParserListener) ExitMergestmt(ctx *MergestmtContext) {}
+
+// EnterMerge_when_clause is called when production merge_when_clause is entered.
+func (s *BaseRedshiftParserListener) EnterMerge_when_clause(ctx *Merge_when_clauseContext) {}
+
+// ExitMerge_when_clause is called when production merge_when_clause is exited.
+func (s *BaseRedshiftParserListener) ExitMerge_when_clause(ctx *Merge_when_clauseContext) {}
 
 // EnterMerge_insert_clause is called when production merge_insert_clause is entered.
 func (s *BaseRedshiftParserListener) EnterMerge_insert_clause(ctx *Merge_insert_clauseContext) {}

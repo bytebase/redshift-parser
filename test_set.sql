@@ -1,0 +1,1 @@
+SET my_app.timeout TO '30';
