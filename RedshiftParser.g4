@@ -3614,8 +3614,7 @@ vacuum_option
    ;
 
 analyzestmt
-   : analyze_keyword opt_verbose? opt_vacuum_relation_list?
-   | analyze_keyword OPEN_PAREN vac_analyze_option_list CLOSE_PAREN opt_vacuum_relation_list?
+   : analyze_keyword opt_verbose? (qualified_name (OPEN_PAREN columnlist CLOSE_PAREN)?)? ((PREDICATE COLUMNS) | (ALL COLUMNS))?
    ;
 
 vac_analyze_option_list

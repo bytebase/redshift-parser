@@ -1273,6 +1273,10 @@ PRECEDING
    : 'PRECEDING'
    ;
 
+PREDICATE
+   : 'PREDICATE'
+   ;
+
 PREPARE
    : 'PREPARE'
    ;
