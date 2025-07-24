@@ -168,7 +168,6 @@ stmt
    | altermaterializedviewstmt
    | alterrlspolicystmt
    | altertableappendstmt
-   | alteruserstmt
    | analyzecompressionstmt
    | attachmaskingpolicystmt
    | attachrlspolicystmt
@@ -3254,24 +3253,22 @@ appendoptions
     ;
 
 alteruserstmt
-    : ALTER USER colid (WITH)? alteruseropts+
+    : ALTER USER rolespec (WITH)? alteruseropts+
     ;
 
 alteruseropts
-    : PASSWORD (sconst | colid | DISABLE)
-    | CREATEDB
-    | NOCREATEDB
-    | CREATEUSER  
-    | NOCREATEUSER
+    : CREATEDB | NOCREATEDB
+    | CREATEUSER | NOCREATEUSER
     | SYSLOG ACCESS (RESTRICTED | UNRESTRICTED)
-    | CONNECTION LIMIT (iconst | UNLIMITED)
+    | PASSWORD (sconst | DISABLE_P)
     | VALID UNTIL sconst
     | RENAME TO colid
+    | CONNECTION LIMIT (iconst | UNLIMITED)
     | SESSION TIMEOUT iconst
     | RESET SESSION TIMEOUT
-    | RESET colid
     | SET colid TO a_expr
-    | EXTERNALID sconst
+    | RESET colid
+    | EXTERNALID colid
     ;
 
 analyzecompressionstmt
@@ -5078,6 +5075,7 @@ roleid
 
 rolespec
    : nonreservedword
+   | NamespaceUser
    | CURRENT_USER
    | SESSION_USER
    ;

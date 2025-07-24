@@ -3515,6 +3515,10 @@ Identifier
    : IdentifierStartChar IdentifierChar*
    ;
 
+NamespaceUser
+   : Identifier ':' Identifier
+   ;
+
 fragment IdentifierStartChar options { caseInsensitive=false; }
    : // these are the valid identifier start characters below 0x7F
    [a-zA-Z_]
