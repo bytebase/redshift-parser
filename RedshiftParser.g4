@@ -57,6 +57,7 @@ stmt
    | alterpublicationstmt
    | alterrolesetstmt
    | alterrolestmt
+   | alteruserstmt
    | alterschemastmt
    | altersubscriptionstmt
    | alterstatsstmt
@@ -275,7 +276,12 @@ createuserstmt
    ;
 
 alterrolestmt
-   : ALTER (ROLE | USER) rolespec opt_with? alteroptrolelist
+   : ALTER ROLE rolespec opt_with? alterroleaction;
+
+alterroleaction
+   : RENAME TO colid
+   | OWNER TO colid
+   | EXTERNALID TO colid
    ;
 
 opt_in_database
@@ -463,20 +469,47 @@ discardstmt
    ;
 
 altertablestmt
-   : ALTER TABLE (IF_P EXISTS)? relation_expr (alter_table_cmds | partition_cmd)
-   | ALTER TABLE ALL IN_P TABLESPACE name (OWNED BY role_list)? SET TABLESPACE name opt_nowait?
-   | ALTER INDEX (IF_P EXISTS)? qualified_name (alter_table_cmds | index_partition_cmd)
-   | ALTER INDEX ALL IN_P TABLESPACE name (OWNED BY role_list)? SET TABLESPACE name opt_nowait?
-   | ALTER SEQUENCE (IF_P EXISTS)? qualified_name alter_table_cmds
-   | ALTER VIEW (IF_P EXISTS)? qualified_name alter_table_cmds
-   | ALTER MATERIALIZED VIEW (IF_P EXISTS)? qualified_name alter_table_cmds
-   | ALTER MATERIALIZED VIEW ALL IN_P TABLESPACE name (OWNED BY role_list)? SET TABLESPACE name opt_nowait?
-   | ALTER FOREIGN TABLE (IF_P EXISTS)? relation_expr alter_table_cmds
+   : ALTER TABLE qualified_name alter_table_cmds (COMMA alter_table_cmds)*
    ;
 
 alter_table_cmds
-   : alter_table_cmd (COMMA alter_table_cmd)*
+   : ADD_P table_constraint
+   | DROP CONSTRAINT colid (RESTRICT | CASCADE)?
+   | OWNER TO rolespec
+   | RENAME TO colid
+   | RENAME COLUMN colid TO colid
+   | ALTER COLUMN colid TYPE_P typename
+   | ALTER COLUMN colid ENCODE colid
+   | ALTER DISTKEY colid
+   | ALTER DISTSTYLE ALL
+   | ALTER DISTSTYLE EVEN
+   | ALTER DISTSTYLE KEY DISTKEY colid
+   | ALTER DISTSTYLE AUTO
+   | ALTER COMPOUND? SORTKEY OPEN_PAREN columnlist CLOSE_PAREN
+   | ALTER SORTKEY AUTO
+   | ALTER SORTKEY NONE
+   | ALTER ENCODE AUTO
+   | ADD_P COLUMN? colid typename (DEFAULT a_expr)? (ENCODE colid)? (NOT? NULL_P)? (COLLATE (CASE_SENSITIVE | CS | CASE_INSENSITIVE | CI))?
+   | DROP COLUMN? colid (RESTRICT | CASCADE)?
+   | ROW LEVEL SECURITY (ON | OFF) (CONJUNCTION TYPE_P (AND | OR))? (FOR DATASHARES)?
+   | MASKING (ON | OFF) FOR DATASHARES
+   // ALTER TABLE APPEND
+   | APPEND FROM qualified_name (IGNOREEXTRA | FILLTARGET)?
+   // The following options apply only to external tables
+   | SET LOCATION StringConstant
+   | SET FILE FORMAT colid
+   | SET TABLE PROPERTIES OPEN_PAREN table_properties_list CLOSE_PAREN
+   | PARTITION OPEN_PAREN ((colid EQUAL a_expr) (COMMA colid EQUAL a_expr)*) CLOSE_PAREN SET LOCATION StringConstant
+   | ADD_P opt_if_not_exists? PARTITION OPEN_PAREN ((colid EQUAL a_expr) (COMMA colid EQUAL a_expr)*) CLOSE_PAREN LOCATION StringConstant
+   | DROP PARTITION OPEN_PAREN ((colid EQUAL a_expr) (COMMA colid EQUAL a_expr)*) CLOSE_PAREN
    ;
+
+table_constraint
+   : (CONSTRAINT colid)? (
+       (UNIQUE OPEN_PAREN columnlist CLOSE_PAREN)
+       | (PRIMARY KEY OPEN_PAREN columnlist CLOSE_PAREN)
+       | (FOREIGN KEY OPEN_PAREN columnlist CLOSE_PAREN REFERENCES qualified_name OPEN_PAREN columnlist CLOSE_PAREN)
+   );
 
 partition_cmd
    : ATTACH PARTITION qualified_name partitionboundspec
@@ -3225,7 +3258,7 @@ alteruserstmt
     ;
 
 alteruseropts
-    : PASSWORD (sconst | colid)
+    : PASSWORD (sconst | colid | DISABLE)
     | CREATEDB
     | NOCREATEDB
     | CREATEUSER  

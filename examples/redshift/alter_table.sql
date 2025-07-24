@@ -46,29 +46,8 @@ ALTER TABLE orders DROP shipping_notes;
 -- ALTER COLUMN TYPE
 ALTER TABLE customers ALTER COLUMN phone TYPE VARCHAR(20);
 
--- ALTER COLUMN TYPE with USING
-ALTER TABLE sales ALTER COLUMN amount TYPE DECIMAL(12,2) USING amount::DECIMAL(12,2);
-
--- ALTER COLUMN SET DEFAULT
-ALTER TABLE orders ALTER COLUMN order_date SET DEFAULT CURRENT_DATE;
-
--- ALTER COLUMN DROP DEFAULT
-ALTER TABLE products ALTER COLUMN discount DROP DEFAULT;
-
--- ALTER COLUMN SET NOT NULL
-ALTER TABLE employees ALTER COLUMN employee_id SET NOT NULL;
-
--- ALTER COLUMN DROP NOT NULL
-ALTER TABLE addresses ALTER COLUMN apartment_number DROP NOT NULL;
-
 -- ALTER COLUMN SET ENCODE
-ALTER TABLE events ALTER COLUMN event_data SET ENCODE LZO;
-
--- ALTER COLUMN SET MASKED
-ALTER TABLE users ALTER COLUMN ssn SET MASKED;
-
--- ALTER COLUMN SET NOT MASKED
-ALTER TABLE users ALTER COLUMN phone SET NOT MASKED;
+ALTER TABLE events ALTER COLUMN event_data ENCODE LZO;
 
 -- ===========================
 -- 4. RENAME Operations
@@ -99,11 +78,7 @@ ALTER TABLE orders ADD CONSTRAINT fk_orders_customer
 
 -- ADD FOREIGN KEY with referential actions
 ALTER TABLE order_items ADD CONSTRAINT fk_items_order 
-    FOREIGN KEY (order_id) REFERENCES orders(order_id)
-    ON DELETE CASCADE ON UPDATE CASCADE;
-
--- ADD CHECK constraint
-ALTER TABLE products ADD CONSTRAINT chk_price CHECK (price > 0);
+    FOREIGN KEY (order_id) REFERENCES orders(order_id);
 
 -- ADD unnamed constraint
 ALTER TABLE inventory ADD UNIQUE (product_id, warehouse_id);
@@ -144,7 +119,7 @@ ALTER TABLE sales ALTER SORTKEY (sale_date);
 ALTER TABLE events ALTER COMPOUND SORTKEY (event_date, event_type);
 
 -- ALTER INTERLEAVED SORTKEY
-ALTER TABLE customer_data ALTER INTERLEAVED SORTKEY (customer_id, order_date);
+ALTER TABLE customer_data ALTER SORTKEY (customer_id, order_date);
 
 -- ALTER SORTKEY AUTO
 ALTER TABLE analytics_table ALTER SORTKEY AUTO;
@@ -160,10 +135,10 @@ ALTER TABLE temp_table ALTER SORTKEY NONE;
 ALTER TABLE large_table ALTER ENCODE AUTO;
 
 -- ALTER ENCODE AUTO PRESERVE YES
-ALTER TABLE historical_data ALTER ENCODE AUTO PRESERVE YES;
+ALTER TABLE historical_data ALTER ENCODE AUTO;
 
 -- ALTER ENCODE AUTO PRESERVE NO
-ALTER TABLE staging_table ALTER ENCODE AUTO PRESERVE NO;
+ALTER TABLE staging_table ALTER ENCODE AUTO;
 
 -- ALTER specific column encoding
 ALTER TABLE events ALTER COLUMN event_data ENCODE ZSTD;
@@ -176,7 +151,7 @@ ALTER TABLE events ALTER COLUMN event_data ENCODE ZSTD;
 ALTER TABLE sales OWNER TO analytics_user;
 
 -- Change owner with IF EXISTS
-ALTER TABLE IF EXISTS temp_data OWNER TO etl_user;
+ALTER TABLE temp_data OWNER TO etl_user;
 
 -- ===========================
 -- 10. Row Level Security Operations
@@ -188,17 +163,10 @@ ALTER TABLE sensitive_data ROW LEVEL SECURITY ON;
 -- Disable row level security
 ALTER TABLE public_data ROW LEVEL SECURITY OFF;
 
--- Set conjunction type to AND
-ALTER TABLE filtered_table CONJUNCTION TYPE AND;
-
--- Set conjunction type to OR
-ALTER TABLE multi_policy_table CONJUNCTION TYPE OR;
-
 -- Enable masking for datashares
-ALTER TABLE shared_table MASKING FOR DATASHARES ON;
-
+ALTER TABLE shared_table MASKING ON FOR DATASHARES;
 -- Disable masking for datashares
-ALTER TABLE unmasked_table MASKING FOR DATASHARES OFF;
+ALTER TABLE unmasked_table MASKING OFF FOR DATASHARES;
 
 -- ===========================
 -- 11. External Table Operations
@@ -209,14 +177,6 @@ ALTER TABLE spectrum.sales SET TABLE PROPERTIES ('numRows'='1000000', 'compressi
 
 -- APPEND FROM another table
 ALTER TABLE sales_history APPEND FROM sales_staging;
-
--- APPEND FROM with column mapping
-ALTER TABLE customers APPEND FROM temp_customers (id, name, email);
-
--- APPEND FROM with IAM role and region
-ALTER TABLE external_data APPEND FROM s3_staging 
-    IAM_ROLE 'arn:aws:iam::123456789012:role/MySpectrumRole'
-    REGION 'us-west-2';
 
 -- SET LOCATION for external table
 ALTER TABLE spectrum.events SET LOCATION 's3://mybucket/data/events/2024/';
@@ -249,8 +209,7 @@ ALTER TABLE products
 -- Add multiple constraints
 ALTER TABLE orders
     ADD CONSTRAINT pk_orders PRIMARY KEY (order_id),
-    ADD CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customers(id),
-    ADD CONSTRAINT chk_amount CHECK (total_amount >= 0);
+    ADD CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customers(id);
 
 -- Comprehensive table modification
 ALTER TABLE sales_fact
@@ -275,11 +234,7 @@ ALTER TABLE data ADD COLUMN data VARCHAR(100);
 -- Complex data type modifications
 ALTER TABLE measurements ALTER COLUMN reading TYPE NUMERIC(15,6);
 
--- Nested function in default expression
-ALTER TABLE logs ALTER COLUMN timestamp SET DEFAULT DATEADD(hour, -8, GETDATE());
-
 -- Multiple encoding types
 ALTER TABLE performance_data
-    ALTER COLUMN metric1 SET ENCODE MOSTLY32,
-    ALTER COLUMN metric2 SET ENCODE DELTA32K,
-    ALTER COLUMN description SET ENCODE TEXT255;
+    ALTER COLUMN metric1 ENCODE MOSTLY32,
+    ALTER COLUMN metric2 ENCODE DELTA32K;

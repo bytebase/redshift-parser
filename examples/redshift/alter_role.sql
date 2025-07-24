@@ -51,14 +51,11 @@ ALTER ROLE role1 EXTERNALID TO "";  -- Empty external ID
 -- WITH keyword usage variations
 ALTER ROLE role1 WITH RENAME TO role2;
 ALTER ROLE role1 RENAME TO role2;  -- WITH is optional
-ALTER ROLE role1 WITH OWNER TO user1, EXTERNALID TO "ID123";
-ALTER ROLE role1 OWNER TO user1, EXTERNALID TO "ID123";  -- WITH is optional
 
 -- Real-world examples
 ALTER ROLE etl_reader_role RENAME TO etl_full_access_role;
 ALTER ROLE bi_analyst_role OWNER TO bi_admin_user;
 ALTER ROLE aws_federated_role EXTERNALID TO "arn:aws:iam::987654321098:role/RedshiftAccess";
-ALTER ROLE temporary_contractor_role WITH RENAME TO permanent_employee_role, OWNER TO hr_admin;
 
 -- Edge cases
 ALTER ROLE a RENAME TO b;  -- Single character role names

@@ -52,6 +52,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#alterrolestmt.
 	VisitAlterrolestmt(ctx *AlterrolestmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#alterroleaction.
+	VisitAlterroleaction(ctx *AlterroleactionContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#opt_in_database.
 	VisitOpt_in_database(ctx *Opt_in_databaseContext) interface{}
 

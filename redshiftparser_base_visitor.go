@@ -67,6 +67,10 @@ func (v *BaseRedshiftParserVisitor) VisitAlterrolestmt(ctx *AlterrolestmtContext
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitAlterroleaction(ctx *AlterroleactionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitOpt_in_database(ctx *Opt_in_databaseContext) interface{} {
 	return v.VisitChildren(ctx)
 }

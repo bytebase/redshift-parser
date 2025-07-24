@@ -52,6 +52,9 @@ type RedshiftParserListener interface {
 	// EnterAlterrolestmt is called when entering the alterrolestmt production.
 	EnterAlterrolestmt(c *AlterrolestmtContext)
 
+	// EnterAlterroleaction is called when entering the alterroleaction production.
+	EnterAlterroleaction(c *AlterroleactionContext)
+
 	// EnterOpt_in_database is called when entering the opt_in_database production.
 	EnterOpt_in_database(c *Opt_in_databaseContext)
 
@@ -3033,6 +3036,9 @@ type RedshiftParserListener interface {
 
 	// ExitAlterrolestmt is called when exiting the alterrolestmt production.
 	ExitAlterrolestmt(c *AlterrolestmtContext)
+
+	// ExitAlterroleaction is called when exiting the alterroleaction production.
+	ExitAlterroleaction(c *AlterroleactionContext)
 
 	// ExitOpt_in_database is called when exiting the opt_in_database production.
 	ExitOpt_in_database(c *Opt_in_databaseContext)

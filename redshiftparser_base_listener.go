@@ -110,6 +110,12 @@ func (s *BaseRedshiftParserListener) EnterAlterrolestmt(ctx *AlterrolestmtContex
 // ExitAlterrolestmt is called when production alterrolestmt is exited.
 func (s *BaseRedshiftParserListener) ExitAlterrolestmt(ctx *AlterrolestmtContext) {}
 
+// EnterAlterroleaction is called when production alterroleaction is entered.
+func (s *BaseRedshiftParserListener) EnterAlterroleaction(ctx *AlterroleactionContext) {}
+
+// ExitAlterroleaction is called when production alterroleaction is exited.
+func (s *BaseRedshiftParserListener) ExitAlterroleaction(ctx *AlterroleactionContext) {}
+
 // EnterOpt_in_database is called when production opt_in_database is entered.
 func (s *BaseRedshiftParserListener) EnterOpt_in_database(ctx *Opt_in_databaseContext) {}
 
