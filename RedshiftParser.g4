@@ -3831,7 +3831,7 @@ merge_delete_clause
    ;
 
 deletestmt
-   : opt_with_clause? DELETE_P FROM relation_expr_opt_alias using_clause? where_or_current_clause? returning_clause?
+   : opt_with_clause? DELETE_P FROM? relation_expr_opt_alias using_clause? where_or_current_clause? returning_clause?
    ;
 
 using_clause
