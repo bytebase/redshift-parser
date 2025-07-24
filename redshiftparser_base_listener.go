@@ -176,11 +176,17 @@ func (s *BaseRedshiftParserListener) EnterCreateschemastmt(ctx *Createschemastmt
 // ExitCreateschemastmt is called when production createschemastmt is exited.
 func (s *BaseRedshiftParserListener) ExitCreateschemastmt(ctx *CreateschemastmtContext) {}
 
-// EnterOptschemaname is called when production optschemaname is entered.
-func (s *BaseRedshiftParserListener) EnterOptschemaname(ctx *OptschemanameContext) {}
+// EnterOpt_auth_clause is called when production opt_auth_clause is entered.
+func (s *BaseRedshiftParserListener) EnterOpt_auth_clause(ctx *Opt_auth_clauseContext) {}
 
-// ExitOptschemaname is called when production optschemaname is exited.
-func (s *BaseRedshiftParserListener) ExitOptschemaname(ctx *OptschemanameContext) {}
+// ExitOpt_auth_clause is called when production opt_auth_clause is exited.
+func (s *BaseRedshiftParserListener) ExitOpt_auth_clause(ctx *Opt_auth_clauseContext) {}
+
+// EnterOpt_quota is called when production opt_quota is entered.
+func (s *BaseRedshiftParserListener) EnterOpt_quota(ctx *Opt_quotaContext) {}
+
+// ExitOpt_quota is called when production opt_quota is exited.
+func (s *BaseRedshiftParserListener) ExitOpt_quota(ctx *Opt_quotaContext) {}
 
 // EnterOptschemaeltlist is called when production optschemaeltlist is entered.
 func (s *BaseRedshiftParserListener) EnterOptschemaeltlist(ctx *OptschemaeltlistContext) {}

@@ -85,8 +85,11 @@ type RedshiftParserListener interface {
 	// EnterCreateschemastmt is called when entering the createschemastmt production.
 	EnterCreateschemastmt(c *CreateschemastmtContext)
 
-	// EnterOptschemaname is called when entering the optschemaname production.
-	EnterOptschemaname(c *OptschemanameContext)
+	// EnterOpt_auth_clause is called when entering the opt_auth_clause production.
+	EnterOpt_auth_clause(c *Opt_auth_clauseContext)
+
+	// EnterOpt_quota is called when entering the opt_quota production.
+	EnterOpt_quota(c *Opt_quotaContext)
 
 	// EnterOptschemaeltlist is called when entering the optschemaeltlist production.
 	EnterOptschemaeltlist(c *OptschemaeltlistContext)
@@ -3073,8 +3076,11 @@ type RedshiftParserListener interface {
 	// ExitCreateschemastmt is called when exiting the createschemastmt production.
 	ExitCreateschemastmt(c *CreateschemastmtContext)
 
-	// ExitOptschemaname is called when exiting the optschemaname production.
-	ExitOptschemaname(c *OptschemanameContext)
+	// ExitOpt_auth_clause is called when exiting the opt_auth_clause production.
+	ExitOpt_auth_clause(c *Opt_auth_clauseContext)
+
+	// ExitOpt_quota is called when exiting the opt_quota production.
+	ExitOpt_quota(c *Opt_quotaContext)
 
 	// ExitOptschemaeltlist is called when exiting the optschemaeltlist production.
 	ExitOptschemaeltlist(c *OptschemaeltlistContext)

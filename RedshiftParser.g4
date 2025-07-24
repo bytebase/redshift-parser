@@ -322,15 +322,20 @@ add_drop
    ;
 
 createschemastmt
-   : CREATE SCHEMA (IF_P NOT EXISTS)? (optschemaname? AUTHORIZATION rolespec | colid) optschemaeltlist
+   : CREATE SCHEMA opt_if_not_exists? schemaname=colid opt_auth_clause? opt_quota? optschemaeltlist?
+   | CREATE SCHEMA opt_auth_clause opt_quota? optschemaeltlist?
    ;
 
-optschemaname
-   : colid
+opt_auth_clause
+   : AUTHORIZATION rolespec
+   ;
+
+opt_quota
+   : QUOTA ((fconst | iconst) (MB | GB | TB)? | UNLIMITED)
    ;
 
 optschemaeltlist
-   : schema_stmt*
+   : schema_stmt+
    ;
 
 schema_stmt

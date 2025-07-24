@@ -85,8 +85,11 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#createschemastmt.
 	VisitCreateschemastmt(ctx *CreateschemastmtContext) interface{}
 
-	// Visit a parse tree produced by RedshiftParser#optschemaname.
-	VisitOptschemaname(ctx *OptschemanameContext) interface{}
+	// Visit a parse tree produced by RedshiftParser#opt_auth_clause.
+	VisitOpt_auth_clause(ctx *Opt_auth_clauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#opt_quota.
+	VisitOpt_quota(ctx *Opt_quotaContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#optschemaeltlist.
 	VisitOptschemaeltlist(ctx *OptschemaeltlistContext) interface{}

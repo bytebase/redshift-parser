@@ -111,7 +111,11 @@ func (v *BaseRedshiftParserVisitor) VisitCreateschemastmt(ctx *CreateschemastmtC
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseRedshiftParserVisitor) VisitOptschemaname(ctx *OptschemanameContext) interface{} {
+func (v *BaseRedshiftParserVisitor) VisitOpt_auth_clause(ctx *Opt_auth_clauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitOpt_quota(ctx *Opt_quotaContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
