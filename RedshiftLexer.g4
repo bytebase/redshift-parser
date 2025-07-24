@@ -459,6 +459,10 @@ PRIMARY
    : 'PRIMARY'
    ;
 
+PUBLIC
+   : 'PUBLIC'
+   ;
+
 REFERENCES
    : 'REFERENCES'
    ;

@@ -2115,6 +2115,18 @@ func (v *BaseRedshiftParserVisitor) VisitDetachrlspolicystmt(ctx *Detachrlspolic
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitRole_or_user_or_public_list(ctx *Role_or_user_or_public_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRole_or_user_or_public(ctx *Role_or_user_or_publicContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRlspolicyname(ctx *RlspolicynameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitDropidentityproviderstmt(ctx *DropidentityproviderstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }

@@ -3241,7 +3241,22 @@ detachmaskingpolicystmt
     ;
 
 detachrlspolicystmt
-    : DETACH RLS POLICY colid FROM qualified_name
+    : DETACH RLS POLICY rlspolicyname ON TABLE? table_name_list
+      FROM role_or_user_or_public_list
+    ;
+
+role_or_user_or_public_list
+    : role_or_user_or_public (COMMA role_or_user_or_public)*
+    ;
+
+role_or_user_or_public
+    : rolespec
+    | ROLE rolespec
+    | PUBLIC
+    ;
+
+rlspolicyname:
+    colid
     ;
 
 dropidentityproviderstmt
@@ -3556,7 +3571,7 @@ alterdatabasesetstmt
    ;
 
 dropdbstmt
-   : DROP DATABASE (IF_P EXISTS)? name (opt_with? OPEN_PAREN drop_option_list CLOSE_PAREN)?
+   : DROP DATABASE name
    ;
 
 drop_option_list
@@ -5343,6 +5358,7 @@ unreserved_keyword
    | OWNER
    | PARALLEL
    | PARAMETER
+   | PUBLIC
    | PARSER
    | PARTIAL
    | PARTITION

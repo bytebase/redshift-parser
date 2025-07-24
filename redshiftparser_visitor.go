@@ -1588,6 +1588,15 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#detachrlspolicystmt.
 	VisitDetachrlspolicystmt(ctx *DetachrlspolicystmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#role_or_user_or_public_list.
+	VisitRole_or_user_or_public_list(ctx *Role_or_user_or_public_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#role_or_user_or_public.
+	VisitRole_or_user_or_public(ctx *Role_or_user_or_publicContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#rlspolicyname.
+	VisitRlspolicyname(ctx *RlspolicynameContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#dropidentityproviderstmt.
 	VisitDropidentityproviderstmt(ctx *DropidentityproviderstmtContext) interface{}
 

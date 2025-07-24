@@ -3338,6 +3338,27 @@ func (s *BaseRedshiftParserListener) EnterDetachrlspolicystmt(ctx *Detachrlspoli
 // ExitDetachrlspolicystmt is called when production detachrlspolicystmt is exited.
 func (s *BaseRedshiftParserListener) ExitDetachrlspolicystmt(ctx *DetachrlspolicystmtContext) {}
 
+// EnterRole_or_user_or_public_list is called when production role_or_user_or_public_list is entered.
+func (s *BaseRedshiftParserListener) EnterRole_or_user_or_public_list(ctx *Role_or_user_or_public_listContext) {
+}
+
+// ExitRole_or_user_or_public_list is called when production role_or_user_or_public_list is exited.
+func (s *BaseRedshiftParserListener) ExitRole_or_user_or_public_list(ctx *Role_or_user_or_public_listContext) {
+}
+
+// EnterRole_or_user_or_public is called when production role_or_user_or_public is entered.
+func (s *BaseRedshiftParserListener) EnterRole_or_user_or_public(ctx *Role_or_user_or_publicContext) {
+}
+
+// ExitRole_or_user_or_public is called when production role_or_user_or_public is exited.
+func (s *BaseRedshiftParserListener) ExitRole_or_user_or_public(ctx *Role_or_user_or_publicContext) {}
+
+// EnterRlspolicyname is called when production rlspolicyname is entered.
+func (s *BaseRedshiftParserListener) EnterRlspolicyname(ctx *RlspolicynameContext) {}
+
+// ExitRlspolicyname is called when production rlspolicyname is exited.
+func (s *BaseRedshiftParserListener) ExitRlspolicyname(ctx *RlspolicynameContext) {}
+
 // EnterDropidentityproviderstmt is called when production dropidentityproviderstmt is entered.
 func (s *BaseRedshiftParserListener) EnterDropidentityproviderstmt(ctx *DropidentityproviderstmtContext) {
 }

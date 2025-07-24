@@ -1588,6 +1588,15 @@ type RedshiftParserListener interface {
 	// EnterDetachrlspolicystmt is called when entering the detachrlspolicystmt production.
 	EnterDetachrlspolicystmt(c *DetachrlspolicystmtContext)
 
+	// EnterRole_or_user_or_public_list is called when entering the role_or_user_or_public_list production.
+	EnterRole_or_user_or_public_list(c *Role_or_user_or_public_listContext)
+
+	// EnterRole_or_user_or_public is called when entering the role_or_user_or_public production.
+	EnterRole_or_user_or_public(c *Role_or_user_or_publicContext)
+
+	// EnterRlspolicyname is called when entering the rlspolicyname production.
+	EnterRlspolicyname(c *RlspolicynameContext)
+
 	// EnterDropidentityproviderstmt is called when entering the dropidentityproviderstmt production.
 	EnterDropidentityproviderstmt(c *DropidentityproviderstmtContext)
 
@@ -4590,6 +4599,15 @@ type RedshiftParserListener interface {
 
 	// ExitDetachrlspolicystmt is called when exiting the detachrlspolicystmt production.
 	ExitDetachrlspolicystmt(c *DetachrlspolicystmtContext)
+
+	// ExitRole_or_user_or_public_list is called when exiting the role_or_user_or_public_list production.
+	ExitRole_or_user_or_public_list(c *Role_or_user_or_public_listContext)
+
+	// ExitRole_or_user_or_public is called when exiting the role_or_user_or_public production.
+	ExitRole_or_user_or_public(c *Role_or_user_or_publicContext)
+
+	// ExitRlspolicyname is called when exiting the rlspolicyname production.
+	ExitRlspolicyname(c *RlspolicynameContext)
 
 	// ExitDropidentityproviderstmt is called when exiting the dropidentityproviderstmt production.
 	ExitDropidentityproviderstmt(c *DropidentityproviderstmtContext)
