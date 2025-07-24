@@ -615,7 +615,7 @@ func (v *BaseRedshiftParserVisitor) VisitTable_attributes(ctx *Table_attributesC
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseRedshiftParserVisitor) VisitOpt_backup_clase(ctx *Opt_backup_claseContext) interface{} {
+func (v *BaseRedshiftParserVisitor) VisitOpt_backup_clause(ctx *Opt_backup_clauseContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -627,11 +627,11 @@ func (v *BaseRedshiftParserVisitor) VisitCreatematviewstmt(ctx *Creatematviewstm
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseRedshiftParserVisitor) VisitCreate_mv_target(ctx *Create_mv_targetContext) interface{} {
+func (v *BaseRedshiftParserVisitor) VisitOpt_table_attributes(ctx *Opt_table_attributesContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseRedshiftParserVisitor) VisitOptnolog(ctx *OptnologContext) interface{} {
+func (v *BaseRedshiftParserVisitor) VisitOpt_auto_refresh(ctx *Opt_auto_refreshContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

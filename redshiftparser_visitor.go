@@ -463,8 +463,8 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#table_attributes.
 	VisitTable_attributes(ctx *Table_attributesContext) interface{}
 
-	// Visit a parse tree produced by RedshiftParser#opt_backup_clase.
-	VisitOpt_backup_clase(ctx *Opt_backup_claseContext) interface{}
+	// Visit a parse tree produced by RedshiftParser#opt_backup_clause.
+	VisitOpt_backup_clause(ctx *Opt_backup_clauseContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#opt_with_data.
 	VisitOpt_with_data(ctx *Opt_with_dataContext) interface{}
@@ -472,11 +472,11 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#creatematviewstmt.
 	VisitCreatematviewstmt(ctx *CreatematviewstmtContext) interface{}
 
-	// Visit a parse tree produced by RedshiftParser#create_mv_target.
-	VisitCreate_mv_target(ctx *Create_mv_targetContext) interface{}
+	// Visit a parse tree produced by RedshiftParser#opt_table_attributes.
+	VisitOpt_table_attributes(ctx *Opt_table_attributesContext) interface{}
 
-	// Visit a parse tree produced by RedshiftParser#optnolog.
-	VisitOptnolog(ctx *OptnologContext) interface{}
+	// Visit a parse tree produced by RedshiftParser#opt_auto_refresh.
+	VisitOpt_auto_refresh(ctx *Opt_auto_refreshContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#refreshmatviewstmt.
 	VisitRefreshmatviewstmt(ctx *RefreshmatviewstmtContext) interface{}

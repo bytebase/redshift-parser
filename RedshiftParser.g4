@@ -1040,7 +1040,7 @@ createasstmt
    ;
 
 create_as_target
-   : qualified_name opt_column_list? opt_backup_clase? table_attributes?
+   : qualified_name opt_column_list? opt_backup_clause? table_attributes?
    ;
 
 table_attributes
@@ -1049,7 +1049,7 @@ table_attributes
    | (COMPOUND | INTERLEAVED)? SORTKEY OPEN_PAREN sortkey_columnlist=columnlist CLOSE_PAREN
    ;
 
-opt_backup_clase
+opt_backup_clause
    : BACKUP (YES_P | NO)
    ;
 
@@ -1058,16 +1058,17 @@ opt_with_data
    ;
 
 creatematviewstmt
-   : CREATE optnolog? MATERIALIZED VIEW (IF_P NOT EXISTS)? create_mv_target AS selectstmt opt_with_data?
+   : CREATE MATERIALIZED VIEW qualified_name opt_backup_clause? opt_table_attributes* opt_auto_refresh? AS selectstmt
    ;
 
-create_mv_target
-   : qualified_name opt_column_list? table_access_method_clause? opt_reloptions? opttablespace?
+opt_table_attributes
+   : DISTSTYLE (EVEN | ALL | KEY)
+   | DISTKEY OPEN_PAREN distkey_identifier=colid CLOSE_PAREN
+   | (COMPOUND | INTERLEAVED)? SORTKEY OPEN_PAREN sortkey_columnlist=columnlist CLOSE_PAREN
    ;
 
-optnolog
-   : UNLOGGED
-   ;
+opt_auto_refresh
+   : AUTO REFRESH (YES_P | NO);
 
 refreshmatviewstmt
    : REFRESH MATERIALIZED VIEW opt_concurrently? qualified_name opt_with_data? (RESTRICT | CASCADE)?

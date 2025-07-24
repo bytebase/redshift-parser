@@ -960,11 +960,11 @@ func (s *BaseRedshiftParserListener) EnterTable_attributes(ctx *Table_attributes
 // ExitTable_attributes is called when production table_attributes is exited.
 func (s *BaseRedshiftParserListener) ExitTable_attributes(ctx *Table_attributesContext) {}
 
-// EnterOpt_backup_clase is called when production opt_backup_clase is entered.
-func (s *BaseRedshiftParserListener) EnterOpt_backup_clase(ctx *Opt_backup_claseContext) {}
+// EnterOpt_backup_clause is called when production opt_backup_clause is entered.
+func (s *BaseRedshiftParserListener) EnterOpt_backup_clause(ctx *Opt_backup_clauseContext) {}
 
-// ExitOpt_backup_clase is called when production opt_backup_clase is exited.
-func (s *BaseRedshiftParserListener) ExitOpt_backup_clase(ctx *Opt_backup_claseContext) {}
+// ExitOpt_backup_clause is called when production opt_backup_clause is exited.
+func (s *BaseRedshiftParserListener) ExitOpt_backup_clause(ctx *Opt_backup_clauseContext) {}
 
 // EnterOpt_with_data is called when production opt_with_data is entered.
 func (s *BaseRedshiftParserListener) EnterOpt_with_data(ctx *Opt_with_dataContext) {}
@@ -978,17 +978,17 @@ func (s *BaseRedshiftParserListener) EnterCreatematviewstmt(ctx *Creatematviewst
 // ExitCreatematviewstmt is called when production creatematviewstmt is exited.
 func (s *BaseRedshiftParserListener) ExitCreatematviewstmt(ctx *CreatematviewstmtContext) {}
 
-// EnterCreate_mv_target is called when production create_mv_target is entered.
-func (s *BaseRedshiftParserListener) EnterCreate_mv_target(ctx *Create_mv_targetContext) {}
+// EnterOpt_table_attributes is called when production opt_table_attributes is entered.
+func (s *BaseRedshiftParserListener) EnterOpt_table_attributes(ctx *Opt_table_attributesContext) {}
 
-// ExitCreate_mv_target is called when production create_mv_target is exited.
-func (s *BaseRedshiftParserListener) ExitCreate_mv_target(ctx *Create_mv_targetContext) {}
+// ExitOpt_table_attributes is called when production opt_table_attributes is exited.
+func (s *BaseRedshiftParserListener) ExitOpt_table_attributes(ctx *Opt_table_attributesContext) {}
 
-// EnterOptnolog is called when production optnolog is entered.
-func (s *BaseRedshiftParserListener) EnterOptnolog(ctx *OptnologContext) {}
+// EnterOpt_auto_refresh is called when production opt_auto_refresh is entered.
+func (s *BaseRedshiftParserListener) EnterOpt_auto_refresh(ctx *Opt_auto_refreshContext) {}
 
-// ExitOptnolog is called when production optnolog is exited.
-func (s *BaseRedshiftParserListener) ExitOptnolog(ctx *OptnologContext) {}
+// ExitOpt_auto_refresh is called when production opt_auto_refresh is exited.
+func (s *BaseRedshiftParserListener) ExitOpt_auto_refresh(ctx *Opt_auto_refreshContext) {}
 
 // EnterRefreshmatviewstmt is called when production refreshmatviewstmt is entered.
 func (s *BaseRedshiftParserListener) EnterRefreshmatviewstmt(ctx *RefreshmatviewstmtContext) {}

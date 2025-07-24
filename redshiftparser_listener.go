@@ -463,8 +463,8 @@ type RedshiftParserListener interface {
 	// EnterTable_attributes is called when entering the table_attributes production.
 	EnterTable_attributes(c *Table_attributesContext)
 
-	// EnterOpt_backup_clase is called when entering the opt_backup_clase production.
-	EnterOpt_backup_clase(c *Opt_backup_claseContext)
+	// EnterOpt_backup_clause is called when entering the opt_backup_clause production.
+	EnterOpt_backup_clause(c *Opt_backup_clauseContext)
 
 	// EnterOpt_with_data is called when entering the opt_with_data production.
 	EnterOpt_with_data(c *Opt_with_dataContext)
@@ -472,11 +472,11 @@ type RedshiftParserListener interface {
 	// EnterCreatematviewstmt is called when entering the creatematviewstmt production.
 	EnterCreatematviewstmt(c *CreatematviewstmtContext)
 
-	// EnterCreate_mv_target is called when entering the create_mv_target production.
-	EnterCreate_mv_target(c *Create_mv_targetContext)
+	// EnterOpt_table_attributes is called when entering the opt_table_attributes production.
+	EnterOpt_table_attributes(c *Opt_table_attributesContext)
 
-	// EnterOptnolog is called when entering the optnolog production.
-	EnterOptnolog(c *OptnologContext)
+	// EnterOpt_auto_refresh is called when entering the opt_auto_refresh production.
+	EnterOpt_auto_refresh(c *Opt_auto_refreshContext)
 
 	// EnterRefreshmatviewstmt is called when entering the refreshmatviewstmt production.
 	EnterRefreshmatviewstmt(c *RefreshmatviewstmtContext)
@@ -3451,8 +3451,8 @@ type RedshiftParserListener interface {
 	// ExitTable_attributes is called when exiting the table_attributes production.
 	ExitTable_attributes(c *Table_attributesContext)
 
-	// ExitOpt_backup_clase is called when exiting the opt_backup_clase production.
-	ExitOpt_backup_clase(c *Opt_backup_claseContext)
+	// ExitOpt_backup_clause is called when exiting the opt_backup_clause production.
+	ExitOpt_backup_clause(c *Opt_backup_clauseContext)
 
 	// ExitOpt_with_data is called when exiting the opt_with_data production.
 	ExitOpt_with_data(c *Opt_with_dataContext)
@@ -3460,11 +3460,11 @@ type RedshiftParserListener interface {
 	// ExitCreatematviewstmt is called when exiting the creatematviewstmt production.
 	ExitCreatematviewstmt(c *CreatematviewstmtContext)
 
-	// ExitCreate_mv_target is called when exiting the create_mv_target production.
-	ExitCreate_mv_target(c *Create_mv_targetContext)
+	// ExitOpt_table_attributes is called when exiting the opt_table_attributes production.
+	ExitOpt_table_attributes(c *Opt_table_attributesContext)
 
-	// ExitOptnolog is called when exiting the optnolog production.
-	ExitOptnolog(c *OptnologContext)
+	// ExitOpt_auto_refresh is called when exiting the opt_auto_refresh production.
+	ExitOpt_auto_refresh(c *Opt_auto_refreshContext)
 
 	// ExitRefreshmatviewstmt is called when exiting the refreshmatviewstmt production.
 	ExitRefreshmatviewstmt(c *RefreshmatviewstmtContext)
