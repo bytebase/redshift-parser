@@ -2020,7 +2020,7 @@ opt_or_replace
    ;
 
 func_py_args_or_sql_args
-   : OPEN_PAREN func_py_args_or_sql_args_list CLOSE_PAREN
+   : OPEN_PAREN func_py_args_or_sql_args_list? CLOSE_PAREN
    ;
 
 func_py_args_or_sql_args_list
