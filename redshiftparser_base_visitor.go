@@ -223,6 +223,10 @@ func (v *BaseRedshiftParserVisitor) VisitAlter_table_cmds(ctx *Alter_table_cmdsC
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitTable_constraint(ctx *Table_constraintContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitPartition_cmd(ctx *Partition_cmdContext) interface{} {
 	return v.VisitChildren(ctx)
 }

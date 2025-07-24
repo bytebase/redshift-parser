@@ -347,6 +347,12 @@ func (s *BaseRedshiftParserListener) EnterAlter_table_cmds(ctx *Alter_table_cmds
 // ExitAlter_table_cmds is called when production alter_table_cmds is exited.
 func (s *BaseRedshiftParserListener) ExitAlter_table_cmds(ctx *Alter_table_cmdsContext) {}
 
+// EnterTable_constraint is called when production table_constraint is entered.
+func (s *BaseRedshiftParserListener) EnterTable_constraint(ctx *Table_constraintContext) {}
+
+// ExitTable_constraint is called when production table_constraint is exited.
+func (s *BaseRedshiftParserListener) ExitTable_constraint(ctx *Table_constraintContext) {}
+
 // EnterPartition_cmd is called when production partition_cmd is entered.
 func (s *BaseRedshiftParserListener) EnterPartition_cmd(ctx *Partition_cmdContext) {}
 

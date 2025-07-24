@@ -169,6 +169,9 @@ type RedshiftParserListener interface {
 	// EnterAlter_table_cmds is called when entering the alter_table_cmds production.
 	EnterAlter_table_cmds(c *Alter_table_cmdsContext)
 
+	// EnterTable_constraint is called when entering the table_constraint production.
+	EnterTable_constraint(c *Table_constraintContext)
+
 	// EnterPartition_cmd is called when entering the partition_cmd production.
 	EnterPartition_cmd(c *Partition_cmdContext)
 
@@ -3153,6 +3156,9 @@ type RedshiftParserListener interface {
 
 	// ExitAlter_table_cmds is called when exiting the alter_table_cmds production.
 	ExitAlter_table_cmds(c *Alter_table_cmdsContext)
+
+	// ExitTable_constraint is called when exiting the table_constraint production.
+	ExitTable_constraint(c *Table_constraintContext)
 
 	// ExitPartition_cmd is called when exiting the partition_cmd production.
 	ExitPartition_cmd(c *Partition_cmdContext)

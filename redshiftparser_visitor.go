@@ -169,6 +169,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#alter_table_cmds.
 	VisitAlter_table_cmds(ctx *Alter_table_cmdsContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#table_constraint.
+	VisitTable_constraint(ctx *Table_constraintContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#partition_cmd.
 	VisitPartition_cmd(ctx *Partition_cmdContext) interface{}
 

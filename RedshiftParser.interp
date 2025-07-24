@@ -385,6 +385,7 @@ null
 'CONJUNCTION'
 'DEFINITION'
 'DATASHARE'
+'FILE'
 'PUBLICACCESSIBLE'
 'INCLUDENEW'
 'IAM_ROLE'
@@ -1269,6 +1270,7 @@ ZONE
 CONJUNCTION
 DEFINITION
 DATASHARE
+FILE
 PUBLICACCESSIBLE
 INCLUDENEW
 IAM_ROLE
@@ -1821,6 +1823,7 @@ checkpointstmt
 discardstmt
 altertablestmt
 alter_table_cmds
+table_constraint
 partition_cmd
 index_partition_cmd
 alter_table_cmd
