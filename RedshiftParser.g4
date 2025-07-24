@@ -4262,6 +4262,7 @@ xml_namespace_el
 typename
    : SETOF? simpletypename (opt_array_bounds? | ARRAY (OPEN_BRACKET iconst CLOSE_BRACKET)?)
    | qualified_name PERCENT (ROWTYPE | TYPE_P)
+   | SUPER
    ;
 
 opt_array_bounds
