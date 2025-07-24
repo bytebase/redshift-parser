@@ -776,7 +776,7 @@ copy_generic_opt_arg_list_item
    ;
 
 createstmt
-   : CREATE opttemp? TABLE (IF_P NOT EXISTS)? qualified_name (
+   : CREATE opttemp? TABLE (IF_P NOT EXISTS)? table_name (
       OPEN_PAREN opttableelementlist? CLOSE_PAREN opt_backup_clause? opt_table_attributes*
       )
    ;
@@ -1054,7 +1054,12 @@ createasstmt
    ;
 
 create_as_target
-   : qualified_name opt_column_list? opt_backup_clause? table_attributes*
+   : table_name opt_column_list? opt_backup_clause_table_attributes?
+   ;
+
+opt_backup_clause_table_attributes
+   : opt_backup_clause opt_table_attributes*
+   | opt_table_attributes+ opt_backup_clause? opt_table_attributes*
    ;
 
 table_attributes
@@ -2690,6 +2695,15 @@ datashare_table_list
 
 datashare_table_name
    : colid (DOT colid)?
+   ;
+
+table_name
+   : qualified_name
+   | temporary_table_name
+   ;
+
+temporary_table_name
+   : TemporaryIdentifier
    ;
 
 datashare_function_list

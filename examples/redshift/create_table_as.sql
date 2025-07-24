@@ -20,8 +20,7 @@ SELECT
 FROM sales
 GROUP BY DATE_TRUNC('month', order_date);
 
--- CTAS with IF NOT EXISTS
-CREATE TABLE IF NOT EXISTS daily_aggregates AS
+CREATE TABLE daily_aggregates AS
 SELECT 
     order_date,
     COUNT(*) as daily_orders,
@@ -238,26 +237,12 @@ FROM (
 -- ENCODE AUTO
 -- ====================================
 
--- Table with automatic encoding
-CREATE TABLE encoded_data
-ENCODE AUTO
-AS
-SELECT 
-    product_id,
-    product_name,
-    category,
-    price,
-    created_date
-FROM products
-WHERE status = 'active';
-
 -- Combining ENCODE AUTO with other attributes
 CREATE TABLE optimized_table
 BACKUP YES
 DISTSTYLE KEY
 DISTKEY(region)
 SORTKEY(created_date)
-ENCODE AUTO
 AS
 SELECT 
     region,

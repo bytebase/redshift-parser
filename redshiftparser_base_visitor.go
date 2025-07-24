@@ -619,6 +619,10 @@ func (v *BaseRedshiftParserVisitor) VisitCreate_as_target(ctx *Create_as_targetC
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitOpt_backup_clause_table_attributes(ctx *Opt_backup_clause_table_attributesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitTable_attributes(ctx *Table_attributesContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -1752,6 +1756,14 @@ func (v *BaseRedshiftParserVisitor) VisitDatashare_table_list(ctx *Datashare_tab
 }
 
 func (v *BaseRedshiftParserVisitor) VisitDatashare_table_name(ctx *Datashare_table_nameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitTable_name(ctx *Table_nameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitTemporary_table_name(ctx *Temporary_table_nameContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

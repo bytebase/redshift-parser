@@ -466,6 +466,9 @@ type RedshiftParserListener interface {
 	// EnterCreate_as_target is called when entering the create_as_target production.
 	EnterCreate_as_target(c *Create_as_targetContext)
 
+	// EnterOpt_backup_clause_table_attributes is called when entering the opt_backup_clause_table_attributes production.
+	EnterOpt_backup_clause_table_attributes(c *Opt_backup_clause_table_attributesContext)
+
 	// EnterTable_attributes is called when entering the table_attributes production.
 	EnterTable_attributes(c *Table_attributesContext)
 
@@ -1317,6 +1320,12 @@ type RedshiftParserListener interface {
 
 	// EnterDatashare_table_name is called when entering the datashare_table_name production.
 	EnterDatashare_table_name(c *Datashare_table_nameContext)
+
+	// EnterTable_name is called when entering the table_name production.
+	EnterTable_name(c *Table_nameContext)
+
+	// EnterTemporary_table_name is called when entering the temporary_table_name production.
+	EnterTemporary_table_name(c *Temporary_table_nameContext)
 
 	// EnterDatashare_function_list is called when entering the datashare_function_list production.
 	EnterDatashare_function_list(c *Datashare_function_listContext)
@@ -3460,6 +3469,9 @@ type RedshiftParserListener interface {
 	// ExitCreate_as_target is called when exiting the create_as_target production.
 	ExitCreate_as_target(c *Create_as_targetContext)
 
+	// ExitOpt_backup_clause_table_attributes is called when exiting the opt_backup_clause_table_attributes production.
+	ExitOpt_backup_clause_table_attributes(c *Opt_backup_clause_table_attributesContext)
+
 	// ExitTable_attributes is called when exiting the table_attributes production.
 	ExitTable_attributes(c *Table_attributesContext)
 
@@ -4311,6 +4323,12 @@ type RedshiftParserListener interface {
 
 	// ExitDatashare_table_name is called when exiting the datashare_table_name production.
 	ExitDatashare_table_name(c *Datashare_table_nameContext)
+
+	// ExitTable_name is called when exiting the table_name production.
+	ExitTable_name(c *Table_nameContext)
+
+	// ExitTemporary_table_name is called when exiting the temporary_table_name production.
+	ExitTemporary_table_name(c *Temporary_table_nameContext)
 
 	// ExitDatashare_function_list is called when exiting the datashare_function_list production.
 	ExitDatashare_function_list(c *Datashare_function_listContext)

@@ -966,6 +966,14 @@ func (s *BaseRedshiftParserListener) EnterCreate_as_target(ctx *Create_as_target
 // ExitCreate_as_target is called when production create_as_target is exited.
 func (s *BaseRedshiftParserListener) ExitCreate_as_target(ctx *Create_as_targetContext) {}
 
+// EnterOpt_backup_clause_table_attributes is called when production opt_backup_clause_table_attributes is entered.
+func (s *BaseRedshiftParserListener) EnterOpt_backup_clause_table_attributes(ctx *Opt_backup_clause_table_attributesContext) {
+}
+
+// ExitOpt_backup_clause_table_attributes is called when production opt_backup_clause_table_attributes is exited.
+func (s *BaseRedshiftParserListener) ExitOpt_backup_clause_table_attributes(ctx *Opt_backup_clause_table_attributesContext) {
+}
+
 // EnterTable_attributes is called when production table_attributes is entered.
 func (s *BaseRedshiftParserListener) EnterTable_attributes(ctx *Table_attributesContext) {}
 
@@ -2758,6 +2766,18 @@ func (s *BaseRedshiftParserListener) EnterDatashare_table_name(ctx *Datashare_ta
 
 // ExitDatashare_table_name is called when production datashare_table_name is exited.
 func (s *BaseRedshiftParserListener) ExitDatashare_table_name(ctx *Datashare_table_nameContext) {}
+
+// EnterTable_name is called when production table_name is entered.
+func (s *BaseRedshiftParserListener) EnterTable_name(ctx *Table_nameContext) {}
+
+// ExitTable_name is called when production table_name is exited.
+func (s *BaseRedshiftParserListener) ExitTable_name(ctx *Table_nameContext) {}
+
+// EnterTemporary_table_name is called when production temporary_table_name is entered.
+func (s *BaseRedshiftParserListener) EnterTemporary_table_name(ctx *Temporary_table_nameContext) {}
+
+// ExitTemporary_table_name is called when production temporary_table_name is exited.
+func (s *BaseRedshiftParserListener) ExitTemporary_table_name(ctx *Temporary_table_nameContext) {}
 
 // EnterDatashare_function_list is called when production datashare_function_list is entered.
 func (s *BaseRedshiftParserListener) EnterDatashare_function_list(ctx *Datashare_function_listContext) {

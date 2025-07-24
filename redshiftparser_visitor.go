@@ -466,6 +466,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#create_as_target.
 	VisitCreate_as_target(ctx *Create_as_targetContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#opt_backup_clause_table_attributes.
+	VisitOpt_backup_clause_table_attributes(ctx *Opt_backup_clause_table_attributesContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#table_attributes.
 	VisitTable_attributes(ctx *Table_attributesContext) interface{}
 
@@ -1317,6 +1320,12 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#datashare_table_name.
 	VisitDatashare_table_name(ctx *Datashare_table_nameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#table_name.
+	VisitTable_name(ctx *Table_nameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#temporary_table_name.
+	VisitTemporary_table_name(ctx *Temporary_table_nameContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#datashare_function_list.
 	VisitDatashare_function_list(ctx *Datashare_function_listContext) interface{}

@@ -3528,6 +3528,10 @@ Identifier
    : IdentifierStartChar IdentifierChar*
    ;
 
+TemporaryIdentifier
+   : '#' Identifier
+   ;
+
 NamespaceUser
    : Identifier ':' Identifier
    ;
