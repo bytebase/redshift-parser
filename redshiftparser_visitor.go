@@ -301,6 +301,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#createstmt.
 	VisitCreatestmt(ctx *CreatestmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#opt_table_attributes.
+	VisitOpt_table_attributes(ctx *Opt_table_attributesContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#opttemp.
 	VisitOpttemp(ctx *OpttempContext) interface{}
 
@@ -474,9 +477,6 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#creatematviewstmt.
 	VisitCreatematviewstmt(ctx *CreatematviewstmtContext) interface{}
-
-	// Visit a parse tree produced by RedshiftParser#opt_table_attributes.
-	VisitOpt_table_attributes(ctx *Opt_table_attributesContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#opt_auto_refresh.
 	VisitOpt_auto_refresh(ctx *Opt_auto_refreshContext) interface{}
@@ -2229,6 +2229,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#simpletypename.
 	VisitSimpletypename(ctx *SimpletypenameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#varbyte.
+	VisitVarbyte(ctx *VarbyteContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#json_type.
 	VisitJson_type(ctx *Json_typeContext) interface{}

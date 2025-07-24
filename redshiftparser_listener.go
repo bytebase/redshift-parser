@@ -301,6 +301,9 @@ type RedshiftParserListener interface {
 	// EnterCreatestmt is called when entering the createstmt production.
 	EnterCreatestmt(c *CreatestmtContext)
 
+	// EnterOpt_table_attributes is called when entering the opt_table_attributes production.
+	EnterOpt_table_attributes(c *Opt_table_attributesContext)
+
 	// EnterOpttemp is called when entering the opttemp production.
 	EnterOpttemp(c *OpttempContext)
 
@@ -474,9 +477,6 @@ type RedshiftParserListener interface {
 
 	// EnterCreatematviewstmt is called when entering the creatematviewstmt production.
 	EnterCreatematviewstmt(c *CreatematviewstmtContext)
-
-	// EnterOpt_table_attributes is called when entering the opt_table_attributes production.
-	EnterOpt_table_attributes(c *Opt_table_attributesContext)
 
 	// EnterOpt_auto_refresh is called when entering the opt_auto_refresh production.
 	EnterOpt_auto_refresh(c *Opt_auto_refreshContext)
@@ -2230,6 +2230,9 @@ type RedshiftParserListener interface {
 	// EnterSimpletypename is called when entering the simpletypename production.
 	EnterSimpletypename(c *SimpletypenameContext)
 
+	// EnterVarbyte is called when entering the varbyte production.
+	EnterVarbyte(c *VarbyteContext)
+
 	// EnterJson_type is called when entering the json_type production.
 	EnterJson_type(c *Json_typeContext)
 
@@ -3292,6 +3295,9 @@ type RedshiftParserListener interface {
 	// ExitCreatestmt is called when exiting the createstmt production.
 	ExitCreatestmt(c *CreatestmtContext)
 
+	// ExitOpt_table_attributes is called when exiting the opt_table_attributes production.
+	ExitOpt_table_attributes(c *Opt_table_attributesContext)
+
 	// ExitOpttemp is called when exiting the opttemp production.
 	ExitOpttemp(c *OpttempContext)
 
@@ -3465,9 +3471,6 @@ type RedshiftParserListener interface {
 
 	// ExitCreatematviewstmt is called when exiting the creatematviewstmt production.
 	ExitCreatematviewstmt(c *CreatematviewstmtContext)
-
-	// ExitOpt_table_attributes is called when exiting the opt_table_attributes production.
-	ExitOpt_table_attributes(c *Opt_table_attributesContext)
 
 	// ExitOpt_auto_refresh is called when exiting the opt_auto_refresh production.
 	ExitOpt_auto_refresh(c *Opt_auto_refreshContext)
@@ -5220,6 +5223,9 @@ type RedshiftParserListener interface {
 
 	// ExitSimpletypename is called when exiting the simpletypename production.
 	ExitSimpletypename(c *SimpletypenameContext)
+
+	// ExitVarbyte is called when exiting the varbyte production.
+	ExitVarbyte(c *VarbyteContext)
 
 	// ExitJson_type is called when exiting the json_type production.
 	ExitJson_type(c *Json_typeContext)

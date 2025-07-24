@@ -1670,6 +1670,15 @@ ZONE
 // These tokens are specific to Amazon Redshift and not part of standard PostgreSQL
 
 // Datashare Commands
+
+VARBYTE
+   : 'VARBYTE'
+   ;
+
+VARBINARY
+   : 'VARBINARY'
+   ;
+
 CONJUNCTION
    : 'CONJUNCTION'
    ;

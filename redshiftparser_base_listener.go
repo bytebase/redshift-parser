@@ -624,6 +624,12 @@ func (s *BaseRedshiftParserListener) EnterCreatestmt(ctx *CreatestmtContext) {}
 // ExitCreatestmt is called when production createstmt is exited.
 func (s *BaseRedshiftParserListener) ExitCreatestmt(ctx *CreatestmtContext) {}
 
+// EnterOpt_table_attributes is called when production opt_table_attributes is entered.
+func (s *BaseRedshiftParserListener) EnterOpt_table_attributes(ctx *Opt_table_attributesContext) {}
+
+// ExitOpt_table_attributes is called when production opt_table_attributes is exited.
+func (s *BaseRedshiftParserListener) ExitOpt_table_attributes(ctx *Opt_table_attributesContext) {}
+
 // EnterOpttemp is called when production opttemp is entered.
 func (s *BaseRedshiftParserListener) EnterOpttemp(ctx *OpttempContext) {}
 
@@ -983,12 +989,6 @@ func (s *BaseRedshiftParserListener) EnterCreatematviewstmt(ctx *Creatematviewst
 
 // ExitCreatematviewstmt is called when production creatematviewstmt is exited.
 func (s *BaseRedshiftParserListener) ExitCreatematviewstmt(ctx *CreatematviewstmtContext) {}
-
-// EnterOpt_table_attributes is called when production opt_table_attributes is entered.
-func (s *BaseRedshiftParserListener) EnterOpt_table_attributes(ctx *Opt_table_attributesContext) {}
-
-// ExitOpt_table_attributes is called when production opt_table_attributes is exited.
-func (s *BaseRedshiftParserListener) ExitOpt_table_attributes(ctx *Opt_table_attributesContext) {}
 
 // EnterOpt_auto_refresh is called when production opt_auto_refresh is entered.
 func (s *BaseRedshiftParserListener) EnterOpt_auto_refresh(ctx *Opt_auto_refreshContext) {}
@@ -4656,6 +4656,12 @@ func (s *BaseRedshiftParserListener) EnterSimpletypename(ctx *SimpletypenameCont
 
 // ExitSimpletypename is called when production simpletypename is exited.
 func (s *BaseRedshiftParserListener) ExitSimpletypename(ctx *SimpletypenameContext) {}
+
+// EnterVarbyte is called when production varbyte is entered.
+func (s *BaseRedshiftParserListener) EnterVarbyte(ctx *VarbyteContext) {}
+
+// ExitVarbyte is called when production varbyte is exited.
+func (s *BaseRedshiftParserListener) ExitVarbyte(ctx *VarbyteContext) {}
 
 // EnterJson_type is called when production json_type is entered.
 func (s *BaseRedshiftParserListener) EnterJson_type(ctx *Json_typeContext) {}

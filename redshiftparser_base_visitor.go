@@ -399,6 +399,10 @@ func (v *BaseRedshiftParserVisitor) VisitCreatestmt(ctx *CreatestmtContext) inte
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitOpt_table_attributes(ctx *Opt_table_attributesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitOpttemp(ctx *OpttempContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -628,10 +632,6 @@ func (v *BaseRedshiftParserVisitor) VisitOpt_with_data(ctx *Opt_with_dataContext
 }
 
 func (v *BaseRedshiftParserVisitor) VisitCreatematviewstmt(ctx *CreatematviewstmtContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseRedshiftParserVisitor) VisitOpt_table_attributes(ctx *Opt_table_attributesContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -2968,6 +2968,10 @@ func (v *BaseRedshiftParserVisitor) VisitOpt_array_bounds(ctx *Opt_array_boundsC
 }
 
 func (v *BaseRedshiftParserVisitor) VisitSimpletypename(ctx *SimpletypenameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitVarbyte(ctx *VarbyteContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
