@@ -304,7 +304,7 @@ dropuserstmt
    ;
 
 dropgroupstmt
-   : DROP GROUP rolespec
+   : DROP GROUP_P rolespec
    ;
 
 

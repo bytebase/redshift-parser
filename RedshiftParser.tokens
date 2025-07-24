@@ -884,7 +884,6 @@ AfterEscapeStringConstantWithNewlineMode_NotContinued=883
 DollarText=884
 EndDollarStringConstant=885
 AfterEscapeStringConstantWithNewlineMode_Continued=886
-GROUP=887
 '$'=1
 '('=2
 ')'=3
