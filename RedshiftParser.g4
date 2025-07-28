@@ -4037,7 +4037,7 @@ explainablestmt
    | updatestmt
    | deletestmt
    | declarecursorstmt
-   | CREATEsstmt
+   | createasstmt
    | creatematviewstmt
    | refreshmatviewstmt
    | executestmt

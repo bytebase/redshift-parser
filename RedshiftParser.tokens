@@ -891,7 +891,6 @@ AfterEscapeStringConstantWithNewlineMode_NotContinued=890
 DollarText=891
 EndDollarStringConstant=892
 AfterEscapeStringConstantWithNewlineMode_Continued=893
-CREATEsstmt=894
 '$'=1
 '('=2
 ')'=3
