@@ -892,12 +892,6 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#fetch_args.
 	VisitFetch_args(ctx *Fetch_argsContext) interface{}
 
-	// Visit a parse tree produced by RedshiftParser#from_in.
-	VisitFrom_in(ctx *From_inContext) interface{}
-
-	// Visit a parse tree produced by RedshiftParser#opt_from_in.
-	VisitOpt_from_in(ctx *Opt_from_inContext) interface{}
-
 	// Visit a parse tree produced by RedshiftParser#grantstmt.
 	VisitGrantstmt(ctx *GrantstmtContext) interface{}
 
@@ -1371,6 +1365,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#fromdatacatalogclause.
 	VisitFromdatacatalogclause(ctx *FromdatacatalogclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#dropschemastmt.
+	VisitDropschemastmt(ctx *DropschemastmtContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#implicitdatacatalogclause.
 	VisitImplicitdatacatalogclause(ctx *ImplicitdatacatalogclauseContext) interface{}

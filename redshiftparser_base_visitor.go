@@ -1187,14 +1187,6 @@ func (v *BaseRedshiftParserVisitor) VisitFetch_args(ctx *Fetch_argsContext) inte
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseRedshiftParserVisitor) VisitFrom_in(ctx *From_inContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseRedshiftParserVisitor) VisitOpt_from_in(ctx *Opt_from_inContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
 func (v *BaseRedshiftParserVisitor) VisitGrantstmt(ctx *GrantstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -1824,6 +1816,10 @@ func (v *BaseRedshiftParserVisitor) VisitCreateexternalschemastmt(ctx *Createext
 }
 
 func (v *BaseRedshiftParserVisitor) VisitFromdatacatalogclause(ctx *FromdatacatalogclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDropschemastmt(ctx *DropschemastmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

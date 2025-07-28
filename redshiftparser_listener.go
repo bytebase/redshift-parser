@@ -892,12 +892,6 @@ type RedshiftParserListener interface {
 	// EnterFetch_args is called when entering the fetch_args production.
 	EnterFetch_args(c *Fetch_argsContext)
 
-	// EnterFrom_in is called when entering the from_in production.
-	EnterFrom_in(c *From_inContext)
-
-	// EnterOpt_from_in is called when entering the opt_from_in production.
-	EnterOpt_from_in(c *Opt_from_inContext)
-
 	// EnterGrantstmt is called when entering the grantstmt production.
 	EnterGrantstmt(c *GrantstmtContext)
 
@@ -1371,6 +1365,9 @@ type RedshiftParserListener interface {
 
 	// EnterFromdatacatalogclause is called when entering the fromdatacatalogclause production.
 	EnterFromdatacatalogclause(c *FromdatacatalogclauseContext)
+
+	// EnterDropschemastmt is called when entering the dropschemastmt production.
+	EnterDropschemastmt(c *DropschemastmtContext)
 
 	// EnterImplicitdatacatalogclause is called when entering the implicitdatacatalogclause production.
 	EnterImplicitdatacatalogclause(c *ImplicitdatacatalogclauseContext)
@@ -3904,12 +3901,6 @@ type RedshiftParserListener interface {
 	// ExitFetch_args is called when exiting the fetch_args production.
 	ExitFetch_args(c *Fetch_argsContext)
 
-	// ExitFrom_in is called when exiting the from_in production.
-	ExitFrom_in(c *From_inContext)
-
-	// ExitOpt_from_in is called when exiting the opt_from_in production.
-	ExitOpt_from_in(c *Opt_from_inContext)
-
 	// ExitGrantstmt is called when exiting the grantstmt production.
 	ExitGrantstmt(c *GrantstmtContext)
 
@@ -4383,6 +4374,9 @@ type RedshiftParserListener interface {
 
 	// ExitFromdatacatalogclause is called when exiting the fromdatacatalogclause production.
 	ExitFromdatacatalogclause(c *FromdatacatalogclauseContext)
+
+	// ExitDropschemastmt is called when exiting the dropschemastmt production.
+	ExitDropschemastmt(c *DropschemastmtContext)
 
 	// ExitImplicitdatacatalogclause is called when exiting the implicitdatacatalogclause production.
 	ExitImplicitdatacatalogclause(c *ImplicitdatacatalogclauseContext)

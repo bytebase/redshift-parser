@@ -115,6 +115,7 @@ stmt
    | dropopclassstmt
    | dropopfamilystmt
    | dropownedstmt
+   | dropschemastmt
    | dropstmt
    | dropsubscriptionstmt
    | droptablespacestmt
@@ -1694,6 +1695,7 @@ object_type_any_name
 
 object_type_name
    : drop_type_name
+   | SCHEMA
    | DATABASE
    | ROLE
    | SUBSCRIPTION
@@ -1707,7 +1709,6 @@ drop_type_name
    | FOREIGN DATA_P WRAPPER
    | opt_procedural? LANGUAGE
    | PUBLICATION
-   | SCHEMA
    | SERVER
    ;
 
@@ -1792,35 +1793,13 @@ security_label
 
 fetchstmt
    : FETCH fetch_args
-   | MOVE fetch_args
    ;
 
 fetch_args
-   : cursor_name
-   | from_in cursor_name
-   | NEXT opt_from_in? cursor_name
-   | PRIOR opt_from_in? cursor_name
-   | FIRST_P opt_from_in? cursor_name
-   | LAST_P opt_from_in? cursor_name
-   | ABSOLUTE_P signediconst opt_from_in? cursor_name
-   | RELATIVE_P signediconst opt_from_in? cursor_name
-   | signediconst opt_from_in? cursor_name
-   | ALL opt_from_in? cursor_name
-   | FORWARD opt_from_in? cursor_name
-   | FORWARD signediconst opt_from_in? cursor_name
-   | FORWARD ALL opt_from_in? cursor_name
-   | BACKWARD opt_from_in? cursor_name
-   | BACKWARD signediconst opt_from_in? cursor_name
-   | BACKWARD ALL opt_from_in? cursor_name
-   ;
-
-from_in
-   : FROM
-   | IN_P
-   ;
-
-opt_from_in
-   : from_in
+   : NEXT FROM cursor_name
+   | ALL FROM cursor_name
+   | FORWARD (signediconst | ALL)? FROM cursor_name
+   | FROM cursor_name
    ;
 
 grantstmt
@@ -2790,6 +2769,9 @@ fromdatacatalogclause
       (CREATE EXTERNAL DATABASE opt_if_not_exists)?
       (CATALOG_ID sconst)?
     ;
+
+dropschemastmt:
+    DROP SCHEMA opt_if_exists? qualified_name (COMMA qualified_name)* (DROP EXTERNAL DATABASE)? (CASCADE | RESTRICT)?;
 
 // Implicit data catalog clause (without explicit DATA CATALOG keywords)
 implicitdatacatalogclause

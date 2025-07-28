@@ -1872,18 +1872,6 @@ func (s *BaseRedshiftParserListener) EnterFetch_args(ctx *Fetch_argsContext) {}
 // ExitFetch_args is called when production fetch_args is exited.
 func (s *BaseRedshiftParserListener) ExitFetch_args(ctx *Fetch_argsContext) {}
 
-// EnterFrom_in is called when production from_in is entered.
-func (s *BaseRedshiftParserListener) EnterFrom_in(ctx *From_inContext) {}
-
-// ExitFrom_in is called when production from_in is exited.
-func (s *BaseRedshiftParserListener) ExitFrom_in(ctx *From_inContext) {}
-
-// EnterOpt_from_in is called when production opt_from_in is entered.
-func (s *BaseRedshiftParserListener) EnterOpt_from_in(ctx *Opt_from_inContext) {}
-
-// ExitOpt_from_in is called when production opt_from_in is exited.
-func (s *BaseRedshiftParserListener) ExitOpt_from_in(ctx *Opt_from_inContext) {}
-
 // EnterGrantstmt is called when production grantstmt is entered.
 func (s *BaseRedshiftParserListener) EnterGrantstmt(ctx *GrantstmtContext) {}
 
@@ -2879,6 +2867,12 @@ func (s *BaseRedshiftParserListener) EnterFromdatacatalogclause(ctx *Fromdatacat
 
 // ExitFromdatacatalogclause is called when production fromdatacatalogclause is exited.
 func (s *BaseRedshiftParserListener) ExitFromdatacatalogclause(ctx *FromdatacatalogclauseContext) {}
+
+// EnterDropschemastmt is called when production dropschemastmt is entered.
+func (s *BaseRedshiftParserListener) EnterDropschemastmt(ctx *DropschemastmtContext) {}
+
+// ExitDropschemastmt is called when production dropschemastmt is exited.
+func (s *BaseRedshiftParserListener) ExitDropschemastmt(ctx *DropschemastmtContext) {}
 
 // EnterImplicitdatacatalogclause is called when production implicitdatacatalogclause is entered.
 func (s *BaseRedshiftParserListener) EnterImplicitdatacatalogclause(ctx *ImplicitdatacatalogclauseContext) {

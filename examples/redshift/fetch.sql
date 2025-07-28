@@ -67,11 +67,6 @@ FETCH NEXT FROM monthly_summary_cursor;
 FETCH ALL FROM customer_detail_cursor;
 FETCH FORWARD 50 FROM transaction_history_cursor;
 
--- FETCH with parameter placeholders for count
-FETCH FORWARD $1 FROM cursor1;
-FETCH FORWARD $2 FROM my_cursor;
-FETCH FORWARD $10 FROM sales_cursor;
-
 -- Examples from AWS documentation
 -- Fetch the first 5 rows in the cursor lollapalooza
 FETCH FORWARD 5 FROM lollapalooza;
