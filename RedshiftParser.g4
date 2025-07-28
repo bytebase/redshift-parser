@@ -3705,7 +3705,7 @@ showmodelstmt
     ;
 
 showprocedurestmt
-    : SHOW PROCEDURE qualified_name ('(' datatypelist ')')?
+    : SHOW PROCEDURE qualified_name func_args?
     ;
 
 showschemasstmt  
