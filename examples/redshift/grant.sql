@@ -18,8 +18,6 @@ GRANT ALL ON TABLE sales TO dbuser WITH GRANT OPTION;
 -- Column-level privileges (from AWS documentation)
 GRANT SELECT (col1) ON TABLE t1 TO PUBLIC;
 GRANT UPDATE (col1, col2) ON TABLE t1 TO user1;
-GRANT INSERT (col1, col2, col3) ON TABLE sales TO dbuser;
-GRANT REFERENCES (customer_id) ON TABLE customers TO app_user;
 
 -- Grant to PUBLIC
 GRANT SELECT ON TABLE public_data TO PUBLIC;
@@ -40,7 +38,6 @@ GRANT USAGE ON DATABASE prod_db TO readonly_user;
 GRANT TEMPORARY ON DATABASE session_db TO temp_user;
 GRANT TEMP ON DATABASE session_db TO temp_user;
 GRANT ALTER ON DATABASE mydb TO admin_user;
-GRANT DROP ON DATABASE old_db TO cleanup_user;
 GRANT ALL ON DATABASE mydb TO dba_role;
 GRANT ALL PRIVILEGES ON DATABASE mydb TO admin_group;
 
@@ -89,13 +86,8 @@ GRANT EXECUTE ON FUNCTION f1() TO dbuser WITH GRANT OPTION;
 GRANT EXECUTE ON PROCEDURE proc1() TO admin WITH GRANT OPTION;
 
 -- Datashare privileges (from AWS documentation)
-GRANT ALTER ON DATASHARE salesshare TO namespace 'a3f3ae8c-14e8-45ba-9eaa-b42b9b7ae635';
-GRANT SHARE ON DATASHARE salesshare TO namespace '7d717b7f-9606-4ada-8005-8c85b4e97600';
-GRANT USAGE ON DATASHARE salesshare TO dbuser;
-
--- Multiple datashare privileges
-GRANT ALTER, SHARE ON DATASHARE salesshare TO admin_user;
-GRANT USAGE, ALTER ON DATASHARE reporting_share TO analytics_team;
+GRANT ALTER ON DATASHARE salesshare TO myuser WITH GRANT OPTION;
+GRANT USAGE ON DATASHARE salesshare TO namespace 'a3f3ae8c-14e8-45ba-9eaa-b42b9b7ae635';
 
 -- Role privileges (from AWS documentation)
 GRANT ROLE sample_role1 TO reguser;
@@ -117,7 +109,7 @@ GRANT ALL ON MODEL price_optimization_model TO pricing_team WITH GRANT OPTION;
 
 -- Complex combinations
 GRANT SELECT, INSERT, UPDATE ON TABLE orders TO ROLE order_manager, GROUP sales_team;
-GRANT ALL ON TABLE customers TO user1, ROLE customer_admin, GROUP support_team WITH GRANT OPTION;
+GRANT ALL ON TABLE customers TO user1 WITH GRANT OPTION, ROLE customer_admin, GROUP support_team;
 
 -- Cross-object privileges
 GRANT CREATE ON DATABASE prod_db TO schema_creator;
@@ -127,7 +119,7 @@ GRANT SELECT ON TABLE new_schema.products TO product_analyst;
 -- Real-world examples
 GRANT SELECT ON TABLE fact_sales TO ROLE analyst_role;
 GRANT INSERT, UPDATE ON TABLE staging_orders TO ROLE etl_role;
-GRANT ALL ON TABLE dim_customer TO ROLE data_engineer WITH GRANT OPTION;
+GRANT ALL ON TABLE dim_customer TO data_engineer WITH GRANT OPTION;
 GRANT USAGE ON SCHEMA analytics TO ROLE business_analyst;
 GRANT CREATE ON DATABASE warehouse TO ROLE data_architect;
 

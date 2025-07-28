@@ -2657,6 +2657,35 @@ DELIMITED
    : 'DELIMITED'
    ;
 
+// Privilges and roles tokens
+USAGE
+   : 'USAGE'
+   ;
+
+IGNORE
+    : 'IGNORE'
+    ;
+
+LANGUAGES
+   : 'LANGUAGES'
+   ;
+
+JOB
+   : 'JOB'
+   ;
+
+JOBS
+    : 'JOBS'
+    ;
+
+VIA
+   : 'VIA'
+   ;
+
+ASSUMEROLE
+    : 'ASSUMEROLE'
+    ;
+
 // External function tokens
 RETRY_TIMEOUT
    : 'RETRY_TIMEOUT'

@@ -1878,6 +1878,465 @@ func (s *BaseRedshiftParserListener) EnterGrantstmt(ctx *GrantstmtContext) {}
 // ExitGrantstmt is called when production grantstmt is exited.
 func (s *BaseRedshiftParserListener) ExitGrantstmt(ctx *GrantstmtContext) {}
 
+// EnterGrant_permissions_for_rls_lookup_tables is called when production grant_permissions_for_rls_lookup_tables is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_permissions_for_rls_lookup_tables(ctx *Grant_permissions_for_rls_lookup_tablesContext) {
+}
+
+// ExitGrant_permissions_for_rls_lookup_tables is called when production grant_permissions_for_rls_lookup_tables is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_permissions_for_rls_lookup_tables(ctx *Grant_permissions_for_rls_lookup_tablesContext) {
+}
+
+// EnterGrant_explain_permissions_for_row_level_security_policy_filters is called when production grant_explain_permissions_for_row_level_security_policy_filters is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_explain_permissions_for_row_level_security_policy_filters(ctx *Grant_explain_permissions_for_row_level_security_policy_filtersContext) {
+}
+
+// ExitGrant_explain_permissions_for_row_level_security_policy_filters is called when production grant_explain_permissions_for_row_level_security_policy_filters is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_explain_permissions_for_row_level_security_policy_filters(ctx *Grant_explain_permissions_for_row_level_security_policy_filtersContext) {
+}
+
+// EnterGrant_machine_learning_permissions is called when production grant_machine_learning_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_machine_learning_permissions(ctx *Grant_machine_learning_permissionsContext) {
+}
+
+// ExitGrant_machine_learning_permissions is called when production grant_machine_learning_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_machine_learning_permissions(ctx *Grant_machine_learning_permissionsContext) {
+}
+
+// EnterGrant_role_permissions is called when production grant_role_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_role_permissions(ctx *Grant_role_permissionsContext) {
+}
+
+// ExitGrant_role_permissions is called when production grant_role_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_role_permissions(ctx *Grant_role_permissionsContext) {}
+
+// EnterGrant_role_permission_target_list is called when production grant_role_permission_target_list is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_role_permission_target_list(ctx *Grant_role_permission_target_listContext) {
+}
+
+// ExitGrant_role_permission_target_list is called when production grant_role_permission_target_list is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_role_permission_target_list(ctx *Grant_role_permission_target_listContext) {
+}
+
+// EnterGrant_role_permission_target_list_item is called when production grant_role_permission_target_list_item is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_role_permission_target_list_item(ctx *Grant_role_permission_target_list_itemContext) {
+}
+
+// ExitGrant_role_permission_target_list_item is called when production grant_role_permission_target_list_item is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_role_permission_target_list_item(ctx *Grant_role_permission_target_list_itemContext) {
+}
+
+// EnterSystem_permissions is called when production system_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterSystem_permissions(ctx *System_permissionsContext) {}
+
+// ExitSystem_permissions is called when production system_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitSystem_permissions(ctx *System_permissionsContext) {}
+
+// EnterSystem_permissions_item is called when production system_permissions_item is entered.
+func (s *BaseRedshiftParserListener) EnterSystem_permissions_item(ctx *System_permissions_itemContext) {
+}
+
+// ExitSystem_permissions_item is called when production system_permissions_item is exited.
+func (s *BaseRedshiftParserListener) ExitSystem_permissions_item(ctx *System_permissions_itemContext) {
+}
+
+// EnterOpt_with_admin_option is called when production opt_with_admin_option is entered.
+func (s *BaseRedshiftParserListener) EnterOpt_with_admin_option(ctx *Opt_with_admin_optionContext) {}
+
+// ExitOpt_with_admin_option is called when production opt_with_admin_option is exited.
+func (s *BaseRedshiftParserListener) ExitOpt_with_admin_option(ctx *Opt_with_admin_optionContext) {}
+
+// EnterGrant_scoped_permissions is called when production grant_scoped_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_scoped_permissions(ctx *Grant_scoped_permissionsContext) {
+}
+
+// ExitGrant_scoped_permissions is called when production grant_scoped_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_scoped_permissions(ctx *Grant_scoped_permissionsContext) {
+}
+
+// EnterGrant_scoped_schemas_permissions is called when production grant_scoped_schemas_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_scoped_schemas_permissions(ctx *Grant_scoped_schemas_permissionsContext) {
+}
+
+// ExitGrant_scoped_schemas_permissions is called when production grant_scoped_schemas_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_scoped_schemas_permissions(ctx *Grant_scoped_schemas_permissionsContext) {
+}
+
+// EnterGrant_scoped_tables_permissions is called when production grant_scoped_tables_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_scoped_tables_permissions(ctx *Grant_scoped_tables_permissionsContext) {
+}
+
+// ExitGrant_scoped_tables_permissions is called when production grant_scoped_tables_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_scoped_tables_permissions(ctx *Grant_scoped_tables_permissionsContext) {
+}
+
+// EnterGrant_scoped_functions_permissions is called when production grant_scoped_functions_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_scoped_functions_permissions(ctx *Grant_scoped_functions_permissionsContext) {
+}
+
+// ExitGrant_scoped_functions_permissions is called when production grant_scoped_functions_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_scoped_functions_permissions(ctx *Grant_scoped_functions_permissionsContext) {
+}
+
+// EnterGrant_scoped_procedures_permissions is called when production grant_scoped_procedures_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_scoped_procedures_permissions(ctx *Grant_scoped_procedures_permissionsContext) {
+}
+
+// ExitGrant_scoped_procedures_permissions is called when production grant_scoped_procedures_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_scoped_procedures_permissions(ctx *Grant_scoped_procedures_permissionsContext) {
+}
+
+// EnterGrant_scoped_languages_permissions is called when production grant_scoped_languages_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_scoped_languages_permissions(ctx *Grant_scoped_languages_permissionsContext) {
+}
+
+// ExitGrant_scoped_languages_permissions is called when production grant_scoped_languages_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_scoped_languages_permissions(ctx *Grant_scoped_languages_permissionsContext) {
+}
+
+// EnterGrant_scoped_copy_jobs_permissions is called when production grant_scoped_copy_jobs_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_scoped_copy_jobs_permissions(ctx *Grant_scoped_copy_jobs_permissionsContext) {
+}
+
+// ExitGrant_scoped_copy_jobs_permissions is called when production grant_scoped_copy_jobs_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_scoped_copy_jobs_permissions(ctx *Grant_scoped_copy_jobs_permissionsContext) {
+}
+
+// EnterGrantee_list_without_public is called when production grantee_list_without_public is entered.
+func (s *BaseRedshiftParserListener) EnterGrantee_list_without_public(ctx *Grantee_list_without_publicContext) {
+}
+
+// ExitGrantee_list_without_public is called when production grantee_list_without_public is exited.
+func (s *BaseRedshiftParserListener) ExitGrantee_list_without_public(ctx *Grantee_list_without_publicContext) {
+}
+
+// EnterGrantee_without_public is called when production grantee_without_public is entered.
+func (s *BaseRedshiftParserListener) EnterGrantee_without_public(ctx *Grantee_without_publicContext) {
+}
+
+// ExitGrantee_without_public is called when production grantee_without_public is exited.
+func (s *BaseRedshiftParserListener) ExitGrantee_without_public(ctx *Grantee_without_publicContext) {}
+
+// EnterGrant_datashare_permissions is called when production grant_datashare_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_datashare_permissions(ctx *Grant_datashare_permissionsContext) {
+}
+
+// ExitGrant_datashare_permissions is called when production grant_datashare_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_datashare_permissions(ctx *Grant_datashare_permissionsContext) {
+}
+
+// EnterGrant_spectrum_integration_permissions is called when production grant_spectrum_integration_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_spectrum_integration_permissions(ctx *Grant_spectrum_integration_permissionsContext) {
+}
+
+// ExitGrant_spectrum_integration_permissions is called when production grant_spectrum_integration_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_spectrum_integration_permissions(ctx *Grant_spectrum_integration_permissionsContext) {
+}
+
+// EnterGrant_spectrum_integration_external_schema_permissions is called when production grant_spectrum_integration_external_schema_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_spectrum_integration_external_schema_permissions(ctx *Grant_spectrum_integration_external_schema_permissionsContext) {
+}
+
+// ExitGrant_spectrum_integration_external_schema_permissions is called when production grant_spectrum_integration_external_schema_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_spectrum_integration_external_schema_permissions(ctx *Grant_spectrum_integration_external_schema_permissionsContext) {
+}
+
+// EnterSpectrum_integration_external_schema_permission_list is called when production spectrum_integration_external_schema_permission_list is entered.
+func (s *BaseRedshiftParserListener) EnterSpectrum_integration_external_schema_permission_list(ctx *Spectrum_integration_external_schema_permission_listContext) {
+}
+
+// ExitSpectrum_integration_external_schema_permission_list is called when production spectrum_integration_external_schema_permission_list is exited.
+func (s *BaseRedshiftParserListener) ExitSpectrum_integration_external_schema_permission_list(ctx *Spectrum_integration_external_schema_permission_listContext) {
+}
+
+// EnterSpectrum_integration_external_schema_permission is called when production spectrum_integration_external_schema_permission is entered.
+func (s *BaseRedshiftParserListener) EnterSpectrum_integration_external_schema_permission(ctx *Spectrum_integration_external_schema_permissionContext) {
+}
+
+// ExitSpectrum_integration_external_schema_permission is called when production spectrum_integration_external_schema_permission is exited.
+func (s *BaseRedshiftParserListener) ExitSpectrum_integration_external_schema_permission(ctx *Spectrum_integration_external_schema_permissionContext) {
+}
+
+// EnterGrant_spectrum_integration_external_table_permissions is called when production grant_spectrum_integration_external_table_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_spectrum_integration_external_table_permissions(ctx *Grant_spectrum_integration_external_table_permissionsContext) {
+}
+
+// ExitGrant_spectrum_integration_external_table_permissions is called when production grant_spectrum_integration_external_table_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_spectrum_integration_external_table_permissions(ctx *Grant_spectrum_integration_external_table_permissionsContext) {
+}
+
+// EnterSpectrum_integration_external_table_permission is called when production spectrum_integration_external_table_permission is entered.
+func (s *BaseRedshiftParserListener) EnterSpectrum_integration_external_table_permission(ctx *Spectrum_integration_external_table_permissionContext) {
+}
+
+// ExitSpectrum_integration_external_table_permission is called when production spectrum_integration_external_table_permission is exited.
+func (s *BaseRedshiftParserListener) ExitSpectrum_integration_external_table_permission(ctx *Spectrum_integration_external_table_permissionContext) {
+}
+
+// EnterSpectrum_integration_external_table_permission_list is called when production spectrum_integration_external_table_permission_list is entered.
+func (s *BaseRedshiftParserListener) EnterSpectrum_integration_external_table_permission_list(ctx *Spectrum_integration_external_table_permission_listContext) {
+}
+
+// ExitSpectrum_integration_external_table_permission_list is called when production spectrum_integration_external_table_permission_list is exited.
+func (s *BaseRedshiftParserListener) ExitSpectrum_integration_external_table_permission_list(ctx *Spectrum_integration_external_table_permission_listContext) {
+}
+
+// EnterGrant_spectrum_integration_extenral_column_permissions is called when production grant_spectrum_integration_extenral_column_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_spectrum_integration_extenral_column_permissions(ctx *Grant_spectrum_integration_extenral_column_permissionsContext) {
+}
+
+// ExitGrant_spectrum_integration_extenral_column_permissions is called when production grant_spectrum_integration_extenral_column_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_spectrum_integration_extenral_column_permissions(ctx *Grant_spectrum_integration_extenral_column_permissionsContext) {
+}
+
+// EnterIamrolelist_or_public is called when production iamrolelist_or_public is entered.
+func (s *BaseRedshiftParserListener) EnterIamrolelist_or_public(ctx *Iamrolelist_or_publicContext) {}
+
+// ExitIamrolelist_or_public is called when production iamrolelist_or_public is exited.
+func (s *BaseRedshiftParserListener) ExitIamrolelist_or_public(ctx *Iamrolelist_or_publicContext) {}
+
+// EnterGrant_assume_role_permissions is called when production grant_assume_role_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_assume_role_permissions(ctx *Grant_assume_role_permissionsContext) {
+}
+
+// ExitGrant_assume_role_permissions is called when production grant_assume_role_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_assume_role_permissions(ctx *Grant_assume_role_permissionsContext) {
+}
+
+// EnterGrant_assume_role_for_list is called when production grant_assume_role_for_list is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_assume_role_for_list(ctx *Grant_assume_role_for_listContext) {
+}
+
+// ExitGrant_assume_role_for_list is called when production grant_assume_role_for_list is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_assume_role_for_list(ctx *Grant_assume_role_for_listContext) {
+}
+
+// EnterGrant_assume_role_for_item is called when production grant_assume_role_for_item is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_assume_role_for_item(ctx *Grant_assume_role_for_itemContext) {
+}
+
+// ExitGrant_assume_role_for_item is called when production grant_assume_role_for_item is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_assume_role_for_item(ctx *Grant_assume_role_for_itemContext) {
+}
+
+// EnterGrant_assume_role_target is called when production grant_assume_role_target is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_assume_role_target(ctx *Grant_assume_role_targetContext) {
+}
+
+// ExitGrant_assume_role_target is called when production grant_assume_role_target is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_assume_role_target(ctx *Grant_assume_role_targetContext) {
+}
+
+// EnterGrant_column_level_permissions is called when production grant_column_level_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_column_level_permissions(ctx *Grant_column_level_permissionsContext) {
+}
+
+// ExitGrant_column_level_permissions is called when production grant_column_level_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_column_level_permissions(ctx *Grant_column_level_permissionsContext) {
+}
+
+// EnterColumn_privilege_target is called when production column_privilege_target is entered.
+func (s *BaseRedshiftParserListener) EnterColumn_privilege_target(ctx *Column_privilege_targetContext) {
+}
+
+// ExitColumn_privilege_target is called when production column_privilege_target is exited.
+func (s *BaseRedshiftParserListener) ExitColumn_privilege_target(ctx *Column_privilege_targetContext) {
+}
+
+// EnterColumn_privilege_list is called when production column_privilege_list is entered.
+func (s *BaseRedshiftParserListener) EnterColumn_privilege_list(ctx *Column_privilege_listContext) {}
+
+// ExitColumn_privilege_list is called when production column_privilege_list is exited.
+func (s *BaseRedshiftParserListener) ExitColumn_privilege_list(ctx *Column_privilege_listContext) {}
+
+// EnterColumn_all_privilege is called when production column_all_privilege is entered.
+func (s *BaseRedshiftParserListener) EnterColumn_all_privilege(ctx *Column_all_privilegeContext) {}
+
+// ExitColumn_all_privilege is called when production column_all_privilege is exited.
+func (s *BaseRedshiftParserListener) ExitColumn_all_privilege(ctx *Column_all_privilegeContext) {}
+
+// EnterColumn_select_update_privilege is called when production column_select_update_privilege is entered.
+func (s *BaseRedshiftParserListener) EnterColumn_select_update_privilege(ctx *Column_select_update_privilegeContext) {
+}
+
+// ExitColumn_select_update_privilege is called when production column_select_update_privilege is exited.
+func (s *BaseRedshiftParserListener) ExitColumn_select_update_privilege(ctx *Column_select_update_privilegeContext) {
+}
+
+// EnterCommon_grant is called when production common_grant is entered.
+func (s *BaseRedshiftParserListener) EnterCommon_grant(ctx *Common_grantContext) {}
+
+// ExitCommon_grant is called when production common_grant is exited.
+func (s *BaseRedshiftParserListener) ExitCommon_grant(ctx *Common_grantContext) {}
+
+// EnterCopy_job_privilege_list is called when production copy_job_privilege_list is entered.
+func (s *BaseRedshiftParserListener) EnterCopy_job_privilege_list(ctx *Copy_job_privilege_listContext) {
+}
+
+// ExitCopy_job_privilege_list is called when production copy_job_privilege_list is exited.
+func (s *BaseRedshiftParserListener) ExitCopy_job_privilege_list(ctx *Copy_job_privilege_listContext) {
+}
+
+// EnterCopy_job_privilege is called when production copy_job_privilege is entered.
+func (s *BaseRedshiftParserListener) EnterCopy_job_privilege(ctx *Copy_job_privilegeContext) {}
+
+// ExitCopy_job_privilege is called when production copy_job_privilege is exited.
+func (s *BaseRedshiftParserListener) ExitCopy_job_privilege(ctx *Copy_job_privilegeContext) {}
+
+// EnterCopy_job_target is called when production copy_job_target is entered.
+func (s *BaseRedshiftParserListener) EnterCopy_job_target(ctx *Copy_job_targetContext) {}
+
+// ExitCopy_job_target is called when production copy_job_target is exited.
+func (s *BaseRedshiftParserListener) ExitCopy_job_target(ctx *Copy_job_targetContext) {}
+
+// EnterCopy_job_name is called when production copy_job_name is entered.
+func (s *BaseRedshiftParserListener) EnterCopy_job_name(ctx *Copy_job_nameContext) {}
+
+// ExitCopy_job_name is called when production copy_job_name is exited.
+func (s *BaseRedshiftParserListener) ExitCopy_job_name(ctx *Copy_job_nameContext) {}
+
+// EnterLanguage_privilege_list is called when production language_privilege_list is entered.
+func (s *BaseRedshiftParserListener) EnterLanguage_privilege_list(ctx *Language_privilege_listContext) {
+}
+
+// ExitLanguage_privilege_list is called when production language_privilege_list is exited.
+func (s *BaseRedshiftParserListener) ExitLanguage_privilege_list(ctx *Language_privilege_listContext) {
+}
+
+// EnterGrant_language_target is called when production grant_language_target is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_language_target(ctx *Grant_language_targetContext) {}
+
+// ExitGrant_language_target is called when production grant_language_target is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_language_target(ctx *Grant_language_targetContext) {}
+
+// EnterGrant_procedure_target is called when production grant_procedure_target is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_procedure_target(ctx *Grant_procedure_targetContext) {
+}
+
+// ExitGrant_procedure_target is called when production grant_procedure_target is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_procedure_target(ctx *Grant_procedure_targetContext) {}
+
+// EnterProcedure_privilege_list is called when production procedure_privilege_list is entered.
+func (s *BaseRedshiftParserListener) EnterProcedure_privilege_list(ctx *Procedure_privilege_listContext) {
+}
+
+// ExitProcedure_privilege_list is called when production procedure_privilege_list is exited.
+func (s *BaseRedshiftParserListener) ExitProcedure_privilege_list(ctx *Procedure_privilege_listContext) {
+}
+
+// EnterProcedure_privilege is called when production procedure_privilege is entered.
+func (s *BaseRedshiftParserListener) EnterProcedure_privilege(ctx *Procedure_privilegeContext) {}
+
+// ExitProcedure_privilege is called when production procedure_privilege is exited.
+func (s *BaseRedshiftParserListener) ExitProcedure_privilege(ctx *Procedure_privilegeContext) {}
+
+// EnterFunction_privilege_list is called when production function_privilege_list is entered.
+func (s *BaseRedshiftParserListener) EnterFunction_privilege_list(ctx *Function_privilege_listContext) {
+}
+
+// ExitFunction_privilege_list is called when production function_privilege_list is exited.
+func (s *BaseRedshiftParserListener) ExitFunction_privilege_list(ctx *Function_privilege_listContext) {
+}
+
+// EnterFunction_privilege is called when production function_privilege is entered.
+func (s *BaseRedshiftParserListener) EnterFunction_privilege(ctx *Function_privilegeContext) {}
+
+// ExitFunction_privilege is called when production function_privilege is exited.
+func (s *BaseRedshiftParserListener) ExitFunction_privilege(ctx *Function_privilegeContext) {}
+
+// EnterGrant_function_target is called when production grant_function_target is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_function_target(ctx *Grant_function_targetContext) {}
+
+// ExitGrant_function_target is called when production grant_function_target is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_function_target(ctx *Grant_function_targetContext) {}
+
+// EnterGrant_schema_target is called when production grant_schema_target is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_schema_target(ctx *Grant_schema_targetContext) {}
+
+// ExitGrant_schema_target is called when production grant_schema_target is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_schema_target(ctx *Grant_schema_targetContext) {}
+
+// EnterSchema_privilege_list is called when production schema_privilege_list is entered.
+func (s *BaseRedshiftParserListener) EnterSchema_privilege_list(ctx *Schema_privilege_listContext) {}
+
+// ExitSchema_privilege_list is called when production schema_privilege_list is exited.
+func (s *BaseRedshiftParserListener) ExitSchema_privilege_list(ctx *Schema_privilege_listContext) {}
+
+// EnterSchema_privilege is called when production schema_privilege is entered.
+func (s *BaseRedshiftParserListener) EnterSchema_privilege(ctx *Schema_privilegeContext) {}
+
+// ExitSchema_privilege is called when production schema_privilege is exited.
+func (s *BaseRedshiftParserListener) ExitSchema_privilege(ctx *Schema_privilegeContext) {}
+
+// EnterDatabase_privilege_list is called when production database_privilege_list is entered.
+func (s *BaseRedshiftParserListener) EnterDatabase_privilege_list(ctx *Database_privilege_listContext) {
+}
+
+// ExitDatabase_privilege_list is called when production database_privilege_list is exited.
+func (s *BaseRedshiftParserListener) ExitDatabase_privilege_list(ctx *Database_privilege_listContext) {
+}
+
+// EnterDatabase_privilege is called when production database_privilege is entered.
+func (s *BaseRedshiftParserListener) EnterDatabase_privilege(ctx *Database_privilegeContext) {}
+
+// ExitDatabase_privilege is called when production database_privilege is exited.
+func (s *BaseRedshiftParserListener) ExitDatabase_privilege(ctx *Database_privilegeContext) {}
+
+// EnterGrant_database_target is called when production grant_database_target is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_database_target(ctx *Grant_database_targetContext) {}
+
+// ExitGrant_database_target is called when production grant_database_target is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_database_target(ctx *Grant_database_targetContext) {}
+
+// EnterGrant_table_target is called when production grant_table_target is entered.
+func (s *BaseRedshiftParserListener) EnterGrant_table_target(ctx *Grant_table_targetContext) {}
+
+// ExitGrant_table_target is called when production grant_table_target is exited.
+func (s *BaseRedshiftParserListener) ExitGrant_table_target(ctx *Grant_table_targetContext) {}
+
+// EnterAll_tables_in_schema_list is called when production all_tables_in_schema_list is entered.
+func (s *BaseRedshiftParserListener) EnterAll_tables_in_schema_list(ctx *All_tables_in_schema_listContext) {
+}
+
+// ExitAll_tables_in_schema_list is called when production all_tables_in_schema_list is exited.
+func (s *BaseRedshiftParserListener) ExitAll_tables_in_schema_list(ctx *All_tables_in_schema_listContext) {
+}
+
+// EnterAll_privileges is called when production all_privileges is entered.
+func (s *BaseRedshiftParserListener) EnterAll_privileges(ctx *All_privilegesContext) {}
+
+// ExitAll_privileges is called when production all_privileges is exited.
+func (s *BaseRedshiftParserListener) ExitAll_privileges(ctx *All_privilegesContext) {}
+
+// EnterGrantee_list is called when production grantee_list is entered.
+func (s *BaseRedshiftParserListener) EnterGrantee_list(ctx *Grantee_listContext) {}
+
+// ExitGrantee_list is called when production grantee_list is exited.
+func (s *BaseRedshiftParserListener) ExitGrantee_list(ctx *Grantee_listContext) {}
+
+// EnterGrantee is called when production grantee is entered.
+func (s *BaseRedshiftParserListener) EnterGrantee(ctx *GranteeContext) {}
+
+// ExitGrantee is called when production grantee is exited.
+func (s *BaseRedshiftParserListener) ExitGrantee(ctx *GranteeContext) {}
+
+// EnterOpt_with_grant_option is called when production opt_with_grant_option is entered.
+func (s *BaseRedshiftParserListener) EnterOpt_with_grant_option(ctx *Opt_with_grant_optionContext) {}
+
+// ExitOpt_with_grant_option is called when production opt_with_grant_option is exited.
+func (s *BaseRedshiftParserListener) ExitOpt_with_grant_option(ctx *Opt_with_grant_optionContext) {}
+
+// EnterTable_privilege is called when production table_privilege is entered.
+func (s *BaseRedshiftParserListener) EnterTable_privilege(ctx *Table_privilegeContext) {}
+
+// ExitTable_privilege is called when production table_privilege is exited.
+func (s *BaseRedshiftParserListener) ExitTable_privilege(ctx *Table_privilegeContext) {}
+
+// EnterTable_privilege_list is called when production table_privilege_list is entered.
+func (s *BaseRedshiftParserListener) EnterTable_privilege_list(ctx *Table_privilege_listContext) {}
+
+// ExitTable_privilege_list is called when production table_privilege_list is exited.
+func (s *BaseRedshiftParserListener) ExitTable_privilege_list(ctx *Table_privilege_listContext) {}
+
 // EnterRevokestmt is called when production revokestmt is entered.
 func (s *BaseRedshiftParserListener) EnterRevokestmt(ctx *RevokestmtContext) {}
 
@@ -1919,18 +2378,6 @@ func (s *BaseRedshiftParserListener) EnterParameter_name(ctx *Parameter_nameCont
 
 // ExitParameter_name is called when production parameter_name is exited.
 func (s *BaseRedshiftParserListener) ExitParameter_name(ctx *Parameter_nameContext) {}
-
-// EnterGrantee_list is called when production grantee_list is entered.
-func (s *BaseRedshiftParserListener) EnterGrantee_list(ctx *Grantee_listContext) {}
-
-// ExitGrantee_list is called when production grantee_list is exited.
-func (s *BaseRedshiftParserListener) ExitGrantee_list(ctx *Grantee_listContext) {}
-
-// EnterGrantee is called when production grantee is entered.
-func (s *BaseRedshiftParserListener) EnterGrantee(ctx *GranteeContext) {}
-
-// ExitGrantee is called when production grantee is exited.
-func (s *BaseRedshiftParserListener) ExitGrantee(ctx *GranteeContext) {}
 
 // EnterOpt_grant_grant_option is called when production opt_grant_grant_option is entered.
 func (s *BaseRedshiftParserListener) EnterOpt_grant_grant_option(ctx *Opt_grant_grant_optionContext) {

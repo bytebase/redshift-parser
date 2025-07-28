@@ -895,6 +895,198 @@ type RedshiftParserListener interface {
 	// EnterGrantstmt is called when entering the grantstmt production.
 	EnterGrantstmt(c *GrantstmtContext)
 
+	// EnterGrant_permissions_for_rls_lookup_tables is called when entering the grant_permissions_for_rls_lookup_tables production.
+	EnterGrant_permissions_for_rls_lookup_tables(c *Grant_permissions_for_rls_lookup_tablesContext)
+
+	// EnterGrant_explain_permissions_for_row_level_security_policy_filters is called when entering the grant_explain_permissions_for_row_level_security_policy_filters production.
+	EnterGrant_explain_permissions_for_row_level_security_policy_filters(c *Grant_explain_permissions_for_row_level_security_policy_filtersContext)
+
+	// EnterGrant_machine_learning_permissions is called when entering the grant_machine_learning_permissions production.
+	EnterGrant_machine_learning_permissions(c *Grant_machine_learning_permissionsContext)
+
+	// EnterGrant_role_permissions is called when entering the grant_role_permissions production.
+	EnterGrant_role_permissions(c *Grant_role_permissionsContext)
+
+	// EnterGrant_role_permission_target_list is called when entering the grant_role_permission_target_list production.
+	EnterGrant_role_permission_target_list(c *Grant_role_permission_target_listContext)
+
+	// EnterGrant_role_permission_target_list_item is called when entering the grant_role_permission_target_list_item production.
+	EnterGrant_role_permission_target_list_item(c *Grant_role_permission_target_list_itemContext)
+
+	// EnterSystem_permissions is called when entering the system_permissions production.
+	EnterSystem_permissions(c *System_permissionsContext)
+
+	// EnterSystem_permissions_item is called when entering the system_permissions_item production.
+	EnterSystem_permissions_item(c *System_permissions_itemContext)
+
+	// EnterOpt_with_admin_option is called when entering the opt_with_admin_option production.
+	EnterOpt_with_admin_option(c *Opt_with_admin_optionContext)
+
+	// EnterGrant_scoped_permissions is called when entering the grant_scoped_permissions production.
+	EnterGrant_scoped_permissions(c *Grant_scoped_permissionsContext)
+
+	// EnterGrant_scoped_schemas_permissions is called when entering the grant_scoped_schemas_permissions production.
+	EnterGrant_scoped_schemas_permissions(c *Grant_scoped_schemas_permissionsContext)
+
+	// EnterGrant_scoped_tables_permissions is called when entering the grant_scoped_tables_permissions production.
+	EnterGrant_scoped_tables_permissions(c *Grant_scoped_tables_permissionsContext)
+
+	// EnterGrant_scoped_functions_permissions is called when entering the grant_scoped_functions_permissions production.
+	EnterGrant_scoped_functions_permissions(c *Grant_scoped_functions_permissionsContext)
+
+	// EnterGrant_scoped_procedures_permissions is called when entering the grant_scoped_procedures_permissions production.
+	EnterGrant_scoped_procedures_permissions(c *Grant_scoped_procedures_permissionsContext)
+
+	// EnterGrant_scoped_languages_permissions is called when entering the grant_scoped_languages_permissions production.
+	EnterGrant_scoped_languages_permissions(c *Grant_scoped_languages_permissionsContext)
+
+	// EnterGrant_scoped_copy_jobs_permissions is called when entering the grant_scoped_copy_jobs_permissions production.
+	EnterGrant_scoped_copy_jobs_permissions(c *Grant_scoped_copy_jobs_permissionsContext)
+
+	// EnterGrantee_list_without_public is called when entering the grantee_list_without_public production.
+	EnterGrantee_list_without_public(c *Grantee_list_without_publicContext)
+
+	// EnterGrantee_without_public is called when entering the grantee_without_public production.
+	EnterGrantee_without_public(c *Grantee_without_publicContext)
+
+	// EnterGrant_datashare_permissions is called when entering the grant_datashare_permissions production.
+	EnterGrant_datashare_permissions(c *Grant_datashare_permissionsContext)
+
+	// EnterGrant_spectrum_integration_permissions is called when entering the grant_spectrum_integration_permissions production.
+	EnterGrant_spectrum_integration_permissions(c *Grant_spectrum_integration_permissionsContext)
+
+	// EnterGrant_spectrum_integration_external_schema_permissions is called when entering the grant_spectrum_integration_external_schema_permissions production.
+	EnterGrant_spectrum_integration_external_schema_permissions(c *Grant_spectrum_integration_external_schema_permissionsContext)
+
+	// EnterSpectrum_integration_external_schema_permission_list is called when entering the spectrum_integration_external_schema_permission_list production.
+	EnterSpectrum_integration_external_schema_permission_list(c *Spectrum_integration_external_schema_permission_listContext)
+
+	// EnterSpectrum_integration_external_schema_permission is called when entering the spectrum_integration_external_schema_permission production.
+	EnterSpectrum_integration_external_schema_permission(c *Spectrum_integration_external_schema_permissionContext)
+
+	// EnterGrant_spectrum_integration_external_table_permissions is called when entering the grant_spectrum_integration_external_table_permissions production.
+	EnterGrant_spectrum_integration_external_table_permissions(c *Grant_spectrum_integration_external_table_permissionsContext)
+
+	// EnterSpectrum_integration_external_table_permission is called when entering the spectrum_integration_external_table_permission production.
+	EnterSpectrum_integration_external_table_permission(c *Spectrum_integration_external_table_permissionContext)
+
+	// EnterSpectrum_integration_external_table_permission_list is called when entering the spectrum_integration_external_table_permission_list production.
+	EnterSpectrum_integration_external_table_permission_list(c *Spectrum_integration_external_table_permission_listContext)
+
+	// EnterGrant_spectrum_integration_extenral_column_permissions is called when entering the grant_spectrum_integration_extenral_column_permissions production.
+	EnterGrant_spectrum_integration_extenral_column_permissions(c *Grant_spectrum_integration_extenral_column_permissionsContext)
+
+	// EnterIamrolelist_or_public is called when entering the iamrolelist_or_public production.
+	EnterIamrolelist_or_public(c *Iamrolelist_or_publicContext)
+
+	// EnterGrant_assume_role_permissions is called when entering the grant_assume_role_permissions production.
+	EnterGrant_assume_role_permissions(c *Grant_assume_role_permissionsContext)
+
+	// EnterGrant_assume_role_for_list is called when entering the grant_assume_role_for_list production.
+	EnterGrant_assume_role_for_list(c *Grant_assume_role_for_listContext)
+
+	// EnterGrant_assume_role_for_item is called when entering the grant_assume_role_for_item production.
+	EnterGrant_assume_role_for_item(c *Grant_assume_role_for_itemContext)
+
+	// EnterGrant_assume_role_target is called when entering the grant_assume_role_target production.
+	EnterGrant_assume_role_target(c *Grant_assume_role_targetContext)
+
+	// EnterGrant_column_level_permissions is called when entering the grant_column_level_permissions production.
+	EnterGrant_column_level_permissions(c *Grant_column_level_permissionsContext)
+
+	// EnterColumn_privilege_target is called when entering the column_privilege_target production.
+	EnterColumn_privilege_target(c *Column_privilege_targetContext)
+
+	// EnterColumn_privilege_list is called when entering the column_privilege_list production.
+	EnterColumn_privilege_list(c *Column_privilege_listContext)
+
+	// EnterColumn_all_privilege is called when entering the column_all_privilege production.
+	EnterColumn_all_privilege(c *Column_all_privilegeContext)
+
+	// EnterColumn_select_update_privilege is called when entering the column_select_update_privilege production.
+	EnterColumn_select_update_privilege(c *Column_select_update_privilegeContext)
+
+	// EnterCommon_grant is called when entering the common_grant production.
+	EnterCommon_grant(c *Common_grantContext)
+
+	// EnterCopy_job_privilege_list is called when entering the copy_job_privilege_list production.
+	EnterCopy_job_privilege_list(c *Copy_job_privilege_listContext)
+
+	// EnterCopy_job_privilege is called when entering the copy_job_privilege production.
+	EnterCopy_job_privilege(c *Copy_job_privilegeContext)
+
+	// EnterCopy_job_target is called when entering the copy_job_target production.
+	EnterCopy_job_target(c *Copy_job_targetContext)
+
+	// EnterCopy_job_name is called when entering the copy_job_name production.
+	EnterCopy_job_name(c *Copy_job_nameContext)
+
+	// EnterLanguage_privilege_list is called when entering the language_privilege_list production.
+	EnterLanguage_privilege_list(c *Language_privilege_listContext)
+
+	// EnterGrant_language_target is called when entering the grant_language_target production.
+	EnterGrant_language_target(c *Grant_language_targetContext)
+
+	// EnterGrant_procedure_target is called when entering the grant_procedure_target production.
+	EnterGrant_procedure_target(c *Grant_procedure_targetContext)
+
+	// EnterProcedure_privilege_list is called when entering the procedure_privilege_list production.
+	EnterProcedure_privilege_list(c *Procedure_privilege_listContext)
+
+	// EnterProcedure_privilege is called when entering the procedure_privilege production.
+	EnterProcedure_privilege(c *Procedure_privilegeContext)
+
+	// EnterFunction_privilege_list is called when entering the function_privilege_list production.
+	EnterFunction_privilege_list(c *Function_privilege_listContext)
+
+	// EnterFunction_privilege is called when entering the function_privilege production.
+	EnterFunction_privilege(c *Function_privilegeContext)
+
+	// EnterGrant_function_target is called when entering the grant_function_target production.
+	EnterGrant_function_target(c *Grant_function_targetContext)
+
+	// EnterGrant_schema_target is called when entering the grant_schema_target production.
+	EnterGrant_schema_target(c *Grant_schema_targetContext)
+
+	// EnterSchema_privilege_list is called when entering the schema_privilege_list production.
+	EnterSchema_privilege_list(c *Schema_privilege_listContext)
+
+	// EnterSchema_privilege is called when entering the schema_privilege production.
+	EnterSchema_privilege(c *Schema_privilegeContext)
+
+	// EnterDatabase_privilege_list is called when entering the database_privilege_list production.
+	EnterDatabase_privilege_list(c *Database_privilege_listContext)
+
+	// EnterDatabase_privilege is called when entering the database_privilege production.
+	EnterDatabase_privilege(c *Database_privilegeContext)
+
+	// EnterGrant_database_target is called when entering the grant_database_target production.
+	EnterGrant_database_target(c *Grant_database_targetContext)
+
+	// EnterGrant_table_target is called when entering the grant_table_target production.
+	EnterGrant_table_target(c *Grant_table_targetContext)
+
+	// EnterAll_tables_in_schema_list is called when entering the all_tables_in_schema_list production.
+	EnterAll_tables_in_schema_list(c *All_tables_in_schema_listContext)
+
+	// EnterAll_privileges is called when entering the all_privileges production.
+	EnterAll_privileges(c *All_privilegesContext)
+
+	// EnterGrantee_list is called when entering the grantee_list production.
+	EnterGrantee_list(c *Grantee_listContext)
+
+	// EnterGrantee is called when entering the grantee production.
+	EnterGrantee(c *GranteeContext)
+
+	// EnterOpt_with_grant_option is called when entering the opt_with_grant_option production.
+	EnterOpt_with_grant_option(c *Opt_with_grant_optionContext)
+
+	// EnterTable_privilege is called when entering the table_privilege production.
+	EnterTable_privilege(c *Table_privilegeContext)
+
+	// EnterTable_privilege_list is called when entering the table_privilege_list production.
+	EnterTable_privilege_list(c *Table_privilege_listContext)
+
 	// EnterRevokestmt is called when entering the revokestmt production.
 	EnterRevokestmt(c *RevokestmtContext)
 
@@ -915,12 +1107,6 @@ type RedshiftParserListener interface {
 
 	// EnterParameter_name is called when entering the parameter_name production.
 	EnterParameter_name(c *Parameter_nameContext)
-
-	// EnterGrantee_list is called when entering the grantee_list production.
-	EnterGrantee_list(c *Grantee_listContext)
-
-	// EnterGrantee is called when entering the grantee production.
-	EnterGrantee(c *GranteeContext)
 
 	// EnterOpt_grant_grant_option is called when entering the opt_grant_grant_option production.
 	EnterOpt_grant_grant_option(c *Opt_grant_grant_optionContext)
@@ -3904,6 +4090,198 @@ type RedshiftParserListener interface {
 	// ExitGrantstmt is called when exiting the grantstmt production.
 	ExitGrantstmt(c *GrantstmtContext)
 
+	// ExitGrant_permissions_for_rls_lookup_tables is called when exiting the grant_permissions_for_rls_lookup_tables production.
+	ExitGrant_permissions_for_rls_lookup_tables(c *Grant_permissions_for_rls_lookup_tablesContext)
+
+	// ExitGrant_explain_permissions_for_row_level_security_policy_filters is called when exiting the grant_explain_permissions_for_row_level_security_policy_filters production.
+	ExitGrant_explain_permissions_for_row_level_security_policy_filters(c *Grant_explain_permissions_for_row_level_security_policy_filtersContext)
+
+	// ExitGrant_machine_learning_permissions is called when exiting the grant_machine_learning_permissions production.
+	ExitGrant_machine_learning_permissions(c *Grant_machine_learning_permissionsContext)
+
+	// ExitGrant_role_permissions is called when exiting the grant_role_permissions production.
+	ExitGrant_role_permissions(c *Grant_role_permissionsContext)
+
+	// ExitGrant_role_permission_target_list is called when exiting the grant_role_permission_target_list production.
+	ExitGrant_role_permission_target_list(c *Grant_role_permission_target_listContext)
+
+	// ExitGrant_role_permission_target_list_item is called when exiting the grant_role_permission_target_list_item production.
+	ExitGrant_role_permission_target_list_item(c *Grant_role_permission_target_list_itemContext)
+
+	// ExitSystem_permissions is called when exiting the system_permissions production.
+	ExitSystem_permissions(c *System_permissionsContext)
+
+	// ExitSystem_permissions_item is called when exiting the system_permissions_item production.
+	ExitSystem_permissions_item(c *System_permissions_itemContext)
+
+	// ExitOpt_with_admin_option is called when exiting the opt_with_admin_option production.
+	ExitOpt_with_admin_option(c *Opt_with_admin_optionContext)
+
+	// ExitGrant_scoped_permissions is called when exiting the grant_scoped_permissions production.
+	ExitGrant_scoped_permissions(c *Grant_scoped_permissionsContext)
+
+	// ExitGrant_scoped_schemas_permissions is called when exiting the grant_scoped_schemas_permissions production.
+	ExitGrant_scoped_schemas_permissions(c *Grant_scoped_schemas_permissionsContext)
+
+	// ExitGrant_scoped_tables_permissions is called when exiting the grant_scoped_tables_permissions production.
+	ExitGrant_scoped_tables_permissions(c *Grant_scoped_tables_permissionsContext)
+
+	// ExitGrant_scoped_functions_permissions is called when exiting the grant_scoped_functions_permissions production.
+	ExitGrant_scoped_functions_permissions(c *Grant_scoped_functions_permissionsContext)
+
+	// ExitGrant_scoped_procedures_permissions is called when exiting the grant_scoped_procedures_permissions production.
+	ExitGrant_scoped_procedures_permissions(c *Grant_scoped_procedures_permissionsContext)
+
+	// ExitGrant_scoped_languages_permissions is called when exiting the grant_scoped_languages_permissions production.
+	ExitGrant_scoped_languages_permissions(c *Grant_scoped_languages_permissionsContext)
+
+	// ExitGrant_scoped_copy_jobs_permissions is called when exiting the grant_scoped_copy_jobs_permissions production.
+	ExitGrant_scoped_copy_jobs_permissions(c *Grant_scoped_copy_jobs_permissionsContext)
+
+	// ExitGrantee_list_without_public is called when exiting the grantee_list_without_public production.
+	ExitGrantee_list_without_public(c *Grantee_list_without_publicContext)
+
+	// ExitGrantee_without_public is called when exiting the grantee_without_public production.
+	ExitGrantee_without_public(c *Grantee_without_publicContext)
+
+	// ExitGrant_datashare_permissions is called when exiting the grant_datashare_permissions production.
+	ExitGrant_datashare_permissions(c *Grant_datashare_permissionsContext)
+
+	// ExitGrant_spectrum_integration_permissions is called when exiting the grant_spectrum_integration_permissions production.
+	ExitGrant_spectrum_integration_permissions(c *Grant_spectrum_integration_permissionsContext)
+
+	// ExitGrant_spectrum_integration_external_schema_permissions is called when exiting the grant_spectrum_integration_external_schema_permissions production.
+	ExitGrant_spectrum_integration_external_schema_permissions(c *Grant_spectrum_integration_external_schema_permissionsContext)
+
+	// ExitSpectrum_integration_external_schema_permission_list is called when exiting the spectrum_integration_external_schema_permission_list production.
+	ExitSpectrum_integration_external_schema_permission_list(c *Spectrum_integration_external_schema_permission_listContext)
+
+	// ExitSpectrum_integration_external_schema_permission is called when exiting the spectrum_integration_external_schema_permission production.
+	ExitSpectrum_integration_external_schema_permission(c *Spectrum_integration_external_schema_permissionContext)
+
+	// ExitGrant_spectrum_integration_external_table_permissions is called when exiting the grant_spectrum_integration_external_table_permissions production.
+	ExitGrant_spectrum_integration_external_table_permissions(c *Grant_spectrum_integration_external_table_permissionsContext)
+
+	// ExitSpectrum_integration_external_table_permission is called when exiting the spectrum_integration_external_table_permission production.
+	ExitSpectrum_integration_external_table_permission(c *Spectrum_integration_external_table_permissionContext)
+
+	// ExitSpectrum_integration_external_table_permission_list is called when exiting the spectrum_integration_external_table_permission_list production.
+	ExitSpectrum_integration_external_table_permission_list(c *Spectrum_integration_external_table_permission_listContext)
+
+	// ExitGrant_spectrum_integration_extenral_column_permissions is called when exiting the grant_spectrum_integration_extenral_column_permissions production.
+	ExitGrant_spectrum_integration_extenral_column_permissions(c *Grant_spectrum_integration_extenral_column_permissionsContext)
+
+	// ExitIamrolelist_or_public is called when exiting the iamrolelist_or_public production.
+	ExitIamrolelist_or_public(c *Iamrolelist_or_publicContext)
+
+	// ExitGrant_assume_role_permissions is called when exiting the grant_assume_role_permissions production.
+	ExitGrant_assume_role_permissions(c *Grant_assume_role_permissionsContext)
+
+	// ExitGrant_assume_role_for_list is called when exiting the grant_assume_role_for_list production.
+	ExitGrant_assume_role_for_list(c *Grant_assume_role_for_listContext)
+
+	// ExitGrant_assume_role_for_item is called when exiting the grant_assume_role_for_item production.
+	ExitGrant_assume_role_for_item(c *Grant_assume_role_for_itemContext)
+
+	// ExitGrant_assume_role_target is called when exiting the grant_assume_role_target production.
+	ExitGrant_assume_role_target(c *Grant_assume_role_targetContext)
+
+	// ExitGrant_column_level_permissions is called when exiting the grant_column_level_permissions production.
+	ExitGrant_column_level_permissions(c *Grant_column_level_permissionsContext)
+
+	// ExitColumn_privilege_target is called when exiting the column_privilege_target production.
+	ExitColumn_privilege_target(c *Column_privilege_targetContext)
+
+	// ExitColumn_privilege_list is called when exiting the column_privilege_list production.
+	ExitColumn_privilege_list(c *Column_privilege_listContext)
+
+	// ExitColumn_all_privilege is called when exiting the column_all_privilege production.
+	ExitColumn_all_privilege(c *Column_all_privilegeContext)
+
+	// ExitColumn_select_update_privilege is called when exiting the column_select_update_privilege production.
+	ExitColumn_select_update_privilege(c *Column_select_update_privilegeContext)
+
+	// ExitCommon_grant is called when exiting the common_grant production.
+	ExitCommon_grant(c *Common_grantContext)
+
+	// ExitCopy_job_privilege_list is called when exiting the copy_job_privilege_list production.
+	ExitCopy_job_privilege_list(c *Copy_job_privilege_listContext)
+
+	// ExitCopy_job_privilege is called when exiting the copy_job_privilege production.
+	ExitCopy_job_privilege(c *Copy_job_privilegeContext)
+
+	// ExitCopy_job_target is called when exiting the copy_job_target production.
+	ExitCopy_job_target(c *Copy_job_targetContext)
+
+	// ExitCopy_job_name is called when exiting the copy_job_name production.
+	ExitCopy_job_name(c *Copy_job_nameContext)
+
+	// ExitLanguage_privilege_list is called when exiting the language_privilege_list production.
+	ExitLanguage_privilege_list(c *Language_privilege_listContext)
+
+	// ExitGrant_language_target is called when exiting the grant_language_target production.
+	ExitGrant_language_target(c *Grant_language_targetContext)
+
+	// ExitGrant_procedure_target is called when exiting the grant_procedure_target production.
+	ExitGrant_procedure_target(c *Grant_procedure_targetContext)
+
+	// ExitProcedure_privilege_list is called when exiting the procedure_privilege_list production.
+	ExitProcedure_privilege_list(c *Procedure_privilege_listContext)
+
+	// ExitProcedure_privilege is called when exiting the procedure_privilege production.
+	ExitProcedure_privilege(c *Procedure_privilegeContext)
+
+	// ExitFunction_privilege_list is called when exiting the function_privilege_list production.
+	ExitFunction_privilege_list(c *Function_privilege_listContext)
+
+	// ExitFunction_privilege is called when exiting the function_privilege production.
+	ExitFunction_privilege(c *Function_privilegeContext)
+
+	// ExitGrant_function_target is called when exiting the grant_function_target production.
+	ExitGrant_function_target(c *Grant_function_targetContext)
+
+	// ExitGrant_schema_target is called when exiting the grant_schema_target production.
+	ExitGrant_schema_target(c *Grant_schema_targetContext)
+
+	// ExitSchema_privilege_list is called when exiting the schema_privilege_list production.
+	ExitSchema_privilege_list(c *Schema_privilege_listContext)
+
+	// ExitSchema_privilege is called when exiting the schema_privilege production.
+	ExitSchema_privilege(c *Schema_privilegeContext)
+
+	// ExitDatabase_privilege_list is called when exiting the database_privilege_list production.
+	ExitDatabase_privilege_list(c *Database_privilege_listContext)
+
+	// ExitDatabase_privilege is called when exiting the database_privilege production.
+	ExitDatabase_privilege(c *Database_privilegeContext)
+
+	// ExitGrant_database_target is called when exiting the grant_database_target production.
+	ExitGrant_database_target(c *Grant_database_targetContext)
+
+	// ExitGrant_table_target is called when exiting the grant_table_target production.
+	ExitGrant_table_target(c *Grant_table_targetContext)
+
+	// ExitAll_tables_in_schema_list is called when exiting the all_tables_in_schema_list production.
+	ExitAll_tables_in_schema_list(c *All_tables_in_schema_listContext)
+
+	// ExitAll_privileges is called when exiting the all_privileges production.
+	ExitAll_privileges(c *All_privilegesContext)
+
+	// ExitGrantee_list is called when exiting the grantee_list production.
+	ExitGrantee_list(c *Grantee_listContext)
+
+	// ExitGrantee is called when exiting the grantee production.
+	ExitGrantee(c *GranteeContext)
+
+	// ExitOpt_with_grant_option is called when exiting the opt_with_grant_option production.
+	ExitOpt_with_grant_option(c *Opt_with_grant_optionContext)
+
+	// ExitTable_privilege is called when exiting the table_privilege production.
+	ExitTable_privilege(c *Table_privilegeContext)
+
+	// ExitTable_privilege_list is called when exiting the table_privilege_list production.
+	ExitTable_privilege_list(c *Table_privilege_listContext)
+
 	// ExitRevokestmt is called when exiting the revokestmt production.
 	ExitRevokestmt(c *RevokestmtContext)
 
@@ -3924,12 +4302,6 @@ type RedshiftParserListener interface {
 
 	// ExitParameter_name is called when exiting the parameter_name production.
 	ExitParameter_name(c *Parameter_nameContext)
-
-	// ExitGrantee_list is called when exiting the grantee_list production.
-	ExitGrantee_list(c *Grantee_listContext)
-
-	// ExitGrantee is called when exiting the grantee production.
-	ExitGrantee(c *GranteeContext)
 
 	// ExitOpt_grant_grant_option is called when exiting the opt_grant_grant_option production.
 	ExitOpt_grant_grant_option(c *Opt_grant_grant_optionContext)

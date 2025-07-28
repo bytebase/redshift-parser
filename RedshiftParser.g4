@@ -129,7 +129,6 @@ stmt
    | explainstmt
    | fetchstmt
    | grantstmt
-   | grantrolestmt
    | importforeignschemastmt
    | indexstmt
    | insertstmt
@@ -1803,8 +1802,351 @@ fetch_args
    ;
 
 grantstmt
-   : GRANT privileges ON privilege_target TO grantee_list opt_grant_grant_option?
+   : common_grant
+   | grant_column_level_permissions
+   | grant_assume_role_permissions
+   | grant_spectrum_integration_permissions
+   | grant_datashare_permissions
+   | grant_scoped_permissions
+   | grant_machine_learning_permissions
+   | grant_role_permissions
+   | grant_explain_permissions_for_row_level_security_policy_filters
+   | grant_permissions_for_rls_lookup_tables
    ;
+
+grant_permissions_for_rls_lookup_tables
+   : GRANT SELECT ON TABLE? qualified_name_list TO RLS POLICY columnlist
+   ;
+
+grant_explain_permissions_for_row_level_security_policy_filters
+   : GRANT (EXPLAIN | IGNORE) RLS TO ROLE rolespec
+   ;
+
+grant_machine_learning_permissions
+   : GRANT CREATE MODEL TO grantee_list
+   | GRANT function_privilege_list ON MODEL columnlist TO grantee_list
+   ;
+
+grant_role_permissions
+   : GRANT ROLE rolespec (COMMA ROLE rolespec)* TO grant_role_permission_target_list
+   | GRANT system_permissions TO ROLE role_list
+   ;
+
+grant_role_permission_target_list
+   : grant_role_permission_target_list_item (COMMA grant_role_permission_target_list_item)*
+   ;
+
+grant_role_permission_target_list_item
+   : rolespec opt_with_admin_option?
+   | ROLE rolespec
+   ;
+
+system_permissions
+   : system_permissions_item (COMMA system_permissions_item)*
+   | all_privileges
+   ;
+
+system_permissions_item
+   : (CREATE | DROP | ALTER) USER
+   | (CREATE | DROP) SCHEMA
+   | ALTER DEFAULT PRIVILEGES
+   | ACCESS (CATALOG | (SYSTEM_P TABLE))
+   | (CREATE | DROP | ALTER) TABLE
+   | CREATE OR REPLACE (FUNCTION | (EXTERNAL FUNCTION))
+   | DROP FUNCTION
+   | ((CREATE OR REPLACE) | DROP) PROCEDURE
+   | ((CREATE OR REPLACE) | DROP) VIEW
+   | (CREATE | DROP) MODEL
+   | (CREATE | ALTER | DROP) DATASHARE
+   | (CREATE | DROP) LIBRARY
+   | (CREATE | DROP) ROLE
+   | TRUNCATE TABLE
+   | VACUUM | ANALYZE | CANCEL
+   | (IGNORE | EXPLAIN) RLS
+   | EXPLAIN MASKING
+   ;
+
+opt_with_admin_option
+   : WITH ADMIN OPTION
+   ;
+
+grant_scoped_permissions
+   : grant_scoped_schemas_permissions
+   | grant_scoped_tables_permissions
+   | grant_scoped_functions_permissions
+   | grant_scoped_procedures_permissions
+   | grant_scoped_languages_permissions
+   | grant_scoped_copy_jobs_permissions
+   ;
+
+grant_scoped_schemas_permissions
+   : GRANT schema_privilege_list FOR SCHEMAS IN_P DATABASE colid TO grantee_list_without_public
+   ;
+
+grant_scoped_tables_permissions
+   : GRANT table_privilege_list FOR TABLES IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) TO grantee_list_without_public
+   ;
+
+grant_scoped_functions_permissions
+   : GRANT function_privilege_list FOR FUNCTIONS IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) TO grantee_list_without_public
+   ;
+
+grant_scoped_procedures_permissions
+   : GRANT procedure_privilege_list FOR PROCEDURES IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) TO grantee_list_without_public
+   ;
+
+grant_scoped_languages_permissions
+    : GRANT language_privilege_list FOR LANGUAGES IN_P DATABASE colid TO grantee_list_without_public
+    ;
+
+grant_scoped_copy_jobs_permissions
+    : GRANT copy_job_privilege_list FOR COPY JOBS IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) TO grantee_list_without_public
+    ;
+
+grantee_list_without_public
+   : grantee_without_public (COMMA grantee_without_public)*
+   ;
+
+grantee_without_public
+   : rolespec opt_with_grant_option?
+   | ROLE rolespec
+   ;
+
+grant_datashare_permissions
+   : GRANT (ALTER | SHARE) ON DATASHARE colid TO grantee_list
+   | GRANT USAGE ON DATASHARE colid TO ((NAMESPACE sconst) | (ACCOUNT sconst (VIA DATA_P CATALOG)?))
+   | GRANT USAGE ON (DATABASE columnlist | SCHEMA colid) TO grantee_list
+   ;
+
+grant_spectrum_integration_permissions
+    : grant_spectrum_integration_extenral_column_permissions
+    | grant_spectrum_integration_external_table_permissions
+    | grant_spectrum_integration_external_schema_permissions
+    ;
+
+grant_spectrum_integration_external_schema_permissions
+   : GRANT spectrum_integration_external_schema_permission_list ON EXTERNAL SCHEMA columnlist TO iamrolelist_or_public opt_with_grant_option?
+   ;
+
+spectrum_integration_external_schema_permission_list
+   : spectrum_integration_external_schema_permission (COMMA spectrum_integration_external_schema_permission)*
+   | all_privileges
+   ;
+
+spectrum_integration_external_schema_permission
+   : CREATE
+   | ALTER
+   | DROP
+   ;
+
+grant_spectrum_integration_external_table_permissions
+   : GRANT spectrum_integration_external_table_permission_list ON EXTERNAL TABLE qualified_name_list TO iamrolelist_or_public opt_with_grant_option?
+   ;
+
+spectrum_integration_external_table_permission
+   : SELECT | ALTER | DROP | DELETE_P | INSERT
+   | all_privileges
+   ;
+
+spectrum_integration_external_table_permission_list
+   : spectrum_integration_external_table_permission (COMMA spectrum_integration_external_table_permission)*
+   ;
+
+
+grant_spectrum_integration_extenral_column_permissions
+   : GRANT (SELECT | all_privileges) OPEN_PAREN columnlist CLOSE_PAREN ON EXTERNAL TABLE qualified_name TO iamrolelist_or_public opt_with_grant_option?
+   ;
+
+iamrolelist_or_public
+   : iamrolevalue (COMMA iamrolevalue)*
+   | PUBLIC
+   ;
+
+
+grant_assume_role_permissions
+   : GRANT ASSUMEROLE grant_assume_role_target TO grantee_list FOR grant_assume_role_for_list
+   ;
+
+grant_assume_role_for_list
+   : grant_assume_role_for_item (COMMA grant_assume_role_for_item)*
+   ;
+
+grant_assume_role_for_item
+   : ALL
+   | COPY
+   | UNLOAD
+   | EXTERNAL FUNCTION
+   | CREATE MODEL
+   ;
+
+grant_assume_role_target
+   : sconst (COMMA sconst)* | DEFAULT | ALL
+   ;
+
+grant_column_level_permissions
+   : GRANT column_privilege_list ON column_privilege_target TO grantee_list
+   ;
+
+column_privilege_target
+   : TABLE? qualified_name_list
+   ;
+
+column_privilege_list
+   : column_select_update_privilege (COMMA column_select_update_privilege)*
+   | column_all_privilege (COMMA column_all_privilege)*
+   ;
+
+column_all_privilege
+   : ALL PRIVILEGES? OPEN_PAREN columnlist? CLOSE_PAREN
+   ;
+
+column_select_update_privilege
+   : (SELECT | UPDATE) OPEN_PAREN columnlist? CLOSE_PAREN
+   ;
+
+common_grant
+   : GRANT table_privilege_list ON grant_table_target TO grantee_list
+   | GRANT database_privilege_list ON grant_database_target TO grantee_list
+   | GRANT schema_privilege_list ON grant_schema_target TO grantee_list
+   | GRANT function_privilege_list ON grant_function_target TO grantee_list
+   | GRANT procedure_privilege_list ON grant_procedure_target TO grantee_list
+   | GRANT language_privilege_list ON grant_language_target TO grantee_list
+   | GRANT copy_job_privilege_list ON copy_job_target TO grantee_list
+   ;
+
+copy_job_privilege_list
+    : copy_job_privilege (COMMA copy_job_privilege)*
+    | all_privileges
+    ;
+
+copy_job_privilege
+    : ALTER
+    | DROP
+    ;
+
+copy_job_target
+    : COPY JOB copy_job_name (COMMA copy_job_name)*
+    ;
+
+copy_job_name
+    : colid
+    ;
+
+language_privilege_list
+   : USAGE
+   ;
+
+grant_language_target
+    : LANGUAGE columnlist
+    ;
+
+grant_procedure_target
+    : PROCEDURE function_with_argtypes_list (COMMA function_with_argtypes_list)*
+    | ALL PROCEDURES IN_P SCHEMA columnlist
+    ;
+
+procedure_privilege_list
+    : procedure_privilege
+    | all_privileges
+    ;
+
+procedure_privilege
+    : EXECUTE
+    | all_privileges
+    ;
+
+function_privilege_list
+    : function_privilege
+    | all_privileges
+    ;
+
+function_privilege
+    : EXECUTE
+    | all_privileges
+    ;
+
+grant_function_target
+    : FUNCTION function_with_argtypes_list (COMMA function_with_argtypes_list)*
+    | ALL FUNCTIONS IN_P SCHEMA columnlist
+    ;
+
+grant_schema_target
+    : SCHEMA colid (COMMA colid)*
+    ;
+
+schema_privilege_list
+    : schema_privilege (COMMA schema_privilege)*
+    | all_privileges
+    ;
+
+schema_privilege
+   : CREATE
+   | USAGE
+   | ALTER
+   | DROP
+   ;
+
+database_privilege_list
+   : database_privilege (COMMA database_privilege)*
+   | all_privileges
+   ;
+
+database_privilege
+   : CREATE
+   | USAGE
+   | TEMPORARY
+   | TEMP
+   | ALTER
+   ;
+
+grant_database_target
+    : DATABASE colid (COMMA colid)*
+    ;
+
+
+grant_table_target
+    : TABLE? qualified_name_list
+    | all_tables_in_schema_list
+    ;
+
+all_tables_in_schema_list
+    : ALL TABLES IN_P SCHEMA qualified_name_list
+    ;
+
+all_privileges
+   : ALL PRIVILEGES?
+   ;
+
+grantee_list
+   : grantee (COMMA grantee)*
+   ;
+
+grantee
+   : rolespec opt_with_grant_option?
+   | GROUP_P rolespec
+   | ROLE rolespec
+   | PUBLIC
+   ;
+
+opt_with_grant_option
+   : WITH GRANT OPTION
+   ;
+
+table_privilege
+   : SELECT
+   | INSERT
+   | UPDATE
+   | DELETE_P
+   | DROP
+   | ALTER
+   | TRUNCATE
+   | REFERENCES
+   ;
+
+table_privilege_list
+    : table_privilege (COMMA table_privilege)*
+    | all_privileges
+    ;
 
 revokestmt
    : REVOKE privileges ON privilege_target FROM grantee_list opt_drop_behavior?
@@ -1861,16 +2203,6 @@ parameter_name_list
    
 parameter_name
    : colid (DOT colid)?
-   ;
-
-grantee_list
-   : grantee (COMMA grantee)*
-   ;
-
-grantee
-   : rolespec
-   | GROUP_P rolespec
-   | ROLE rolespec
    ;
 
 opt_grant_grant_option
@@ -3705,7 +4037,7 @@ explainablestmt
    | updatestmt
    | deletestmt
    | declarecursorstmt
-   | createasstmt
+   | CREATEsstmt
    | creatematviewstmt
    | refreshmatviewstmt
    | executestmt

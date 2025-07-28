@@ -895,6 +895,198 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#grantstmt.
 	VisitGrantstmt(ctx *GrantstmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#grant_permissions_for_rls_lookup_tables.
+	VisitGrant_permissions_for_rls_lookup_tables(ctx *Grant_permissions_for_rls_lookup_tablesContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_explain_permissions_for_row_level_security_policy_filters.
+	VisitGrant_explain_permissions_for_row_level_security_policy_filters(ctx *Grant_explain_permissions_for_row_level_security_policy_filtersContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_machine_learning_permissions.
+	VisitGrant_machine_learning_permissions(ctx *Grant_machine_learning_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_role_permissions.
+	VisitGrant_role_permissions(ctx *Grant_role_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_role_permission_target_list.
+	VisitGrant_role_permission_target_list(ctx *Grant_role_permission_target_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_role_permission_target_list_item.
+	VisitGrant_role_permission_target_list_item(ctx *Grant_role_permission_target_list_itemContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#system_permissions.
+	VisitSystem_permissions(ctx *System_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#system_permissions_item.
+	VisitSystem_permissions_item(ctx *System_permissions_itemContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#opt_with_admin_option.
+	VisitOpt_with_admin_option(ctx *Opt_with_admin_optionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_permissions.
+	VisitGrant_scoped_permissions(ctx *Grant_scoped_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_schemas_permissions.
+	VisitGrant_scoped_schemas_permissions(ctx *Grant_scoped_schemas_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_tables_permissions.
+	VisitGrant_scoped_tables_permissions(ctx *Grant_scoped_tables_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_functions_permissions.
+	VisitGrant_scoped_functions_permissions(ctx *Grant_scoped_functions_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_procedures_permissions.
+	VisitGrant_scoped_procedures_permissions(ctx *Grant_scoped_procedures_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_languages_permissions.
+	VisitGrant_scoped_languages_permissions(ctx *Grant_scoped_languages_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_copy_jobs_permissions.
+	VisitGrant_scoped_copy_jobs_permissions(ctx *Grant_scoped_copy_jobs_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grantee_list_without_public.
+	VisitGrantee_list_without_public(ctx *Grantee_list_without_publicContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grantee_without_public.
+	VisitGrantee_without_public(ctx *Grantee_without_publicContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_datashare_permissions.
+	VisitGrant_datashare_permissions(ctx *Grant_datashare_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_spectrum_integration_permissions.
+	VisitGrant_spectrum_integration_permissions(ctx *Grant_spectrum_integration_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_spectrum_integration_external_schema_permissions.
+	VisitGrant_spectrum_integration_external_schema_permissions(ctx *Grant_spectrum_integration_external_schema_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#spectrum_integration_external_schema_permission_list.
+	VisitSpectrum_integration_external_schema_permission_list(ctx *Spectrum_integration_external_schema_permission_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#spectrum_integration_external_schema_permission.
+	VisitSpectrum_integration_external_schema_permission(ctx *Spectrum_integration_external_schema_permissionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_spectrum_integration_external_table_permissions.
+	VisitGrant_spectrum_integration_external_table_permissions(ctx *Grant_spectrum_integration_external_table_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#spectrum_integration_external_table_permission.
+	VisitSpectrum_integration_external_table_permission(ctx *Spectrum_integration_external_table_permissionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#spectrum_integration_external_table_permission_list.
+	VisitSpectrum_integration_external_table_permission_list(ctx *Spectrum_integration_external_table_permission_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_spectrum_integration_extenral_column_permissions.
+	VisitGrant_spectrum_integration_extenral_column_permissions(ctx *Grant_spectrum_integration_extenral_column_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#iamrolelist_or_public.
+	VisitIamrolelist_or_public(ctx *Iamrolelist_or_publicContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_assume_role_permissions.
+	VisitGrant_assume_role_permissions(ctx *Grant_assume_role_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_assume_role_for_list.
+	VisitGrant_assume_role_for_list(ctx *Grant_assume_role_for_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_assume_role_for_item.
+	VisitGrant_assume_role_for_item(ctx *Grant_assume_role_for_itemContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_assume_role_target.
+	VisitGrant_assume_role_target(ctx *Grant_assume_role_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_column_level_permissions.
+	VisitGrant_column_level_permissions(ctx *Grant_column_level_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#column_privilege_target.
+	VisitColumn_privilege_target(ctx *Column_privilege_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#column_privilege_list.
+	VisitColumn_privilege_list(ctx *Column_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#column_all_privilege.
+	VisitColumn_all_privilege(ctx *Column_all_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#column_select_update_privilege.
+	VisitColumn_select_update_privilege(ctx *Column_select_update_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#common_grant.
+	VisitCommon_grant(ctx *Common_grantContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#copy_job_privilege_list.
+	VisitCopy_job_privilege_list(ctx *Copy_job_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#copy_job_privilege.
+	VisitCopy_job_privilege(ctx *Copy_job_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#copy_job_target.
+	VisitCopy_job_target(ctx *Copy_job_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#copy_job_name.
+	VisitCopy_job_name(ctx *Copy_job_nameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#language_privilege_list.
+	VisitLanguage_privilege_list(ctx *Language_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_language_target.
+	VisitGrant_language_target(ctx *Grant_language_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_procedure_target.
+	VisitGrant_procedure_target(ctx *Grant_procedure_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#procedure_privilege_list.
+	VisitProcedure_privilege_list(ctx *Procedure_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#procedure_privilege.
+	VisitProcedure_privilege(ctx *Procedure_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#function_privilege_list.
+	VisitFunction_privilege_list(ctx *Function_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#function_privilege.
+	VisitFunction_privilege(ctx *Function_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_function_target.
+	VisitGrant_function_target(ctx *Grant_function_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_schema_target.
+	VisitGrant_schema_target(ctx *Grant_schema_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#schema_privilege_list.
+	VisitSchema_privilege_list(ctx *Schema_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#schema_privilege.
+	VisitSchema_privilege(ctx *Schema_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#database_privilege_list.
+	VisitDatabase_privilege_list(ctx *Database_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#database_privilege.
+	VisitDatabase_privilege(ctx *Database_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_database_target.
+	VisitGrant_database_target(ctx *Grant_database_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_table_target.
+	VisitGrant_table_target(ctx *Grant_table_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#all_tables_in_schema_list.
+	VisitAll_tables_in_schema_list(ctx *All_tables_in_schema_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#all_privileges.
+	VisitAll_privileges(ctx *All_privilegesContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grantee_list.
+	VisitGrantee_list(ctx *Grantee_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grantee.
+	VisitGrantee(ctx *GranteeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#opt_with_grant_option.
+	VisitOpt_with_grant_option(ctx *Opt_with_grant_optionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#table_privilege.
+	VisitTable_privilege(ctx *Table_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#table_privilege_list.
+	VisitTable_privilege_list(ctx *Table_privilege_listContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#revokestmt.
 	VisitRevokestmt(ctx *RevokestmtContext) interface{}
 
@@ -915,12 +1107,6 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#parameter_name.
 	VisitParameter_name(ctx *Parameter_nameContext) interface{}
-
-	// Visit a parse tree produced by RedshiftParser#grantee_list.
-	VisitGrantee_list(ctx *Grantee_listContext) interface{}
-
-	// Visit a parse tree produced by RedshiftParser#grantee.
-	VisitGrantee(ctx *GranteeContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#opt_grant_grant_option.
 	VisitOpt_grant_grant_option(ctx *Opt_grant_grant_optionContext) interface{}
