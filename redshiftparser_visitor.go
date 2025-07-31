@@ -52,14 +52,26 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#alterrolestmt.
 	VisitAlterrolestmt(ctx *AlterrolestmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#alterroleaction.
+	VisitAlterroleaction(ctx *AlterroleactionContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#opt_in_database.
 	VisitOpt_in_database(ctx *Opt_in_databaseContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#alterrolesetstmt.
 	VisitAlterrolesetstmt(ctx *AlterrolesetstmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#alterschemastmt.
+	VisitAlterschemastmt(ctx *AlterschemastmtContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#droprolestmt.
 	VisitDroprolestmt(ctx *DroprolestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#dropuserstmt.
+	VisitDropuserstmt(ctx *DropuserstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#dropgroupstmt.
+	VisitDropgroupstmt(ctx *DropgroupstmtContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#creategroupstmt.
 	VisitCreategroupstmt(ctx *CreategroupstmtContext) interface{}
@@ -73,8 +85,11 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#createschemastmt.
 	VisitCreateschemastmt(ctx *CreateschemastmtContext) interface{}
 
-	// Visit a parse tree produced by RedshiftParser#optschemaname.
-	VisitOptschemaname(ctx *OptschemanameContext) interface{}
+	// Visit a parse tree produced by RedshiftParser#opt_auth_clause.
+	VisitOpt_auth_clause(ctx *Opt_auth_clauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#opt_quota.
+	VisitOpt_quota(ctx *Opt_quotaContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#optschemaeltlist.
 	VisitOptschemaeltlist(ctx *OptschemaeltlistContext) interface{}
@@ -157,6 +172,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#alter_table_cmds.
 	VisitAlter_table_cmds(ctx *Alter_table_cmdsContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#table_constraint.
+	VisitTable_constraint(ctx *Table_constraintContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#partition_cmd.
 	VisitPartition_cmd(ctx *Partition_cmdContext) interface{}
 
@@ -223,6 +241,21 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#copystmt.
 	VisitCopystmt(ctx *CopystmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#redshift_copy_authorization.
+	VisitRedshift_copy_authorization(ctx *Redshift_copy_authorizationContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#redshift_copy_format.
+	VisitRedshift_copy_format(ctx *Redshift_copy_formatContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#redshift_copy_parameter.
+	VisitRedshift_copy_parameter(ctx *Redshift_copy_parameterContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#copy_param_name.
+	VisitCopy_param_name(ctx *Copy_param_nameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#copy_param_value.
+	VisitCopy_param_value(ctx *Copy_param_valueContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#copy_from.
 	VisitCopy_from(ctx *Copy_fromContext) interface{}
 
@@ -268,6 +301,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#createstmt.
 	VisitCreatestmt(ctx *CreatestmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#opt_table_attributes.
+	VisitOpt_table_attributes(ctx *Opt_table_attributesContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#opttemp.
 	VisitOpttemp(ctx *OpttempContext) interface{}
 
@@ -294,6 +330,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#rs_colattributes.
 	VisitRs_colattributes(ctx *Rs_colattributesContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#rs_colattribute.
+	VisitRs_colattribute(ctx *Rs_colattributeContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#columnOptions.
 	VisitColumnOptions(ctx *ColumnOptionsContext) interface{}
@@ -397,6 +436,18 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#opttablespace.
 	VisitOpttablespace(ctx *OpttablespaceContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#optredshifttableoptions.
+	VisitOptredshifttableoptions(ctx *OptredshifttableoptionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#redshifttableoption.
+	VisitRedshifttableoption(ctx *RedshifttableoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#sortkeyclause.
+	VisitSortkeyclause(ctx *SortkeyclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#sortkeyclausetype.
+	VisitSortkeyclausetype(ctx *SortkeyclausetypeContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#optconstablespace.
 	VisitOptconstablespace(ctx *OptconstablespaceContext) interface{}
 
@@ -415,17 +466,23 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#create_as_target.
 	VisitCreate_as_target(ctx *Create_as_targetContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#opt_backup_clause_table_attributes.
+	VisitOpt_backup_clause_table_attributes(ctx *Opt_backup_clause_table_attributesContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#table_attributes.
+	VisitTable_attributes(ctx *Table_attributesContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#opt_backup_clause.
+	VisitOpt_backup_clause(ctx *Opt_backup_clauseContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#opt_with_data.
 	VisitOpt_with_data(ctx *Opt_with_dataContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#creatematviewstmt.
 	VisitCreatematviewstmt(ctx *CreatematviewstmtContext) interface{}
 
-	// Visit a parse tree produced by RedshiftParser#create_mv_target.
-	VisitCreate_mv_target(ctx *Create_mv_targetContext) interface{}
-
-	// Visit a parse tree produced by RedshiftParser#optnolog.
-	VisitOptnolog(ctx *OptnologContext) interface{}
+	// Visit a parse tree produced by RedshiftParser#opt_auto_refresh.
+	VisitOpt_auto_refresh(ctx *Opt_auto_refreshContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#refreshmatviewstmt.
 	VisitRefreshmatviewstmt(ctx *RefreshmatviewstmtContext) interface{}
@@ -835,17 +892,269 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#fetch_args.
 	VisitFetch_args(ctx *Fetch_argsContext) interface{}
 
-	// Visit a parse tree produced by RedshiftParser#from_in.
-	VisitFrom_in(ctx *From_inContext) interface{}
-
-	// Visit a parse tree produced by RedshiftParser#opt_from_in.
-	VisitOpt_from_in(ctx *Opt_from_inContext) interface{}
-
 	// Visit a parse tree produced by RedshiftParser#grantstmt.
 	VisitGrantstmt(ctx *GrantstmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#grant_permissions_for_rls_lookup_tables.
+	VisitGrant_permissions_for_rls_lookup_tables(ctx *Grant_permissions_for_rls_lookup_tablesContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_explain_permissions_for_row_level_security_policy_filters.
+	VisitGrant_explain_permissions_for_row_level_security_policy_filters(ctx *Grant_explain_permissions_for_row_level_security_policy_filtersContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_machine_learning_permissions.
+	VisitGrant_machine_learning_permissions(ctx *Grant_machine_learning_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_role_permissions.
+	VisitGrant_role_permissions(ctx *Grant_role_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_role_permission_target_list.
+	VisitGrant_role_permission_target_list(ctx *Grant_role_permission_target_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_role_permission_target_list_item.
+	VisitGrant_role_permission_target_list_item(ctx *Grant_role_permission_target_list_itemContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#system_permissions.
+	VisitSystem_permissions(ctx *System_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#system_permissions_item.
+	VisitSystem_permissions_item(ctx *System_permissions_itemContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#opt_with_admin_option.
+	VisitOpt_with_admin_option(ctx *Opt_with_admin_optionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_permissions.
+	VisitGrant_scoped_permissions(ctx *Grant_scoped_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_schemas_permissions.
+	VisitGrant_scoped_schemas_permissions(ctx *Grant_scoped_schemas_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_tables_permissions.
+	VisitGrant_scoped_tables_permissions(ctx *Grant_scoped_tables_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_functions_permissions.
+	VisitGrant_scoped_functions_permissions(ctx *Grant_scoped_functions_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_procedures_permissions.
+	VisitGrant_scoped_procedures_permissions(ctx *Grant_scoped_procedures_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_languages_permissions.
+	VisitGrant_scoped_languages_permissions(ctx *Grant_scoped_languages_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_scoped_copy_jobs_permissions.
+	VisitGrant_scoped_copy_jobs_permissions(ctx *Grant_scoped_copy_jobs_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grantee_list_without_public.
+	VisitGrantee_list_without_public(ctx *Grantee_list_without_publicContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grantee_without_public.
+	VisitGrantee_without_public(ctx *Grantee_without_publicContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_datashare_permissions.
+	VisitGrant_datashare_permissions(ctx *Grant_datashare_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_spectrum_integration_permissions.
+	VisitGrant_spectrum_integration_permissions(ctx *Grant_spectrum_integration_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_spectrum_integration_external_schema_permissions.
+	VisitGrant_spectrum_integration_external_schema_permissions(ctx *Grant_spectrum_integration_external_schema_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#spectrum_integration_external_schema_permission_list.
+	VisitSpectrum_integration_external_schema_permission_list(ctx *Spectrum_integration_external_schema_permission_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#spectrum_integration_external_schema_permission.
+	VisitSpectrum_integration_external_schema_permission(ctx *Spectrum_integration_external_schema_permissionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_spectrum_integration_external_table_permissions.
+	VisitGrant_spectrum_integration_external_table_permissions(ctx *Grant_spectrum_integration_external_table_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#spectrum_integration_external_table_permission.
+	VisitSpectrum_integration_external_table_permission(ctx *Spectrum_integration_external_table_permissionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#spectrum_integration_external_table_permission_list.
+	VisitSpectrum_integration_external_table_permission_list(ctx *Spectrum_integration_external_table_permission_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_spectrum_integration_extenral_column_permissions.
+	VisitGrant_spectrum_integration_extenral_column_permissions(ctx *Grant_spectrum_integration_extenral_column_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#iamrolelist_or_public.
+	VisitIamrolelist_or_public(ctx *Iamrolelist_or_publicContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#iamrolelist.
+	VisitIamrolelist(ctx *IamrolelistContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_assume_role_permissions.
+	VisitGrant_assume_role_permissions(ctx *Grant_assume_role_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_assume_role_for_list.
+	VisitGrant_assume_role_for_list(ctx *Grant_assume_role_for_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_assume_role_for_item.
+	VisitGrant_assume_role_for_item(ctx *Grant_assume_role_for_itemContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_assume_role_target.
+	VisitGrant_assume_role_target(ctx *Grant_assume_role_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_column_level_permissions.
+	VisitGrant_column_level_permissions(ctx *Grant_column_level_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#column_privilege_target.
+	VisitColumn_privilege_target(ctx *Column_privilege_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#column_privilege_list.
+	VisitColumn_privilege_list(ctx *Column_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#column_all_privilege.
+	VisitColumn_all_privilege(ctx *Column_all_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#column_select_update_privilege.
+	VisitColumn_select_update_privilege(ctx *Column_select_update_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#common_grant.
+	VisitCommon_grant(ctx *Common_grantContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#copy_job_privilege_list.
+	VisitCopy_job_privilege_list(ctx *Copy_job_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#copy_job_privilege.
+	VisitCopy_job_privilege(ctx *Copy_job_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#copy_job_target.
+	VisitCopy_job_target(ctx *Copy_job_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#copy_job_name.
+	VisitCopy_job_name(ctx *Copy_job_nameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#language_privilege_list.
+	VisitLanguage_privilege_list(ctx *Language_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_language_target.
+	VisitGrant_language_target(ctx *Grant_language_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_procedure_target.
+	VisitGrant_procedure_target(ctx *Grant_procedure_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#procedure_privilege_list.
+	VisitProcedure_privilege_list(ctx *Procedure_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#procedure_privilege.
+	VisitProcedure_privilege(ctx *Procedure_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#function_privilege_list.
+	VisitFunction_privilege_list(ctx *Function_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#function_privilege.
+	VisitFunction_privilege(ctx *Function_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_function_target.
+	VisitGrant_function_target(ctx *Grant_function_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_schema_target.
+	VisitGrant_schema_target(ctx *Grant_schema_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_schema_target.
+	VisitRevoke_schema_target(ctx *Revoke_schema_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#schema_privilege_list.
+	VisitSchema_privilege_list(ctx *Schema_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#schema_privilege.
+	VisitSchema_privilege(ctx *Schema_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#database_privilege_list.
+	VisitDatabase_privilege_list(ctx *Database_privilege_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#database_privilege.
+	VisitDatabase_privilege(ctx *Database_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_database_target.
+	VisitGrant_database_target(ctx *Grant_database_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grant_table_target.
+	VisitGrant_table_target(ctx *Grant_table_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_table_target.
+	VisitRevoke_table_target(ctx *Revoke_table_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#all_tables_in_schema_list.
+	VisitAll_tables_in_schema_list(ctx *All_tables_in_schema_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#all_privileges.
+	VisitAll_privileges(ctx *All_privilegesContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grantee_list.
+	VisitGrantee_list(ctx *Grantee_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grantee.
+	VisitGrantee(ctx *GranteeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#opt_with_grant_option.
+	VisitOpt_with_grant_option(ctx *Opt_with_grant_optionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#table_privilege.
+	VisitTable_privilege(ctx *Table_privilegeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#table_privilege_list.
+	VisitTable_privilege_list(ctx *Table_privilege_listContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#revokestmt.
 	VisitRevokestmt(ctx *RevokestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_permissions_for_rls_lookup_tables.
+	VisitRevoke_permissions_for_rls_lookup_tables(ctx *Revoke_permissions_for_rls_lookup_tablesContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_explain_permissions_for_row_level_security_policy_filters.
+	VisitRevoke_explain_permissions_for_row_level_security_policy_filters(ctx *Revoke_explain_permissions_for_row_level_security_policy_filtersContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_machine_learning_permissions.
+	VisitRevoke_machine_learning_permissions(ctx *Revoke_machine_learning_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_role_permissions.
+	VisitRevoke_role_permissions(ctx *Revoke_role_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_permissions.
+	VisitRevoke_scoped_permissions(ctx *Revoke_scoped_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_schemas_permissions.
+	VisitRevoke_scoped_schemas_permissions(ctx *Revoke_scoped_schemas_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_tables_permissions.
+	VisitRevoke_scoped_tables_permissions(ctx *Revoke_scoped_tables_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_functions_permissions.
+	VisitRevoke_scoped_functions_permissions(ctx *Revoke_scoped_functions_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_procedures_permissions.
+	VisitRevoke_scoped_procedures_permissions(ctx *Revoke_scoped_procedures_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_languages_permissions.
+	VisitRevoke_scoped_languages_permissions(ctx *Revoke_scoped_languages_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_copy_jobs_permissions.
+	VisitRevoke_scoped_copy_jobs_permissions(ctx *Revoke_scoped_copy_jobs_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_datashare_permissions.
+	VisitRevoke_datashare_permissions(ctx *Revoke_datashare_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_spectrum_integration_permissions.
+	VisitRevoke_spectrum_integration_permissions(ctx *Revoke_spectrum_integration_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_spectrum_integration_external_schema_permissions.
+	VisitRevoke_spectrum_integration_external_schema_permissions(ctx *Revoke_spectrum_integration_external_schema_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_spectrum_integration_external_table_permissions.
+	VisitRevoke_spectrum_integration_external_table_permissions(ctx *Revoke_spectrum_integration_external_table_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_spectrum_integration_extenral_column_permissions.
+	VisitRevoke_spectrum_integration_extenral_column_permissions(ctx *Revoke_spectrum_integration_extenral_column_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_assume_role_permissions.
+	VisitRevoke_assume_role_permissions(ctx *Revoke_assume_role_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_column_level_permissions.
+	VisitRevoke_column_level_permissions(ctx *Revoke_column_level_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#common_revoke.
+	VisitCommon_revoke(ctx *Common_revokeContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#privileges.
 	VisitPrivileges(ctx *PrivilegesContext) interface{}
@@ -864,12 +1173,6 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#parameter_name.
 	VisitParameter_name(ctx *Parameter_nameContext) interface{}
-
-	// Visit a parse tree produced by RedshiftParser#grantee_list.
-	VisitGrantee_list(ctx *Grantee_listContext) interface{}
-
-	// Visit a parse tree produced by RedshiftParser#grantee.
-	VisitGrantee(ctx *GranteeContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#opt_grant_grant_option.
 	VisitOpt_grant_grant_option(ctx *Opt_grant_grant_optionContext) interface{}
@@ -946,8 +1249,20 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#createfunctionstmt.
 	VisitCreatefunctionstmt(ctx *CreatefunctionstmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#createprocedurestmt.
+	VisitCreateprocedurestmt(ctx *CreateprocedurestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#opt_nonatomic.
+	VisitOpt_nonatomic(ctx *Opt_nonatomicContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#opt_or_replace.
 	VisitOpt_or_replace(ctx *Opt_or_replaceContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#func_py_args_or_sql_args.
+	VisitFunc_py_args_or_sql_args(ctx *Func_py_args_or_sql_argsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#func_py_args_or_sql_args_list.
+	VisitFunc_py_args_or_sql_args_list(ctx *Func_py_args_or_sql_args_listContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#func_args.
 	VisitFunc_args(ctx *Func_argsContext) interface{}
@@ -1026,6 +1341,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#alterfunctionstmt.
 	VisitAlterfunctionstmt(ctx *AlterfunctionstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#alterprocedurestmt.
+	VisitAlterprocedurestmt(ctx *AlterprocedurestmtContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#alterfunc_opt_list.
 	VisitAlterfunc_opt_list(ctx *Alterfunc_opt_listContext) interface{}
@@ -1222,11 +1540,476 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#viewstmt.
 	VisitViewstmt(ctx *ViewstmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#with_no_schema_binding.
+	VisitWith_no_schema_binding(ctx *With_no_schema_bindingContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#opt_check_option.
 	VisitOpt_check_option(ctx *Opt_check_optionContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#loadstmt.
 	VisitLoadstmt(ctx *LoadstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#alterdatasharestmt.
+	VisitAlterdatasharestmt(ctx *AlterdatasharestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#alterdatashare_action.
+	VisitAlterdatashare_action(ctx *Alterdatashare_actionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#alterdatashare_add_drop.
+	VisitAlterdatashare_add_drop(ctx *Alterdatashare_add_dropContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#alterdatashare_objects.
+	VisitAlterdatashare_objects(ctx *Alterdatashare_objectsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#datashare_table_list.
+	VisitDatashare_table_list(ctx *Datashare_table_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#datashare_table_name.
+	VisitDatashare_table_name(ctx *Datashare_table_nameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#table_name.
+	VisitTable_name(ctx *Table_nameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#temporary_table_name.
+	VisitTemporary_table_name(ctx *Temporary_table_nameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#datashare_function_list.
+	VisitDatashare_function_list(ctx *Datashare_function_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#datashare_function.
+	VisitDatashare_function(ctx *Datashare_functionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#datashare_function_name.
+	VisitDatashare_function_name(ctx *Datashare_function_nameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createdatasharestmt.
+	VisitCreatedatasharestmt(ctx *CreatedatasharestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createdatashareoptions.
+	VisitCreatedatashareoptions(ctx *CreatedatashareoptionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createdatashareoption.
+	VisitCreatedatashareoption(ctx *CreatedatashareoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#setpublicaccessibleoption.
+	VisitSetpublicaccessibleoption(ctx *SetpublicaccessibleoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#managedbyoption.
+	VisitManagedbyoption(ctx *ManagedbyoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#descdatasharestmt.
+	VisitDescdatasharestmt(ctx *DescdatasharestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#dropdatasharestmt.
+	VisitDropdatasharestmt(ctx *DropdatasharestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#alterexternalschemastmt.
+	VisitAlterexternalschemastmt(ctx *AlterexternalschemastmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#altexternalschemaopts.
+	VisitAltexternalschemaopts(ctx *AltexternalschemaoptsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#alterexternalviewstmt.
+	VisitAlterexternalviewstmt(ctx *AlterexternalviewstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createexternalschemastmt.
+	VisitCreateexternalschemastmt(ctx *CreateexternalschemastmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#fromdatacatalogclause.
+	VisitFromdatacatalogclause(ctx *FromdatacatalogclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#dropschemastmt.
+	VisitDropschemastmt(ctx *DropschemastmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#implicitdatacatalogclause.
+	VisitImplicitdatacatalogclause(ctx *ImplicitdatacatalogclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#fromhivemetastoreclause.
+	VisitFromhivemetastoreclause(ctx *FromhivemetastoreclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#frompostgresclause.
+	VisitFrompostgresclause(ctx *FrompostgresclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#frommysqlclause.
+	VisitFrommysqlclause(ctx *FrommysqlclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#fromkinesisclause.
+	VisitFromkinesisclause(ctx *FromkinesisclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#fromkafkaclause.
+	VisitFromkafkaclause(ctx *FromkafkaclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#frommskclause.
+	VisitFrommskclause(ctx *FrommskclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#fromredshiftclause.
+	VisitFromredshiftclause(ctx *FromredshiftclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#iamrolevalue.
+	VisitIamrolevalue(ctx *IamrolevalueContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#catalogrolevalue.
+	VisitCatalogrolevalue(ctx *CatalogrolevalueContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#authenticationvalue.
+	VisitAuthenticationvalue(ctx *AuthenticationvalueContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createexternalfunctionstmt.
+	VisitCreateexternalfunctionstmt(ctx *CreateexternalfunctionstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#external_func_params.
+	VisitExternal_func_params(ctx *External_func_paramsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#paramlist.
+	VisitParamlist(ctx *ParamlistContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#param_spec.
+	VisitParam_spec(ctx *Param_specContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createexternalmodelstmt.
+	VisitCreateexternalmodelstmt(ctx *CreateexternalmodelstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createexternaltablestmt.
+	VisitCreateexternaltablestmt(ctx *CreateexternaltablestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#extern_column_list.
+	VisitExtern_column_list(ctx *Extern_column_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#extern_column_def.
+	VisitExtern_column_def(ctx *Extern_column_defContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#extern_typename.
+	VisitExtern_typename(ctx *Extern_typenameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#extern_table_format.
+	VisitExtern_table_format(ctx *Extern_table_formatContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#row_format_spec.
+	VisitRow_format_spec(ctx *Row_format_specContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#serde_properties_list.
+	VisitSerde_properties_list(ctx *Serde_properties_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#serde_property.
+	VisitSerde_property(ctx *Serde_propertyContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#external_format_spec.
+	VisitExternal_format_spec(ctx *External_format_specContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#table_properties_list.
+	VisitTable_properties_list(ctx *Table_properties_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#table_property.
+	VisitTable_property(ctx *Table_propertyContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createexternalviewstmt.
+	VisitCreateexternalviewstmt(ctx *CreateexternalviewstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#dropexternalviewstmt.
+	VisitDropexternalviewstmt(ctx *DropexternalviewstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#alteridentityproviderstmt.
+	VisitAlteridentityproviderstmt(ctx *AlteridentityproviderstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#alteridprovideropts.
+	VisitAlteridprovideropts(ctx *AlteridprovideroptsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#altermaskingpolicystmt.
+	VisitAltermaskingpolicystmt(ctx *AltermaskingpolicystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#altermaterializedviewstmt.
+	VisitAltermaterializedviewstmt(ctx *AltermaterializedviewstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#altmaskingpolicyopts.
+	VisitAltmaskingpolicyopts(ctx *AltmaskingpolicyoptsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#altmaskingpolicyargs.
+	VisitAltmaskingpolicyargs(ctx *AltmaskingpolicyargsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#altmaskingpolicyarg.
+	VisitAltmaskingpolicyarg(ctx *AltmaskingpolicyargContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#alterrlspolicystmt.
+	VisitAlterrlspolicystmt(ctx *AlterrlspolicystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#attachmaskingpolicystmt.
+	VisitAttachmaskingpolicystmt(ctx *AttachmaskingpolicystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#attachpolicycollist.
+	VisitAttachpolicycollist(ctx *AttachpolicycollistContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#attachpolicycolumn.
+	VisitAttachpolicycolumn(ctx *AttachpolicycolumnContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#attachpolicytargets.
+	VisitAttachpolicytargets(ctx *AttachpolicytargetsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#attachpolicytarget.
+	VisitAttachpolicytarget(ctx *AttachpolicytargetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#attachrlspolicystmt.
+	VisitAttachrlspolicystmt(ctx *AttachrlspolicystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#table_name_list.
+	VisitTable_name_list(ctx *Table_name_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createidentityproviderstmt.
+	VisitCreateidentityproviderstmt(ctx *CreateidentityproviderstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createidprovideropts.
+	VisitCreateidprovideropts(ctx *CreateidprovideroptsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#groupfilter.
+	VisitGroupfilter(ctx *GroupfilterContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createlibrarystmt.
+	VisitCreatelibrarystmt(ctx *CreatelibrarystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createlibraryopts.
+	VisitCreatelibraryopts(ctx *CreatelibraryoptsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createmaskingpolicystmt.
+	VisitCreatemaskingpolicystmt(ctx *CreatemaskingpolicystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#inputcolumnlist.
+	VisitInputcolumnlist(ctx *InputcolumnlistContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#inputcolumn.
+	VisitInputcolumn(ctx *InputcolumnContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#maskingexpression.
+	VisitMaskingexpression(ctx *MaskingexpressionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createmodelstmt.
+	VisitCreatemodelstmt(ctx *CreatemodelstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createmodelfromclause.
+	VisitCreatemodelfromclause(ctx *CreatemodelfromclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#iamrolespec.
+	VisitIamrolespec(ctx *IamrolespecContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#sagemakerspec.
+	VisitSagemakerspec(ctx *SagemakerspecContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#modeltypespec.
+	VisitModeltypespec(ctx *ModeltypespecContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#problemtypespec.
+	VisitProblemtypespec(ctx *ProblemtypespecContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#problemtype.
+	VisitProblemtype(ctx *ProblemtypeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#objectivespec.
+	VisitObjectivespec(ctx *ObjectivespecContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#hyperparametersspec.
+	VisitHyperparametersspec(ctx *HyperparametersspecContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#hyperparameterslist.
+	VisitHyperparameterslist(ctx *HyperparameterslistContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#hyperparameteritem.
+	VisitHyperparameteritem(ctx *HyperparameteritemContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#settingsclause.
+	VisitSettingsclause(ctx *SettingsclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#settingsitem.
+	VisitSettingsitem(ctx *SettingsitemContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#datatypelist.
+	VisitDatatypelist(ctx *DatatypelistContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#datatype.
+	VisitDatatype(ctx *DatatypeContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#createrlspolicystmt.
+	VisitCreaterlspolicystmt(ctx *CreaterlspolicystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#descidentityproviderstmt.
+	VisitDescidentityproviderstmt(ctx *DescidentityproviderstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#detachmaskingpolicystmt.
+	VisitDetachmaskingpolicystmt(ctx *DetachmaskingpolicystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#detachrlspolicystmt.
+	VisitDetachrlspolicystmt(ctx *DetachrlspolicystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#role_or_user_or_public_list.
+	VisitRole_or_user_or_public_list(ctx *Role_or_user_or_public_listContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#role_or_user_or_public.
+	VisitRole_or_user_or_public(ctx *Role_or_user_or_publicContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#rlspolicyname.
+	VisitRlspolicyname(ctx *RlspolicynameContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#dropidentityproviderstmt.
+	VisitDropidentityproviderstmt(ctx *DropidentityproviderstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#droplibrarystmt.
+	VisitDroplibrarystmt(ctx *DroplibrarystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#dropmaskingpolicystmt.
+	VisitDropmaskingpolicystmt(ctx *DropmaskingpolicystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#dropmodelstmt.
+	VisitDropmodelstmt(ctx *DropmodelstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#droprlspolicystmt.
+	VisitDroprlspolicystmt(ctx *DroprlspolicystmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#altertableappendstmt.
+	VisitAltertableappendstmt(ctx *AltertableappendstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#appendoptions.
+	VisitAppendoptions(ctx *AppendoptionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#alteruserstmt.
+	VisitAlteruserstmt(ctx *AlteruserstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#alteruseropts.
+	VisitAlteruseropts(ctx *AlteruseroptsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#analyzecompressionstmt.
+	VisitAnalyzecompressionstmt(ctx *AnalyzecompressionstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#cancelstmt.
+	VisitCancelstmt(ctx *CancelstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#closestmt.
+	VisitClosestmt(ctx *ClosestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#insertexternaltablestmt.
+	VisitInsertexternaltablestmt(ctx *InsertexternaltablestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#select_or_values.
+	VisitSelect_or_values(ctx *Select_or_valuesContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#selectintostmt.
+	VisitSelectintostmt(ctx *SelectintostmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#setsessionauthorizationstmt.
+	VisitSetsessionauthorizationstmt(ctx *SetsessionauthorizationstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#setsessioncharacteristicsstmt.
+	VisitSetsessioncharacteristicsstmt(ctx *SetsessioncharacteristicsstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#showcolumnsstmt.
+	VisitShowcolumnsstmt(ctx *ShowcolumnsstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#showdatabasesstmt.
+	VisitShowdatabasesstmt(ctx *ShowdatabasesstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#showdbsopts.
+	VisitShowdbsopts(ctx *ShowdbsoptsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#showdatasharesstmt.
+	VisitShowdatasharesstmt(ctx *ShowdatasharesstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#showexternaltablestmt.
+	VisitShowexternaltablestmt(ctx *ShowexternaltablestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#showgrantsstmt.
+	VisitShowgrantsstmt(ctx *ShowgrantsstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grantobject.
+	VisitGrantobject(ctx *GrantobjectContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#grantprincipal.
+	VisitGrantprincipal(ctx *GrantprincipalContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#showmodelstmt.
+	VisitShowmodelstmt(ctx *ShowmodelstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#showprocedurestmt.
+	VisitShowprocedurestmt(ctx *ShowprocedurestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#showschemasstmt.
+	VisitShowschemasstmt(ctx *ShowschemasstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#showtablestmt.
+	VisitShowtablestmt(ctx *ShowtablestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#showtablesstmt.
+	VisitShowtablesstmt(ctx *ShowtablesstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#showviewstmt.
+	VisitShowviewstmt(ctx *ShowviewstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#unloadstmt.
+	VisitUnloadstmt(ctx *UnloadstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#iamroleclause.
+	VisitIamroleclause(ctx *IamroleclauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#unloadoptions.
+	VisitUnloadoptions(ctx *UnloadoptionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#formatoption.
+	VisitFormatoption(ctx *FormatoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#partitionbyoption.
+	VisitPartitionbyoption(ctx *PartitionbyoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#manifestoption.
+	VisitManifestoption(ctx *ManifestoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#headeroption.
+	VisitHeaderoption(ctx *HeaderoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#delimiteroption.
+	VisitDelimiteroption(ctx *DelimiteroptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#fixedwidthoption.
+	VisitFixedwidthoption(ctx *FixedwidthoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#encryptedoption.
+	VisitEncryptedoption(ctx *EncryptedoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#kmskeyoption.
+	VisitKmskeyoption(ctx *KmskeyoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#compressionoption.
+	VisitCompressionoption(ctx *CompressionoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#addquotesoption.
+	VisitAddquotesoption(ctx *AddquotesoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#nullasoption.
+	VisitNullasoption(ctx *NullasoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#escapeoption.
+	VisitEscapeoption(ctx *EscapeoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#allowoverwriteoption.
+	VisitAllowoverwriteoption(ctx *AllowoverwriteoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#cleanpathoption.
+	VisitCleanpathoption(ctx *CleanpathoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#paralleloption.
+	VisitParalleloption(ctx *ParalleloptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#maxfilesizeoption.
+	VisitMaxfilesizeoption(ctx *MaxfilesizeoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#rowgroupsizeoption.
+	VisitRowgroupsizeoption(ctx *RowgroupsizeoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#sizeunit.
+	VisitSizeunit(ctx *SizeunitContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#regionoption.
+	VisitRegionoption(ctx *RegionoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#extensionoption.
+	VisitExtensionoption(ctx *ExtensionoptionContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#usestmt.
+	VisitUsestmt(ctx *UsestmtContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#createdbstmt.
 	VisitCreatedbstmt(ctx *CreatedbstmtContext) interface{}
@@ -1296,6 +2079,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#vacuumstmt.
 	VisitVacuumstmt(ctx *VacuumstmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#vacuum_option.
+	VisitVacuum_option(ctx *Vacuum_optionContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#analyzestmt.
 	VisitAnalyzestmt(ctx *AnalyzestmtContext) interface{}
@@ -1405,6 +2191,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#mergestmt.
 	VisitMergestmt(ctx *MergestmtContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#merge_when_clause.
+	VisitMerge_when_clause(ctx *Merge_when_clauseContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#merge_insert_clause.
 	VisitMerge_insert_clause(ctx *Merge_insert_clauseContext) interface{}
 
@@ -1480,6 +2269,15 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#simple_select_pramary.
 	VisitSimple_select_pramary(ctx *Simple_select_pramaryContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#exclude_clause.
+	VisitExclude_clause(ctx *Exclude_clauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#qualify_clause.
+	VisitQualify_clause(ctx *Qualify_clauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#start_with_clause.
+	VisitStart_with_clause(ctx *Start_with_clauseContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#with_clause.
 	VisitWith_clause(ctx *With_clauseContext) interface{}
 
@@ -1497,6 +2295,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#into_clause.
 	VisitInto_clause(ctx *Into_clauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#opt_top_clause.
+	VisitOpt_top_clause(ctx *Opt_top_clauseContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#opt_strict.
 	VisitOpt_strict(ctx *Opt_strictContext) interface{}
@@ -1708,6 +2509,12 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#simpletypename.
 	VisitSimpletypename(ctx *SimpletypenameContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#varbyte.
+	VisitVarbyte(ctx *VarbyteContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#json_type.
+	VisitJson_type(ctx *Json_typeContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#consttypename.
 	VisitConsttypename(ctx *ConsttypenameContext) interface{}
 
@@ -1797,6 +2604,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#a_expr_compare.
 	VisitA_expr_compare(ctx *A_expr_compareContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#a_expr_prior_or_level.
+	VisitA_expr_prior_or_level(ctx *A_expr_prior_or_levelContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#a_expr_like.
 	VisitA_expr_like(ctx *A_expr_likeContext) interface{}

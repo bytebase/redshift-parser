@@ -459,6 +459,10 @@ PRIMARY
    : 'PRIMARY'
    ;
 
+PUBLIC
+   : 'PUBLIC'
+   ;
+
 REFERENCES
    : 'REFERENCES'
    ;
@@ -551,6 +555,10 @@ AUTHORIZATION
 
 BINARY
    : 'BINARY'
+   ;
+
+BINDING
+   : 'BINDING'
    ;
 
 COLLATION
@@ -814,6 +822,10 @@ CSV
    : 'CSV'
    ;
 
+JSON
+   : 'JSON'
+   ;
+
 CURSOR
    : 'CURSOR'
    ;
@@ -824,6 +836,10 @@ CYCLE
 
 DATA_P
    : 'DATA'
+   ;
+
+DATA_CATALOG
+   : 'DATA_CATALOG'
    ;
 
 DATABASE
@@ -1261,6 +1277,10 @@ PRECEDING
    : 'PRECEDING'
    ;
 
+PREDICATE
+   : 'PREDICATE'
+   ;
+
 PREPARE
    : 'PREPARE'
    ;
@@ -1649,6 +1669,676 @@ YES_P
 ZONE
    : 'ZONE'
    ;
+
+// REDSHIFT-SPECIFIC KEYWORDS
+// These tokens are specific to Amazon Redshift and not part of standard PostgreSQL
+
+// Datashare Commands
+QUALIFY
+   : 'QUALIFY'
+   ;
+
+CONNECT
+   : 'CONNECT'
+   ;
+
+TOP
+   : 'TOP'
+   ;
+
+VARBYTE
+   : 'VARBYTE'
+   ;
+
+VARBINARY
+   : 'VARBINARY'
+   ;
+
+CONJUNCTION
+   : 'CONJUNCTION'
+   ;
+
+DEFINITION
+   : 'DEFINITION'
+   ;
+
+DATASHARE
+   : 'DATASHARE'
+   ;
+
+FILE
+   : 'FILE'
+   ;
+
+PUBLICACCESSIBLE
+   : 'PUBLICACCESSIBLE'
+   ;
+
+INCLUDENEW
+   : 'INCLUDENEW'
+   ;
+
+// External Data Sources
+IAM_ROLE
+   : 'IAM_ROLE'
+   ;
+
+CATALOG_ROLE
+   : 'CATALOG_ROLE'
+   ;
+
+CATALOG_ID
+   : 'CATALOG_ID'
+   ;
+
+HIVE
+   : 'HIVE'
+   ;
+
+METASTORE
+   : 'METASTORE'
+   ;
+
+URI
+   : 'URI'
+   ;
+
+POSTGRES
+   : 'POSTGRES'
+   ;
+
+MYSQL
+   : 'MYSQL'
+   ;
+
+SECRET_ARN
+   : 'SECRET_ARN'
+   ;
+
+KINESIS
+   : 'KINESIS'
+   ;
+
+KAFKA
+   : 'KAFKA'
+   ;
+
+MSK
+   : 'MSK'
+   ;
+
+AUTHENTICATION
+   : 'AUTHENTICATION'
+   ;
+
+AUTHENTICATION_ARN
+   : 'AUTHENTICATION_ARN'
+   ;
+
+SESSION_TOKEN
+   : 'SESSION'
+   ;
+
+MTLS
+   : 'MTLS'
+   ;
+
+// Security/Policy
+MASKING
+   : 'MASKING'
+   ;
+
+RLS
+   : 'RLS'
+   ;
+
+IDENTITY
+   : 'IDENTITY'
+   ;
+
+PROVIDER
+   : 'PROVIDER'
+   ;
+
+PROTECTED
+   : 'PROTECTED'
+   ;
+
+// ML/Model Commands
+MODEL
+   : 'MODEL'
+   ;
+
+TARGET
+   : 'TARGET'
+   ;
+
+SAGEMAKER
+   : 'SAGEMAKER'
+   ;
+
+AUTO
+   : 'AUTO'
+   ;
+
+MODEL_TYPE
+   : 'MODEL_TYPE'
+   ;
+
+PROBLEM_TYPE
+   : 'PROBLEM_TYPE'
+   ;
+
+OBJECTIVE
+   : 'OBJECTIVE'
+   ;
+
+PREPROCESSORS
+   : 'PREPROCESSORS'
+   ;
+
+HYPERPARAMETERS
+   : 'HYPERPARAMETERS'
+   ;
+
+XGBOOST
+   : 'XGBOOST'
+   ;
+
+MLP
+   : 'MLP'
+   ;
+
+LINEAR_LEARNER
+   : 'LINEAR_LEARNER'
+   ;
+
+KMEANS
+   : 'KMEANS'
+   ;
+
+FORECAST
+   : 'FORECAST'
+   ;
+
+REGRESSION
+   : 'REGRESSION'
+   ;
+
+BINARY_CLASSIFICATION
+   : 'BINARY_CLASSIFICATION'
+   ;
+
+MULTICLASS_CLASSIFICATION
+   : 'MULTICLASS_CLASSIFICATION'
+   ;
+
+S3_BUCKET
+   : 'S3_BUCKET'
+   ;
+
+TAGS
+   : 'TAGS'
+   ;
+
+KMS_KEY_ID
+   : 'KMS_KEY_ID'
+   ;
+
+S3_GARBAGE_COLLECT
+   : 'S3_GARBAGE_COLLECT'
+   ;
+
+MAX_CELLS
+   : 'MAX_CELLS'
+   ;
+
+MAX_RUNTIME
+   : 'MAX_RUNTIME'
+   ;
+
+HORIZON
+   : 'HORIZON'
+   ;
+
+FREQUENCY
+   : 'FREQUENCY'
+   ;
+
+PERCENTILES
+   : 'PERCENTILES'
+   ;
+
+MAX_BATCH_ROWS
+   : 'MAX_BATCH_ROWS'
+   ;
+
+// UNLOAD Command
+UNLOAD
+   : 'UNLOAD'
+   ;
+
+MANIFEST
+   : 'MANIFEST'
+   ;
+
+ADDQUOTES
+   : 'ADDQUOTES'
+   ;
+
+ALLOWOVERWRITE
+   : 'ALLOWOVERWRITE'
+   ;
+
+CLEANPATH
+   : 'CLEANPATH'
+   ;
+
+MAXFILESIZE
+   : 'MAXFILESIZE'
+   ;
+
+ROWGROUPSIZE
+   : 'ROWGROUPSIZE'
+   ;
+
+BZIP2
+   : 'BZIP2'
+   ;
+
+GZIP
+   : 'GZIP'
+   ;
+
+ZSTD
+   : 'ZSTD'
+   ;
+
+// Show Commands
+DATABASES
+   : 'DATABASES'
+   ;
+
+DATASHARES
+   : 'DATASHARES'
+   ;
+
+GRANTS
+   : 'GRANTS'
+   ;
+
+// Session/Connection
+USE
+   : 'USE'
+   ;
+
+CANCEL
+   : 'CANCEL'
+   ;
+
+SESSION_AUTHORIZATION
+   : 'SESSION_AUTHORIZATION'
+   ;
+
+SESSION_CHARACTERISTICS
+   : 'SESSION_CHARACTERISTICS'
+   ;
+
+// General
+COMPRESSION
+   : 'COMPRESSION'
+   ;
+
+LIBRARY
+   : 'LIBRARY'
+   ;
+
+APPEND
+   : 'APPEND'
+   ;
+
+// Size Units
+MB
+   : 'MB'
+   ;
+
+GB
+   : 'GB'
+   ;
+
+// Common Redshift Keywords
+ACCOUNT
+   : 'ACCOUNT'
+   ;
+
+NAMESPACE
+   : 'NAMESPACE'
+   ;
+
+DESCRIBE
+   : 'DESCRIBE'
+   ;
+
+// Additional Redshift-specific tokens
+NONATOMIC
+    : 'NONATOMIC'
+    ;
+
+MANAGEDBY
+   : 'MANAGEDBY'
+   ;
+
+ADX
+   : 'ADX'
+   ;
+
+REMOVE
+   : 'REMOVE'
+   ;
+
+DUPLICATES
+   : 'DUPLICATES'
+   ;
+
+BEDROCK
+   : 'BEDROCK'
+   ;
+
+MODEL_ID
+   : 'MODEL_ID'
+   ;
+
+PROMPT
+   : 'PROMPT'
+   ;
+
+SUFFIX
+   : 'SUFFIX'
+   ;
+
+REQUEST_TYPE
+   : 'REQUEST_TYPE'
+   ;
+
+RESPONSE_TYPE
+   : 'RESPONSE_TYPE'
+   ;
+
+RAW
+   : 'RAW'
+   ;
+
+UNIFIED
+   : 'UNIFIED'
+   ;
+
+SUPER
+   : 'SUPER'
+   ;
+
+CI
+   : 'CI'
+   ;
+
+CS
+   : 'CS'
+   ;
+
+PLPYTHONU
+   : 'PLPYTHONU'
+   ;
+
+FILLTARGET
+   : 'FILLTARGET'
+   ;
+
+IGNOREEXTRA
+   : 'IGNOREEXTRA'
+   ;
+
+CREATEUSER
+   : 'CREATEUSER'
+   ;
+
+NOCREATEUSER
+   : 'NOCREATEUSER'
+   ;
+
+// Additional commonly used tokens (avoiding conflicts with existing _P tokens and identifiers)
+REGION
+   : 'REGION'
+   ;
+
+PORT
+   : 'PORT'
+   ;
+
+REDSHIFT
+   : 'REDSHIFT'
+   ;
+
+IAM
+   : 'IAM'
+   ;
+
+CREATEDB
+   : 'CREATEDB'
+   ;
+
+NOCREATEDB
+   : 'NOCREATEDB'
+   ;
+
+RESTRICTED
+   : 'RESTRICTED'
+   ;
+
+UNLIMITED
+   : 'UNLIMITED'
+   ;
+
+EXTERNALID
+   : 'EXTERNALID'
+   ;
+
+TIMEOUT
+   : 'TIMEOUT'
+   ;
+
+SYSLOG
+   : 'SYSLOG'
+   ;
+
+CREDENTIALS
+   : 'CREDENTIALS'
+   ;
+
+UNRESTRICTED
+   : 'UNRESTRICTED'
+   ;
+
+PARAMETERS
+   : 'PARAMETERS'
+   ;
+
+APPLICATION_ARN
+   : 'APPLICATION_ARN'
+   ;
+
+AUTO_CREATE_ROLES
+   : 'AUTO_CREATE_ROLES'
+   ;
+
+COMPROWS
+   : 'COMPROWS'
+   ;
+
+PROVIDER_URL
+   : 'PROVIDER_URL'
+   ;
+
+PROVIDER_URL_PORT
+   : 'PROVIDER_URL_PORT'
+   ;
+
+ATTRIBUTE_MAP
+   : 'ATTRIBUTE_MAP'
+   ;
+
+PROVIDER_ARN
+   : 'PROVIDER_ARN'
+   ;
+
+ASSUME_ROLE_ARN
+   : 'ASSUME_ROLE_ARN'
+   ;
+
+
+PROPERTIES
+   : 'PROPERTIES'
+   ;
+
+AVRO
+   : 'AVRO'
+   ;
+
+RCFILE
+   : 'RCFILE'
+   ;
+
+SEQUENCEFILE
+   : 'SEQUENCEFILE'
+   ;
+
+TEXTFILE
+   : 'TEXTFILE'
+   ;
+
+ORC
+   : 'ORC'
+   ;
+
+ION
+   : 'ION'
+   ;
+
+LAMBDA
+   : 'LAMBDA'
+   ;
+
+FIXEDWIDTH
+   : 'FIXEDWIDTH'
+   ;
+
+// Missing tokens causing implicit definition warnings (avoiding conflicts with _P versions)
+PARQUET
+   : 'PARQUET'
+   ;
+
+LZOP
+   : 'LZOP'
+   ;
+
+REMOVEQUOTES
+   : 'REMOVEQUOTES'
+   ;
+
+TRUNCATECOLUMNS
+   : 'TRUNCATECOLUMNS'
+   ;
+
+FILLRECORD
+   : 'FILLRECORD'
+   ;
+
+BLANKSASNULL
+   : 'BLANKSASNULL'
+   ;
+
+EMPTYASNULL
+   : 'EMPTYASNULL'
+   ;
+
+MAXERROR
+   : 'MAXERROR'
+   ;
+
+DATEFORMAT
+   : 'DATEFORMAT'
+   ;
+
+TIMEFORMAT
+   : 'TIMEFORMAT'
+   ;
+
+ACCEPTINVCHARS
+   : 'ACCEPTINVCHARS'
+   ;
+
+ACCEPTANYDATE
+   : 'ACCEPTANYDATE'
+   ;
+
+IGNOREHEADER
+   : 'IGNOREHEADER'
+   ;
+
+IGNOREBLANKLINES
+   : 'IGNOREBLANKLINES'
+   ;
+
+COMPUPDATE
+   : 'COMPUPDATE'
+   ;
+
+STATUPDATE
+   : 'STATUPDATE'
+   ;
+
+EXPLICIT_IDS
+   : 'EXPLICIT_IDS'
+   ;
+
+READRATIO
+   : 'READRATIO'
+   ;
+
+ROUNDEC
+   : 'ROUNDEC'
+   ;
+
+TRIMBLANKS
+   : 'TRIMBLANKS'
+   ;
+
+PRESET
+   : 'PRESET'
+   ;
+
+ACCESS_KEY_ID
+   : 'ACCESS_KEY_ID'
+   ;
+
+SECRET_ACCESS_KEY
+   : 'SECRET_ACCESS_KEY'
+   ;
+
+SESSION_TOKEN_KW
+   : 'SESSION_TOKEN'
+   ;
+
+HEADER
+   : 'HEADER'
+   ;
+
+SETTINGS
+   : 'SETTINGS'
+   ;
+
+FUNCTION_NAME
+   : 'FUNCTION_NAME'
+   ;
+
    //
 
    // non-reserved keywords (can not be function or type)
@@ -1908,6 +2598,123 @@ STORED
    : 'STORED'
    ;
 
+// External table format tokens
+SERDE
+   : 'SERDE'
+   ;
+
+SERDEPROPERTIES
+   : 'SERDEPROPERTIES'
+   ;
+
+INPUTFORMAT
+   : 'INPUTFORMAT'
+   ;
+
+OUTPUTFORMAT
+   : 'OUTPUTFORMAT'
+   ;
+
+FIELDS
+   : 'FIELDS'
+   ;
+
+COLLECTION
+   : 'COLLECTION'
+   ;
+
+ITEMS
+   : 'ITEMS'
+   ;
+
+TERMINATED
+   : 'TERMINATED'
+   ;
+
+ESCAPED
+   : 'ESCAPED'
+   ;
+
+DEFINED
+   : 'DEFINED'
+   ;
+
+LINES
+   : 'LINES'
+   ;
+
+KEYS
+   : 'KEYS'
+   ;
+
+PARTITIONED
+   : 'PARTITIONED'
+   ;
+
+// Complex type tokens
+STRUCT
+   : 'STRUCT'
+   ;
+
+MAP
+   : 'MAP'
+   ;
+
+STRING
+   : 'STRING'
+   ;
+
+DELIMITED
+   : 'DELIMITED'
+   ;
+
+// Privilges and roles tokens
+USAGE
+   : 'USAGE'
+   ;
+
+IGNORE
+    : 'IGNORE'
+    ;
+
+LANGUAGES
+   : 'LANGUAGES'
+   ;
+
+JOB
+   : 'JOB'
+   ;
+
+JOBS
+    : 'JOBS'
+    ;
+
+VIA
+   : 'VIA'
+   ;
+
+ASSUMEROLE
+    : 'ASSUMEROLE'
+    ;
+
+// External function tokens
+RETRY_TIMEOUT
+   : 'RETRY_TIMEOUT'
+   ;
+
+MAX_BATCH_SIZE
+   : 'MAX_BATCH_SIZE'
+   ;
+
+MAX_PAYLOAD_IN_MB
+   : 'MAX_PAYLOAD_IN_MB'
+   ;
+
+KB
+   : 'KB'
+   ;
+
+
 INCLUDE
    : 'INCLUDE'
    ;
@@ -1926,6 +2733,10 @@ IMPORT_P
 
 POLICY
    : 'POLICY'
+   ;
+
+PRIORITY
+   : 'PRIORITY'
    ;
 
 METHOD
@@ -2705,8 +3516,52 @@ SORTKEY
    : 'SORTKEY'
    ;
 
+DISTSTYLE
+   : 'DISTSTYLE'
+   ;
+
+BACKUP
+   : 'BACKUP'
+   ;
+
+COMPOUND
+   : 'COMPOUND'
+   ;
+
+INTERLEAVED
+   : 'INTERLEAVED'
+   ;
+
+EVEN
+   : 'EVEN'
+   ;
+
 CASE_SENSITIVE
    : 'CASE_SENSITIVE'
+   ;
+
+QUOTA
+   : 'QUOTA'
+   ;
+
+TB
+   : 'TB'
+   ;
+
+BOOST
+   : 'BOOST'
+   ;
+
+RECLUSTER
+   : 'RECLUSTER'
+   ;
+
+SORT
+   : 'SORT'
+   ;
+
+PERCENT_WORD
+   : 'PERCENT'
    ;
 
 CASE_INSENSITIVE
@@ -2715,6 +3570,14 @@ CASE_INSENSITIVE
 
 Identifier
    : IdentifierStartChar IdentifierChar*
+   ;
+
+TemporaryIdentifier
+   : '#' Identifier
+   ;
+
+NamespaceUser
+   : Identifier ':' Identifier
    ;
 
 fragment IdentifierStartChar options { caseInsensitive=false; }

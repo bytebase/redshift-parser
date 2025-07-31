@@ -41,6 +41,7 @@ stmt
    | alterfdwstmt
    | alterforeignserverstmt
    | alterfunctionstmt
+   | alterprocedurestmt
    | altergroupstmt
    | alterobjectdependsstmt
    | alterobjectschemastmt
@@ -56,6 +57,8 @@ stmt
    | alterpublicationstmt
    | alterrolesetstmt
    | alterrolestmt
+   | alteruserstmt
+   | alterschemastmt
    | altersubscriptionstmt
    | alterstatsstmt
    | altertsconfigurationstmt
@@ -80,6 +83,7 @@ stmt
    | createforeignserverstmt
    | createforeigntablestmt
    | createfunctionstmt
+   | createprocedurestmt
    | creategroupstmt
    | creatematviewstmt
    | createopclassstmt
@@ -111,18 +115,20 @@ stmt
    | dropopclassstmt
    | dropopfamilystmt
    | dropownedstmt
+   | dropschemastmt
    | dropstmt
    | dropsubscriptionstmt
    | droptablespacestmt
    | droptransformstmt
    | droprolestmt
+   | dropuserstmt
+   | dropgroupstmt
    | dropusermappingstmt
    | dropdbstmt
    | executestmt
    | explainstmt
    | fetchstmt
    | grantstmt
-   | grantrolestmt
    | importforeignschemastmt
    | indexstmt
    | insertstmt
@@ -153,6 +159,59 @@ stmt
    | variablesetstmt
    | variableshowstmt
    | viewstmt
+   // REDSHIFT-SPECIFIC STATEMENTS
+   | alterdatasharestmt
+   | alterexternalschemastmt
+   | alterexternalviewstmt
+   | alteridentityproviderstmt
+   | altermaskingpolicystmt
+   | altermaterializedviewstmt
+   | alterrlspolicystmt
+   | altertableappendstmt
+   | analyzecompressionstmt
+   | attachmaskingpolicystmt
+   | attachrlspolicystmt
+   | cancelstmt
+   | closestmt
+   | createdatasharestmt
+   | createexternalfunctionstmt
+   | createexternalmodelstmt
+   | createexternalschemastmt
+   | createexternaltablestmt
+   | createexternalviewstmt
+   | createidentityproviderstmt
+   | createlibrarystmt
+   | createmaskingpolicystmt
+   | createmodelstmt
+   | createrlspolicystmt
+   | descdatasharestmt
+   | descidentityproviderstmt
+   | detachmaskingpolicystmt
+   | detachrlspolicystmt
+   | dropdatasharestmt
+   | dropexternalviewstmt
+   | dropidentityproviderstmt
+   | droplibrarystmt
+   | dropmaskingpolicystmt
+   | dropmodelstmt
+   | droprlspolicystmt
+   | insertexternaltablestmt
+   | selectintostmt
+   | setsessionauthorizationstmt
+   | setsessioncharacteristicsstmt
+   | showcolumnsstmt
+   | showdatabasesstmt
+   | showdatasharesstmt
+   | showexternaltablestmt
+   | showgrantsstmt
+   | showmodelstmt
+   | showprocedurestmt
+   | showschemasstmt
+   | showtablestmt
+   | showtablesstmt
+   | showviewstmt
+   | unloadstmt
+   | usestmt
    | plsqlconsolecommand
    ;
 
@@ -178,16 +237,28 @@ optrolelist
    ;
 
 alteroptrolelist
-   : alteroptroleelem*
+   : alteroptroleelem (',' alteroptroleelem)*
+   | alteroptroleelem*
    ;
 
 alteroptroleelem
-   : PASSWORD (sconst | NULL_P)
+   : PASSWORD (sconst | NULL_P | DISABLE_P)
    | (ENCRYPTED | UNENCRYPTED) PASSWORD sconst
    | INHERIT
-   | CONNECTION LIMIT signediconst
+   | CONNECTION LIMIT (signediconst | UNLIMITED)
    | VALID UNTIL sconst
    | USER role_list
+   | EXTERNALID (sconst | identifier)
+   | CREATEDB
+   | NOCREATEDB
+   | CREATEUSER
+   | NOCREATEUSER
+   | SYSLOG ACCESS (RESTRICTED | UNRESTRICTED)
+   | SESSION TIMEOUT iconst
+   | RESET SESSION TIMEOUT
+   | RESET ALL
+   | SET var_name (TO | EQUAL)? var_list
+   | RESET var_name
    | identifier
    ;
 
@@ -204,7 +275,12 @@ createuserstmt
    ;
 
 alterrolestmt
-   : ALTER (ROLE | USER) rolespec opt_with? alteroptrolelist
+   : ALTER ROLE rolespec opt_with? alterroleaction;
+
+alterroleaction
+   : RENAME TO colid
+   | OWNER TO colid
+   | EXTERNALID TO colid
    ;
 
 opt_in_database
@@ -215,9 +291,22 @@ alterrolesetstmt
    : ALTER (ROLE | USER) ALL? rolespec opt_in_database? setresetclause
    ;
 
-droprolestmt
-   : DROP (ROLE | USER | GROUP_P) (IF_P EXISTS)? role_list
+alterschemastmt
+   : ALTER SCHEMA name QUOTA (iconst (MB | GB | TB)? | UNLIMITED)
    ;
+
+droprolestmt
+   : DROP ROLE rolespec (FORCE | RESTRICT)?
+   ;
+
+dropuserstmt
+   : DROP USER opt_if_exists? role_list
+   ;
+
+dropgroupstmt
+   : DROP GROUP_P rolespec
+   ;
+
 
 creategroupstmt
    : CREATE GROUP_P roleid opt_with? optrolelist
@@ -233,15 +322,20 @@ add_drop
    ;
 
 createschemastmt
-   : CREATE SCHEMA (IF_P NOT EXISTS)? (optschemaname? AUTHORIZATION rolespec | colid) optschemaeltlist
+   : CREATE SCHEMA opt_if_not_exists? schemaname=colid opt_auth_clause? opt_quota? optschemaeltlist?
+   | CREATE SCHEMA opt_auth_clause opt_quota? optschemaeltlist?
    ;
 
-optschemaname
-   : colid
+opt_auth_clause
+   : AUTHORIZATION rolespec
+   ;
+
+opt_quota
+   : QUOTA ((fconst | iconst) (MB | GB | TB)? | UNLIMITED)
    ;
 
 optschemaeltlist
-   : schema_stmt*
+   : schema_stmt+
    ;
 
 schema_stmt
@@ -353,7 +447,7 @@ functionsetresetclause
    ;
 
 variableshowstmt
-   : SHOW (var_name | TIME ZONE | TRANSACTION ISOLATION LEVEL | SESSION AUTHORIZATION | ALL)
+   : SHOW (var_name | TIME ZONE | TRANSACTION ISOLATION LEVEL | SESSION AUTHORIZATION | CURRENT_SCHEMA | SESSION_USER | CURRENT_USER | ALL)
    ;
 
 constraintssetstmt
@@ -379,20 +473,47 @@ discardstmt
    ;
 
 altertablestmt
-   : ALTER TABLE (IF_P EXISTS)? relation_expr (alter_table_cmds | partition_cmd)
-   | ALTER TABLE ALL IN_P TABLESPACE name (OWNED BY role_list)? SET TABLESPACE name opt_nowait?
-   | ALTER INDEX (IF_P EXISTS)? qualified_name (alter_table_cmds | index_partition_cmd)
-   | ALTER INDEX ALL IN_P TABLESPACE name (OWNED BY role_list)? SET TABLESPACE name opt_nowait?
-   | ALTER SEQUENCE (IF_P EXISTS)? qualified_name alter_table_cmds
-   | ALTER VIEW (IF_P EXISTS)? qualified_name alter_table_cmds
-   | ALTER MATERIALIZED VIEW (IF_P EXISTS)? qualified_name alter_table_cmds
-   | ALTER MATERIALIZED VIEW ALL IN_P TABLESPACE name (OWNED BY role_list)? SET TABLESPACE name opt_nowait?
-   | ALTER FOREIGN TABLE (IF_P EXISTS)? relation_expr alter_table_cmds
+   : ALTER TABLE qualified_name alter_table_cmds (COMMA alter_table_cmds)*
    ;
 
 alter_table_cmds
-   : alter_table_cmd (COMMA alter_table_cmd)*
+   : ADD_P table_constraint
+   | DROP CONSTRAINT colid (RESTRICT | CASCADE)?
+   | OWNER TO rolespec
+   | RENAME TO colid
+   | RENAME COLUMN colid TO colid
+   | ALTER COLUMN colid TYPE_P typename
+   | ALTER COLUMN colid ENCODE colid
+   | ALTER DISTKEY colid
+   | ALTER DISTSTYLE ALL
+   | ALTER DISTSTYLE EVEN
+   | ALTER DISTSTYLE KEY DISTKEY colid
+   | ALTER DISTSTYLE AUTO
+   | ALTER COMPOUND? SORTKEY OPEN_PAREN columnlist CLOSE_PAREN
+   | ALTER SORTKEY AUTO
+   | ALTER SORTKEY NONE
+   | ALTER ENCODE AUTO
+   | ADD_P COLUMN? colid typename (DEFAULT a_expr)? (ENCODE colid)? (NOT? NULL_P)? (COLLATE (CASE_SENSITIVE | CS | CASE_INSENSITIVE | CI))?
+   | DROP COLUMN? colid (RESTRICT | CASCADE)?
+   | ROW LEVEL SECURITY (ON | OFF) (CONJUNCTION TYPE_P (AND | OR))? (FOR DATASHARES)?
+   | MASKING (ON | OFF) FOR DATASHARES
+   // ALTER TABLE APPEND
+   | APPEND FROM qualified_name (IGNOREEXTRA | FILLTARGET)?
+   // The following options apply only to external tables
+   | SET LOCATION StringConstant
+   | SET FILE FORMAT colid
+   | SET TABLE PROPERTIES OPEN_PAREN table_properties_list CLOSE_PAREN
+   | PARTITION OPEN_PAREN ((colid EQUAL a_expr) (COMMA colid EQUAL a_expr)*) CLOSE_PAREN SET LOCATION StringConstant
+   | ADD_P opt_if_not_exists? PARTITION OPEN_PAREN ((colid EQUAL a_expr) (COMMA colid EQUAL a_expr)*) CLOSE_PAREN LOCATION StringConstant
+   | DROP PARTITION OPEN_PAREN ((colid EQUAL a_expr) (COMMA colid EQUAL a_expr)*) CLOSE_PAREN
    ;
+
+table_constraint
+   : (CONSTRAINT colid)? (
+       (UNIQUE OPEN_PAREN columnlist CLOSE_PAREN)
+       | (PRIMARY KEY OPEN_PAREN columnlist CLOSE_PAREN)
+       | (FOREIGN KEY OPEN_PAREN columnlist CLOSE_PAREN REFERENCES qualified_name OPEN_PAREN columnlist CLOSE_PAREN)
+   );
 
 partition_cmd
    : ATTACH PARTITION qualified_name partitionboundspec
@@ -551,6 +672,32 @@ closeportalstmt
 copystmt
    : COPY opt_binary? qualified_name opt_column_list? copy_from opt_program? copy_file_name copy_delimiter? opt_with? copy_options where_clause?
    | COPY OPEN_PAREN preparablestmt CLOSE_PAREN TO opt_program? copy_file_name opt_with? copy_options
+   | COPY qualified_name opt_column_list? FROM sconst redshift_copy_authorization redshift_copy_format? redshift_copy_parameter*
+   ;
+
+redshift_copy_authorization
+   : IAM_ROLE (DEFAULT | sconst)
+   | CREDENTIALS sconst
+   | ACCESS_KEY_ID sconst SECRET_ACCESS_KEY sconst (SESSION_TOKEN_KW sconst)?
+   ;
+
+redshift_copy_format
+   : FORMAT? AS? (CSV | PARQUET | ORC | JSON | AVRO) sconst?
+   ;
+
+redshift_copy_parameter
+   : copy_param_name (AS? copy_param_value)?
+   ;
+
+copy_param_name
+   : colid
+   | NULL_P
+   ;
+
+copy_param_value
+   : sconst | iconst | colid
+   | ON | OFF | TRUE_P | FALSE_P | PRESET
+   | AUTO | DEFAULT | NONE
    ;
 
 copy_from
@@ -629,19 +776,21 @@ copy_generic_opt_arg_list_item
    ;
 
 createstmt
-   : CREATE opttemp? TABLE (IF_P NOT EXISTS)? qualified_name (
-      OPEN_PAREN opttableelementlist? CLOSE_PAREN optinherit? optpartitionspec? table_access_method_clause? optwith? oncommitoption? opttablespace?
-      | OF any_name opttypedtableelementlist? optpartitionspec? table_access_method_clause? optwith? oncommitoption? opttablespace?
-      | PARTITION OF qualified_name opttypedtableelementlist? partitionboundspec optpartitionspec? table_access_method_clause? optwith? oncommitoption? opttablespace?
+   : CREATE opttemp? TABLE (IF_P NOT EXISTS)? table_name (
+      OPEN_PAREN opttableelementlist? CLOSE_PAREN opt_backup_clause? opt_table_attributes*
       )
    ;
 
+opt_table_attributes
+   : DISTSTYLE (AUTO | EVEN | KEY | ALL)
+   | DISTKEY OPEN_PAREN distkey_identifier=colid CLOSE_PAREN
+   | (COMPOUND | INTERLEAVED)? SORTKEY OPEN_PAREN sortkey_columnlist=columnlist CLOSE_PAREN
+   | ENCODE AUTO
+   ;
+
+
 opttemp
-   : TEMPORARY
-   | TEMP
-   | LOCAL (TEMPORARY | TEMP)
-   | GLOBAL (TEMPORARY | TEMP)
-   | UNLOGGED
+   : LOCAL? (TEMPORARY | TEMP)
    ;
 
 opttableelementlist
@@ -672,17 +821,24 @@ typedtableelement
    ;
 
 columnDef
-   : colid typename create_generic_options? rs_colattributes? colquallist
+   : colid extern_typename create_generic_options? rs_colattributes?
    ;
 
-rs_colattributes
+rs_colattributes:
+   rs_colattribute+
+   ;
+
+rs_colattribute
    : DEFAULT b_expr
    | IDENTITY_P OPEN_PAREN seed=iconst COMMA step=iconst CLOSE_PAREN
-   | GENERATED BY DEFAULT AS IDENTITY_P OPEN_PAREN seed=iconst COMMA step=iconst CLOSE_PAREN
-   | ENCODE StringConstant
+   | GENERATED generated_when AS IDENTITY_P (OPEN_PAREN seed=iconst COMMA step=iconst CLOSE_PAREN)?
+   | ENCODE colid
    | DISTKEY
    | SORTKEY
    | COLLATE (CASE_SENSITIVE | CASE_INSENSITIVE)
+   | NOT NULL_P | NULL_P
+   | UNIQUE | PRIMARY KEY
+   | REFERENCES qualified_name opt_column_list?
    ;
 
 columnOptions
@@ -856,6 +1012,27 @@ opttablespace
    : TABLESPACE name
    ;
 
+optredshifttableoptions
+   : redshifttableoption+
+   ;
+
+redshifttableoption
+   : BACKUP (YES_P | NO)
+   | DISTSTYLE (ALL | EVEN | KEY | AUTO)
+   | DISTKEY OPEN_PAREN colid CLOSE_PAREN
+   | sortkeyclause
+   | ENCODE AUTO
+   ;
+
+sortkeyclause
+   : sortkeyclausetype? SORTKEY OPEN_PAREN columnlist CLOSE_PAREN
+   ;
+
+sortkeyclausetype
+   : COMPOUND
+   | INTERLEAVED
+   ;
+
 optconstablespace
    : USING INDEX TABLESPACE name
    ;
@@ -873,11 +1050,26 @@ alterstatsstmt
    ;
 
 createasstmt
-   : CREATE opttemp? TABLE (IF_P NOT EXISTS)? create_as_target AS selectstmt opt_with_data?
+   : CREATE opttemp? TABLE create_as_target AS selectstmt
    ;
 
 create_as_target
-   : qualified_name opt_column_list? table_access_method_clause? optwith? oncommitoption? opttablespace?
+   : table_name opt_column_list? opt_backup_clause_table_attributes?
+   ;
+
+opt_backup_clause_table_attributes
+   : opt_backup_clause opt_table_attributes*
+   | opt_table_attributes+ opt_backup_clause? opt_table_attributes*
+   ;
+
+table_attributes
+   : DISTSTYLE (AUTO | EVEN | ALL | KEY)
+   | DISTKEY OPEN_PAREN distkey_identifier=colid CLOSE_PAREN
+   | (COMPOUND | INTERLEAVED)? SORTKEY OPEN_PAREN sortkey_columnlist=columnlist CLOSE_PAREN
+   ;
+
+opt_backup_clause
+   : BACKUP (YES_P | NO)
    ;
 
 opt_with_data
@@ -885,19 +1077,14 @@ opt_with_data
    ;
 
 creatematviewstmt
-   : CREATE optnolog? MATERIALIZED VIEW (IF_P NOT EXISTS)? create_mv_target AS selectstmt opt_with_data?
+   : CREATE MATERIALIZED VIEW qualified_name opt_backup_clause? opt_table_attributes* opt_auto_refresh? AS selectstmt
    ;
 
-create_mv_target
-   : qualified_name opt_column_list? table_access_method_clause? opt_reloptions? opttablespace?
-   ;
-
-optnolog
-   : UNLOGGED
-   ;
+opt_auto_refresh
+   : AUTO REFRESH (YES_P | NO);
 
 refreshmatviewstmt
-   : REFRESH MATERIALIZED VIEW opt_concurrently? qualified_name opt_with_data?
+   : REFRESH MATERIALIZED VIEW opt_concurrently? qualified_name opt_with_data? (RESTRICT | CASCADE)?
    ;
 
 createseqstmt
@@ -1507,6 +1694,7 @@ object_type_any_name
 
 object_type_name
    : drop_type_name
+   | SCHEMA
    | DATABASE
    | ROLE
    | SUBSCRIPTION
@@ -1520,7 +1708,6 @@ drop_type_name
    | FOREIGN DATA_P WRAPPER
    | opt_procedural? LANGUAGE
    | PUBLICATION
-   | SCHEMA
    | SERVER
    ;
 
@@ -1605,44 +1792,480 @@ security_label
 
 fetchstmt
    : FETCH fetch_args
-   | MOVE fetch_args
    ;
 
 fetch_args
-   : cursor_name
-   | from_in cursor_name
-   | NEXT opt_from_in? cursor_name
-   | PRIOR opt_from_in? cursor_name
-   | FIRST_P opt_from_in? cursor_name
-   | LAST_P opt_from_in? cursor_name
-   | ABSOLUTE_P signediconst opt_from_in? cursor_name
-   | RELATIVE_P signediconst opt_from_in? cursor_name
-   | signediconst opt_from_in? cursor_name
-   | ALL opt_from_in? cursor_name
-   | FORWARD opt_from_in? cursor_name
-   | FORWARD signediconst opt_from_in? cursor_name
-   | FORWARD ALL opt_from_in? cursor_name
-   | BACKWARD opt_from_in? cursor_name
-   | BACKWARD signediconst opt_from_in? cursor_name
-   | BACKWARD ALL opt_from_in? cursor_name
-   ;
-
-from_in
-   : FROM
-   | IN_P
-   ;
-
-opt_from_in
-   : from_in
+   : NEXT FROM cursor_name
+   | ALL FROM cursor_name
+   | FORWARD (signediconst | ALL)? FROM cursor_name
+   | FROM cursor_name
    ;
 
 grantstmt
-   : GRANT privileges ON privilege_target TO grantee_list opt_grant_grant_option?
+   : common_grant
+   | grant_column_level_permissions
+   | grant_assume_role_permissions
+   | grant_spectrum_integration_permissions
+   | grant_datashare_permissions
+   | grant_scoped_permissions
+   | grant_machine_learning_permissions
+   | grant_role_permissions
+   | grant_explain_permissions_for_row_level_security_policy_filters
+   | grant_permissions_for_rls_lookup_tables
    ;
 
+grant_permissions_for_rls_lookup_tables
+   : GRANT SELECT ON TABLE? qualified_name_list TO RLS POLICY columnlist
+   ;
+
+grant_explain_permissions_for_row_level_security_policy_filters
+   : GRANT (EXPLAIN | IGNORE) RLS TO ROLE rolespec
+   ;
+
+grant_machine_learning_permissions
+   : GRANT CREATE MODEL TO grantee_list
+   | GRANT function_privilege_list ON MODEL columnlist TO grantee_list
+   ;
+
+grant_role_permissions
+   : GRANT ROLE rolespec (COMMA ROLE rolespec)* TO grant_role_permission_target_list
+   | GRANT system_permissions TO ROLE role_list
+   ;
+
+grant_role_permission_target_list
+   : grant_role_permission_target_list_item (COMMA grant_role_permission_target_list_item)*
+   ;
+
+grant_role_permission_target_list_item
+   : rolespec opt_with_admin_option?
+   | ROLE rolespec
+   ;
+
+system_permissions
+   : system_permissions_item (COMMA system_permissions_item)*
+   | all_privileges
+   ;
+
+system_permissions_item
+   : (CREATE | DROP | ALTER) USER
+   | (CREATE | DROP) SCHEMA
+   | ALTER DEFAULT PRIVILEGES
+   | ACCESS (CATALOG | (SYSTEM_P TABLE))
+   | (CREATE | DROP | ALTER) TABLE
+   | CREATE OR REPLACE (FUNCTION | (EXTERNAL FUNCTION))
+   | DROP FUNCTION
+   | ((CREATE OR REPLACE) | DROP) PROCEDURE
+   | ((CREATE OR REPLACE) | DROP) VIEW
+   | (CREATE | DROP) MODEL
+   | (CREATE | ALTER | DROP) DATASHARE
+   | (CREATE | DROP) LIBRARY
+   | (CREATE | DROP) ROLE
+   | TRUNCATE TABLE
+   | VACUUM | ANALYZE | CANCEL
+   | (IGNORE | EXPLAIN) RLS
+   | EXPLAIN MASKING
+   ;
+
+opt_with_admin_option
+   : WITH ADMIN OPTION
+   ;
+
+grant_scoped_permissions
+   : grant_scoped_schemas_permissions
+   | grant_scoped_tables_permissions
+   | grant_scoped_functions_permissions
+   | grant_scoped_procedures_permissions
+   | grant_scoped_languages_permissions
+   | grant_scoped_copy_jobs_permissions
+   ;
+
+grant_scoped_schemas_permissions
+   : GRANT schema_privilege_list FOR SCHEMAS IN_P DATABASE colid TO grantee_list_without_public
+   ;
+
+grant_scoped_tables_permissions
+   : GRANT table_privilege_list FOR TABLES IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) TO grantee_list_without_public
+   ;
+
+grant_scoped_functions_permissions
+   : GRANT function_privilege_list FOR FUNCTIONS IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) TO grantee_list_without_public
+   ;
+
+grant_scoped_procedures_permissions
+   : GRANT procedure_privilege_list FOR PROCEDURES IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) TO grantee_list_without_public
+   ;
+
+grant_scoped_languages_permissions
+    : GRANT language_privilege_list FOR LANGUAGES IN_P DATABASE colid TO grantee_list_without_public
+    ;
+
+grant_scoped_copy_jobs_permissions
+    : GRANT copy_job_privilege_list FOR COPY JOBS IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) TO grantee_list_without_public
+    ;
+
+grantee_list_without_public
+   : grantee_without_public (COMMA grantee_without_public)*
+   ;
+
+grantee_without_public
+   : rolespec opt_with_grant_option?
+   | ROLE rolespec
+   ;
+
+grant_datashare_permissions
+   : GRANT (ALTER | SHARE) ON DATASHARE colid TO grantee_list
+   | GRANT USAGE ON DATASHARE colid TO ((NAMESPACE sconst) | (ACCOUNT sconst (VIA DATA_P CATALOG)?))
+   | GRANT USAGE ON (DATABASE columnlist | SCHEMA colid) TO grantee_list
+   ;
+
+grant_spectrum_integration_permissions
+    : grant_spectrum_integration_extenral_column_permissions
+    | grant_spectrum_integration_external_table_permissions
+    | grant_spectrum_integration_external_schema_permissions
+    ;
+
+grant_spectrum_integration_external_schema_permissions
+   : GRANT spectrum_integration_external_schema_permission_list ON EXTERNAL SCHEMA columnlist TO iamrolelist_or_public opt_with_grant_option?
+   ;
+
+spectrum_integration_external_schema_permission_list
+   : spectrum_integration_external_schema_permission (COMMA spectrum_integration_external_schema_permission)*
+   | all_privileges
+   ;
+
+spectrum_integration_external_schema_permission
+   : CREATE
+   | ALTER
+   | DROP
+   ;
+
+grant_spectrum_integration_external_table_permissions
+   : GRANT spectrum_integration_external_table_permission_list ON EXTERNAL TABLE qualified_name_list TO iamrolelist_or_public opt_with_grant_option?
+   ;
+
+spectrum_integration_external_table_permission
+   : SELECT | ALTER | DROP | DELETE_P | INSERT
+   | all_privileges
+   ;
+
+spectrum_integration_external_table_permission_list
+   : spectrum_integration_external_table_permission (COMMA spectrum_integration_external_table_permission)*
+   ;
+
+
+grant_spectrum_integration_extenral_column_permissions
+   : GRANT (SELECT | all_privileges) OPEN_PAREN columnlist CLOSE_PAREN ON EXTERNAL TABLE qualified_name TO iamrolelist_or_public opt_with_grant_option?
+   ;
+
+iamrolelist_or_public
+   : iamrolelist
+   | PUBLIC
+   ;
+
+iamrolelist
+   : IAM_ROLE iamrolevalue (COMMA IAM_ROLE iamrolevalue)*
+   ;
+
+grant_assume_role_permissions
+   : GRANT ASSUMEROLE grant_assume_role_target TO grantee_list FOR grant_assume_role_for_list
+   ;
+
+grant_assume_role_for_list
+   : grant_assume_role_for_item (COMMA grant_assume_role_for_item)*
+   ;
+
+grant_assume_role_for_item
+   : ALL
+   | COPY
+   | UNLOAD
+   | EXTERNAL FUNCTION
+   | CREATE MODEL
+   ;
+
+grant_assume_role_target
+   : sconst (COMMA sconst)* | DEFAULT | ALL
+   ;
+
+grant_column_level_permissions
+   : GRANT column_privilege_list ON column_privilege_target TO grantee_list
+   ;
+
+column_privilege_target
+   : TABLE? qualified_name_list
+   ;
+
+column_privilege_list
+   : column_select_update_privilege (COMMA column_select_update_privilege)*
+   | column_all_privilege (COMMA column_all_privilege)*
+   ;
+
+column_all_privilege
+   : ALL PRIVILEGES? OPEN_PAREN columnlist? CLOSE_PAREN
+   ;
+
+column_select_update_privilege
+   : (SELECT | UPDATE) OPEN_PAREN columnlist? CLOSE_PAREN
+   ;
+
+common_grant
+   : GRANT table_privilege_list ON grant_table_target TO grantee_list
+   | GRANT database_privilege_list ON grant_database_target TO grantee_list
+   | GRANT schema_privilege_list ON grant_schema_target TO grantee_list
+   | GRANT function_privilege_list ON grant_function_target TO grantee_list
+   | GRANT procedure_privilege_list ON grant_procedure_target TO grantee_list
+   | GRANT language_privilege_list ON grant_language_target TO grantee_list
+   | GRANT copy_job_privilege_list ON copy_job_target TO grantee_list
+   ;
+
+copy_job_privilege_list
+    : copy_job_privilege (COMMA copy_job_privilege)*
+    | all_privileges
+    ;
+
+copy_job_privilege
+    : ALTER
+    | DROP
+    ;
+
+copy_job_target
+    : COPY JOB copy_job_name (COMMA copy_job_name)*
+    ;
+
+copy_job_name
+    : colid
+    ;
+
+language_privilege_list
+   : USAGE
+   ;
+
+grant_language_target
+    : LANGUAGE columnlist
+    ;
+
+grant_procedure_target
+    : PROCEDURE function_with_argtypes_list (COMMA function_with_argtypes_list)*
+    | ALL PROCEDURES IN_P SCHEMA columnlist
+    ;
+
+procedure_privilege_list
+    : procedure_privilege
+    | all_privileges
+    ;
+
+procedure_privilege
+    : EXECUTE
+    | all_privileges
+    ;
+
+function_privilege_list
+    : function_privilege
+    | all_privileges
+    ;
+
+function_privilege
+    : EXECUTE
+    | all_privileges
+    ;
+
+grant_function_target
+    : FUNCTION function_with_argtypes_list (COMMA function_with_argtypes_list)*
+    | ALL FUNCTIONS IN_P SCHEMA columnlist
+    ;
+
+grant_schema_target
+    : SCHEMA colid (COMMA colid)*
+    ;
+
+revoke_schema_target
+    : SCHEMA (IF_P EXISTS)? colid (COMMA colid)*
+    ;
+
+schema_privilege_list
+    : schema_privilege (COMMA schema_privilege)*
+    | all_privileges
+    ;
+
+schema_privilege
+   : CREATE
+   | USAGE
+   | ALTER
+   | DROP
+   ;
+
+database_privilege_list
+   : database_privilege (COMMA database_privilege)*
+   | all_privileges
+   ;
+
+database_privilege
+   : CREATE
+   | USAGE
+   | TEMPORARY
+   | TEMP
+   | ALTER
+   ;
+
+grant_database_target
+    : DATABASE colid (COMMA colid)*
+    ;
+
+
+grant_table_target
+    : TABLE? qualified_name_list
+    | all_tables_in_schema_list
+    ;
+
+revoke_table_target
+    : TABLE? (IF_P EXISTS)? qualified_name_list
+    | all_tables_in_schema_list
+    ;
+
+all_tables_in_schema_list
+    : ALL TABLES IN_P SCHEMA qualified_name_list
+    ;
+
+all_privileges
+   : ALL PRIVILEGES?
+   ;
+
+grantee_list
+   : grantee (COMMA grantee)*
+   ;
+
+grantee
+   : rolespec opt_with_grant_option?
+   | GROUP_P rolespec
+   | ROLE rolespec
+   | PUBLIC
+   ;
+
+opt_with_grant_option
+   : WITH GRANT OPTION
+   ;
+
+table_privilege
+   : SELECT
+   | INSERT
+   | UPDATE
+   | DELETE_P
+   | DROP
+   | ALTER
+   | TRUNCATE
+   | REFERENCES
+   ;
+
+table_privilege_list
+    : table_privilege (COMMA table_privilege)*
+    | all_privileges
+    ;
+
 revokestmt
-   : REVOKE privileges ON privilege_target FROM grantee_list opt_drop_behavior?
-   | REVOKE GRANT OPTION FOR privileges ON privilege_target FROM grantee_list opt_drop_behavior?
+   : common_revoke
+   | revoke_column_level_permissions
+   | revoke_assume_role_permissions
+   | revoke_spectrum_integration_permissions
+   | revoke_datashare_permissions
+   | revoke_scoped_permissions
+   | revoke_machine_learning_permissions
+   | revoke_role_permissions
+   | revoke_explain_permissions_for_row_level_security_policy_filters
+   | revoke_permissions_for_rls_lookup_tables
+   ;
+
+revoke_permissions_for_rls_lookup_tables
+   : REVOKE SELECT ON TABLE? qualified_name_list FROM RLS POLICY columnlist opt_drop_behavior?
+   ;
+
+revoke_explain_permissions_for_row_level_security_policy_filters
+   : REVOKE (EXPLAIN | IGNORE) RLS FROM ROLE rolespec opt_drop_behavior?
+   ;
+
+revoke_machine_learning_permissions
+   : REVOKE CREATE MODEL FROM grantee_list opt_drop_behavior?
+   | REVOKE function_privilege_list ON MODEL columnlist FROM grantee_list opt_drop_behavior?
+   ;
+
+revoke_role_permissions
+   : REVOKE ROLE rolespec (COMMA ROLE rolespec)* FROM grant_role_permission_target_list opt_drop_behavior?
+   | REVOKE system_permissions FROM ROLE role_list opt_drop_behavior?
+   | REVOKE ADMIN OPTION FOR ROLE rolespec (COMMA ROLE rolespec)* FROM grant_role_permission_target_list opt_drop_behavior?
+   ;
+
+revoke_scoped_permissions
+   : revoke_scoped_schemas_permissions
+   | revoke_scoped_tables_permissions
+   | revoke_scoped_functions_permissions
+   | revoke_scoped_procedures_permissions
+   | revoke_scoped_languages_permissions
+   | revoke_scoped_copy_jobs_permissions
+   ;
+
+revoke_scoped_schemas_permissions
+   : REVOKE schema_privilege_list FOR SCHEMAS IN_P DATABASE colid FROM grantee_list_without_public opt_drop_behavior?
+   ;
+
+revoke_scoped_tables_permissions
+   : REVOKE table_privilege_list FOR TABLES IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) FROM grantee_list_without_public opt_drop_behavior?
+   ;
+
+revoke_scoped_functions_permissions
+   : REVOKE function_privilege_list FOR FUNCTIONS IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) FROM grantee_list_without_public opt_drop_behavior?
+   ;
+
+revoke_scoped_procedures_permissions
+   : REVOKE procedure_privilege_list FOR PROCEDURES IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) FROM grantee_list_without_public opt_drop_behavior?
+   ;
+
+revoke_scoped_languages_permissions
+    : REVOKE language_privilege_list FOR LANGUAGES IN_P DATABASE colid FROM grantee_list_without_public opt_drop_behavior?
+    ;
+
+revoke_scoped_copy_jobs_permissions
+    : REVOKE copy_job_privilege_list FOR COPY JOBS IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) FROM grantee_list_without_public opt_drop_behavior?
+    ;
+
+revoke_datashare_permissions
+   : REVOKE (GRANT OPTION FOR)? (ALTER | SHARE) ON DATASHARE colid FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? USAGE ON DATASHARE colid FROM ((NAMESPACE sconst) | (ACCOUNT sconst (VIA DATA_CATALOG)?)) opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? USAGE ON (DATABASE columnlist | SCHEMA colid) FROM grantee_list opt_drop_behavior?
+   ;
+
+revoke_spectrum_integration_permissions
+    : revoke_spectrum_integration_extenral_column_permissions
+    | revoke_spectrum_integration_external_table_permissions
+    | revoke_spectrum_integration_external_schema_permissions
+    ;
+
+revoke_spectrum_integration_external_schema_permissions
+   : REVOKE spectrum_integration_external_schema_permission_list ON EXTERNAL SCHEMA columnlist FROM iamrolelist opt_drop_behavior?
+   ;
+
+revoke_spectrum_integration_external_table_permissions
+   : REVOKE spectrum_integration_external_table_permission_list ON EXTERNAL TABLE qualified_name_list FROM iamrolelist_or_public opt_drop_behavior?
+   ;
+
+revoke_spectrum_integration_extenral_column_permissions
+   : REVOKE (SELECT | all_privileges) OPEN_PAREN columnlist CLOSE_PAREN ON EXTERNAL TABLE qualified_name FROM iamrolelist opt_drop_behavior?
+   ;
+
+revoke_assume_role_permissions
+   : REVOKE ASSUMEROLE grant_assume_role_target FROM grantee_list FOR grant_assume_role_for_list opt_drop_behavior?
+   ;
+
+revoke_column_level_permissions
+   : REVOKE column_privilege_list ON column_privilege_target FROM grantee_list opt_drop_behavior?
+   | REVOKE GRANT OPTION FOR column_privilege_list ON column_privilege_target FROM grantee_list opt_drop_behavior?
+   ;
+
+common_revoke
+   : REVOKE (GRANT OPTION FOR)? table_privilege_list ON revoke_table_target FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? database_privilege_list ON grant_database_target FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? schema_privilege_list ON revoke_schema_target FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? function_privilege_list ON grant_function_target FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? procedure_privilege_list ON grant_procedure_target FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? language_privilege_list ON grant_language_target FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? copy_job_privilege_list ON copy_job_target FROM grantee_list opt_drop_behavior?
    ;
 
 privileges
@@ -1697,15 +2320,6 @@ parameter_name
    : colid (DOT colid)?
    ;
 
-grantee_list
-   : grantee (COMMA grantee)*
-   ;
-
-grantee
-   : rolespec
-   | GROUP_P rolespec
-   ;
-
 opt_grant_grant_option
    : WITH GRANT OPTION
    ;
@@ -1750,6 +2364,7 @@ defaclaction
 defacl_privilege_target
    : TABLES
    | FUNCTIONS
+   | PROCEDURES
    | ROUTINES
    | SEQUENCES
    | TYPES_P
@@ -1820,15 +2435,37 @@ opt_nulls_order
    ;
 
 createfunctionstmt
-   : CREATE opt_or_replace? (FUNCTION | PROCEDURE) func_name func_args_with_defaults
+   : CREATE opt_or_replace? FUNCTION func_name func_py_args_or_sql_args
      (
         RETURNS (func_return | TABLE OPEN_PAREN table_func_column_list CLOSE_PAREN)
      )?
+     (VOLATILE | STABLE | IMMUTABLE)
      createfunc_opt_list
+   ;
+
+createprocedurestmt
+   : CREATE opt_or_replace? PROCEDURE func_name func_args
+    (
+            RETURNS (func_return | TABLE OPEN_PAREN table_func_column_list CLOSE_PAREN)
+    )?
+    opt_nonatomic?
+    createfunc_opt_list;
+
+opt_nonatomic
+   : NONATOMIC
    ;
 
 opt_or_replace
    : OR REPLACE
+   ;
+
+func_py_args_or_sql_args
+   : OPEN_PAREN func_py_args_or_sql_args_list? CLOSE_PAREN
+   ;
+
+func_py_args_or_sql_args_list
+   : param_name func_type (COMMA param_name func_type)*
+   | func_type (COMMA func_type)*
    ;
 
 func_args
@@ -1864,10 +2501,9 @@ func_arg
    ;
 
 arg_class
-   : IN_P OUT_P?
+   : IN_P
    | OUT_P
    | INOUT
-   | VARIADIC
    ;
 
 param_name
@@ -1978,7 +2614,11 @@ table_func_column_list
    ;
 
 alterfunctionstmt
-   : ALTER (FUNCTION | PROCEDURE | ROUTINE) function_with_argtypes alterfunc_opt_list opt_restrict?
+   : ALTER FUNCTION func_name func_py_args_or_sql_args ((RENAME TO func_name) | (OWNER TO rolespec))
+   ;
+
+alterprocedurestmt
+   : ALTER PROCEDURE func_name func_args ((RENAME TO func_name) | (OWNER TO rolespec))
    ;
 
 alterfunc_opt_list
@@ -2431,7 +3071,11 @@ viewstmt
           VIEW qualified_name opt_column_list? opt_reloptions?
         | RECURSIVE VIEW qualified_name OPEN_PAREN columnlist CLOSE_PAREN opt_reloptions?
     )
-     AS selectstmt opt_check_option?
+     AS selectstmt opt_check_option? with_no_schema_binding?
+   ;
+
+with_no_schema_binding
+   : WITH NO SCHEMA BINDING
    ;
 
 opt_check_option
@@ -2441,6 +3085,879 @@ opt_check_option
 loadstmt
    : LOAD file_name
    ;
+
+// ==============================================================================
+// REDSHIFT-SPECIFIC STATEMENTS  
+// These statements are specific to Amazon Redshift and not part of PostgreSQL
+// ==============================================================================
+
+// DATASHARE statements
+alterdatasharestmt
+   : ALTER DATASHARE colid alterdatashare_action
+   ;
+
+alterdatashare_action
+   : alterdatashare_add_drop alterdatashare_objects
+   | SET PUBLICACCESSIBLE opt_equal? opt_boolean_or_string
+   | SET INCLUDENEW opt_equal? opt_boolean_or_string FOR SCHEMA colid
+   ;
+
+alterdatashare_add_drop
+   : ADD_P
+   | REMOVE
+   ;
+
+alterdatashare_objects
+   : TABLE datashare_table_list
+   | SCHEMA name_list
+   | FUNCTION datashare_function_list
+   | ALL TABLES IN_P SCHEMA name_list
+   | ALL FUNCTIONS IN_P SCHEMA name_list
+   ;
+
+datashare_table_list
+   : datashare_table_name (COMMA datashare_table_name)*
+   ;
+
+datashare_table_name
+   : colid (DOT colid)?
+   ;
+
+table_name
+   : qualified_name
+   | temporary_table_name
+   ;
+
+temporary_table_name
+   : TemporaryIdentifier
+   ;
+
+datashare_function_list
+   : datashare_function (COMMA datashare_function)*
+   ;
+
+datashare_function
+   : datashare_function_name func_args
+   ;
+
+datashare_function_name
+   : colid (DOT colid)?
+   ;
+
+createdatasharestmt
+    : CREATE DATASHARE qualified_name createdatashareoptions?
+    ;
+
+createdatashareoptions
+    : createdatashareoption (COMMA createdatashareoption)*
+    ;
+
+createdatashareoption
+    : setpublicaccessibleoption
+    | managedbyoption
+    ;
+
+setpublicaccessibleoption
+    : SET? PUBLICACCESSIBLE (EQUAL? (TRUE_P | FALSE_P))?
+    ;
+
+managedbyoption
+    : MANAGEDBY ADX
+    ;
+
+descdatasharestmt
+    : (DESC | DESCRIBE) DATASHARE datashare_name=colid (OF (ACCOUNT account_id=sconst)? NAMESPACE namespace_guid=sconst)?
+    ;
+
+dropdatasharestmt
+    : DROP DATASHARE opt_if_exists? colid
+    ;
+
+// EXTERNAL statements
+alterexternalschemastmt
+    : ALTER EXTERNAL SCHEMA colid altexternalschemaopts+
+    ;
+
+altexternalschemaopts
+    : RENAME TO colid
+    | OWNER TO colid
+    | IAM_ROLE (DEFAULT | SESSION | sconst)
+    | AUTHENTICATION (NONE | IAM | MTLS)
+    | AUTHENTICATION_ARN sconst
+    | SECRET_ARN sconst
+    | URI sconst
+    ;
+
+alterexternalviewstmt
+    : ALTER EXTERNAL VIEW qualified_name FORCE? ((AS selectstmt) | (REMOVE DEFINITION))?
+    ;
+
+createexternalschemastmt
+    : CREATE EXTERNAL SCHEMA opt_if_not_exists? schema_name=colid
+      ( fromdatacatalogclause
+      | fromhivemetastoreclause
+      | frompostgresclause
+      | frommysqlclause
+      | fromkinesisclause
+      | fromkafkaclause
+      | frommskclause
+      | fromredshiftclause
+      | implicitdatacatalogclause  // Support implicit data catalog
+      )
+    ;
+
+// External schema FROM clauses
+fromdatacatalogclause
+    : FROM (DATA_P CATALOG | DATA_CATALOG)
+      DATABASE sconst
+      colid sconst  // REGION AS literal
+      IAM_ROLE iamrolevalue
+      (CATALOG_ROLE catalogrolevalue)?
+      (CREATE EXTERNAL DATABASE opt_if_not_exists)?
+      (CATALOG_ID sconst)?
+    ;
+
+dropschemastmt:
+    DROP SCHEMA opt_if_exists? qualified_name (COMMA qualified_name)* (DROP EXTERNAL DATABASE)? (CASCADE | RESTRICT)?;
+
+// Implicit data catalog clause (without explicit DATA CATALOG keywords)
+implicitdatacatalogclause
+    : FROM DATABASE sconst
+      colid sconst  // REGION AS literal
+      IAM_ROLE iamrolevalue
+      (CATALOG_ROLE catalogrolevalue)?
+      (CREATE EXTERNAL DATABASE opt_if_not_exists)?
+      (CATALOG_ID sconst)?
+    ;
+
+fromhivemetastoreclause
+    : FROM HIVE METASTORE
+      DATABASE sconst
+      URI sconst
+      (PORT iconst)?
+      IAM_ROLE sconst
+    ;
+
+frompostgresclause
+    : FROM POSTGRES
+      DATABASE sconst
+      (SCHEMA sconst)?
+      URI sconst
+      (PORT iconst)?
+      IAM_ROLE iamrolevalue
+      SECRET_ARN sconst
+    ;
+
+frommysqlclause
+    : FROM MYSQL
+      DATABASE sconst
+      URI sconst
+      (PORT iconst)?
+      IAM_ROLE iamrolevalue
+      SECRET_ARN sconst
+    ;
+
+fromkinesisclause
+    : FROM KINESIS
+      IAM_ROLE iamrolevalue
+    ;
+
+fromkafkaclause
+    : FROM KAFKA
+      IAM_ROLE iamrolevalue
+      (URI sconst)?
+      (AUTHENTICATION authenticationvalue)?
+      (AUTHENTICATION_ARN sconst)?
+    ;
+
+frommskclause
+    : FROM MSK
+      IAM_ROLE iamrolevalue
+      (URI sconst)?
+      (AUTHENTICATION authenticationvalue)?
+      (AUTHENTICATION_ARN sconst)?
+    ;
+
+fromredshiftclause
+    : FROM REDSHIFT
+      DATABASE sconst
+      (SCHEMA sconst)?
+      (colid sconst)?  // REGION 'region-name'
+      (IAM_ROLE iamrolevalue)?
+    ;
+
+iamrolevalue
+    : DEFAULT
+    | SESSION_TOKEN
+    | sconst
+    ;
+
+catalogrolevalue
+    : SESSION_TOKEN
+    | sconst
+    ;
+
+authenticationvalue
+    : NONE
+    | IAM
+    | MTLS
+    ;
+
+createexternalfunctionstmt
+    : CREATE (OR REPLACE)? EXTERNAL FUNCTION function_name=qualified_name '(' external_func_params? ')' 
+      RETURNS typename
+      (STABLE | IMMUTABLE | VOLATILE)
+      LAMBDA sconst
+      IAM_ROLE iamrolevalue
+      (RETRY_TIMEOUT iconst)?
+      (MAX_BATCH_ROWS iconst)?
+      (MAX_BATCH_SIZE iconst (KB | MB)?)?
+    ;
+
+external_func_params
+    : typename (',' typename)*
+    ;
+
+paramlist
+    : param_spec (',' param_spec)*
+    |
+    ;
+
+param_spec
+    : paramname=colid typename
+    ;
+
+createexternalmodelstmt
+    : CREATE EXTERNAL MODEL qualified_name
+      FROM sconst  // S3 path
+      (FUNCTION_NAME qualified_name)?
+      IAM_ROLE iamrolevalue
+      (SETTINGS '(' settingsclause ')')?
+    | CREATE EXTERNAL MODEL qualified_name
+      FUNCTION qualified_name
+      IAM_ROLE iamrolevalue
+      MODEL_TYPE BEDROCK
+      SETTINGS '(' settingsclause ')'
+    ;
+
+createexternaltablestmt
+    : CREATE EXTERNAL TABLE opt_if_not_exists? qualified_name '(' extern_column_list ')'
+      (PARTITIONED BY '(' extern_column_list ')')?
+      extern_table_format
+      LOCATION sconst
+      (TABLE PROPERTIES '(' table_properties_list ')')?
+    ;
+
+extern_column_list
+    : extern_column_def (',' extern_column_def)*
+    ;
+
+extern_column_def
+    : colid extern_typename
+    ;
+
+extern_typename
+    : typename
+    | STRING  // Support STRING type
+    ;
+
+extern_table_format
+    : STORED AS external_format_spec
+    | row_format_spec STORED AS external_format_spec
+    | STORED AS INPUTFORMAT sconst OUTPUTFORMAT sconst
+    ;
+
+row_format_spec
+    : ROW FORMAT DELIMITED 
+      (FIELDS TERMINATED BY sconst (ESCAPED BY sconst)?)?
+      (COLLECTION ITEMS TERMINATED BY sconst)?
+      (MAP KEYS TERMINATED BY sconst)?
+      (LINES TERMINATED BY sconst)?
+      (NULL_P DEFINED AS sconst)?
+    | ROW FORMAT SERDE sconst (WITH SERDEPROPERTIES '(' serde_properties_list ')')?
+    ;
+
+serde_properties_list
+    : serde_property (',' serde_property)*
+    ;
+
+serde_property
+    : sconst '=' sconst
+    ;
+
+external_format_spec
+    : PARQUET
+    | AVRO
+    | RCFILE
+    | SEQUENCEFILE
+    | TEXTFILE
+    | ORC
+    | ION
+    | JSON
+    ;
+
+table_properties_list
+    : table_property (',' table_property)*
+    ;
+
+table_property
+    : sconst EQUAL sconst
+    ;
+
+createexternalviewstmt
+    : CREATE (OR REPLACE)? EXTERNAL PROTECTED? VIEW qualified_name 
+      (IF_P NOT EXISTS)?
+      (OPEN_PAREN name_list CLOSE_PAREN)?
+      AS selectstmt
+    ;
+
+dropexternalviewstmt
+    : DROP EXTERNAL VIEW opt_if_exists? qualified_name opt_drop_behavior?
+    ;
+
+// SECURITY/POLICY statements
+alteridentityproviderstmt
+    : ALTER IDENTITY_P PROVIDER identity_provider_name=colid alteridprovideropts+
+    ;
+
+alteridprovideropts
+    : PARAMETERS parameter_string=sconst
+    | NAMESPACE namespace=sconst
+    | IAM_ROLE iam_role=sconst
+    | AUTO_CREATE_ROLES ((TRUE_P ((INCLUDE | EXCLUDE) GROUPS LIKE filter_pattern=sconst)?) | FALSE_P)?
+    | DISABLE_P | ENABLE_P
+    ;
+
+altermaskingpolicystmt
+    : ALTER MASKING POLICY colid altmaskingpolicyopts
+    ;
+
+altermaterializedviewstmt
+    : ALTER MATERIALIZED VIEW qualified_name
+     (
+       AUTO REFRESH (YES_P | NO)
+       | ALTER DISTKEY colid
+       | ALTER DISTSTYLE (ALL | EVEN | (KEY DISTKEY colid) | AUTO)
+       | ALTER COMPOUND? SORTKEY OPEN_PAREN (colid (COMMA colid)*) CLOSE_PAREN
+       | ALTER SORTKEY (AUTO | NONE)
+       | ROW LEVEL SECURITY (ON | OFF) (CONJUNCTION TYPE_P (AND | OR))? (FOR DATASHARES)?
+     )
+    ;
+
+altmaskingpolicyopts
+    : RENAME TO colid
+    | OWNER TO colid
+    | SET '(' altmaskingpolicyargs ')'
+    | USING '(' maskingexpression ')'
+    ;
+
+altmaskingpolicyargs
+    : altmaskingpolicyarg (',' altmaskingpolicyarg)*
+    ;
+
+altmaskingpolicyarg
+    : colid typename
+    ;
+
+alterrlspolicystmt
+    : ALTER RLS POLICY colid USING OPEN_PAREN a_expr CLOSE_PAREN
+    ;
+
+attachmaskingpolicystmt
+    : ATTACH MASKING POLICY colid
+      ON qualified_name
+      '(' attachpolicycollist ')'
+      (USING '(' attachpolicycollist ')')?
+      TO attachpolicytargets
+      (PRIORITY iconst)?
+    ;
+
+attachpolicycollist
+    : attachpolicycolumn (',' attachpolicycolumn)*
+    ;
+
+attachpolicycolumn
+    : qualified_name  // supports dotted paths like person.name.first_name
+    ;
+
+attachpolicytargets
+    : attachpolicytarget (',' attachpolicytarget)*
+    ;
+
+attachpolicytarget
+    : ROLE qualified_name
+    | colid // PUBLIC or user name - PUBLIC is treated as an identifier here
+    ;
+
+attachrlspolicystmt
+    : ATTACH RLS POLICY policy_name=colid ON TABLE? table_name_list TO attachpolicytargets
+    ;
+
+table_name_list
+    : qualified_name (COMMA qualified_name)*
+    ;
+
+createidentityproviderstmt
+    : CREATE IDENTITY_P PROVIDER colid
+      TYPE_P (sconst | colid)
+      createidprovideropts*
+    ;
+
+createidprovideropts
+    : PROVIDER_URL sconst
+    | PROVIDER_URL_PORT iconst
+    | ATTRIBUTE_MAP sconst
+    | PROVIDER_ARN sconst
+    | ASSUME_ROLE_ARN sconst
+    | NAMESPACE sconst
+    | PARAMETERS sconst
+    | APPLICATION_ARN sconst
+    | IAM_ROLE (DEFAULT | sconst)
+    | AUTO_CREATE_ROLES (TRUE_P | FALSE_P) (groupfilter)?
+    ;
+
+groupfilter
+    : INCLUDE GROUPS LIKE sconst
+    | EXCLUDE GROUPS LIKE sconst
+    ;
+
+createlibrarystmt
+    : CREATE (OR REPLACE)? LIBRARY colid LANGUAGE PLPYTHONU
+      FROM sconst createlibraryopts*
+    ;
+
+createlibraryopts
+    : CREDENTIALS sconst
+    | colid (AS)? sconst  // REGION AS literal  
+    | IAM_ROLE (DEFAULT | sconst)
+    ;
+
+createmaskingpolicystmt
+    : CREATE MASKING POLICY opt_if_not_exists? policy_name=colid
+      WITH '(' inputcolumnlist ')'
+      USING '(' maskingexpression ')'
+    ;
+
+inputcolumnlist
+    : inputcolumn (',' inputcolumn)*
+    ;
+
+inputcolumn
+    : column_name=colid typename
+    ;
+
+maskingexpression
+    : a_expr
+    ;
+
+createmodelstmt
+    : CREATE MODEL model_name=qualified_name
+      FROM createmodelfromclause
+      (TARGET target_column=qualified_name)?
+      FUNCTION function_name=qualified_name ('(' datatypelist ')')?
+      (RETURNS typename)?
+      (SAGEMAKER sagemakerspec)?
+      IAM_ROLE iamrolespec
+      (AUTO (ON | OFF))?
+      (MODEL_TYPE modeltypespec)?
+      (PROBLEM_TYPE problemtypespec)?
+      (OBJECTIVE objectivespec)?
+      (PREPROCESSORS sconst)?
+      (HYPERPARAMETERS hyperparametersspec)?
+      (SETTINGS '(' settingsclause ')')?
+    ;
+
+createmodelfromclause
+    : qualified_name
+    | '(' selectstmt ')'
+    | sconst
+    ;
+
+iamrolespec
+    : DEFAULT
+    | sconst
+    ;
+
+sagemakerspec
+    : sconst (':' sconst)?
+    ;
+
+modeltypespec
+    : XGBOOST
+    | MLP
+    | LINEAR_LEARNER
+    | KMEANS
+    | FORECAST
+    ;
+
+problemtypespec
+    : '(' problemtype ')'
+    ;
+
+problemtype
+    : REGRESSION
+    | BINARY_CLASSIFICATION
+    | MULTICLASS_CLASSIFICATION
+    ;
+
+objectivespec
+    : '(' sconst ')'
+    ;
+
+hyperparametersspec
+    : DEFAULT
+    | DEFAULT EXCEPT '(' hyperparameterslist ')'
+    ;
+
+hyperparameterslist
+    : hyperparameteritem (',' hyperparameteritem)*
+    ;
+
+hyperparameteritem
+    : colid sconst
+    ;
+
+settingsclause
+    : settingsitem (',' settingsitem)*
+    ;
+
+settingsitem
+    : S3_BUCKET sconst
+    | TAGS sconst
+    | KMS_KEY_ID sconst
+    | S3_GARBAGE_COLLECT (ON | OFF)
+    | MAX_CELLS iconst
+    | MAX_RUNTIME iconst
+    | MAX_BATCH_SIZE sconst
+    | MAX_PAYLOAD_IN_MB sconst
+    | HORIZON iconst
+    | FREQUENCY iconst
+    | PERCENTILES sconst
+    | MAX_BATCH_ROWS iconst
+    | MODEL_ID sconst
+    | PROMPT sconst
+    | SUFFIX sconst
+    | REQUEST_TYPE (RAW | UNIFIED)
+    | RESPONSE_TYPE (VARCHAR | SUPER)
+    ;
+
+datatypelist
+    : datatype (',' datatype)*
+    ;
+
+datatype
+    : typename
+    | colid typename  // named parameter: name type
+    | colid colid     // named parameter with non-standard type like: data json
+    ;
+
+
+createrlspolicystmt
+    : CREATE RLS POLICY colid 
+      (WITH '(' inputcolumnlist ')' (AS colid)?)?
+      USING '(' a_expr ')'
+    ;
+
+descidentityproviderstmt
+    : (DESC | DESCRIBE) IDENTITY_P PROVIDER colid
+    ;
+
+detachmaskingpolicystmt
+    : DETACH MASKING POLICY colid
+      ON qualified_name
+      '(' attachpolicycollist ')'
+      FROM attachpolicytargets
+    ;
+
+detachrlspolicystmt
+    : DETACH RLS POLICY rlspolicyname ON TABLE? table_name_list
+      FROM role_or_user_or_public_list
+    ;
+
+role_or_user_or_public_list
+    : role_or_user_or_public (COMMA role_or_user_or_public)*
+    ;
+
+role_or_user_or_public
+    : rolespec
+    | ROLE rolespec
+    | PUBLIC
+    ;
+
+rlspolicyname:
+    colid
+    ;
+
+dropidentityproviderstmt
+    : DROP IDENTITY_P PROVIDER opt_if_exists? colid (CASCADE)?
+    ;
+
+droplibrarystmt
+    : DROP LIBRARY opt_if_exists? colid
+    ;
+
+dropmaskingpolicystmt  
+    : DROP MASKING POLICY opt_if_exists? colid
+    ;
+
+dropmodelstmt
+    : DROP MODEL opt_if_exists? qualified_name
+    ;
+
+
+droprlspolicystmt
+    : DROP RLS POLICY opt_if_exists? colid (CASCADE | RESTRICT)?
+    ;
+
+// REDSHIFT-SPECIFIC UTILITY statements
+altertableappendstmt
+    : ALTER TABLE qualified_name APPEND FROM qualified_name appendoptions*
+    ;
+
+appendoptions
+    : FILLTARGET
+    | IGNOREEXTRA
+    ;
+
+alteruserstmt
+    : ALTER USER rolespec (WITH)? alteruseropts+
+    ;
+
+alteruseropts
+    : CREATEDB | NOCREATEDB
+    | CREATEUSER | NOCREATEUSER
+    | SYSLOG ACCESS (RESTRICTED | UNRESTRICTED)
+    | PASSWORD (sconst | DISABLE_P)
+    | VALID UNTIL sconst
+    | RENAME TO colid
+    | CONNECTION LIMIT (iconst | UNLIMITED)
+    | SESSION TIMEOUT iconst
+    | RESET SESSION TIMEOUT
+    | SET colid TO a_expr
+    | RESET colid
+    | EXTERNALID colid
+    ;
+
+analyzecompressionstmt
+    : (ANALYZE | ANALYSE) COMPRESSION (qualified_name ('(' name_list ')')?)? (COMPROWS iconst)?
+    ;
+
+cancelstmt
+    : CANCEL (sconst | iconst) (sconst)?  // session PID/query ID, optional message
+    ;
+
+closestmt
+    : CLOSE cursorname=colid
+    ;
+
+insertexternaltablestmt
+    : INSERT INTO qualified_name select_or_values
+    ;
+
+select_or_values  
+    : selectstmt
+    | values_clause  
+    ;
+
+selectintostmt
+    : SELECT opt_all_clause? opt_target_list INTO qualified_name from_clause?
+    ;
+
+setsessionauthorizationstmt
+    : SET SESSION AUTHORIZATION colid
+    | SET SESSION AUTHORIZATION DEFAULT
+    | RESET SESSION AUTHORIZATION
+    ;
+
+setsessioncharacteristicsstmt
+    : SET SESSION CHARACTERISTICS AS TRANSACTION transaction_mode_list
+    ;
+
+// SHOW statements  
+showcolumnsstmt
+    : SHOW COLUMNS FROM TABLE? qualified_name (LIKE sconst)? (LIMIT iconst)?
+    ;
+
+showdatabasesstmt
+    : SHOW DATABASES (FROM DATA_P CATALOG)? showdbsopts*
+    ;
+
+showdbsopts
+    : LIKE sconst
+    | WITH DATASHARE sconst
+    | LIMIT iconst
+    | ACCOUNT sconst (',' sconst)*
+    | IAM_ROLE (DEFAULT | SESSION | sconst)
+    ;
+
+showdatasharesstmt
+    : SHOW DATASHARES (LIKE sconst)?
+    ;
+
+showexternaltablestmt
+    : SHOW EXTERNAL TABLE qualified_name (PARTITION)?
+    ;
+
+showgrantsstmt
+    : SHOW GRANTS (ON grantobject)? (FOR grantprincipal)? (LIMIT iconst)?
+    | SHOW GRANTS (FOR grantprincipal) (LIMIT iconst)?
+    ;
+
+grantobject
+    : DATABASE colid
+    | SCHEMA qualified_name  
+    | TABLE? qualified_name
+    | FUNCTION qualified_name ('(' datatypelist? ')')?
+    ;
+
+grantprincipal
+    : colid
+    | ROLE colid
+    ;
+
+showmodelstmt
+    : SHOW MODEL (qualified_name | ALL)
+    ;
+
+showprocedurestmt
+    : SHOW PROCEDURE qualified_name func_args?
+    ;
+
+showschemasstmt  
+    : SHOW SCHEMAS (FROM DATABASE colid)? (LIKE sconst)? (LIMIT iconst)?
+    ;
+
+showtablestmt
+    : SHOW TABLE qualified_name
+    ;
+
+showtablesstmt
+    : SHOW TABLES FROM SCHEMA database_name=colid '.' schema_name=colid
+      (LIKE pattern=sconst)?
+      (LIMIT limit_value=iconst)?
+    ;
+
+showviewstmt
+    : SHOW VIEW qualified_name
+    ;
+
+// OTHER REDSHIFT statements
+unloadstmt
+    : UNLOAD '(' sconst ')' TO sconst iamroleclause unloadoptions*
+    ;
+
+iamroleclause
+    : IAM_ROLE (DEFAULT | sconst)
+    ;
+
+unloadoptions
+    : formatoption
+    | partitionbyoption
+    | manifestoption
+    | headeroption
+    | delimiteroption
+    | fixedwidthoption
+    | encryptedoption
+    | kmskeyoption
+    | compressionoption
+    | addquotesoption
+    | nullasoption
+    | escapeoption
+    | allowoverwriteoption
+    | cleanpathoption
+    | paralleloption
+    | maxfilesizeoption
+    | rowgroupsizeoption
+    | regionoption
+    | extensionoption
+    ;
+
+formatoption
+    : FORMAT (CSV | PARQUET | JSON)
+    ;
+
+partitionbyoption
+    : PARTITION BY '(' columnlist ')' INCLUDE?
+    ;
+
+manifestoption
+    : MANIFEST VERBOSE?
+    ;
+
+headeroption
+    : HEADER_P
+    ;
+
+delimiteroption
+    : DELIMITER AS? sconst
+    ;
+
+fixedwidthoption
+    : FIXEDWIDTH sconst
+    ;
+
+encryptedoption
+    : ENCRYPTED AUTO?
+    ;
+
+kmskeyoption
+    : KMS_KEY_ID sconst
+    ;
+
+compressionoption
+    : BZIP2
+    | GZIP
+    | ZSTD
+    ;
+
+addquotesoption
+    : ADDQUOTES
+    ;
+
+nullasoption
+    : NULL_P AS sconst
+    ;
+
+escapeoption
+    : ESCAPE
+    ;
+
+allowoverwriteoption
+    : ALLOWOVERWRITE
+    ;
+
+cleanpathoption
+    : CLEANPATH
+    ;
+
+paralleloption
+    : PARALLEL (ON | OFF)
+    ;
+
+maxfilesizeoption
+    : MAXFILESIZE AS? iconst sizeunit?
+    ;
+
+rowgroupsizeoption
+    : ROWGROUPSIZE AS? iconst sizeunit?
+    ;
+
+sizeunit
+    : MB
+    | GB
+    ;
+
+regionoption
+    : colid AS? sconst  // REGION AS literal
+    ;
+
+extensionoption
+    : EXTENSION sconst
+    ;
+
+usestmt
+    : USE database_name=colid
+    ;
 
 createdbstmt
    : CREATE DATABASE name opt_with? createdb_opt_list?
@@ -2455,7 +3972,9 @@ createdb_opt_items
    ;
 
 createdb_opt_item
-   : createdb_opt_name opt_equal? (signediconst | opt_boolean_or_string | DEFAULT)
+   : createdb_opt_name opt_equal? (signediconst | opt_boolean_or_string | DEFAULT | UNLIMITED)
+   | ISOLATION LEVEL (SERIALIZABLE | SNAPSHOT)
+   | COLLATE (CASE_SENSITIVE | CASE_INSENSITIVE | CI | CS)
    ;
 
 createdb_opt_name
@@ -2473,7 +3992,7 @@ opt_equal
    ;
 
 alterdatabasestmt
-   : ALTER DATABASE name (WITH createdb_opt_list? | createdb_opt_list? | SET TABLESPACE name | REFRESH COLLATION VERSION_P)
+   : ALTER DATABASE name (WITH createdb_opt_list? | createdb_opt_list? | SET TABLESPACE name | REFRESH COLLATION VERSION_P | COLLATE (CASE_SENSITIVE | CASE_INSENSITIVE) | CONNECTION LIMIT (iconst | UNLIMITED))
    ;
 
 alterdatabasesetstmt
@@ -2481,7 +4000,7 @@ alterdatabasesetstmt
    ;
 
 dropdbstmt
-   : DROP DATABASE (IF_P EXISTS)? name (opt_with? OPEN_PAREN drop_option_list CLOSE_PAREN)?
+   : DROP DATABASE name
    ;
 
 drop_option_list
@@ -2550,11 +4069,19 @@ cluster_index_specification
 vacuumstmt
    : VACUUM opt_full? opt_freeze? opt_verbose? opt_analyze? opt_vacuum_relation_list?
    | VACUUM OPEN_PAREN vac_analyze_option_list CLOSE_PAREN opt_vacuum_relation_list?
+   | VACUUM vacuum_option? qualified_name? (TO iconst PERCENT_WORD)? BOOST?
+   ;
+
+vacuum_option
+   : FULL
+   | SORT ONLY
+   | DELETE_P ONLY
+   | REINDEX
+   | RECLUSTER
    ;
 
 analyzestmt
-   : analyze_keyword opt_verbose? opt_vacuum_relation_list?
-   | analyze_keyword OPEN_PAREN vac_analyze_option_list CLOSE_PAREN opt_vacuum_relation_list?
+   : analyze_keyword opt_verbose? (qualified_name (OPEN_PAREN columnlist CLOSE_PAREN)?)? ((PREDICATE COLUMNS) | (ALL COLUMNS))?
    ;
 
 vac_analyze_option_list
@@ -2726,7 +4253,13 @@ returning_clause
 // https://www.postgresql.org/docs/current/sql-merge.html
 mergestmt
    : with_clause? MERGE INTO ONLY? qualified_name alias_clause? USING (select_with_parens|qualified_name) alias_clause? ON a_expr
-        (merge_insert_clause merge_update_clause? | merge_update_clause merge_insert_clause?) merge_delete_clause?
+        (merge_when_clause+ | REMOVE DUPLICATES)
+   ;
+
+merge_when_clause
+   : merge_insert_clause
+   | merge_update_clause
+   | merge_delete_clause
    ;
 
 merge_insert_clause
@@ -2738,11 +4271,11 @@ merge_update_clause
    ;
 
 merge_delete_clause
-   : WHEN MATCHED THEN? DELETE_P
+   : WHEN MATCHED (AND a_expr)? THEN? DELETE_P
    ;
 
 deletestmt
-   : opt_with_clause? DELETE_P FROM relation_expr_opt_alias using_clause? where_or_current_clause? returning_clause?
+   : opt_with_clause? DELETE_P FROM? relation_expr_opt_alias using_clause? where_or_current_clause? returning_clause?
    ;
 
 using_clause
@@ -2844,18 +4377,32 @@ simple_select_intersect
     ;
 
 simple_select_pramary
-   : ( SELECT (opt_all_clause? into_clause? opt_target_list? | distinct_clause target_list)
+   : ( SELECT (opt_all_clause? into_clause? opt_target_list? | opt_top_clause? into_clause? target_list | distinct_clause target_list)
+           exclude_clause?
            into_clause?
            from_clause?
            where_clause?
+           start_with_clause?
            group_clause?
            having_clause?
+           qualify_clause?
            window_clause?
     )
    | values_clause
    | TABLE relation_expr
    | select_with_parens
    ;
+
+exclude_clause
+   : EXCLUDE OPEN_PAREN columnlist CLOSE_PAREN
+   ;
+
+qualify_clause
+   : QUALIFY a_expr
+   ;
+
+start_with_clause
+   : (START WITH a_expr)? CONNECT BY a_expr;
 
 with_clause
    : WITH RECURSIVE? cte_list
@@ -2880,6 +4427,10 @@ opt_with_clause
 
 into_clause
    : INTO (opt_strict? opttempTableName | into_target)
+   ;
+
+opt_top_clause
+   : TOP iconst
    ;
 
 opt_strict
@@ -2980,6 +4531,7 @@ group_clause
 
 group_by_list
    : group_by_item (COMMA group_by_item)*
+   | ALL
    ;
 
 group_by_item
@@ -3194,12 +4746,13 @@ xml_namespace_el
    ;
 
 typename
-   : SETOF? simpletypename (opt_array_bounds | ARRAY (OPEN_BRACKET iconst CLOSE_BRACKET)?)
+   : SETOF? simpletypename (opt_array_bounds? | ARRAY (OPEN_BRACKET iconst CLOSE_BRACKET)?)
    | qualified_name PERCENT (ROWTYPE | TYPE_P)
+   | SUPER
    ;
 
 opt_array_bounds
-   : (OPEN_BRACKET iconst? CLOSE_BRACKET)*
+   : (OPEN_BRACKET iconst? CLOSE_BRACKET)+
    ;
 
 simpletypename
@@ -3207,8 +4760,18 @@ simpletypename
    | numeric
    | bit
    | character
+   | varbyte
    | constdatetime
    | constinterval (opt_interval? | OPEN_PAREN iconst CLOSE_PAREN)
+   | json_type
+   ;
+
+varbyte
+    : (VARBYTE | VARBINARY | BINARY VARYING) OPEN_PAREN iconst CLOSE_PAREN
+    ;
+
+json_type
+   : JSON
    ;
 
 consttypename
@@ -3264,11 +4827,11 @@ bitwithoutlength
    ;
 
 character
-   : character_c (OPEN_PAREN iconst CLOSE_PAREN)?
+   : character_c (OPEN_PAREN (iconst | colid) CLOSE_PAREN)?
    ;
 
 constcharacter
-   : character_c (OPEN_PAREN iconst CLOSE_PAREN)?
+   : character_c (OPEN_PAREN (iconst | colid) CLOSE_PAREN)?
    ;
 
 character_c
@@ -3447,13 +5010,31 @@ a_expr_is_not
 /*11*/
 
 
+//a_expr_compare
+//   : a_expr_like ((LT | GT | EQUAL | LESS_EQUALS | GREATER_EQUALS | NOT_EQUALS) a_expr_like |subquery_Op sub_type (select_with_parens | OPEN_PAREN a_expr CLOSE_PAREN) /*21*/
+//
+//   )?
+//   ;
+///*10*/
+
 a_expr_compare
-   : a_expr_like ((LT | GT | EQUAL | LESS_EQUALS | GREATER_EQUALS | NOT_EQUALS) a_expr_like |subquery_Op sub_type (select_with_parens | OPEN_PAREN a_expr CLOSE_PAREN) /*21*/
+   : a_expr_prior_or_level ((LT | GT | EQUAL | LESS_EQUALS | GREATER_EQUALS | NOT_EQUALS) a_expr_prior_or_level |subquery_Op sub_type (select_with_parens | OPEN_PAREN a_expr CLOSE_PAREN) /*21*/
 
    )?
    ;
 /*10*/
 
+/* Redshift Level and Prior Expression https://docs.aws.amazon.com/redshift/latest/dg/r_CONNECT_BY_clause.html */
+// Perf(zp): Introducing a_expr_prior_or_level seems like introduce the significant performance penalty,
+// make redshift-test costs ~4x higher time than without it. Using (PRIOR | LEVEL)? a_expr_like instead will not.
+//a_expr_prior_or_level
+//   : PRIOR? a_expr_like
+//   | LEVEL? a_expr_like
+//   ;
+
+a_expr_prior_or_level
+   : (PRIOR | LEVEL)? a_expr_like
+   ;
 
 a_expr_like
    : a_expr_qual_op (NOT? (LIKE | ILIKE | SIMILAR TO) a_expr_qual_op opt_escape?)?
@@ -4003,6 +5584,7 @@ roleid
 
 rolespec
    : nonreservedword
+   | NamespaceUser
    | CURRENT_USER
    | SESSION_USER
    ;
@@ -4242,6 +5824,7 @@ unreserved_keyword
    | OWNER
    | PARALLEL
    | PARAMETER
+   | PUBLIC
    | PARSER
    | PARTIAL
    | PARTITION
@@ -4254,6 +5837,7 @@ unreserved_keyword
    | PREPARED
    | PRESERVE
    | PRIOR
+   | PRIORITY
    | PRIVILEGES
    | PROCEDURAL
    | PROCEDURE
@@ -4365,6 +5949,37 @@ unreserved_keyword
    | YEAR_P
    | YES_P
    | ZONE
+   // REDSHIFT-SPECIFIC KEYWORDS (added to support their use as column names/identifiers)
+   | DEFINITION | DATASHARE | PUBLICACCESSIBLE | INCLUDENEW
+   | IAM_ROLE | CATALOG_ROLE | CATALOG_ID | HIVE | METASTORE | URI
+   | POSTGRES | MYSQL | SECRET_ARN | KINESIS | KAFKA | MSK
+   | AUTHENTICATION | AUTHENTICATION_ARN | SESSION_TOKEN | MTLS
+   | MASKING | RLS | IDENTITY | PROVIDER | PROTECTED
+   | MODEL | TARGET | SAGEMAKER | AUTO | MODEL_TYPE | PROBLEM_TYPE
+   | OBJECTIVE | PREPROCESSORS | HYPERPARAMETERS | XGBOOST | MLP
+   | LINEAR_LEARNER | KMEANS | FORECAST | REGRESSION | BINARY_CLASSIFICATION
+   | MULTICLASS_CLASSIFICATION | S3_BUCKET | TAGS | KMS_KEY_ID | S3_GARBAGE_COLLECT
+   | MAX_CELLS | MAX_RUNTIME | HORIZON | FREQUENCY | PERCENTILES | MAX_BATCH_ROWS
+   | UNLOAD | MANIFEST | ADDQUOTES | ALLOWOVERWRITE | CLEANPATH
+   | MAXFILESIZE | ROWGROUPSIZE | BZIP2 | GZIP | ZSTD
+   | DATABASES | DATASHARES | GRANTS | USE | CANCEL
+   | SESSION_AUTHORIZATION | SESSION_CHARACTERISTICS | COMPRESSION | LIBRARY | APPEND
+   | MB | GB | ACCOUNT | NAMESPACE | DESCRIBE
+   | NONATOMIC | MANAGEDBY | ADX | REMOVE | DUPLICATES
+   | BEDROCK | MODEL_ID | PROMPT | SUFFIX | REQUEST_TYPE | RESPONSE_TYPE
+   | RAW | UNIFIED | SUPER | CI | CS | PLPYTHONU
+   | FILLTARGET | IGNOREEXTRA | CREATEUSER | NOCREATEUSER | REGION | PORT
+   | REDSHIFT | IAM | CREATEDB | NOCREATEDB | RESTRICTED | UNLIMITED
+   | EXTERNALID | TIMEOUT | SYSLOG | CREDENTIALS | UNRESTRICTED | PARAMETERS
+   | APPLICATION_ARN | AUTO_CREATE_ROLES | COMPROWS | PROVIDER_URL | PROVIDER_URL_PORT
+   | ATTRIBUTE_MAP | PROVIDER_ARN | ASSUME_ROLE_ARN | PROPERTIES
+   | AVRO | RCFILE | SEQUENCEFILE | TEXTFILE | ORC | ION | LAMBDA | FIXEDWIDTH
+   | PARQUET | LZOP | REMOVEQUOTES | TRUNCATECOLUMNS | FILLRECORD
+   | BLANKSASNULL | EMPTYASNULL | MAXERROR | DATEFORMAT | TIMEFORMAT
+   | ACCEPTINVCHARS | ACCEPTANYDATE | IGNOREHEADER | IGNOREBLANKLINES
+   | COMPUPDATE | STATUPDATE | EXPLICIT_IDS | READRATIO | ROUNDEC
+   | TRIMBLANKS | PRESET | ACCESS_KEY_ID | SECRET_ACCESS_KEY
+   | SESSION_TOKEN_KW | HEADER | SETTINGS | FUNCTION_NAME
    ;
 
 col_name_keyword
@@ -4386,6 +6001,15 @@ col_name_keyword
    | INT_P
    | INTEGER
    | INTERVAL
+   | JSON
+   | IGNOREHEADER | IGNOREBLANKLINES | TRUNCATECOLUMNS | FILLRECORD
+   | BLANKSASNULL | EMPTYASNULL | ACCEPTINVCHARS | ACCEPTANYDATE  
+   | DATEFORMAT | TIMEFORMAT | COMPUPDATE | STATUPDATE
+   | MAXERROR | READRATIO | MANIFEST | ENCRYPTED
+   | REMOVEQUOTES | EXPLICIT_IDS | ROUNDEC | TRIMBLANKS
+   | FIXEDWIDTH | ACCESS_KEY_ID | SECRET_ACCESS_KEY | SESSION_TOKEN_KW
+   | GZIP | BZIP2 | LZOP | ZSTD | AVRO | PARQUET | ORC
+   | REGION | DELIMITER | ENCODING | COMPRESSION | QUOTE | COMPROWS
    | LEAST
    | NATIONAL
    | NCHAR
@@ -4393,6 +6017,7 @@ col_name_keyword
    | NORMALIZE
    | NULLIF
    | numeric
+   | OFFSET
    | OUT_P
    | OVERLAY
    | POSITION
@@ -4662,6 +6287,7 @@ builtin_function_name
    | TO_CHAR
    | TO_DATE
    | TO_NUMBER
+   | CURRENT_USER
    ;
 
 /************************************************************************************************************************************************************/

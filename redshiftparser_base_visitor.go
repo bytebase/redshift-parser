@@ -67,6 +67,10 @@ func (v *BaseRedshiftParserVisitor) VisitAlterrolestmt(ctx *AlterrolestmtContext
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitAlterroleaction(ctx *AlterroleactionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitOpt_in_database(ctx *Opt_in_databaseContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -75,7 +79,19 @@ func (v *BaseRedshiftParserVisitor) VisitAlterrolesetstmt(ctx *AlterrolesetstmtC
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitAlterschemastmt(ctx *AlterschemastmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitDroprolestmt(ctx *DroprolestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDropuserstmt(ctx *DropuserstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDropgroupstmt(ctx *DropgroupstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -95,7 +111,11 @@ func (v *BaseRedshiftParserVisitor) VisitCreateschemastmt(ctx *CreateschemastmtC
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseRedshiftParserVisitor) VisitOptschemaname(ctx *OptschemanameContext) interface{} {
+func (v *BaseRedshiftParserVisitor) VisitOpt_auth_clause(ctx *Opt_auth_clauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitOpt_quota(ctx *Opt_quotaContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -207,6 +227,10 @@ func (v *BaseRedshiftParserVisitor) VisitAlter_table_cmds(ctx *Alter_table_cmdsC
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitTable_constraint(ctx *Table_constraintContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitPartition_cmd(ctx *Partition_cmdContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -295,6 +319,26 @@ func (v *BaseRedshiftParserVisitor) VisitCopystmt(ctx *CopystmtContext) interfac
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitRedshift_copy_authorization(ctx *Redshift_copy_authorizationContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRedshift_copy_format(ctx *Redshift_copy_formatContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRedshift_copy_parameter(ctx *Redshift_copy_parameterContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCopy_param_name(ctx *Copy_param_nameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCopy_param_value(ctx *Copy_param_valueContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitCopy_from(ctx *Copy_fromContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -355,6 +399,10 @@ func (v *BaseRedshiftParserVisitor) VisitCreatestmt(ctx *CreatestmtContext) inte
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitOpt_table_attributes(ctx *Opt_table_attributesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitOpttemp(ctx *OpttempContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -388,6 +436,10 @@ func (v *BaseRedshiftParserVisitor) VisitColumnDef(ctx *ColumnDefContext) interf
 }
 
 func (v *BaseRedshiftParserVisitor) VisitRs_colattributes(ctx *Rs_colattributesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRs_colattribute(ctx *Rs_colattributeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -527,6 +579,22 @@ func (v *BaseRedshiftParserVisitor) VisitOpttablespace(ctx *OpttablespaceContext
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitOptredshifttableoptions(ctx *OptredshifttableoptionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRedshifttableoption(ctx *RedshifttableoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSortkeyclause(ctx *SortkeyclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSortkeyclausetype(ctx *SortkeyclausetypeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitOptconstablespace(ctx *OptconstablespaceContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -551,6 +619,18 @@ func (v *BaseRedshiftParserVisitor) VisitCreate_as_target(ctx *Create_as_targetC
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitOpt_backup_clause_table_attributes(ctx *Opt_backup_clause_table_attributesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitTable_attributes(ctx *Table_attributesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitOpt_backup_clause(ctx *Opt_backup_clauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitOpt_with_data(ctx *Opt_with_dataContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -559,11 +639,7 @@ func (v *BaseRedshiftParserVisitor) VisitCreatematviewstmt(ctx *Creatematviewstm
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseRedshiftParserVisitor) VisitCreate_mv_target(ctx *Create_mv_targetContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseRedshiftParserVisitor) VisitOptnolog(ctx *OptnologContext) interface{} {
+func (v *BaseRedshiftParserVisitor) VisitOpt_auto_refresh(ctx *Opt_auto_refreshContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -1111,19 +1187,355 @@ func (v *BaseRedshiftParserVisitor) VisitFetch_args(ctx *Fetch_argsContext) inte
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseRedshiftParserVisitor) VisitFrom_in(ctx *From_inContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseRedshiftParserVisitor) VisitOpt_from_in(ctx *Opt_from_inContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
 func (v *BaseRedshiftParserVisitor) VisitGrantstmt(ctx *GrantstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitGrant_permissions_for_rls_lookup_tables(ctx *Grant_permissions_for_rls_lookup_tablesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_explain_permissions_for_row_level_security_policy_filters(ctx *Grant_explain_permissions_for_row_level_security_policy_filtersContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_machine_learning_permissions(ctx *Grant_machine_learning_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_role_permissions(ctx *Grant_role_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_role_permission_target_list(ctx *Grant_role_permission_target_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_role_permission_target_list_item(ctx *Grant_role_permission_target_list_itemContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSystem_permissions(ctx *System_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSystem_permissions_item(ctx *System_permissions_itemContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitOpt_with_admin_option(ctx *Opt_with_admin_optionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_scoped_permissions(ctx *Grant_scoped_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_scoped_schemas_permissions(ctx *Grant_scoped_schemas_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_scoped_tables_permissions(ctx *Grant_scoped_tables_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_scoped_functions_permissions(ctx *Grant_scoped_functions_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_scoped_procedures_permissions(ctx *Grant_scoped_procedures_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_scoped_languages_permissions(ctx *Grant_scoped_languages_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_scoped_copy_jobs_permissions(ctx *Grant_scoped_copy_jobs_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrantee_list_without_public(ctx *Grantee_list_without_publicContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrantee_without_public(ctx *Grantee_without_publicContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_datashare_permissions(ctx *Grant_datashare_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_spectrum_integration_permissions(ctx *Grant_spectrum_integration_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_spectrum_integration_external_schema_permissions(ctx *Grant_spectrum_integration_external_schema_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSpectrum_integration_external_schema_permission_list(ctx *Spectrum_integration_external_schema_permission_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSpectrum_integration_external_schema_permission(ctx *Spectrum_integration_external_schema_permissionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_spectrum_integration_external_table_permissions(ctx *Grant_spectrum_integration_external_table_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSpectrum_integration_external_table_permission(ctx *Spectrum_integration_external_table_permissionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSpectrum_integration_external_table_permission_list(ctx *Spectrum_integration_external_table_permission_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_spectrum_integration_extenral_column_permissions(ctx *Grant_spectrum_integration_extenral_column_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitIamrolelist_or_public(ctx *Iamrolelist_or_publicContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitIamrolelist(ctx *IamrolelistContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_assume_role_permissions(ctx *Grant_assume_role_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_assume_role_for_list(ctx *Grant_assume_role_for_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_assume_role_for_item(ctx *Grant_assume_role_for_itemContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_assume_role_target(ctx *Grant_assume_role_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_column_level_permissions(ctx *Grant_column_level_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitColumn_privilege_target(ctx *Column_privilege_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitColumn_privilege_list(ctx *Column_privilege_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitColumn_all_privilege(ctx *Column_all_privilegeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitColumn_select_update_privilege(ctx *Column_select_update_privilegeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCommon_grant(ctx *Common_grantContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCopy_job_privilege_list(ctx *Copy_job_privilege_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCopy_job_privilege(ctx *Copy_job_privilegeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCopy_job_target(ctx *Copy_job_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCopy_job_name(ctx *Copy_job_nameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitLanguage_privilege_list(ctx *Language_privilege_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_language_target(ctx *Grant_language_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_procedure_target(ctx *Grant_procedure_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitProcedure_privilege_list(ctx *Procedure_privilege_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitProcedure_privilege(ctx *Procedure_privilegeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFunction_privilege_list(ctx *Function_privilege_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFunction_privilege(ctx *Function_privilegeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_function_target(ctx *Grant_function_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_schema_target(ctx *Grant_schema_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_schema_target(ctx *Revoke_schema_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSchema_privilege_list(ctx *Schema_privilege_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSchema_privilege(ctx *Schema_privilegeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDatabase_privilege_list(ctx *Database_privilege_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDatabase_privilege(ctx *Database_privilegeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_database_target(ctx *Grant_database_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrant_table_target(ctx *Grant_table_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_table_target(ctx *Revoke_table_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAll_tables_in_schema_list(ctx *All_tables_in_schema_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAll_privileges(ctx *All_privilegesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrantee_list(ctx *Grantee_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrantee(ctx *GranteeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitOpt_with_grant_option(ctx *Opt_with_grant_optionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitTable_privilege(ctx *Table_privilegeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitTable_privilege_list(ctx *Table_privilege_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitRevokestmt(ctx *RevokestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_permissions_for_rls_lookup_tables(ctx *Revoke_permissions_for_rls_lookup_tablesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_explain_permissions_for_row_level_security_policy_filters(ctx *Revoke_explain_permissions_for_row_level_security_policy_filtersContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_machine_learning_permissions(ctx *Revoke_machine_learning_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_role_permissions(ctx *Revoke_role_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_permissions(ctx *Revoke_scoped_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_schemas_permissions(ctx *Revoke_scoped_schemas_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_tables_permissions(ctx *Revoke_scoped_tables_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_functions_permissions(ctx *Revoke_scoped_functions_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_procedures_permissions(ctx *Revoke_scoped_procedures_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_languages_permissions(ctx *Revoke_scoped_languages_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_copy_jobs_permissions(ctx *Revoke_scoped_copy_jobs_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_datashare_permissions(ctx *Revoke_datashare_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_spectrum_integration_permissions(ctx *Revoke_spectrum_integration_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_spectrum_integration_external_schema_permissions(ctx *Revoke_spectrum_integration_external_schema_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_spectrum_integration_external_table_permissions(ctx *Revoke_spectrum_integration_external_table_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_spectrum_integration_extenral_column_permissions(ctx *Revoke_spectrum_integration_extenral_column_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_assume_role_permissions(ctx *Revoke_assume_role_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_column_level_permissions(ctx *Revoke_column_level_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCommon_revoke(ctx *Common_revokeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -1148,14 +1560,6 @@ func (v *BaseRedshiftParserVisitor) VisitParameter_name_list(ctx *Parameter_name
 }
 
 func (v *BaseRedshiftParserVisitor) VisitParameter_name(ctx *Parameter_nameContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseRedshiftParserVisitor) VisitGrantee_list(ctx *Grantee_listContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseRedshiftParserVisitor) VisitGrantee(ctx *GranteeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -1259,7 +1663,23 @@ func (v *BaseRedshiftParserVisitor) VisitCreatefunctionstmt(ctx *Createfunctions
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitCreateprocedurestmt(ctx *CreateprocedurestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitOpt_nonatomic(ctx *Opt_nonatomicContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitOpt_or_replace(ctx *Opt_or_replaceContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFunc_py_args_or_sql_args(ctx *Func_py_args_or_sql_argsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFunc_py_args_or_sql_args_list(ctx *Func_py_args_or_sql_args_listContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -1364,6 +1784,10 @@ func (v *BaseRedshiftParserVisitor) VisitTable_func_column_list(ctx *Table_func_
 }
 
 func (v *BaseRedshiftParserVisitor) VisitAlterfunctionstmt(ctx *AlterfunctionstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAlterprocedurestmt(ctx *AlterprocedurestmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -1627,11 +2051,631 @@ func (v *BaseRedshiftParserVisitor) VisitViewstmt(ctx *ViewstmtContext) interfac
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitWith_no_schema_binding(ctx *With_no_schema_bindingContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitOpt_check_option(ctx *Opt_check_optionContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
 func (v *BaseRedshiftParserVisitor) VisitLoadstmt(ctx *LoadstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAlterdatasharestmt(ctx *AlterdatasharestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAlterdatashare_action(ctx *Alterdatashare_actionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAlterdatashare_add_drop(ctx *Alterdatashare_add_dropContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAlterdatashare_objects(ctx *Alterdatashare_objectsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDatashare_table_list(ctx *Datashare_table_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDatashare_table_name(ctx *Datashare_table_nameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitTable_name(ctx *Table_nameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitTemporary_table_name(ctx *Temporary_table_nameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDatashare_function_list(ctx *Datashare_function_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDatashare_function(ctx *Datashare_functionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDatashare_function_name(ctx *Datashare_function_nameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreatedatasharestmt(ctx *CreatedatasharestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreatedatashareoptions(ctx *CreatedatashareoptionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreatedatashareoption(ctx *CreatedatashareoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSetpublicaccessibleoption(ctx *SetpublicaccessibleoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitManagedbyoption(ctx *ManagedbyoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDescdatasharestmt(ctx *DescdatasharestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDropdatasharestmt(ctx *DropdatasharestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAlterexternalschemastmt(ctx *AlterexternalschemastmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAltexternalschemaopts(ctx *AltexternalschemaoptsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAlterexternalviewstmt(ctx *AlterexternalviewstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreateexternalschemastmt(ctx *CreateexternalschemastmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFromdatacatalogclause(ctx *FromdatacatalogclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDropschemastmt(ctx *DropschemastmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitImplicitdatacatalogclause(ctx *ImplicitdatacatalogclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFromhivemetastoreclause(ctx *FromhivemetastoreclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFrompostgresclause(ctx *FrompostgresclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFrommysqlclause(ctx *FrommysqlclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFromkinesisclause(ctx *FromkinesisclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFromkafkaclause(ctx *FromkafkaclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFrommskclause(ctx *FrommskclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFromredshiftclause(ctx *FromredshiftclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitIamrolevalue(ctx *IamrolevalueContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCatalogrolevalue(ctx *CatalogrolevalueContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAuthenticationvalue(ctx *AuthenticationvalueContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreateexternalfunctionstmt(ctx *CreateexternalfunctionstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitExternal_func_params(ctx *External_func_paramsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitParamlist(ctx *ParamlistContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitParam_spec(ctx *Param_specContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreateexternalmodelstmt(ctx *CreateexternalmodelstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreateexternaltablestmt(ctx *CreateexternaltablestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitExtern_column_list(ctx *Extern_column_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitExtern_column_def(ctx *Extern_column_defContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitExtern_typename(ctx *Extern_typenameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitExtern_table_format(ctx *Extern_table_formatContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRow_format_spec(ctx *Row_format_specContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSerde_properties_list(ctx *Serde_properties_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSerde_property(ctx *Serde_propertyContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitExternal_format_spec(ctx *External_format_specContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitTable_properties_list(ctx *Table_properties_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitTable_property(ctx *Table_propertyContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreateexternalviewstmt(ctx *CreateexternalviewstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDropexternalviewstmt(ctx *DropexternalviewstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAlteridentityproviderstmt(ctx *AlteridentityproviderstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAlteridprovideropts(ctx *AlteridprovideroptsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAltermaskingpolicystmt(ctx *AltermaskingpolicystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAltermaterializedviewstmt(ctx *AltermaterializedviewstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAltmaskingpolicyopts(ctx *AltmaskingpolicyoptsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAltmaskingpolicyargs(ctx *AltmaskingpolicyargsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAltmaskingpolicyarg(ctx *AltmaskingpolicyargContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAlterrlspolicystmt(ctx *AlterrlspolicystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAttachmaskingpolicystmt(ctx *AttachmaskingpolicystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAttachpolicycollist(ctx *AttachpolicycollistContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAttachpolicycolumn(ctx *AttachpolicycolumnContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAttachpolicytargets(ctx *AttachpolicytargetsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAttachpolicytarget(ctx *AttachpolicytargetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAttachrlspolicystmt(ctx *AttachrlspolicystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitTable_name_list(ctx *Table_name_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreateidentityproviderstmt(ctx *CreateidentityproviderstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreateidprovideropts(ctx *CreateidprovideroptsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGroupfilter(ctx *GroupfilterContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreatelibrarystmt(ctx *CreatelibrarystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreatelibraryopts(ctx *CreatelibraryoptsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreatemaskingpolicystmt(ctx *CreatemaskingpolicystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitInputcolumnlist(ctx *InputcolumnlistContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitInputcolumn(ctx *InputcolumnContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitMaskingexpression(ctx *MaskingexpressionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreatemodelstmt(ctx *CreatemodelstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreatemodelfromclause(ctx *CreatemodelfromclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitIamrolespec(ctx *IamrolespecContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSagemakerspec(ctx *SagemakerspecContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitModeltypespec(ctx *ModeltypespecContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitProblemtypespec(ctx *ProblemtypespecContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitProblemtype(ctx *ProblemtypeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitObjectivespec(ctx *ObjectivespecContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitHyperparametersspec(ctx *HyperparametersspecContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitHyperparameterslist(ctx *HyperparameterslistContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitHyperparameteritem(ctx *HyperparameteritemContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSettingsclause(ctx *SettingsclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSettingsitem(ctx *SettingsitemContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDatatypelist(ctx *DatatypelistContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDatatype(ctx *DatatypeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCreaterlspolicystmt(ctx *CreaterlspolicystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDescidentityproviderstmt(ctx *DescidentityproviderstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDetachmaskingpolicystmt(ctx *DetachmaskingpolicystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDetachrlspolicystmt(ctx *DetachrlspolicystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRole_or_user_or_public_list(ctx *Role_or_user_or_public_listContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRole_or_user_or_public(ctx *Role_or_user_or_publicContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRlspolicyname(ctx *RlspolicynameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDropidentityproviderstmt(ctx *DropidentityproviderstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDroplibrarystmt(ctx *DroplibrarystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDropmaskingpolicystmt(ctx *DropmaskingpolicystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDropmodelstmt(ctx *DropmodelstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDroprlspolicystmt(ctx *DroprlspolicystmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAltertableappendstmt(ctx *AltertableappendstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAppendoptions(ctx *AppendoptionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAlteruserstmt(ctx *AlteruserstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAlteruseropts(ctx *AlteruseroptsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAnalyzecompressionstmt(ctx *AnalyzecompressionstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCancelstmt(ctx *CancelstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitClosestmt(ctx *ClosestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitInsertexternaltablestmt(ctx *InsertexternaltablestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSelect_or_values(ctx *Select_or_valuesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSelectintostmt(ctx *SelectintostmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSetsessionauthorizationstmt(ctx *SetsessionauthorizationstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSetsessioncharacteristicsstmt(ctx *SetsessioncharacteristicsstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitShowcolumnsstmt(ctx *ShowcolumnsstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitShowdatabasesstmt(ctx *ShowdatabasesstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitShowdbsopts(ctx *ShowdbsoptsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitShowdatasharesstmt(ctx *ShowdatasharesstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitShowexternaltablestmt(ctx *ShowexternaltablestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitShowgrantsstmt(ctx *ShowgrantsstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrantobject(ctx *GrantobjectContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitGrantprincipal(ctx *GrantprincipalContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitShowmodelstmt(ctx *ShowmodelstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitShowprocedurestmt(ctx *ShowprocedurestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitShowschemasstmt(ctx *ShowschemasstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitShowtablestmt(ctx *ShowtablestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitShowtablesstmt(ctx *ShowtablesstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitShowviewstmt(ctx *ShowviewstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitUnloadstmt(ctx *UnloadstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitIamroleclause(ctx *IamroleclauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitUnloadoptions(ctx *UnloadoptionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFormatoption(ctx *FormatoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitPartitionbyoption(ctx *PartitionbyoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitManifestoption(ctx *ManifestoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitHeaderoption(ctx *HeaderoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitDelimiteroption(ctx *DelimiteroptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitFixedwidthoption(ctx *FixedwidthoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitEncryptedoption(ctx *EncryptedoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitKmskeyoption(ctx *KmskeyoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCompressionoption(ctx *CompressionoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAddquotesoption(ctx *AddquotesoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitNullasoption(ctx *NullasoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitEscapeoption(ctx *EscapeoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitAllowoverwriteoption(ctx *AllowoverwriteoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCleanpathoption(ctx *CleanpathoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitParalleloption(ctx *ParalleloptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitMaxfilesizeoption(ctx *MaxfilesizeoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRowgroupsizeoption(ctx *RowgroupsizeoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitSizeunit(ctx *SizeunitContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRegionoption(ctx *RegionoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitExtensionoption(ctx *ExtensionoptionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitUsestmt(ctx *UsestmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -1724,6 +2768,10 @@ func (v *BaseRedshiftParserVisitor) VisitCluster_index_specification(ctx *Cluste
 }
 
 func (v *BaseRedshiftParserVisitor) VisitVacuumstmt(ctx *VacuumstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitVacuum_option(ctx *Vacuum_optionContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -1871,6 +2919,10 @@ func (v *BaseRedshiftParserVisitor) VisitMergestmt(ctx *MergestmtContext) interf
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitMerge_when_clause(ctx *Merge_when_clauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitMerge_insert_clause(ctx *Merge_insert_clauseContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -1971,6 +3023,18 @@ func (v *BaseRedshiftParserVisitor) VisitSimple_select_pramary(ctx *Simple_selec
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitExclude_clause(ctx *Exclude_clauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitQualify_clause(ctx *Qualify_clauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitStart_with_clause(ctx *Start_with_clauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitWith_clause(ctx *With_clauseContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -1992,6 +3056,10 @@ func (v *BaseRedshiftParserVisitor) VisitOpt_with_clause(ctx *Opt_with_clauseCon
 }
 
 func (v *BaseRedshiftParserVisitor) VisitInto_clause(ctx *Into_clauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitOpt_top_clause(ctx *Opt_top_clauseContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -2275,6 +3343,14 @@ func (v *BaseRedshiftParserVisitor) VisitSimpletypename(ctx *SimpletypenameConte
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitVarbyte(ctx *VarbyteContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitJson_type(ctx *Json_typeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitConsttypename(ctx *ConsttypenameContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -2392,6 +3468,10 @@ func (v *BaseRedshiftParserVisitor) VisitA_expr_is_not(ctx *A_expr_is_notContext
 }
 
 func (v *BaseRedshiftParserVisitor) VisitA_expr_compare(ctx *A_expr_compareContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitA_expr_prior_or_level(ctx *A_expr_prior_or_levelContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
