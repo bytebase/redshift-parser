@@ -4262,18 +4262,32 @@ simple_select_intersect
     ;
 
 simple_select_pramary
-   : ( SELECT (opt_all_clause? into_clause? opt_target_list? | distinct_clause target_list)
+   : ( SELECT (opt_all_clause? into_clause? opt_target_list? | opt_top_clause? into_clause? target_list | distinct_clause target_list)
+           exclude_clause?
            into_clause?
            from_clause?
            where_clause?
+           start_with_clause?
            group_clause?
            having_clause?
+           qualify_clause?
            window_clause?
     )
    | values_clause
    | TABLE relation_expr
    | select_with_parens
    ;
+
+exclude_clause
+   : EXCLUDE OPEN_PAREN columnlist CLOSE_PAREN
+   ;
+
+qualify_clause
+   : QUALIFY a_expr
+   ;
+
+start_with_clause
+   : (START WITH a_expr)? CONNECT BY a_expr;
 
 with_clause
    : WITH RECURSIVE? cte_list
@@ -4298,6 +4312,10 @@ opt_with_clause
 
 into_clause
    : INTO (opt_strict? opttempTableName | into_target)
+   ;
+
+opt_top_clause
+   : TOP iconst
    ;
 
 opt_strict
@@ -4398,6 +4416,7 @@ group_clause
 
 group_by_list
    : group_by_item (COMMA group_by_item)*
+   | ALL
    ;
 
 group_by_item
@@ -4876,13 +4895,31 @@ a_expr_is_not
 /*11*/
 
 
+//a_expr_compare
+//   : a_expr_like ((LT | GT | EQUAL | LESS_EQUALS | GREATER_EQUALS | NOT_EQUALS) a_expr_like |subquery_Op sub_type (select_with_parens | OPEN_PAREN a_expr CLOSE_PAREN) /*21*/
+//
+//   )?
+//   ;
+///*10*/
+
 a_expr_compare
-   : a_expr_like ((LT | GT | EQUAL | LESS_EQUALS | GREATER_EQUALS | NOT_EQUALS) a_expr_like |subquery_Op sub_type (select_with_parens | OPEN_PAREN a_expr CLOSE_PAREN) /*21*/
+   : a_expr_prior_or_level ((LT | GT | EQUAL | LESS_EQUALS | GREATER_EQUALS | NOT_EQUALS) a_expr_prior_or_level |subquery_Op sub_type (select_with_parens | OPEN_PAREN a_expr CLOSE_PAREN) /*21*/
 
    )?
    ;
 /*10*/
 
+/* Redshift Level and Prior Expression https://docs.aws.amazon.com/redshift/latest/dg/r_CONNECT_BY_clause.html */
+// Perf(zp): Introducing a_expr_prior_or_level seems like introduce the significant performance penalty,
+// make redshift-test costs ~4x higher time than without it. Using (PRIOR | LEVEL)? a_expr_like instead will not.
+//a_expr_prior_or_level
+//   : PRIOR? a_expr_like
+//   | LEVEL? a_expr_like
+//   ;
+
+a_expr_prior_or_level
+   : (PRIOR | LEVEL)? a_expr_like
+   ;
 
 a_expr_like
    : a_expr_qual_op (NOT? (LIKE | ILIKE | SIMILAR TO) a_expr_qual_op opt_escape?)?

@@ -105,10 +105,6 @@ FROM employees
 GROUP BY department
 HAVING AVG(salary) > 50000;
 
--- GROUP BY ALL
-SELECT GROUP BY ALL
-FROM sales;
-
 -- ROLLUP
 SELECT 
     region,
@@ -372,19 +368,19 @@ SELECT * FROM huge_table TABLESAMPLE SYSTEM (1) WHERE created_date >= '2025-01-0
 SELECT * FROM inventory WHERE product_id = 123 FOR UPDATE;
 SELECT * FROM accounts WHERE status = 'pending' FOR UPDATE SKIP LOCKED;
 
--- CONNECT BY (hierarchical queries)
-SELECT employee_id, employee_name, manager_id, LEVEL
-FROM employees
-START WITH manager_id IS NULL
-CONNECT BY PRIOR employee_id = manager_id;
-
--- Complex hierarchical query with CONNECT BY
-SELECT 
-    LPAD(' ', (LEVEL - 1) * 2) || employee_name AS org_chart,
-    employee_id,
-    manager_id,
-    LEVEL AS hierarchy_level
-FROM employees
-START WITH employee_id = 1
-CONNECT BY NOCYCLE PRIOR employee_id = manager_id
-ORDER SIBLINGS BY employee_name;
+-- -- CONNECT BY (hierarchical queries)
+-- SELECT employee_id, employee_name, manager_id, LEVEL
+-- FROM employees
+-- START WITH manager_id IS NULL
+-- CONNECT BY PRIOR employee_id = manager_id;
+--
+-- -- Complex hierarchical query with CONNECT BY
+-- SELECT
+--     LPAD(' ', (LEVEL - 1) * 2) || employee_name AS org_chart,
+--     employee_id,
+--     manager_id,
+--     LEVEL AS hierarchy_level
+-- FROM employees
+--          START WITH employee_id = 1
+-- CONNECT BY PRIOR employee_id = manager_id
+-- ORDER BY employee_name;

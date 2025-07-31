@@ -4670,6 +4670,24 @@ func (s *BaseRedshiftParserListener) EnterSimple_select_pramary(ctx *Simple_sele
 // ExitSimple_select_pramary is called when production simple_select_pramary is exited.
 func (s *BaseRedshiftParserListener) ExitSimple_select_pramary(ctx *Simple_select_pramaryContext) {}
 
+// EnterExclude_clause is called when production exclude_clause is entered.
+func (s *BaseRedshiftParserListener) EnterExclude_clause(ctx *Exclude_clauseContext) {}
+
+// ExitExclude_clause is called when production exclude_clause is exited.
+func (s *BaseRedshiftParserListener) ExitExclude_clause(ctx *Exclude_clauseContext) {}
+
+// EnterQualify_clause is called when production qualify_clause is entered.
+func (s *BaseRedshiftParserListener) EnterQualify_clause(ctx *Qualify_clauseContext) {}
+
+// ExitQualify_clause is called when production qualify_clause is exited.
+func (s *BaseRedshiftParserListener) ExitQualify_clause(ctx *Qualify_clauseContext) {}
+
+// EnterStart_with_clause is called when production start_with_clause is entered.
+func (s *BaseRedshiftParserListener) EnterStart_with_clause(ctx *Start_with_clauseContext) {}
+
+// ExitStart_with_clause is called when production start_with_clause is exited.
+func (s *BaseRedshiftParserListener) ExitStart_with_clause(ctx *Start_with_clauseContext) {}
+
 // EnterWith_clause is called when production with_clause is entered.
 func (s *BaseRedshiftParserListener) EnterWith_clause(ctx *With_clauseContext) {}
 
@@ -4705,6 +4723,12 @@ func (s *BaseRedshiftParserListener) EnterInto_clause(ctx *Into_clauseContext) {
 
 // ExitInto_clause is called when production into_clause is exited.
 func (s *BaseRedshiftParserListener) ExitInto_clause(ctx *Into_clauseContext) {}
+
+// EnterOpt_top_clause is called when production opt_top_clause is entered.
+func (s *BaseRedshiftParserListener) EnterOpt_top_clause(ctx *Opt_top_clauseContext) {}
+
+// ExitOpt_top_clause is called when production opt_top_clause is exited.
+func (s *BaseRedshiftParserListener) ExitOpt_top_clause(ctx *Opt_top_clauseContext) {}
 
 // EnterOpt_strict is called when production opt_strict is entered.
 func (s *BaseRedshiftParserListener) EnterOpt_strict(ctx *Opt_strictContext) {}
@@ -5330,6 +5354,12 @@ func (s *BaseRedshiftParserListener) EnterA_expr_compare(ctx *A_expr_compareCont
 
 // ExitA_expr_compare is called when production a_expr_compare is exited.
 func (s *BaseRedshiftParserListener) ExitA_expr_compare(ctx *A_expr_compareContext) {}
+
+// EnterA_expr_prior_or_level is called when production a_expr_prior_or_level is entered.
+func (s *BaseRedshiftParserListener) EnterA_expr_prior_or_level(ctx *A_expr_prior_or_levelContext) {}
+
+// ExitA_expr_prior_or_level is called when production a_expr_prior_or_level is exited.
+func (s *BaseRedshiftParserListener) ExitA_expr_prior_or_level(ctx *A_expr_prior_or_levelContext) {}
 
 // EnterA_expr_like is called when production a_expr_like is entered.
 func (s *BaseRedshiftParserListener) EnterA_expr_like(ctx *A_expr_likeContext) {}

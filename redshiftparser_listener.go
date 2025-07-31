@@ -2203,6 +2203,15 @@ type RedshiftParserListener interface {
 	// EnterSimple_select_pramary is called when entering the simple_select_pramary production.
 	EnterSimple_select_pramary(c *Simple_select_pramaryContext)
 
+	// EnterExclude_clause is called when entering the exclude_clause production.
+	EnterExclude_clause(c *Exclude_clauseContext)
+
+	// EnterQualify_clause is called when entering the qualify_clause production.
+	EnterQualify_clause(c *Qualify_clauseContext)
+
+	// EnterStart_with_clause is called when entering the start_with_clause production.
+	EnterStart_with_clause(c *Start_with_clauseContext)
+
 	// EnterWith_clause is called when entering the with_clause production.
 	EnterWith_clause(c *With_clauseContext)
 
@@ -2220,6 +2229,9 @@ type RedshiftParserListener interface {
 
 	// EnterInto_clause is called when entering the into_clause production.
 	EnterInto_clause(c *Into_clauseContext)
+
+	// EnterOpt_top_clause is called when entering the opt_top_clause production.
+	EnterOpt_top_clause(c *Opt_top_clauseContext)
 
 	// EnterOpt_strict is called when entering the opt_strict production.
 	EnterOpt_strict(c *Opt_strictContext)
@@ -2526,6 +2538,9 @@ type RedshiftParserListener interface {
 
 	// EnterA_expr_compare is called when entering the a_expr_compare production.
 	EnterA_expr_compare(c *A_expr_compareContext)
+
+	// EnterA_expr_prior_or_level is called when entering the a_expr_prior_or_level production.
+	EnterA_expr_prior_or_level(c *A_expr_prior_or_levelContext)
 
 	// EnterA_expr_like is called when entering the a_expr_like production.
 	EnterA_expr_like(c *A_expr_likeContext)
@@ -5398,6 +5413,15 @@ type RedshiftParserListener interface {
 	// ExitSimple_select_pramary is called when exiting the simple_select_pramary production.
 	ExitSimple_select_pramary(c *Simple_select_pramaryContext)
 
+	// ExitExclude_clause is called when exiting the exclude_clause production.
+	ExitExclude_clause(c *Exclude_clauseContext)
+
+	// ExitQualify_clause is called when exiting the qualify_clause production.
+	ExitQualify_clause(c *Qualify_clauseContext)
+
+	// ExitStart_with_clause is called when exiting the start_with_clause production.
+	ExitStart_with_clause(c *Start_with_clauseContext)
+
 	// ExitWith_clause is called when exiting the with_clause production.
 	ExitWith_clause(c *With_clauseContext)
 
@@ -5415,6 +5439,9 @@ type RedshiftParserListener interface {
 
 	// ExitInto_clause is called when exiting the into_clause production.
 	ExitInto_clause(c *Into_clauseContext)
+
+	// ExitOpt_top_clause is called when exiting the opt_top_clause production.
+	ExitOpt_top_clause(c *Opt_top_clauseContext)
 
 	// ExitOpt_strict is called when exiting the opt_strict production.
 	ExitOpt_strict(c *Opt_strictContext)
@@ -5721,6 +5748,9 @@ type RedshiftParserListener interface {
 
 	// ExitA_expr_compare is called when exiting the a_expr_compare production.
 	ExitA_expr_compare(c *A_expr_compareContext)
+
+	// ExitA_expr_prior_or_level is called when exiting the a_expr_prior_or_level production.
+	ExitA_expr_prior_or_level(c *A_expr_prior_or_levelContext)
 
 	// ExitA_expr_like is called when exiting the a_expr_like production.
 	ExitA_expr_like(c *A_expr_likeContext)

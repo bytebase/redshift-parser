@@ -2935,6 +2935,18 @@ func (v *BaseRedshiftParserVisitor) VisitSimple_select_pramary(ctx *Simple_selec
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitExclude_clause(ctx *Exclude_clauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitQualify_clause(ctx *Qualify_clauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitStart_with_clause(ctx *Start_with_clauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitWith_clause(ctx *With_clauseContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -2956,6 +2968,10 @@ func (v *BaseRedshiftParserVisitor) VisitOpt_with_clause(ctx *Opt_with_clauseCon
 }
 
 func (v *BaseRedshiftParserVisitor) VisitInto_clause(ctx *Into_clauseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitOpt_top_clause(ctx *Opt_top_clauseContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -3364,6 +3380,10 @@ func (v *BaseRedshiftParserVisitor) VisitA_expr_is_not(ctx *A_expr_is_notContext
 }
 
 func (v *BaseRedshiftParserVisitor) VisitA_expr_compare(ctx *A_expr_compareContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitA_expr_prior_or_level(ctx *A_expr_prior_or_levelContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

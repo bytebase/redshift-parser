@@ -2203,6 +2203,15 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#simple_select_pramary.
 	VisitSimple_select_pramary(ctx *Simple_select_pramaryContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#exclude_clause.
+	VisitExclude_clause(ctx *Exclude_clauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#qualify_clause.
+	VisitQualify_clause(ctx *Qualify_clauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#start_with_clause.
+	VisitStart_with_clause(ctx *Start_with_clauseContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#with_clause.
 	VisitWith_clause(ctx *With_clauseContext) interface{}
 
@@ -2220,6 +2229,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#into_clause.
 	VisitInto_clause(ctx *Into_clauseContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#opt_top_clause.
+	VisitOpt_top_clause(ctx *Opt_top_clauseContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#opt_strict.
 	VisitOpt_strict(ctx *Opt_strictContext) interface{}
@@ -2526,6 +2538,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#a_expr_compare.
 	VisitA_expr_compare(ctx *A_expr_compareContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#a_expr_prior_or_level.
+	VisitA_expr_prior_or_level(ctx *A_expr_prior_or_levelContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#a_expr_like.
 	VisitA_expr_like(ctx *A_expr_likeContext) interface{}
