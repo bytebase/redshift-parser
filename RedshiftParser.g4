@@ -1958,10 +1958,13 @@ grant_spectrum_integration_extenral_column_permissions
    ;
 
 iamrolelist_or_public
-   : iamrolevalue (COMMA iamrolevalue)*
+   : iamrolelist
    | PUBLIC
    ;
 
+iamrolelist
+   : IAM_ROLE iamrolevalue (COMMA IAM_ROLE iamrolevalue)*
+   ;
 
 grant_assume_role_permissions
    : GRANT ASSUMEROLE grant_assume_role_target TO grantee_list FOR grant_assume_role_for_list
@@ -2074,6 +2077,10 @@ grant_schema_target
     : SCHEMA colid (COMMA colid)*
     ;
 
+revoke_schema_target
+    : SCHEMA (IF_P EXISTS)? colid (COMMA colid)*
+    ;
+
 schema_privilege_list
     : schema_privilege (COMMA schema_privilege)*
     | all_privileges
@@ -2106,6 +2113,11 @@ grant_database_target
 
 grant_table_target
     : TABLE? qualified_name_list
+    | all_tables_in_schema_list
+    ;
+
+revoke_table_target
+    : TABLE? (IF_P EXISTS)? qualified_name_list
     | all_tables_in_schema_list
     ;
 
@@ -2149,8 +2161,111 @@ table_privilege_list
     ;
 
 revokestmt
-   : REVOKE privileges ON privilege_target FROM grantee_list opt_drop_behavior?
-   | REVOKE GRANT OPTION FOR privileges ON privilege_target FROM grantee_list opt_drop_behavior?
+   : common_revoke
+   | revoke_column_level_permissions
+   | revoke_assume_role_permissions
+   | revoke_spectrum_integration_permissions
+   | revoke_datashare_permissions
+   | revoke_scoped_permissions
+   | revoke_machine_learning_permissions
+   | revoke_role_permissions
+   | revoke_explain_permissions_for_row_level_security_policy_filters
+   | revoke_permissions_for_rls_lookup_tables
+   ;
+
+revoke_permissions_for_rls_lookup_tables
+   : REVOKE SELECT ON TABLE? qualified_name_list FROM RLS POLICY columnlist opt_drop_behavior?
+   ;
+
+revoke_explain_permissions_for_row_level_security_policy_filters
+   : REVOKE (EXPLAIN | IGNORE) RLS FROM ROLE rolespec opt_drop_behavior?
+   ;
+
+revoke_machine_learning_permissions
+   : REVOKE CREATE MODEL FROM grantee_list opt_drop_behavior?
+   | REVOKE function_privilege_list ON MODEL columnlist FROM grantee_list opt_drop_behavior?
+   ;
+
+revoke_role_permissions
+   : REVOKE ROLE rolespec (COMMA ROLE rolespec)* FROM grant_role_permission_target_list opt_drop_behavior?
+   | REVOKE system_permissions FROM ROLE role_list opt_drop_behavior?
+   | REVOKE ADMIN OPTION FOR ROLE rolespec (COMMA ROLE rolespec)* FROM grant_role_permission_target_list opt_drop_behavior?
+   ;
+
+revoke_scoped_permissions
+   : revoke_scoped_schemas_permissions
+   | revoke_scoped_tables_permissions
+   | revoke_scoped_functions_permissions
+   | revoke_scoped_procedures_permissions
+   | revoke_scoped_languages_permissions
+   | revoke_scoped_copy_jobs_permissions
+   ;
+
+revoke_scoped_schemas_permissions
+   : REVOKE schema_privilege_list FOR SCHEMAS IN_P DATABASE colid FROM grantee_list_without_public opt_drop_behavior?
+   ;
+
+revoke_scoped_tables_permissions
+   : REVOKE table_privilege_list FOR TABLES IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) FROM grantee_list_without_public opt_drop_behavior?
+   ;
+
+revoke_scoped_functions_permissions
+   : REVOKE function_privilege_list FOR FUNCTIONS IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) FROM grantee_list_without_public opt_drop_behavior?
+   ;
+
+revoke_scoped_procedures_permissions
+   : REVOKE procedure_privilege_list FOR PROCEDURES IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) FROM grantee_list_without_public opt_drop_behavior?
+   ;
+
+revoke_scoped_languages_permissions
+    : REVOKE language_privilege_list FOR LANGUAGES IN_P DATABASE colid FROM grantee_list_without_public opt_drop_behavior?
+    ;
+
+revoke_scoped_copy_jobs_permissions
+    : REVOKE copy_job_privilege_list FOR COPY JOBS IN_P ((SCHEMA colid (DATABASE colid)?) | (DATABASE colid) ) FROM grantee_list_without_public opt_drop_behavior?
+    ;
+
+revoke_datashare_permissions
+   : REVOKE (GRANT OPTION FOR)? (ALTER | SHARE) ON DATASHARE colid FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? USAGE ON DATASHARE colid FROM ((NAMESPACE sconst) | (ACCOUNT sconst (VIA DATA_CATALOG)?)) opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? USAGE ON (DATABASE columnlist | SCHEMA colid) FROM grantee_list opt_drop_behavior?
+   ;
+
+revoke_spectrum_integration_permissions
+    : revoke_spectrum_integration_extenral_column_permissions
+    | revoke_spectrum_integration_external_table_permissions
+    | revoke_spectrum_integration_external_schema_permissions
+    ;
+
+revoke_spectrum_integration_external_schema_permissions
+   : REVOKE spectrum_integration_external_schema_permission_list ON EXTERNAL SCHEMA columnlist FROM iamrolelist opt_drop_behavior?
+   ;
+
+revoke_spectrum_integration_external_table_permissions
+   : REVOKE spectrum_integration_external_table_permission_list ON EXTERNAL TABLE qualified_name_list FROM iamrolelist_or_public opt_drop_behavior?
+   ;
+
+revoke_spectrum_integration_extenral_column_permissions
+   : REVOKE (SELECT | all_privileges) OPEN_PAREN columnlist CLOSE_PAREN ON EXTERNAL TABLE qualified_name FROM iamrolelist opt_drop_behavior?
+   ;
+
+revoke_assume_role_permissions
+   : REVOKE ASSUMEROLE grant_assume_role_target FROM grantee_list FOR grant_assume_role_for_list opt_drop_behavior?
+   ;
+
+revoke_column_level_permissions
+   : REVOKE column_privilege_list ON column_privilege_target FROM grantee_list opt_drop_behavior?
+   | REVOKE GRANT OPTION FOR column_privilege_list ON column_privilege_target FROM grantee_list opt_drop_behavior?
+   ;
+
+common_revoke
+   : REVOKE (GRANT OPTION FOR)? table_privilege_list ON revoke_table_target FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? database_privilege_list ON grant_database_target FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? schema_privilege_list ON revoke_schema_target FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? function_privilege_list ON grant_function_target FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? procedure_privilege_list ON grant_procedure_target FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? language_privilege_list ON grant_language_target FROM grantee_list opt_drop_behavior?
+   | REVOKE (GRANT OPTION FOR)? copy_job_privilege_list ON copy_job_target FROM grantee_list opt_drop_behavior?
    ;
 
 privileges

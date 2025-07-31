@@ -979,6 +979,9 @@ type RedshiftParserListener interface {
 	// EnterIamrolelist_or_public is called when entering the iamrolelist_or_public production.
 	EnterIamrolelist_or_public(c *Iamrolelist_or_publicContext)
 
+	// EnterIamrolelist is called when entering the iamrolelist production.
+	EnterIamrolelist(c *IamrolelistContext)
+
 	// EnterGrant_assume_role_permissions is called when entering the grant_assume_role_permissions production.
 	EnterGrant_assume_role_permissions(c *Grant_assume_role_permissionsContext)
 
@@ -1048,6 +1051,9 @@ type RedshiftParserListener interface {
 	// EnterGrant_schema_target is called when entering the grant_schema_target production.
 	EnterGrant_schema_target(c *Grant_schema_targetContext)
 
+	// EnterRevoke_schema_target is called when entering the revoke_schema_target production.
+	EnterRevoke_schema_target(c *Revoke_schema_targetContext)
+
 	// EnterSchema_privilege_list is called when entering the schema_privilege_list production.
 	EnterSchema_privilege_list(c *Schema_privilege_listContext)
 
@@ -1065,6 +1071,9 @@ type RedshiftParserListener interface {
 
 	// EnterGrant_table_target is called when entering the grant_table_target production.
 	EnterGrant_table_target(c *Grant_table_targetContext)
+
+	// EnterRevoke_table_target is called when entering the revoke_table_target production.
+	EnterRevoke_table_target(c *Revoke_table_targetContext)
 
 	// EnterAll_tables_in_schema_list is called when entering the all_tables_in_schema_list production.
 	EnterAll_tables_in_schema_list(c *All_tables_in_schema_listContext)
@@ -1089,6 +1098,63 @@ type RedshiftParserListener interface {
 
 	// EnterRevokestmt is called when entering the revokestmt production.
 	EnterRevokestmt(c *RevokestmtContext)
+
+	// EnterRevoke_permissions_for_rls_lookup_tables is called when entering the revoke_permissions_for_rls_lookup_tables production.
+	EnterRevoke_permissions_for_rls_lookup_tables(c *Revoke_permissions_for_rls_lookup_tablesContext)
+
+	// EnterRevoke_explain_permissions_for_row_level_security_policy_filters is called when entering the revoke_explain_permissions_for_row_level_security_policy_filters production.
+	EnterRevoke_explain_permissions_for_row_level_security_policy_filters(c *Revoke_explain_permissions_for_row_level_security_policy_filtersContext)
+
+	// EnterRevoke_machine_learning_permissions is called when entering the revoke_machine_learning_permissions production.
+	EnterRevoke_machine_learning_permissions(c *Revoke_machine_learning_permissionsContext)
+
+	// EnterRevoke_role_permissions is called when entering the revoke_role_permissions production.
+	EnterRevoke_role_permissions(c *Revoke_role_permissionsContext)
+
+	// EnterRevoke_scoped_permissions is called when entering the revoke_scoped_permissions production.
+	EnterRevoke_scoped_permissions(c *Revoke_scoped_permissionsContext)
+
+	// EnterRevoke_scoped_schemas_permissions is called when entering the revoke_scoped_schemas_permissions production.
+	EnterRevoke_scoped_schemas_permissions(c *Revoke_scoped_schemas_permissionsContext)
+
+	// EnterRevoke_scoped_tables_permissions is called when entering the revoke_scoped_tables_permissions production.
+	EnterRevoke_scoped_tables_permissions(c *Revoke_scoped_tables_permissionsContext)
+
+	// EnterRevoke_scoped_functions_permissions is called when entering the revoke_scoped_functions_permissions production.
+	EnterRevoke_scoped_functions_permissions(c *Revoke_scoped_functions_permissionsContext)
+
+	// EnterRevoke_scoped_procedures_permissions is called when entering the revoke_scoped_procedures_permissions production.
+	EnterRevoke_scoped_procedures_permissions(c *Revoke_scoped_procedures_permissionsContext)
+
+	// EnterRevoke_scoped_languages_permissions is called when entering the revoke_scoped_languages_permissions production.
+	EnterRevoke_scoped_languages_permissions(c *Revoke_scoped_languages_permissionsContext)
+
+	// EnterRevoke_scoped_copy_jobs_permissions is called when entering the revoke_scoped_copy_jobs_permissions production.
+	EnterRevoke_scoped_copy_jobs_permissions(c *Revoke_scoped_copy_jobs_permissionsContext)
+
+	// EnterRevoke_datashare_permissions is called when entering the revoke_datashare_permissions production.
+	EnterRevoke_datashare_permissions(c *Revoke_datashare_permissionsContext)
+
+	// EnterRevoke_spectrum_integration_permissions is called when entering the revoke_spectrum_integration_permissions production.
+	EnterRevoke_spectrum_integration_permissions(c *Revoke_spectrum_integration_permissionsContext)
+
+	// EnterRevoke_spectrum_integration_external_schema_permissions is called when entering the revoke_spectrum_integration_external_schema_permissions production.
+	EnterRevoke_spectrum_integration_external_schema_permissions(c *Revoke_spectrum_integration_external_schema_permissionsContext)
+
+	// EnterRevoke_spectrum_integration_external_table_permissions is called when entering the revoke_spectrum_integration_external_table_permissions production.
+	EnterRevoke_spectrum_integration_external_table_permissions(c *Revoke_spectrum_integration_external_table_permissionsContext)
+
+	// EnterRevoke_spectrum_integration_extenral_column_permissions is called when entering the revoke_spectrum_integration_extenral_column_permissions production.
+	EnterRevoke_spectrum_integration_extenral_column_permissions(c *Revoke_spectrum_integration_extenral_column_permissionsContext)
+
+	// EnterRevoke_assume_role_permissions is called when entering the revoke_assume_role_permissions production.
+	EnterRevoke_assume_role_permissions(c *Revoke_assume_role_permissionsContext)
+
+	// EnterRevoke_column_level_permissions is called when entering the revoke_column_level_permissions production.
+	EnterRevoke_column_level_permissions(c *Revoke_column_level_permissionsContext)
+
+	// EnterCommon_revoke is called when entering the common_revoke production.
+	EnterCommon_revoke(c *Common_revokeContext)
 
 	// EnterPrivileges is called when entering the privileges production.
 	EnterPrivileges(c *PrivilegesContext)
@@ -4189,6 +4255,9 @@ type RedshiftParserListener interface {
 	// ExitIamrolelist_or_public is called when exiting the iamrolelist_or_public production.
 	ExitIamrolelist_or_public(c *Iamrolelist_or_publicContext)
 
+	// ExitIamrolelist is called when exiting the iamrolelist production.
+	ExitIamrolelist(c *IamrolelistContext)
+
 	// ExitGrant_assume_role_permissions is called when exiting the grant_assume_role_permissions production.
 	ExitGrant_assume_role_permissions(c *Grant_assume_role_permissionsContext)
 
@@ -4258,6 +4327,9 @@ type RedshiftParserListener interface {
 	// ExitGrant_schema_target is called when exiting the grant_schema_target production.
 	ExitGrant_schema_target(c *Grant_schema_targetContext)
 
+	// ExitRevoke_schema_target is called when exiting the revoke_schema_target production.
+	ExitRevoke_schema_target(c *Revoke_schema_targetContext)
+
 	// ExitSchema_privilege_list is called when exiting the schema_privilege_list production.
 	ExitSchema_privilege_list(c *Schema_privilege_listContext)
 
@@ -4275,6 +4347,9 @@ type RedshiftParserListener interface {
 
 	// ExitGrant_table_target is called when exiting the grant_table_target production.
 	ExitGrant_table_target(c *Grant_table_targetContext)
+
+	// ExitRevoke_table_target is called when exiting the revoke_table_target production.
+	ExitRevoke_table_target(c *Revoke_table_targetContext)
 
 	// ExitAll_tables_in_schema_list is called when exiting the all_tables_in_schema_list production.
 	ExitAll_tables_in_schema_list(c *All_tables_in_schema_listContext)
@@ -4299,6 +4374,63 @@ type RedshiftParserListener interface {
 
 	// ExitRevokestmt is called when exiting the revokestmt production.
 	ExitRevokestmt(c *RevokestmtContext)
+
+	// ExitRevoke_permissions_for_rls_lookup_tables is called when exiting the revoke_permissions_for_rls_lookup_tables production.
+	ExitRevoke_permissions_for_rls_lookup_tables(c *Revoke_permissions_for_rls_lookup_tablesContext)
+
+	// ExitRevoke_explain_permissions_for_row_level_security_policy_filters is called when exiting the revoke_explain_permissions_for_row_level_security_policy_filters production.
+	ExitRevoke_explain_permissions_for_row_level_security_policy_filters(c *Revoke_explain_permissions_for_row_level_security_policy_filtersContext)
+
+	// ExitRevoke_machine_learning_permissions is called when exiting the revoke_machine_learning_permissions production.
+	ExitRevoke_machine_learning_permissions(c *Revoke_machine_learning_permissionsContext)
+
+	// ExitRevoke_role_permissions is called when exiting the revoke_role_permissions production.
+	ExitRevoke_role_permissions(c *Revoke_role_permissionsContext)
+
+	// ExitRevoke_scoped_permissions is called when exiting the revoke_scoped_permissions production.
+	ExitRevoke_scoped_permissions(c *Revoke_scoped_permissionsContext)
+
+	// ExitRevoke_scoped_schemas_permissions is called when exiting the revoke_scoped_schemas_permissions production.
+	ExitRevoke_scoped_schemas_permissions(c *Revoke_scoped_schemas_permissionsContext)
+
+	// ExitRevoke_scoped_tables_permissions is called when exiting the revoke_scoped_tables_permissions production.
+	ExitRevoke_scoped_tables_permissions(c *Revoke_scoped_tables_permissionsContext)
+
+	// ExitRevoke_scoped_functions_permissions is called when exiting the revoke_scoped_functions_permissions production.
+	ExitRevoke_scoped_functions_permissions(c *Revoke_scoped_functions_permissionsContext)
+
+	// ExitRevoke_scoped_procedures_permissions is called when exiting the revoke_scoped_procedures_permissions production.
+	ExitRevoke_scoped_procedures_permissions(c *Revoke_scoped_procedures_permissionsContext)
+
+	// ExitRevoke_scoped_languages_permissions is called when exiting the revoke_scoped_languages_permissions production.
+	ExitRevoke_scoped_languages_permissions(c *Revoke_scoped_languages_permissionsContext)
+
+	// ExitRevoke_scoped_copy_jobs_permissions is called when exiting the revoke_scoped_copy_jobs_permissions production.
+	ExitRevoke_scoped_copy_jobs_permissions(c *Revoke_scoped_copy_jobs_permissionsContext)
+
+	// ExitRevoke_datashare_permissions is called when exiting the revoke_datashare_permissions production.
+	ExitRevoke_datashare_permissions(c *Revoke_datashare_permissionsContext)
+
+	// ExitRevoke_spectrum_integration_permissions is called when exiting the revoke_spectrum_integration_permissions production.
+	ExitRevoke_spectrum_integration_permissions(c *Revoke_spectrum_integration_permissionsContext)
+
+	// ExitRevoke_spectrum_integration_external_schema_permissions is called when exiting the revoke_spectrum_integration_external_schema_permissions production.
+	ExitRevoke_spectrum_integration_external_schema_permissions(c *Revoke_spectrum_integration_external_schema_permissionsContext)
+
+	// ExitRevoke_spectrum_integration_external_table_permissions is called when exiting the revoke_spectrum_integration_external_table_permissions production.
+	ExitRevoke_spectrum_integration_external_table_permissions(c *Revoke_spectrum_integration_external_table_permissionsContext)
+
+	// ExitRevoke_spectrum_integration_extenral_column_permissions is called when exiting the revoke_spectrum_integration_extenral_column_permissions production.
+	ExitRevoke_spectrum_integration_extenral_column_permissions(c *Revoke_spectrum_integration_extenral_column_permissionsContext)
+
+	// ExitRevoke_assume_role_permissions is called when exiting the revoke_assume_role_permissions production.
+	ExitRevoke_assume_role_permissions(c *Revoke_assume_role_permissionsContext)
+
+	// ExitRevoke_column_level_permissions is called when exiting the revoke_column_level_permissions production.
+	ExitRevoke_column_level_permissions(c *Revoke_column_level_permissionsContext)
+
+	// ExitCommon_revoke is called when exiting the common_revoke production.
+	ExitCommon_revoke(c *Common_revokeContext)
 
 	// ExitPrivileges is called when exiting the privileges production.
 	ExitPrivileges(c *PrivilegesContext)

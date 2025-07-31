@@ -2094,6 +2094,12 @@ func (s *BaseRedshiftParserListener) EnterIamrolelist_or_public(ctx *Iamrolelist
 // ExitIamrolelist_or_public is called when production iamrolelist_or_public is exited.
 func (s *BaseRedshiftParserListener) ExitIamrolelist_or_public(ctx *Iamrolelist_or_publicContext) {}
 
+// EnterIamrolelist is called when production iamrolelist is entered.
+func (s *BaseRedshiftParserListener) EnterIamrolelist(ctx *IamrolelistContext) {}
+
+// ExitIamrolelist is called when production iamrolelist is exited.
+func (s *BaseRedshiftParserListener) ExitIamrolelist(ctx *IamrolelistContext) {}
+
 // EnterGrant_assume_role_permissions is called when production grant_assume_role_permissions is entered.
 func (s *BaseRedshiftParserListener) EnterGrant_assume_role_permissions(ctx *Grant_assume_role_permissionsContext) {
 }
@@ -2255,6 +2261,12 @@ func (s *BaseRedshiftParserListener) EnterGrant_schema_target(ctx *Grant_schema_
 // ExitGrant_schema_target is called when production grant_schema_target is exited.
 func (s *BaseRedshiftParserListener) ExitGrant_schema_target(ctx *Grant_schema_targetContext) {}
 
+// EnterRevoke_schema_target is called when production revoke_schema_target is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_schema_target(ctx *Revoke_schema_targetContext) {}
+
+// ExitRevoke_schema_target is called when production revoke_schema_target is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_schema_target(ctx *Revoke_schema_targetContext) {}
+
 // EnterSchema_privilege_list is called when production schema_privilege_list is entered.
 func (s *BaseRedshiftParserListener) EnterSchema_privilege_list(ctx *Schema_privilege_listContext) {}
 
@@ -2292,6 +2304,12 @@ func (s *BaseRedshiftParserListener) EnterGrant_table_target(ctx *Grant_table_ta
 
 // ExitGrant_table_target is called when production grant_table_target is exited.
 func (s *BaseRedshiftParserListener) ExitGrant_table_target(ctx *Grant_table_targetContext) {}
+
+// EnterRevoke_table_target is called when production revoke_table_target is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_table_target(ctx *Revoke_table_targetContext) {}
+
+// ExitRevoke_table_target is called when production revoke_table_target is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_table_target(ctx *Revoke_table_targetContext) {}
 
 // EnterAll_tables_in_schema_list is called when production all_tables_in_schema_list is entered.
 func (s *BaseRedshiftParserListener) EnterAll_tables_in_schema_list(ctx *All_tables_in_schema_listContext) {
@@ -2342,6 +2360,156 @@ func (s *BaseRedshiftParserListener) EnterRevokestmt(ctx *RevokestmtContext) {}
 
 // ExitRevokestmt is called when production revokestmt is exited.
 func (s *BaseRedshiftParserListener) ExitRevokestmt(ctx *RevokestmtContext) {}
+
+// EnterRevoke_permissions_for_rls_lookup_tables is called when production revoke_permissions_for_rls_lookup_tables is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_permissions_for_rls_lookup_tables(ctx *Revoke_permissions_for_rls_lookup_tablesContext) {
+}
+
+// ExitRevoke_permissions_for_rls_lookup_tables is called when production revoke_permissions_for_rls_lookup_tables is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_permissions_for_rls_lookup_tables(ctx *Revoke_permissions_for_rls_lookup_tablesContext) {
+}
+
+// EnterRevoke_explain_permissions_for_row_level_security_policy_filters is called when production revoke_explain_permissions_for_row_level_security_policy_filters is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_explain_permissions_for_row_level_security_policy_filters(ctx *Revoke_explain_permissions_for_row_level_security_policy_filtersContext) {
+}
+
+// ExitRevoke_explain_permissions_for_row_level_security_policy_filters is called when production revoke_explain_permissions_for_row_level_security_policy_filters is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_explain_permissions_for_row_level_security_policy_filters(ctx *Revoke_explain_permissions_for_row_level_security_policy_filtersContext) {
+}
+
+// EnterRevoke_machine_learning_permissions is called when production revoke_machine_learning_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_machine_learning_permissions(ctx *Revoke_machine_learning_permissionsContext) {
+}
+
+// ExitRevoke_machine_learning_permissions is called when production revoke_machine_learning_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_machine_learning_permissions(ctx *Revoke_machine_learning_permissionsContext) {
+}
+
+// EnterRevoke_role_permissions is called when production revoke_role_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_role_permissions(ctx *Revoke_role_permissionsContext) {
+}
+
+// ExitRevoke_role_permissions is called when production revoke_role_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_role_permissions(ctx *Revoke_role_permissionsContext) {
+}
+
+// EnterRevoke_scoped_permissions is called when production revoke_scoped_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_scoped_permissions(ctx *Revoke_scoped_permissionsContext) {
+}
+
+// ExitRevoke_scoped_permissions is called when production revoke_scoped_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_scoped_permissions(ctx *Revoke_scoped_permissionsContext) {
+}
+
+// EnterRevoke_scoped_schemas_permissions is called when production revoke_scoped_schemas_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_scoped_schemas_permissions(ctx *Revoke_scoped_schemas_permissionsContext) {
+}
+
+// ExitRevoke_scoped_schemas_permissions is called when production revoke_scoped_schemas_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_scoped_schemas_permissions(ctx *Revoke_scoped_schemas_permissionsContext) {
+}
+
+// EnterRevoke_scoped_tables_permissions is called when production revoke_scoped_tables_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_scoped_tables_permissions(ctx *Revoke_scoped_tables_permissionsContext) {
+}
+
+// ExitRevoke_scoped_tables_permissions is called when production revoke_scoped_tables_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_scoped_tables_permissions(ctx *Revoke_scoped_tables_permissionsContext) {
+}
+
+// EnterRevoke_scoped_functions_permissions is called when production revoke_scoped_functions_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_scoped_functions_permissions(ctx *Revoke_scoped_functions_permissionsContext) {
+}
+
+// ExitRevoke_scoped_functions_permissions is called when production revoke_scoped_functions_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_scoped_functions_permissions(ctx *Revoke_scoped_functions_permissionsContext) {
+}
+
+// EnterRevoke_scoped_procedures_permissions is called when production revoke_scoped_procedures_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_scoped_procedures_permissions(ctx *Revoke_scoped_procedures_permissionsContext) {
+}
+
+// ExitRevoke_scoped_procedures_permissions is called when production revoke_scoped_procedures_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_scoped_procedures_permissions(ctx *Revoke_scoped_procedures_permissionsContext) {
+}
+
+// EnterRevoke_scoped_languages_permissions is called when production revoke_scoped_languages_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_scoped_languages_permissions(ctx *Revoke_scoped_languages_permissionsContext) {
+}
+
+// ExitRevoke_scoped_languages_permissions is called when production revoke_scoped_languages_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_scoped_languages_permissions(ctx *Revoke_scoped_languages_permissionsContext) {
+}
+
+// EnterRevoke_scoped_copy_jobs_permissions is called when production revoke_scoped_copy_jobs_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_scoped_copy_jobs_permissions(ctx *Revoke_scoped_copy_jobs_permissionsContext) {
+}
+
+// ExitRevoke_scoped_copy_jobs_permissions is called when production revoke_scoped_copy_jobs_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_scoped_copy_jobs_permissions(ctx *Revoke_scoped_copy_jobs_permissionsContext) {
+}
+
+// EnterRevoke_datashare_permissions is called when production revoke_datashare_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_datashare_permissions(ctx *Revoke_datashare_permissionsContext) {
+}
+
+// ExitRevoke_datashare_permissions is called when production revoke_datashare_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_datashare_permissions(ctx *Revoke_datashare_permissionsContext) {
+}
+
+// EnterRevoke_spectrum_integration_permissions is called when production revoke_spectrum_integration_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_spectrum_integration_permissions(ctx *Revoke_spectrum_integration_permissionsContext) {
+}
+
+// ExitRevoke_spectrum_integration_permissions is called when production revoke_spectrum_integration_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_spectrum_integration_permissions(ctx *Revoke_spectrum_integration_permissionsContext) {
+}
+
+// EnterRevoke_spectrum_integration_external_schema_permissions is called when production revoke_spectrum_integration_external_schema_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_spectrum_integration_external_schema_permissions(ctx *Revoke_spectrum_integration_external_schema_permissionsContext) {
+}
+
+// ExitRevoke_spectrum_integration_external_schema_permissions is called when production revoke_spectrum_integration_external_schema_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_spectrum_integration_external_schema_permissions(ctx *Revoke_spectrum_integration_external_schema_permissionsContext) {
+}
+
+// EnterRevoke_spectrum_integration_external_table_permissions is called when production revoke_spectrum_integration_external_table_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_spectrum_integration_external_table_permissions(ctx *Revoke_spectrum_integration_external_table_permissionsContext) {
+}
+
+// ExitRevoke_spectrum_integration_external_table_permissions is called when production revoke_spectrum_integration_external_table_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_spectrum_integration_external_table_permissions(ctx *Revoke_spectrum_integration_external_table_permissionsContext) {
+}
+
+// EnterRevoke_spectrum_integration_extenral_column_permissions is called when production revoke_spectrum_integration_extenral_column_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_spectrum_integration_extenral_column_permissions(ctx *Revoke_spectrum_integration_extenral_column_permissionsContext) {
+}
+
+// ExitRevoke_spectrum_integration_extenral_column_permissions is called when production revoke_spectrum_integration_extenral_column_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_spectrum_integration_extenral_column_permissions(ctx *Revoke_spectrum_integration_extenral_column_permissionsContext) {
+}
+
+// EnterRevoke_assume_role_permissions is called when production revoke_assume_role_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_assume_role_permissions(ctx *Revoke_assume_role_permissionsContext) {
+}
+
+// ExitRevoke_assume_role_permissions is called when production revoke_assume_role_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_assume_role_permissions(ctx *Revoke_assume_role_permissionsContext) {
+}
+
+// EnterRevoke_column_level_permissions is called when production revoke_column_level_permissions is entered.
+func (s *BaseRedshiftParserListener) EnterRevoke_column_level_permissions(ctx *Revoke_column_level_permissionsContext) {
+}
+
+// ExitRevoke_column_level_permissions is called when production revoke_column_level_permissions is exited.
+func (s *BaseRedshiftParserListener) ExitRevoke_column_level_permissions(ctx *Revoke_column_level_permissionsContext) {
+}
+
+// EnterCommon_revoke is called when production common_revoke is entered.
+func (s *BaseRedshiftParserListener) EnterCommon_revoke(ctx *Common_revokeContext) {}
+
+// ExitCommon_revoke is called when production common_revoke is exited.
+func (s *BaseRedshiftParserListener) ExitCommon_revoke(ctx *Common_revokeContext) {}
 
 // EnterPrivileges is called when production privileges is entered.
 func (s *BaseRedshiftParserListener) EnterPrivileges(ctx *PrivilegesContext) {}

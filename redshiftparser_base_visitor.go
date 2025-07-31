@@ -1303,6 +1303,10 @@ func (v *BaseRedshiftParserVisitor) VisitIamrolelist_or_public(ctx *Iamrolelist_
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitIamrolelist(ctx *IamrolelistContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitGrant_assume_role_permissions(ctx *Grant_assume_role_permissionsContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -1395,6 +1399,10 @@ func (v *BaseRedshiftParserVisitor) VisitGrant_schema_target(ctx *Grant_schema_t
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRedshiftParserVisitor) VisitRevoke_schema_target(ctx *Revoke_schema_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRedshiftParserVisitor) VisitSchema_privilege_list(ctx *Schema_privilege_listContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -1416,6 +1424,10 @@ func (v *BaseRedshiftParserVisitor) VisitGrant_database_target(ctx *Grant_databa
 }
 
 func (v *BaseRedshiftParserVisitor) VisitGrant_table_target(ctx *Grant_table_targetContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_table_target(ctx *Revoke_table_targetContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -1448,6 +1460,82 @@ func (v *BaseRedshiftParserVisitor) VisitTable_privilege_list(ctx *Table_privile
 }
 
 func (v *BaseRedshiftParserVisitor) VisitRevokestmt(ctx *RevokestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_permissions_for_rls_lookup_tables(ctx *Revoke_permissions_for_rls_lookup_tablesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_explain_permissions_for_row_level_security_policy_filters(ctx *Revoke_explain_permissions_for_row_level_security_policy_filtersContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_machine_learning_permissions(ctx *Revoke_machine_learning_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_role_permissions(ctx *Revoke_role_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_permissions(ctx *Revoke_scoped_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_schemas_permissions(ctx *Revoke_scoped_schemas_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_tables_permissions(ctx *Revoke_scoped_tables_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_functions_permissions(ctx *Revoke_scoped_functions_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_procedures_permissions(ctx *Revoke_scoped_procedures_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_languages_permissions(ctx *Revoke_scoped_languages_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_scoped_copy_jobs_permissions(ctx *Revoke_scoped_copy_jobs_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_datashare_permissions(ctx *Revoke_datashare_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_spectrum_integration_permissions(ctx *Revoke_spectrum_integration_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_spectrum_integration_external_schema_permissions(ctx *Revoke_spectrum_integration_external_schema_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_spectrum_integration_external_table_permissions(ctx *Revoke_spectrum_integration_external_table_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_spectrum_integration_extenral_column_permissions(ctx *Revoke_spectrum_integration_extenral_column_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_assume_role_permissions(ctx *Revoke_assume_role_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitRevoke_column_level_permissions(ctx *Revoke_column_level_permissionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRedshiftParserVisitor) VisitCommon_revoke(ctx *Common_revokeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

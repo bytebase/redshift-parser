@@ -1,184 +1,307 @@
--- REVOKE command test cases for Amazon Redshift
+-- REVOKE test cases based on AWS Redshift documentation
 -- Reference: https://docs.aws.amazon.com/redshift/latest/dg/r_REVOKE.html
 
 -- Basic table privileges
-REVOKE SELECT ON TABLE sales FROM user1;
-REVOKE INSERT ON TABLE sales FROM GROUP guests;
-REVOKE UPDATE ON TABLE customers FROM ROLE analyst_role;
-REVOKE DELETE ON products FROM PUBLIC;
-REVOKE DROP ON TABLE inventory FROM user2;
-REVOKE REFERENCES ON TABLE employees FROM GROUP hr_group;
-REVOKE ALTER ON orders FROM ROLE admin_role;
-REVOKE TRUNCATE ON TABLE temp_data FROM user3;
+REVOKE SELECT ON TABLE sales FROM dbuser;
+REVOKE INSERT, UPDATE, DELETE ON TABLE sales FROM dbuser;
+REVOKE ALL ON TABLE sales FROM dbuser;
+REVOKE ALL PRIVILEGES ON TABLE sales FROM dbuser;
+REVOKE ALTER, DROP, TRUNCATE, REFERENCES ON TABLE sales FROM admin_user;
 
--- Multiple privileges in one statement
-REVOKE SELECT, INSERT, UPDATE ON TABLE transactions FROM user4;
-REVOKE INSERT, UPDATE ON TABLE public.products FROM GROUP data_loaders;
-REVOKE SELECT, UPDATE, DELETE ON customers FROM ROLE reporting_role;
-REVOKE DROP, ALTER, TRUNCATE ON TABLE staging_data FROM GROUP dev_group;
+-- Table privileges from multiple users
+REVOKE SELECT ON TABLE sales FROM user1, user2, user3;
+REVOKE INSERT ON sales FROM dbuser1, dbuser2;
 
--- ALL privileges
-REVOKE ALL ON TABLE sales FROM user5;
-REVOKE ALL PRIVILEGES ON TABLE customers FROM GROUP sales_group;
-REVOKE ALL ON products FROM PUBLIC;
+-- Revoke GRANT OPTION only (users keep the privilege but can't grant it)
+REVOKE GRANT OPTION FOR SELECT ON TABLE sales FROM dbuser;
+REVOKE GRANT OPTION FOR ALL ON TABLE sales FROM dbuser;
 
--- Column-level permissions
-REVOKE SELECT (cust_name, cust_phone) ON TABLE cust_profile FROM user1;
-REVOKE UPDATE (salary, bonus) ON TABLE employees FROM GROUP hr_group;
-REVOKE SELECT (ssn, credit_card) ON TABLE sensitive_data FROM ROLE analyst_role;
-REVOKE ALL (col1, col2, col3) ON TABLE test_table FROM user6;
-REVOKE ALL PRIVILEGES (column_a, column_b) ON TABLE data_table FROM GROUP readers;
+-- Column-level privileges
+REVOKE SELECT (col1) ON TABLE t1 FROM PUBLIC;
+REVOKE UPDATE (col1, col2) ON TABLE t1 FROM user1;
+REVOKE SELECT (customer_id, customer_name) ON TABLE customers FROM analyst;
+REVOKE ALL (order_id, order_date, order_total) ON orders FROM report_user;
+
+-- Revoke from PUBLIC
+REVOKE SELECT ON TABLE public_data FROM PUBLIC;
+REVOKE USAGE ON SCHEMA public FROM PUBLIC;
+
+-- Revoke from ROLE and GROUP
+REVOKE SELECT ON TABLE sales FROM ROLE analyst_role;
+REVOKE INSERT ON TABLE logs FROM GROUP etl_group;
+REVOKE ALL ON TABLE temp_data FROM ROLE temp_role, GROUP admin_group;
 
 -- All tables in schema
-REVOKE SELECT ON ALL TABLES IN SCHEMA qa_tickit FROM fred;
-REVOKE INSERT, UPDATE ON ALL TABLES IN SCHEMA staging FROM GROUP loaders;
-REVOKE ALL ON ALL TABLES IN SCHEMA public FROM ROLE guest_role;
-REVOKE DELETE ON ALL TABLES IN SCHEMA analytics FROM user7;
+REVOKE SELECT ON ALL TABLES IN SCHEMA myschema FROM dbuser;
+REVOKE ALL ON ALL TABLES IN SCHEMA reporting FROM ROLE report_role;
 
 -- Database privileges
-REVOKE CREATE ON DATABASE sales_db FROM user8;
-REVOKE TEMPORARY ON DATABASE analytics_db FROM GROUP temp_users;
-REVOKE TEMP ON DATABASE staging_db FROM ROLE developer_role;
-REVOKE ALTER ON DATABASE production_db FROM user9;
-REVOKE DROP ON DATABASE test_db FROM GROUP admin_group;
-REVOKE USAGE ON DATABASE reporting_db FROM PUBLIC;
-REVOKE ALL ON DATABASE ecommerce_db FROM alice;
-REVOKE ALL PRIVILEGES ON DATABASE warehouse_db FROM ROLE analyst_role;
+REVOKE CREATE ON DATABASE mydb FROM dbuser;
+REVOKE USAGE ON DATABASE prod_db FROM readonly_user;
+REVOKE TEMPORARY ON DATABASE session_db FROM temp_user;
+REVOKE TEMP ON DATABASE session_db FROM temp_user;
+REVOKE ALTER ON DATABASE mydb FROM admin_user;
+REVOKE ALL ON DATABASE mydb FROM dba_role;
+REVOKE ALL PRIVILEGES ON DATABASE mydb FROM admin_group;
 
--- Multiple database privileges
-REVOKE CREATE, TEMPORARY ON DATABASE dev_db FROM user10;
-REVOKE ALTER, DROP ON DATABASE test_db FROM GROUP developers;
-REVOKE CREATE, USAGE, TEMP ON DATABASE staging_db FROM ROLE junior_dev;
+-- Database privileges with CASCADE/RESTRICT
+REVOKE CREATE ON DATABASE mydb FROM dbuser CASCADE;
+REVOKE ALL ON DATABASE mydb FROM admin RESTRICT;
 
 -- Schema privileges
-REVOKE CREATE ON SCHEMA sales_schema FROM user11;
-REVOKE USAGE ON SCHEMA reporting_schema FROM GROUP viewers;
-REVOKE ALTER ON SCHEMA analytics_schema FROM ROLE data_scientist;
-REVOKE DROP ON SCHEMA temp_schema FROM user12;
-REVOKE ALL ON SCHEMA public FROM contractor_01;
-REVOKE ALL PRIVILEGES ON SCHEMA private_schema FROM GROUP external_users;
+REVOKE CREATE ON SCHEMA myschema FROM dbuser;
+REVOKE USAGE ON SCHEMA reporting FROM analyst;
+REVOKE ALTER ON SCHEMA dynamic_schema FROM schema_admin;
+REVOKE DROP ON SCHEMA temp_schema FROM cleanup_role;
+REVOKE ALL ON SCHEMA myschema FROM schema_owner;
+REVOKE ALL PRIVILEGES ON SCHEMA myschema FROM schema_admin;
 
--- Multiple schema privileges
-REVOKE CREATE, USAGE ON SCHEMA dev_schema FROM user13;
-REVOKE ALTER, DROP ON SCHEMA test_schema FROM GROUP testers;
-REVOKE CREATE, USAGE, ALTER, DROP ON SCHEMA sandbox FROM ROLE intern_role;
+-- Schema privileges with CASCADE/RESTRICT
+REVOKE USAGE ON SCHEMA reporting FROM analyst CASCADE;
+REVOKE ALL ON SCHEMA myschema FROM admin RESTRICT;
 
--- Function and procedure privileges
-REVOKE EXECUTE ON FUNCTION calculate_total() FROM user14;
-REVOKE EXECUTE ON FUNCTION get_customer_data(integer) FROM GROUP analysts;
-REVOKE EXECUTE ON FUNCTION process_order(varchar, date) FROM ROLE app_role;
-REVOKE EXECUTE ON PROCEDURE update_inventory() FROM user15;
-REVOKE EXECUTE ON PROCEDURE generate_report(date, date) FROM GROUP reporters;
-REVOKE ALL ON FUNCTION complex_calc(numeric, numeric) FROM PUBLIC;
+-- Function privileges
+REVOKE EXECUTE ON FUNCTION f1() FROM dbuser;
+REVOKE EXECUTE ON FUNCTION calculate_tax(numeric, numeric) FROM tax_calculator;
+REVOKE ALL ON FUNCTION utility_func() FROM utility_user;
+REVOKE ALL PRIVILEGES ON FUNCTION math_func(integer) FROM math_user;
 
--- All functions/procedures in schema
-REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA utils FROM user16;
-REVOKE EXECUTE ON ALL PROCEDURES IN SCHEMA batch FROM GROUP schedulers;
-REVOKE ALL ON ALL FUNCTIONS IN SCHEMA analytics FROM ROLE data_analyst;
-REVOKE ALL ON ALL PROCEDURES IN SCHEMA maintenance FROM user17;
-REVOKE EXECUTE FOR FUNCTIONS IN SCHEMA Sales_schema FROM bob;
-REVOKE EXECUTE FOR PROCEDURES IN SCHEMA admin_schema FROM GROUP operators;
+-- Function privileges with parameters
+REVOKE EXECUTE ON FUNCTION format_currency(numeric, varchar) FROM report_user;
+REVOKE EXECUTE ON FUNCTION validate_email(varchar(255)) FROM validation_service;
+REVOKE EXECUTE ON FUNCTION calculate_discount(decimal(10,2), integer) FROM pricing_engine;
+
+-- All functions in schema
+REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA analytics FROM analyst_role;
+REVOKE ALL ON ALL FUNCTIONS IN SCHEMA utilities FROM utility_group;
+
+-- Procedure privileges
+REVOKE EXECUTE ON PROCEDURE proc1() FROM dbuser;
+REVOKE EXECUTE ON PROCEDURE update_inventory(integer, varchar) FROM inventory_user;
+REVOKE ALL ON PROCEDURE maintenance_proc() FROM admin_role;
+
+-- All procedures in schema
+REVOKE EXECUTE ON ALL PROCEDURES IN SCHEMA maintenance FROM maintenance_role;
+REVOKE ALL ON ALL PROCEDURES IN SCHEMA etl FROM etl_group;
 
 -- Language privileges
-REVOKE USAGE ON LANGUAGE plpythonu FROM user18;
-REVOKE USAGE ON LANGUAGE plpgsql FROM GROUP developers;
-REVOKE USAGE ON LANGUAGE sql FROM ROLE junior_developer;
+REVOKE USAGE ON LANGUAGE plpythonu FROM untrusted_user;
+REVOKE USAGE ON LANGUAGE plpythonu FROM PUBLIC;
 
 -- Datashare privileges
-REVOKE ALTER ON DATASHARE sales_share FROM user19;
-REVOKE SHARE ON DATASHARE marketing_data FROM GROUP external_partners;
-REVOKE USAGE ON DATASHARE analytics_share FROM ROLE consumer_role;
-REVOKE ALTER, SHARE ON DATASHARE prod_share FROM user20;
-REVOKE USAGE ON DATASHARE consumer_share FROM ACCOUNT '123456789012';
-REVOKE USAGE ON DATASHARE producer_share FROM NAMESPACE 'a1b2c3d4-5678-90ef-ghij-klmnopqrstuv';
+REVOKE ALTER ON DATASHARE salesshare FROM myuser;
+REVOKE SHARE ON DATASHARE marketingshare FROM marketing_admin;
+REVOKE USAGE ON DATASHARE salesshare FROM namespace 'a3f3ae8c-14e8-45ba-9eaa-b42b9b7ae635';
+REVOKE USAGE ON DATASHARE customerdata FROM ACCOUNT '123456789012';
+REVOKE USAGE ON DATASHARE productdata FROM ACCOUNT '987654321098' VIA DATA_CATALOG;
+
+-- Datashare database and schema usage
+REVOKE USAGE ON DATABASE shared_db FROM consumer_user;
+REVOKE USAGE ON SCHEMA shared_schema FROM consumer_role;
 
 -- Role privileges
-REVOKE ROLE analyst_role FROM user21;
-REVOKE ROLE admin_role FROM user22;
-REVOKE ROLE developer_role FROM ROLE junior_developer;
-REVOKE ROLE sample_role2 FROM user1;
+REVOKE ROLE sample_role1 FROM reguser;
+REVOKE ROLE admin_role FROM user1;
+REVOKE ROLE analyst_role FROM ROLE senior_analyst;
+REVOKE ADMIN OPTION FOR ROLE admin_role FROM user1;
 
--- Model privileges
-REVOKE EXECUTE ON MODEL customer_churn_model FROM user23;
-REVOKE EXECUTE ON MODEL sales_forecast_model FROM GROUP data_scientists;
-REVOKE ALL ON MODEL recommendation_model FROM ROLE ml_engineer;
-REVOKE CREATE MODEL FROM user24;
-REVOKE CREATE MODEL FROM GROUP ml_developers;
-REVOKE CREATE MODEL FROM ROLE junior_scientist;
+-- Multiple role revocations
+REVOKE ROLE read_role FROM user1, user2, user3;
+REVOKE ROLE admin_role FROM ROLE super_admin, ROLE department_head;
+REVOKE ROLE junior_analyst, ROLE data_entry FROM new_hire;
 
--- REVOKE with CASCADE option
-REVOKE ALL ON SCHEMA public FROM USER contractor_01 CASCADE;
-REVOKE SELECT ON TABLE sales FROM user25 CASCADE;
-REVOKE CREATE ON DATABASE dev_db FROM GROUP interns CASCADE;
-REVOKE EXECUTE ON FUNCTION calculate_metrics() FROM user26 CASCADE;
-REVOKE ALL PRIVILEGES ON TABLE orders FROM ROLE temp_role CASCADE;
+-- System permissions from roles
+REVOKE CREATE USER FROM ROLE user_admin;
+REVOKE DROP USER FROM ROLE user_admin;
+REVOKE ALTER USER FROM ROLE limited_admin;
+REVOKE CREATE SCHEMA FROM ROLE schema_creator;
+REVOKE DROP SCHEMA FROM ROLE schema_admin;
+REVOKE ALTER DEFAULT PRIVILEGES FROM ROLE privilege_admin;
+REVOKE ACCESS CATALOG FROM ROLE catalog_user;
+REVOKE CREATE TABLE FROM ROLE table_creator;
+REVOKE DROP TABLE FROM ROLE table_admin;
+REVOKE ALTER TABLE FROM ROLE table_modifier;
+REVOKE CREATE OR REPLACE FUNCTION FROM ROLE function_developer;
+REVOKE CREATE OR REPLACE EXTERNAL FUNCTION FROM ROLE external_developer;
+REVOKE DROP FUNCTION FROM ROLE function_admin;
+REVOKE CREATE OR REPLACE PROCEDURE FROM ROLE procedure_developer;
+REVOKE DROP PROCEDURE FROM ROLE procedure_admin;
+REVOKE CREATE OR REPLACE VIEW FROM ROLE view_developer;
+REVOKE DROP VIEW FROM ROLE view_admin;
+REVOKE CREATE MODEL FROM ROLE ml_developer;
+REVOKE DROP MODEL FROM ROLE ml_admin;
+REVOKE CREATE DATASHARE FROM ROLE datashare_creator;
+REVOKE ALTER DATASHARE FROM ROLE datashare_admin;
+REVOKE DROP DATASHARE FROM ROLE datashare_owner;
+REVOKE CREATE LIBRARY FROM ROLE library_manager;
+REVOKE DROP LIBRARY FROM ROLE library_admin;
+REVOKE CREATE ROLE FROM ROLE role_admin;
+REVOKE DROP ROLE FROM ROLE role_manager;
+REVOKE TRUNCATE TABLE FROM ROLE data_manager;
+REVOKE VACUUM FROM ROLE maintenance_user;
+REVOKE ANALYZE FROM ROLE maintenance_user;
+REVOKE CANCEL FROM ROLE operations_user;
+REVOKE IGNORE RLS FROM ROLE bypass_user;
+REVOKE EXPLAIN RLS FROM ROLE security_analyst;
+REVOKE EXPLAIN MASKING FROM ROLE compliance_officer;
+REVOKE ALL FROM ROLE super_admin;
+REVOKE ALL PRIVILEGES FROM ROLE restricted_user;
 
--- REVOKE with RESTRICT option
-REVOKE UPDATE ON TABLE inventory FROM user27 RESTRICT;
-REVOKE DROP ON SCHEMA temp_schema FROM GROUP cleaners RESTRICT;
-REVOKE ALTER ON DATABASE prod_db FROM user28 RESTRICT;
-REVOKE EXECUTE ON PROCEDURE daily_cleanup() FROM ROLE maintenance_role RESTRICT;
-REVOKE ALL ON TABLE sensitive_data FROM PUBLIC RESTRICT;
+-- Model privileges (Amazon Redshift ML)
+REVOKE EXECUTE ON MODEL customer_churn_model FROM ml_user;
+REVOKE ALL ON MODEL sales_forecast_model FROM ml_team;
+REVOKE ALL PRIVILEGES ON MODEL recommendation_model FROM data_scientist;
+REVOKE CREATE MODEL FROM untrusted_user;
 
--- REVOKE GRANT OPTION FOR
-REVOKE GRANT OPTION FOR SELECT ON TABLE customers FROM user29;
-REVOKE GRANT OPTION FOR INSERT, UPDATE ON TABLE products FROM GROUP managers;
-REVOKE GRANT OPTION FOR ALL ON TABLE sales FROM ROLE lead_analyst;
-REVOKE GRANT OPTION FOR CREATE ON DATABASE test_db FROM user30;
-REVOKE GRANT OPTION FOR USAGE ON SCHEMA reporting FROM GROUP senior_analysts;
-REVOKE GRANT OPTION FOR EXECUTE ON FUNCTION aggregate_data() FROM user31;
-REVOKE GRANT OPTION FOR EXECUTE ON MODEL prediction_model FROM ROLE senior_scientist;
-REVOKE GRANT OPTION SELECT FOR TABLES IN DATABASE Sales_db FROM alice;
+-- Row-level security permissions
+REVOKE EXPLAIN RLS FROM ROLE analyst;
+REVOKE IGNORE RLS FROM ROLE privileged_user;
+REVOKE SELECT ON TABLE sensitive_data FROM RLS POLICY high_security_policy;
 
--- REVOKE GRANT OPTION FOR with CASCADE/RESTRICT
-REVOKE GRANT OPTION FOR DELETE ON TABLE archives FROM user32 CASCADE;
-REVOKE GRANT OPTION FOR ALTER ON SCHEMA legacy FROM GROUP admins RESTRICT;
-REVOKE GRANT OPTION FOR DROP ON DATABASE old_db FROM user33 CASCADE;
-REVOKE GRANT OPTION FOR ALL PRIVILEGES ON TABLE logs FROM ROLE senior_admin RESTRICT;
+-- Assume role permissions
+REVOKE ASSUMEROLE 'arn:aws:iam::123456789012:role/MyRedshiftRole' FROM sales_user FOR COPY;
+REVOKE ASSUMEROLE 'arn:aws:iam::123456789012:role/MyRedshiftRole' FROM etl_user FOR UNLOAD;
+REVOKE ASSUMEROLE 'arn:aws:iam::123456789012:role/MyRedshiftRole' FROM ml_user FOR CREATE MODEL;
+REVOKE ASSUMEROLE 'arn:aws:iam::123456789012:role/MyRedshiftRole' FROM lambda_user FOR EXTERNAL FUNCTION;
+REVOKE ASSUMEROLE 'arn:aws:iam::123456789012:role/MyRedshiftRole' FROM analytics_team FOR ALL;
+REVOKE ASSUMEROLE DEFAULT FROM legacy_user FOR COPY;
+REVOKE ASSUMEROLE ALL FROM untrusted_user FOR ALL;
 
--- REVOKE ADMIN OPTION FOR role
-REVOKE ADMIN OPTION FOR ROLE sample_role2 FROM user1;
-REVOKE ADMIN OPTION FOR ROLE team_lead FROM user34;
-REVOKE ADMIN OPTION FOR ROLE department_head FROM user35;
+-- Multiple IAM roles
+REVOKE ASSUMEROLE 'arn:aws:iam::123456789012:role/Role1', 'arn:aws:iam::123456789012:role/Role2' FROM multi_role_user FOR COPY;
 
--- Complex multi-privilege scenarios
-REVOKE SELECT, INSERT, UPDATE, DELETE, DROP, ALTER ON TABLE critical_data FROM PUBLIC CASCADE;
-REVOKE CREATE, USAGE, ALTER, DROP ON SCHEMA protected FROM GROUP external_users RESTRICT;
-REVOKE ALL PRIVILEGES ON DATABASE production FROM ROLE contractor CASCADE;
-REVOKE GRANT OPTION FOR ALL ON ALL TABLES IN SCHEMA finance FROM user36 CASCADE;
+-- External schema permissions (Spectrum integration)
+REVOKE CREATE ON EXTERNAL SCHEMA spectrum_schema FROM IAM_ROLE 'spectrum_user';
+REVOKE ALTER ON EXTERNAL SCHEMA spectrum_schema FROM IAM_ROLE 'schema_modifier';
+REVOKE DROP ON EXTERNAL SCHEMA spectrum_schema FROM IAM_ROLE 'schema_admin';
+REVOKE ALL ON EXTERNAL SCHEMA spectrum_schema FROM IAM_ROLE 'spectrum_admin';
+REVOKE CREATE, ALTER, DROP ON EXTERNAL SCHEMA glue_schema FROM IAM_ROLE 'glue_user';
+
+-- IAM role permissions for external objects
+REVOKE SELECT ON EXTERNAL TABLE spectrum_schema.data FROM IAM_ROLE 'arn:aws:iam::123456789012:role/SpectrumRole';
+REVOKE ALL ON EXTERNAL SCHEMA glue_schema FROM IAM_ROLE 'arn:aws:iam::123456789012:role/GlueRole';
+
+-- Copy job permissions
+REVOKE ALTER ON COPY JOB my_copy_job FROM job_modifier;
+REVOKE DROP ON COPY JOB old_copy_job FROM job_cleaner;
+REVOKE ALL ON COPY JOB critical_job FROM PUBLIC;
+REVOKE ALTER, DROP ON COPY JOB job1, job2, job3 FROM job_admin;
+
+-- Scoped permissions (for future objects)
+REVOKE CREATE FOR SCHEMAS IN DATABASE mydb FROM schema_creator;
+REVOKE SELECT FOR TABLES IN SCHEMA reporting FROM analyst_role;
+REVOKE SELECT FOR TABLES IN SCHEMA finance DATABASE prod_db FROM finance_reader;
+REVOKE EXECUTE FOR FUNCTIONS IN SCHEMA utilities FROM function_user;
+REVOKE EXECUTE FOR FUNCTIONS IN SCHEMA math_lib DATABASE analytics_db FROM calculator_app;
+REVOKE EXECUTE FOR PROCEDURES IN SCHEMA etl FROM etl_runner;
+REVOKE EXECUTE FOR PROCEDURES IN SCHEMA maintenance DATABASE ops_db FROM maintenance_bot;
+REVOKE USAGE FOR LANGUAGES IN DATABASE dev_db FROM developer;
+REVOKE ALTER FOR COPY JOBS IN SCHEMA data_import FROM job_modifier;
+REVOKE DROP FOR COPY JOBS IN SCHEMA data_import DATABASE warehouse FROM job_admin;
+
+-- Complex combinations
+REVOKE SELECT, INSERT, UPDATE ON TABLE orders FROM ROLE order_manager, GROUP sales_team;
+REVOKE ALL ON TABLE customers FROM user1, ROLE customer_admin, GROUP support_team CASCADE;
+
+-- Cross-object privileges
+REVOKE CREATE ON DATABASE prod_db FROM schema_creator;
+REVOKE CREATE ON SCHEMA new_schema FROM table_creator;
+REVOKE SELECT ON TABLE new_schema.products FROM product_analyst;
+
+-- Real-world examples
+REVOKE SELECT ON TABLE fact_sales FROM ROLE analyst_role CASCADE;
+REVOKE INSERT, UPDATE ON TABLE staging_orders FROM ROLE etl_role RESTRICT;
+REVOKE ALL ON TABLE dim_customer FROM data_engineer CASCADE;
+REVOKE USAGE ON SCHEMA analytics FROM ROLE business_analyst RESTRICT;
+REVOKE CREATE ON DATABASE warehouse FROM ROLE data_architect CASCADE;
+
+-- Service account patterns
+REVOKE SELECT ON ALL TABLES IN SCHEMA reporting FROM airflow_service;
+REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA utilities FROM lambda_function;
+REVOKE USAGE ON SCHEMA staging FROM kubernetes_pod;
 
 -- Quoted identifiers
-REVOKE SELECT ON TABLE "Sales Data" FROM "user-name";
-REVOKE UPDATE ON "Customer Table" FROM GROUP "sales-group";
-REVOKE EXECUTE ON FUNCTION "Calculate Total"(integer, integer) FROM ROLE "analyst-role";
-REVOKE CREATE ON SCHEMA "Finance Schema" FROM "user@domain";
-REVOKE ALL ON DATABASE "Production DB" FROM GROUP "external-users";
+REVOKE SELECT ON TABLE "Order Details" FROM "Sales Manager";
+REVOKE USAGE ON SCHEMA "Finance Reports" FROM "Finance Team";
+REVOKE EXECUTE ON FUNCTION "Calculate Tax"() FROM "Tax Service";
 
--- Mixed case identifiers
-REVOKE INSERT ON TABLE SalesData FROM UserName;
-REVOKE DELETE ON CustomerTable FROM GROUP SalesGroup;
-REVOKE ALTER ON SCHEMA FinanceSchema FROM ROLE AnalystRole;
-REVOKE DROP ON DATABASE ProductionDB FROM MixedCaseUser;
+-- Case variations
+revoke select on table sales from analyst;
+REVOKE SELECT ON TABLE SALES FROM ANALYST;
+Revoke Select On Table Sales From Analyst;
 
--- Numeric account and namespace identifiers
-REVOKE USAGE ON DATASHARE data_share FROM ACCOUNT '987654321098';
-REVOKE SHARE ON DATASHARE analytics_share FROM NAMESPACE 'zyxw9876-5432-10fe-dcba-9876543210zy';
-REVOKE ALTER ON DATASHARE prod_share FROM ACCOUNT '111222333444', NAMESPACE 'abcd1234-5678-90ef-ghij-klmnopqrstuv';
+-- Privilege combinations
+REVOKE SELECT, INSERT ON TABLE logs FROM logger_service;
+REVOKE UPDATE, DELETE, TRUNCATE ON TABLE temp_data FROM cleanup_service;
+REVOKE DROP, ALTER ON TABLE migration_table FROM migration_tool;
+REVOKE REFERENCES, SELECT ON TABLE lookup_table FROM referencing_table_owner;
 
--- Edge cases and special scenarios
-REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM PUBLIC CASCADE;
-REVOKE GRANT OPTION FOR ALL PRIVILEGES ON DATABASE main_db FROM GROUP power_users RESTRICT;
-REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA utils FROM ROLE function_executor CASCADE;
-REVOKE ADMIN OPTION FOR ROLE super_admin FROM user37;
-REVOKE CREATE MODEL FROM PUBLIC;
+-- Edge cases
+REVOKE ALL ON TABLE single_column_table FROM single_user CASCADE;
+REVOKE SELECT (id) ON TABLE wide_table FROM id_reader RESTRICT;
+REVOKE USAGE ON SCHEMA "" FROM edge_case_user;
+
+-- Multiple grantees with different types
+REVOKE SELECT ON TABLE mixed_access_table FROM user1, ROLE reader_role, GROUP viewer_group, PUBLIC;
+REVOKE USAGE ON SCHEMA shared_schema FROM service_user, ROLE service_role, GROUP service_group;
+
+-- Nested role revocations
+REVOKE ROLE junior_analyst FROM ROLE senior_analyst;
+REVOKE ROLE team_lead FROM ROLE department_manager;
+REVOKE ROLE read_only_role FROM ROLE power_user_role;
+
+-- Function overloading scenarios
+REVOKE EXECUTE ON FUNCTION calculate(integer) FROM math_user1;
+REVOKE EXECUTE ON FUNCTION calculate(numeric) FROM math_user2;
+REVOKE EXECUTE ON FUNCTION calculate(integer, integer) FROM math_user3;
+
+-- Data type variations in function parameters
+REVOKE EXECUTE ON FUNCTION process_string(varchar) FROM string_processor;
+REVOKE EXECUTE ON FUNCTION process_string(text) FROM text_processor;
+REVOKE EXECUTE ON FUNCTION handle_timestamp(timestamp) FROM time_handler;
+REVOKE EXECUTE ON FUNCTION handle_numbers(numeric(10,2)) FROM number_handler;
 
 -- Schema-qualified object names
-REVOKE SELECT ON TABLE public.customers FROM user38;
-REVOKE INSERT ON sales.transactions FROM GROUP sales_team;
-REVOKE UPDATE ON analytics.fact_sales FROM ROLE reporting;
-REVOKE EXECUTE ON FUNCTION utils.calculate_tax(numeric) FROM user39;
-REVOKE EXECUTE ON PROCEDURE maintenance.cleanup_old_data() FROM GROUP ops_team;
+REVOKE SELECT ON TABLE public.users FROM public_reader;
+REVOKE EXECUTE ON FUNCTION analytics.calculate_metrics() FROM metrics_user;
+REVOKE USAGE ON SCHEMA finance FROM finance_analyst;
 
--- ALTER DEFAULT PRIVILEGES combination (for reference, showing related usage)
--- Note: This is mentioned in the documentation as a related command
--- ALTER DEFAULT PRIVILEGES FOR USER app_owner IN SCHEMA public REVOKE SELECT ON TABLES FROM PUBLIC;
+-- Long identifier names
+REVOKE SELECT ON TABLE very_long_table_name_for_comprehensive_sales_data FROM very_long_user_name_for_sales_analysis;
+REVOKE EXECUTE ON FUNCTION extremely_long_function_name_for_complex_calculations() FROM user_with_very_long_descriptive_name;
+
+-- Cleanup after grants with GRANT OPTION
+REVOKE ALL PRIVILEGES ON TABLE revokable_table FROM revokable_user CASCADE;
+REVOKE ALL ON ALL TABLES IN SCHEMA revokable_schema FROM revokable_role CASCADE;
+
+-- Temporary and session-based revocations
+REVOKE TEMPORARY ON DATABASE session_db FROM session_user;
+REVOKE TEMP ON DATABASE temp_workspace FROM temp_worker;
+
+-- GRANT OPTION revocations (keep privilege but remove ability to grant)
+REVOKE GRANT OPTION FOR SELECT ON TABLE sensitive_data FROM trusted_user;
+REVOKE GRANT OPTION FOR ALL ON DATABASE prod_db FROM admin_user;
+REVOKE GRANT OPTION FOR USAGE ON SCHEMA reporting FROM lead_analyst;
+REVOKE GRANT OPTION FOR EXECUTE ON FUNCTION calc() FROM senior_developer;
+REVOKE GRANT OPTION FOR ALTER ON DATASHARE salesshare FROM share_admin;
+
+-- Multiple privileges in one statement
+REVOKE SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON TABLE transactions FROM transaction_processor;
+REVOKE CREATE, USAGE, ALTER, DROP ON SCHEMA dynamic_schema FROM schema_manager;
+REVOKE CREATE, TEMPORARY, ALTER ON DATABASE test_db FROM test_user;
+
+-- Revoke from users that were granted through groups/roles
+REVOKE SELECT ON TABLE inherited_access FROM user_via_group CASCADE;
+REVOKE USAGE ON SCHEMA inherited_schema FROM user_via_role RESTRICT;
+
+-- Special cases with system tables and catalog access
+REVOKE ACCESS CATALOG FROM ROLE limited_viewer;
+
+-- Revoking combinations of column and table privileges
+REVOKE SELECT ON TABLE orders FROM order_viewer;
+REVOKE UPDATE (status, modified_date) ON TABLE orders FROM order_updater;
+REVOKE ALL (sensitive_col1, sensitive_col2) ON TABLE secure_table FROM PUBLIC;
+
+-- Conditional revocations based on object existence
+REVOKE SELECT ON TABLE IF EXISTS optional_table FROM optional_user;
+REVOKE USAGE ON SCHEMA IF EXISTS optional_schema FROM optional_role;

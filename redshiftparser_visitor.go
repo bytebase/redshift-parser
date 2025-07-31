@@ -979,6 +979,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#iamrolelist_or_public.
 	VisitIamrolelist_or_public(ctx *Iamrolelist_or_publicContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#iamrolelist.
+	VisitIamrolelist(ctx *IamrolelistContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#grant_assume_role_permissions.
 	VisitGrant_assume_role_permissions(ctx *Grant_assume_role_permissionsContext) interface{}
 
@@ -1048,6 +1051,9 @@ type RedshiftParserVisitor interface {
 	// Visit a parse tree produced by RedshiftParser#grant_schema_target.
 	VisitGrant_schema_target(ctx *Grant_schema_targetContext) interface{}
 
+	// Visit a parse tree produced by RedshiftParser#revoke_schema_target.
+	VisitRevoke_schema_target(ctx *Revoke_schema_targetContext) interface{}
+
 	// Visit a parse tree produced by RedshiftParser#schema_privilege_list.
 	VisitSchema_privilege_list(ctx *Schema_privilege_listContext) interface{}
 
@@ -1065,6 +1071,9 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#grant_table_target.
 	VisitGrant_table_target(ctx *Grant_table_targetContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_table_target.
+	VisitRevoke_table_target(ctx *Revoke_table_targetContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#all_tables_in_schema_list.
 	VisitAll_tables_in_schema_list(ctx *All_tables_in_schema_listContext) interface{}
@@ -1089,6 +1098,63 @@ type RedshiftParserVisitor interface {
 
 	// Visit a parse tree produced by RedshiftParser#revokestmt.
 	VisitRevokestmt(ctx *RevokestmtContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_permissions_for_rls_lookup_tables.
+	VisitRevoke_permissions_for_rls_lookup_tables(ctx *Revoke_permissions_for_rls_lookup_tablesContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_explain_permissions_for_row_level_security_policy_filters.
+	VisitRevoke_explain_permissions_for_row_level_security_policy_filters(ctx *Revoke_explain_permissions_for_row_level_security_policy_filtersContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_machine_learning_permissions.
+	VisitRevoke_machine_learning_permissions(ctx *Revoke_machine_learning_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_role_permissions.
+	VisitRevoke_role_permissions(ctx *Revoke_role_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_permissions.
+	VisitRevoke_scoped_permissions(ctx *Revoke_scoped_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_schemas_permissions.
+	VisitRevoke_scoped_schemas_permissions(ctx *Revoke_scoped_schemas_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_tables_permissions.
+	VisitRevoke_scoped_tables_permissions(ctx *Revoke_scoped_tables_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_functions_permissions.
+	VisitRevoke_scoped_functions_permissions(ctx *Revoke_scoped_functions_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_procedures_permissions.
+	VisitRevoke_scoped_procedures_permissions(ctx *Revoke_scoped_procedures_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_languages_permissions.
+	VisitRevoke_scoped_languages_permissions(ctx *Revoke_scoped_languages_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_scoped_copy_jobs_permissions.
+	VisitRevoke_scoped_copy_jobs_permissions(ctx *Revoke_scoped_copy_jobs_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_datashare_permissions.
+	VisitRevoke_datashare_permissions(ctx *Revoke_datashare_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_spectrum_integration_permissions.
+	VisitRevoke_spectrum_integration_permissions(ctx *Revoke_spectrum_integration_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_spectrum_integration_external_schema_permissions.
+	VisitRevoke_spectrum_integration_external_schema_permissions(ctx *Revoke_spectrum_integration_external_schema_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_spectrum_integration_external_table_permissions.
+	VisitRevoke_spectrum_integration_external_table_permissions(ctx *Revoke_spectrum_integration_external_table_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_spectrum_integration_extenral_column_permissions.
+	VisitRevoke_spectrum_integration_extenral_column_permissions(ctx *Revoke_spectrum_integration_extenral_column_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_assume_role_permissions.
+	VisitRevoke_assume_role_permissions(ctx *Revoke_assume_role_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#revoke_column_level_permissions.
+	VisitRevoke_column_level_permissions(ctx *Revoke_column_level_permissionsContext) interface{}
+
+	// Visit a parse tree produced by RedshiftParser#common_revoke.
+	VisitCommon_revoke(ctx *Common_revokeContext) interface{}
 
 	// Visit a parse tree produced by RedshiftParser#privileges.
 	VisitPrivileges(ctx *PrivilegesContext) interface{}
